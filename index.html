@@ -1,0 +1,3012 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Automatisez vos processus administratifs sans programmer — tutoriels pas à pas avec Microsoft 365, Power Automate, SharePoint et Forms.">
+<title>Flow Facile — Automatisez sans programmer</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #eef2f8;
+  --surface: #e4ecf5;
+  --card: #ffffff;
+  --card2: #f7f9fc;
+  --border: #cdd8e8;
+  --border2: #b0c3d9;
+  --accent: #1e56c5;
+  --accent-glow: rgba(30,86,197,0.10);
+  --cyan: #0882a8;
+  --green: #16a34a;
+  --orange: #ea580c;
+  --purple: #7c3aed;
+  --text: #0c1a30;
+  --muted: #5a6e87;
+  --muted2: #3d5166;
+  --radius: 14px;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: #eef2f8;
+  background-image:
+    linear-gradient(180deg, #dce6f4 0px, #eef2f8 280px);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ─── GRAIN OVERLAY ─── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  opacity: 0.018;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 200px;
+}
+
+/* ─── NAV ─── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  height: 62px;
+  background: rgba(238,242,248,0.94);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center;
+  padding: 0 2rem; gap: 2rem;
+  box-shadow: 0 1px 4px rgba(12,26,48,0.07);
+}
+
+.nav-brand {
+  display: flex; align-items: center; gap: 0.6rem;
+  text-decoration: none; flex-shrink: 0;
+}
+.brand-icon {
+  width: 30px; height: 30px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent), var(--cyan));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.9rem;
+}
+.brand-name {
+  font-family: 'Fraunces', serif;
+  font-weight: 900; font-size: 1.1rem;
+  color: var(--text); letter-spacing: -0.02em;
+}
+.brand-name span { color: var(--accent); }
+
+.nav-links {
+  display: flex; gap: 1.5rem; list-style: none; margin-left: auto;
+}
+.nav-links a {
+  color: var(--muted); font-size: 0.875rem; font-weight: 500;
+  text-decoration: none; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--text); }
+
+/* Language toggle */
+.lang-toggle {
+  display: flex; align-items: center;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 8px; overflow: hidden;
+  flex-shrink: 0;
+}
+.lang-btn {
+  padding: 0.35rem 0.85rem;
+  font-size: 0.78rem; font-weight: 600;
+  cursor: pointer; border: none; background: transparent;
+  color: var(--muted); transition: all 0.15s;
+  font-family: 'DM Sans', sans-serif;
+  letter-spacing: 0.04em;
+}
+.lang-btn.active {
+  background: var(--accent);
+  color: #fff;
+}
+
+.nav-cta {
+  background: var(--accent); color: #fff;
+  padding: 0.45rem 1.1rem; border-radius: 8px;
+  font-size: 0.82rem; font-weight: 600;
+  text-decoration: none; transition: all 0.2s;
+  flex-shrink: 0;
+}
+.nav-cta:hover { background: #1d4ed8; }
+
+/* ─── HERO ─── */
+.hero {
+  position: relative;
+  padding: 6rem 2rem 4rem;
+  max-width: 1000px; margin: 0 auto;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero-glow {
+  position: absolute;
+  top: 0; left: 50%; transform: translateX(-50%);
+  width: 700px; height: 500px;
+  background: radial-gradient(ellipse at 50% 0%, rgba(37,99,235,0.08) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: rgba(37,99,235,0.08);
+  border: 1px solid rgba(37,99,235,0.2);
+  color: #1d4ed8; padding: 0.3rem 0.9rem;
+  border-radius: 999px; font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 0.05em; text-transform: uppercase;
+  margin-bottom: 1.75rem;
+}
+
+.hero h1 {
+  font-family: 'Fraunces', serif;
+  font-weight: 900; font-size: clamp(2.4rem, 5.5vw, 4rem);
+  line-height: 1.1; letter-spacing: -0.03em;
+  margin-bottom: 1.25rem; color: var(--text);
+}
+.hero h1 em {
+  font-style: italic;
+  background: linear-gradient(135deg, var(--accent), var(--cyan));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+
+.hero-sub {
+  color: var(--muted2); font-size: 1.05rem; font-weight: 400;
+  max-width: 520px; margin: 0 auto 2.5rem;
+}
+
+.hero-actions { display: flex; gap: 0.875rem; justify-content: center; flex-wrap: wrap; }
+.btn-primary {
+  background: var(--accent); color: #fff;
+  padding: 0.7rem 1.6rem; border-radius: 10px;
+  font-weight: 600; font-size: 0.9rem;
+  text-decoration: none; transition: all 0.2s;
+  box-shadow: 0 2px 12px rgba(37,99,235,0.25);
+}
+.btn-primary:hover { background: #1d4ed8; transform: translateY(-1px); }
+
+.btn-ghost {
+  background: var(--card); color: var(--muted2);
+  padding: 0.7rem 1.6rem; border-radius: 10px;
+  font-weight: 500; font-size: 0.9rem;
+  text-decoration: none; border: 1px solid var(--border);
+  transition: all 0.2s;
+}
+.btn-ghost:hover { color: var(--text); border-color: var(--accent); }
+
+/* ─── STATS BAR ─── */
+.stats {
+  display: flex; justify-content: center; gap: 0; flex-wrap: wrap;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: var(--card);
+  box-shadow: 0 1px 3px rgba(15,23,42,0.05);
+}
+.stat-item {
+  padding: 1.4rem 3rem; text-align: center;
+  border-right: 1px solid var(--border);
+}
+.stat-item:last-child { border-right: none; }
+.stat-val {
+  font-family: 'Fraunces', serif;
+  font-weight: 900; font-size: 1.7rem;
+  background: linear-gradient(135deg, var(--accent), var(--cyan));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  line-height: 1;
+}
+.stat-lbl { color: var(--muted); font-size: 0.76rem; font-weight: 500; margin-top: 0.35rem; }
+
+/* ─── LAYOUT ─── */
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+section { padding: 4rem 0; }
+
+.sec-header {
+  display: flex; align-items: baseline; justify-content: space-between;
+  margin-bottom: 2rem;
+}
+.sec-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 700; font-size: 1.45rem; letter-spacing: -0.02em;
+  color: var(--text);
+}
+.sec-link { color: var(--accent); font-size: 0.85rem; text-decoration: none; font-weight: 600; }
+.sec-link:hover { text-decoration: underline; }
+
+/* ─── FEATURED ─── */
+.featured-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  display: grid; grid-template-columns: 7fr 5fr;
+  overflow: hidden; cursor: pointer;
+  transition: border-color 0.25s, box-shadow 0.25s;
+  margin-bottom: 4rem;
+  box-shadow: 0 2px 8px rgba(15,23,42,0.07);
+}
+.featured-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 4px 24px rgba(37,99,235,0.1);
+}
+
+.feat-visual {
+  background: #ffffff;
+  min-height: 360px; padding: 2.5rem;
+  display: flex; flex-direction: column; justify-content: center;
+  position: relative; overflow: hidden;
+  border-right: 1px solid var(--border);
+}
+.feat-visual::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: none;
+  pointer-events: none;
+}
+
+.pipeline {
+  display: flex; flex-direction: column; gap: 0;
+  position: relative; z-index: 1;
+}
+.pipe-step {
+  display: flex; align-items: center; gap: 0.875rem;
+  background: rgba(255,255,255,0.7);
+  border: 1px solid rgba(37,99,235,0.18);
+  border-radius: 10px; padding: 0.8rem 1rem;
+  font-size: 0.82rem; font-weight: 500; color: var(--text);
+  transition: all 0.2s;
+}
+.featured-card:hover .pipe-step {
+  border-color: rgba(37,99,235,0.35);
+  background: rgba(255,255,255,0.9);
+}
+.pipe-connector {
+  width: 1px; height: 14px;
+  background: linear-gradient(to bottom, rgba(37,99,235,0.35), transparent);
+  margin-left: 19px; margin: 4px 0 4px 19px;
+}
+.pipe-icon {
+  width: 26px; height: 26px; border-radius: 7px;
+  background: linear-gradient(135deg, var(--accent), #0891b2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.78rem; flex-shrink: 0;
+}
+
+.feat-body {
+  padding: 2.5rem 3rem;
+  display: flex; flex-direction: column; justify-content: center;
+  background: var(--card);
+}
+
+.tag {
+  display: inline-block;
+  padding: 0.22rem 0.7rem; border-radius: 999px;
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+.tag-blue   { background: rgba(37,99,235,0.1);  color: #1d4ed8; border: 1px solid rgba(37,99,235,0.22); }
+.tag-cyan   { background: rgba(8,145,178,0.1);  color: #0891b2; border: 1px solid rgba(8,145,178,0.22); }
+.tag-green  { background: rgba(22,163,74,0.1);  color: #16a34a; border: 1px solid rgba(22,163,74,0.22); }
+.tag-orange { background: rgba(234,88,12,0.1);  color: #ea580c; border: 1px solid rgba(234,88,12,0.2); }
+.tag-purple { background: rgba(124,58,237,0.1); color: #7c3aed; border: 1px solid rgba(124,58,237,0.2); }
+
+.feat-body h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 700; font-size: 1.65rem; line-height: 1.2;
+  letter-spacing: -0.02em; margin-bottom: 1rem; color: var(--text);
+}
+.feat-body p { color: var(--muted2); font-size: 0.92rem; margin-bottom: 1.75rem; }
+.art-meta { display: flex; gap: 1.25rem; font-size: 0.78rem; color: var(--muted); align-items: center; }
+.meta-chip {
+  background: rgba(8,145,178,0.1); color: var(--cyan);
+  padding: 0.2rem 0.6rem; border-radius: 6px;
+  font-weight: 600; font-size: 0.72rem;
+}
+
+/* ─── GRID ─── */
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-bottom: 4rem; }
+
+.art-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden;
+  cursor: pointer; transition: all 0.2s;
+  display: flex; flex-direction: column;
+  box-shadow: 0 1px 4px rgba(15,23,42,0.06);
+}
+.art-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(37,99,235,0.12); }
+
+.card-thumb {
+  height: 148px; position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.thumb-1 { background: linear-gradient(145deg, #dbeafe, #bfdbfe); }
+.thumb-2 { background: linear-gradient(145deg, #cffafe, #a5f3fc); }
+.thumb-3 { background: linear-gradient(145deg, #ede9fe, #ddd6fe); }
+.thumb-4 { background: linear-gradient(145deg, #fef3c7, #fde68a); }
+.thumb-5 { background: linear-gradient(145deg, #dcfce7, #bbf7d0); }
+.thumb-6 { background: linear-gradient(145deg, #fee2e2, #fecaca); }
+
+.card-thumb::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 40% 40%, rgba(255,255,255,0.5), transparent 60%);
+}
+
+.thumb-emoji { font-size: 2.6rem; position: relative; z-index: 1; filter: drop-shadow(0 2px 8px rgba(15,23,42,0.15)); }
+
+.card-body { padding: 1.25rem; flex: 1; display: flex; flex-direction: column; }
+.card-body h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 0.97rem; font-weight: 700; line-height: 1.35;
+  margin: 0.6rem 0 0.5rem; letter-spacing: -0.01em; color: var(--text);
+}
+.card-body p { color: var(--muted2); font-size: 0.82rem; flex: 1; line-height: 1.6; }
+.card-foot {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 1rem; padding-top: 0.875rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.76rem; color: var(--muted);
+}
+.card-arrow { color: var(--accent); font-size: 0.9rem; transition: transform 0.2s; }
+.art-card:hover .card-arrow { transform: translateX(3px); }
+
+/* ─── VOTE SECTION ─── */
+.vote-section {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2.5rem;
+  margin-bottom: 4rem;
+  position: relative; overflow: hidden;
+  box-shadow: 0 2px 8px rgba(15,23,42,0.06);
+}
+.vote-section::before {
+  content: '';
+  position: absolute; top: -60px; right: -60px;
+  width: 280px; height: 280px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(37,99,235,0.05), transparent 70%);
+  pointer-events: none;
+}
+
+.vote-header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 2rem; margin-bottom: 2rem; flex-wrap: wrap;
+}
+.vote-title-block h3 {
+  font-family: 'Fraunces', serif;
+  font-weight: 700; font-size: 1.4rem; letter-spacing: -0.02em;
+  margin-bottom: 0.4rem; color: var(--text);
+}
+.vote-title-block p { color: var(--muted2); font-size: 0.88rem; }
+
+.vote-total-badge {
+  display: flex; flex-direction: column; align-items: center;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 0.875rem 1.25rem; text-align: center;
+  flex-shrink: 0;
+}
+.vote-total-num {
+  font-family: 'Fraunces', serif; font-size: 1.8rem; font-weight: 900;
+  background: linear-gradient(135deg, var(--accent), var(--cyan));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  line-height: 1;
+}
+.vote-total-lbl { color: var(--muted); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; margin-top: 0.25rem; }
+
+.vote-grid { display: flex; flex-direction: column; gap: 0.875rem; }
+
+.vote-item {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1rem 1.25rem;
+  display: flex; align-items: center; gap: 1rem;
+  transition: all 0.2s; position: relative; overflow: hidden;
+}
+.vote-item:hover { border-color: var(--border2); background: var(--card); }
+.vote-item.top-vote { border-color: rgba(37,99,235,0.35); background: rgba(37,99,235,0.04); }
+
+.vote-bar-bg {
+  position: absolute; left: 0; top: 0; bottom: 0;
+  background: linear-gradient(90deg, rgba(37,99,235,0.07), transparent);
+  border-radius: 12px; transition: width 0.6s cubic-bezier(0.34,1.56,0.64,1);
+  pointer-events: none;
+}
+
+.vote-rank {
+  width: 28px; height: 28px; border-radius: 8px;
+  font-size: 0.72rem; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; position: relative; z-index: 1;
+  font-family: 'Fraunces', serif;
+}
+.rank-1 { background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #1a1000; }
+.rank-2 { background: #e2e8f0; color: var(--muted2); }
+.rank-3 { background: #e2e8f0; color: var(--muted2); }
+.rank-other { background: #f1f5f9; color: var(--muted); }
+
+.vote-text { flex: 1; min-width: 0; position: relative; z-index: 1; }
+.vote-text h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.15rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text); }
+.vote-text p { color: var(--muted); font-size: 0.76rem; line-height: 1.4; }
+
+.vote-stats { display: flex; flex-direction: column; align-items: flex-end; gap: 0.25rem; flex-shrink: 0; position: relative; z-index: 1; }
+.vote-count { font-family: 'Fraunces', serif; font-weight: 700; font-size: 1.1rem; color: var(--text); }
+.vote-pct { font-size: 0.72rem; color: var(--muted); }
+
+.vote-btn {
+  background: var(--card); border: 1px solid var(--border);
+  color: var(--muted2); padding: 0.4rem 0.9rem;
+  border-radius: 8px; font-size: 0.78rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s; flex-shrink: 0;
+  font-family: 'DM Sans', sans-serif; position: relative; z-index: 1;
+  white-space: nowrap;
+}
+.vote-btn:hover:not(:disabled) { background: var(--accent); border-color: var(--accent); color: #fff; }
+.vote-btn:disabled { opacity: 0.5; cursor: default; }
+.vote-btn.voted { background: rgba(37,99,235,0.1); border-color: rgba(37,99,235,0.3); color: #1d4ed8; }
+
+.vote-footer {
+  margin-top: 1.5rem; padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 0.8rem; color: var(--muted); flex-wrap: gap;
+}
+.vote-disclaimer { display: flex; align-items: center; gap: 0.5rem; }
+.vote-disclaimer::before { content: 'ℹ️'; font-size: 0.875rem; }
+
+/* ─── NEWSLETTER ─── */
+.newsletter-block {
+  background: linear-gradient(135deg, #dbeafe 0%, #e0f2fe 100%);
+  border: 1px solid rgba(37,99,235,0.15);
+  border-radius: var(--radius);
+  padding: 3rem; text-align: center;
+  position: relative; overflow: hidden;
+  margin-bottom: 2rem;
+}
+.newsletter-block::before {
+  content: '';
+  position: absolute; top: -80px; left: 50%; transform: translateX(-50%);
+  width: 500px; height: 300px;
+  background: radial-gradient(ellipse, rgba(37,99,235,0.08), transparent 70%);
+  pointer-events: none;
+}
+.nl-title {
+  font-family: 'Fraunces', serif; font-weight: 900;
+  font-size: 1.65rem; letter-spacing: -0.02em;
+  margin-bottom: 0.75rem; position: relative; color: var(--text);
+}
+.nl-sub { color: var(--muted2); margin-bottom: 2rem; position: relative; font-size: 0.95rem; }
+.nl-form { display: flex; gap: 0.75rem; max-width: 420px; margin: 0 auto; position: relative; }
+.nl-input {
+  flex: 1; background: rgba(255,255,255,0.9); border: 1px solid var(--border);
+  color: var(--text); padding: 0.7rem 1rem; border-radius: 10px;
+  font-family: inherit; font-size: 0.88rem; outline: none;
+  transition: border-color 0.2s;
+}
+.nl-input:focus { border-color: var(--accent); }
+.nl-input::placeholder { color: var(--muted); }
+
+/* ─── MODAL ─── */
+.modal-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(15,23,42,0.6); z-index: 500;
+  backdrop-filter: blur(8px);
+  overflow-y: auto; padding: 2rem 1rem;
+}
+.modal-overlay.open { display: flex; align-items: flex-start; justify-content: center; }
+.modal {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 18px; max-width: 780px; width: 100%;
+  position: relative; margin: auto;
+  animation: slideUp 0.25s ease;
+  box-shadow: 0 20px 60px rgba(15,23,42,0.18);
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.modal-close {
+  position: absolute; top: 1.25rem; right: 1.25rem;
+  background: var(--surface); border: 1px solid var(--border); color: var(--muted);
+  width: 32px; height: 32px; border-radius: 8px;
+  font-size: 1rem; cursor: pointer; transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 1;
+}
+.modal-close:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+.modal-header {
+  padding: 2rem 2.5rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.modal-header h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 700; font-size: 1.55rem; line-height: 1.25;
+  letter-spacing: -0.02em; margin: 0.75rem 0 0.75rem; color: var(--text);
+}
+.modal-meta { display: flex; gap: 1.5rem; font-size: 0.8rem; color: var(--muted); }
+.modal-body {
+  padding: 2rem 2.5rem;
+  font-size: 0.94rem; line-height: 1.8; color: var(--muted2);
+}
+.modal-body h3 {
+  font-family: 'Fraunces', serif; font-size: 1.05rem; font-weight: 700;
+  color: var(--cyan); margin: 1.75rem 0 0.6rem;
+}
+.modal-body p { margin-bottom: 0.875rem; }
+.modal-body ul { margin: 0.25rem 0 1rem 1.5rem; }
+.modal-body li { margin-bottom: 0.4rem; }
+.modal-body strong { color: var(--text); font-weight: 600; }
+.modal-body code {
+  background: rgba(37,99,235,0.08); color: #1d4ed8;
+  padding: 0.1rem 0.45rem; border-radius: 5px;
+  font-size: 0.84rem; font-family: 'Courier New', monospace;
+}
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--text); border-top: 1px solid rgba(255,255,255,0.08);
+  padding: 2.5rem 2rem; text-align: center;
+  color: rgba(255,255,255,0.5); font-size: 0.82rem;
+}
+.footer-brand {
+  font-family: 'Fraunces', serif; font-weight: 900; font-size: 1.15rem;
+  color: #fff; margin-bottom: 0.5rem; display: block; letter-spacing: -0.02em;
+}
+.footer-brand span { color: #60a5fa; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  .featured-card { grid-template-columns: 1fr; }
+  .feat-visual { min-height: 220px; border-right: none; border-bottom: 1px solid var(--border); }
+  .grid-3 { grid-template-columns: 1fr 1fr; }
+  .stat-item { padding: 1.25rem 1.5rem; }
+  .series-banner { grid-template-columns: 1fr; }
+  .series-progress { display: none; }
+  .series-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .grid-3 { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .feat-body { padding: 1.75rem; }
+  .vote-header { flex-direction: column; }
+  .series-grid { grid-template-columns: 1fr; }
+}
+
+/* ─── SERIES BANNER ─── */
+.series-banner {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem 2.5rem;
+  margin-bottom: 1.5rem;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1.5rem 2rem;
+  align-items: center;
+  box-shadow: 0 1px 4px rgba(15,23,42,0.06);
+}
+.series-badge {
+  background: rgba(37,99,235,0.08);
+  border: 1px solid rgba(37,99,235,0.2);
+  color: #1d4ed8;
+  padding: 0.3rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.75rem; font-weight: 700;
+  letter-spacing: 0.05em; white-space: nowrap;
+  align-self: start; margin-top: 0.15rem;
+}
+.series-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 900; font-size: 1.3rem;
+  letter-spacing: -0.02em; margin-bottom: 0.4rem; color: var(--text);
+}
+.series-sub { color: var(--muted2); font-size: 0.88rem; }
+.series-progress { display: flex; align-items: center; gap: 0; }
+.series-step { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+.ss-num {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--cyan));
+  color: #fff; border: none;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Fraunces', serif; font-weight: 700; font-size: 0.9rem;
+  box-shadow: 0 2px 8px rgba(37,99,235,0.25);
+}
+.ss-lbl { font-size: 0.68rem; color: var(--muted2); text-align: center; line-height: 1.3; white-space: nowrap; }
+.series-line {
+  width: 32px; height: 2px;
+  background: linear-gradient(90deg, rgba(37,99,235,0.3), rgba(8,145,178,0.3));
+  margin-bottom: 18px;
+}
+
+/* ─── SERIES CARDS ─── */
+.series-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-bottom: 4rem; }
+.series-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden;
+  cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column;
+  box-shadow: 0 1px 4px rgba(15,23,42,0.06);
+}
+.series-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(37,99,235,0.1); border-color: var(--accent); }
+.series-card-header { padding: 1.25rem 1.25rem 0.5rem; }
+.sc-blue   { background: linear-gradient(160deg,#dbeafe,#eff6ff); border-bottom: 1px solid rgba(37,99,235,0.15); }
+.sc-purple { background: linear-gradient(160deg,#ede9fe,#f5f3ff); border-bottom: 1px solid rgba(124,58,237,0.15); }
+.sc-green  { background: linear-gradient(160deg,#dcfce7,#f0fdf4); border-bottom: 1px solid rgba(22,163,74,0.15); }
+.sc-part { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.75rem; }
+.sc-blue .sc-part   { color: #1d4ed8; }
+.sc-purple .sc-part { color: #7c3aed; }
+.sc-green .sc-part  { color: #16a34a; }
+.series-card-body { padding: 1.25rem; flex: 1; display: flex; flex-direction: column; }
+.series-card-body h3 { font-family: 'Fraunces', serif; font-size: 0.97rem; font-weight: 700; line-height: 1.35; margin-bottom: 0.6rem; letter-spacing: -0.01em; color: var(--text); }
+.series-card-body p { color: var(--muted2); font-size: 0.82rem; flex: 1; line-height: 1.6; }
+.series-card-body code { background: rgba(37,99,235,0.08); color: #1d4ed8; padding: 0.05rem 0.35rem; border-radius: 4px; font-size: 0.78rem; font-family: 'Courier New', monospace; }
+
+/* ─── MODAL ARTICLE DETAIL STYLES ─── */
+.step-block { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem 1.5rem; margin: 1.25rem 0; }
+.step-num { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(37,99,235,0.1); color: #1d4ed8; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.2rem 0.65rem; border-radius: 999px; margin-bottom: 0.75rem; }
+.step-title { font-family: 'Fraunces', serif; font-weight: 700; font-size: 1rem; margin-bottom: 0.6rem; color: var(--text); }
+.code-block { background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 1rem 1.25rem; margin: 0.75rem 0; font-family: 'Courier New', monospace; font-size: 0.82rem; color: #a5f3fc; line-height: 1.8; overflow-x: auto; white-space: pre; }
+.code-block .cm { color: #64748b; }
+.code-block .kw { color: #93c5fd; }
+.code-block .fn { color: #34d399; }
+.code-block .st { color: #fbbf24; }
+.mockup { background: #f8fafc; border: 1px solid var(--border); border-radius: 10px; padding: 0.875rem; margin: 0.75rem 0; }
+.mockup-row { background: #fff; border: 1px solid var(--border); border-radius: 6px; padding: 0.45rem 0.875rem; display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.4rem; }
+.mockup-row:last-child { margin-bottom: 0; }
+.mb-label { color: var(--muted); font-size: 0.74rem; min-width: 110px; flex-shrink: 0; }
+.mb-val { color: var(--text); font-size: 0.82rem; font-family: 'Courier New', monospace; }
+.mb-tag { background: rgba(22,163,74,0.1); color: #16a34a; padding: 0.1rem 0.5rem; border-radius: 4px; font-size: 0.72rem; font-weight: 600; }
+.mb-tag.warn { background: rgba(234,88,12,0.1); color: #ea580c; }
+.mb-tag.blue { background: rgba(37,99,235,0.1); color: #1d4ed8; }
+.tip-box { background: rgba(8,145,178,0.07); border-left: 3px solid var(--cyan); border-radius: 0 8px 8px 0; padding: 0.875rem 1rem; margin: 0.875rem 0; font-size: 0.88rem; color: var(--muted2); }
+.tip-box strong { color: var(--cyan); }
+.warn-box { background: rgba(234,88,12,0.07); border-left: 3px solid var(--orange); border-radius: 0 8px 8px 0; padding: 0.875rem 1rem; margin: 0.875rem 0; font-size: 0.88rem; color: var(--muted2); }
+.warn-box strong { color: var(--orange); }
+.excel-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; margin: 0.75rem 0; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
+.excel-table th { background: rgba(37,99,235,0.08); color: #1d4ed8; padding: 0.5rem 0.875rem; text-align: left; font-weight: 600; font-size: 0.75rem; letter-spacing: 0.04em; text-transform: uppercase; }
+.excel-table td { padding: 0.5rem 0.875rem; border-bottom: 1px solid var(--border); color: var(--muted2); font-family: 'Courier New', monospace; font-size: 0.78rem; }
+.excel-table tr:last-child td { border-bottom: none; }
+.excel-table tr:nth-child(even) td { background: #f8fafc; }
+.nav-series { display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+.nav-btn { background: var(--surface); border: 1px solid var(--border); color: var(--muted2); padding: 0.6rem 1.1rem; border-radius: 8px; font-size: 0.82rem; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.2s; }
+.nav-btn:hover { border-color: var(--accent); color: var(--text); }
+.status-badge { padding:0.18rem 0.6rem;border-radius:999px;font-size:0.68rem;font-weight:700;letter-spacing:0.04em; }
+.status-badge.pub   { background:rgba(22,163,74,0.12);color:#16a34a;border:1px solid rgba(22,163,74,0.25); }
+.status-badge.sched { background:rgba(37,99,235,0.1);color:#1d4ed8;border:1px solid rgba(37,99,235,0.22); }
+.status-badge.meta  { background:rgba(234,88,12,0.1);color:#ea580c;border:1px solid rgba(234,88,12,0.22); }
+
+.cal-block { background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:4rem;box-shadow:0 1px 4px rgba(15,23,42,0.06); }
+.cal-flow-hint { margin-bottom:1.75rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border); overflow-x:auto; }
+.cal-grid { display:flex;flex-direction:column;gap:0.625rem; }
+.cal-row { display:grid;grid-template-columns:110px 1fr auto;align-items:center;gap:1rem;
+  background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:0.75rem 1.1rem;transition:border-color .2s; }
+.cal-row.is-live { border-color:rgba(22,163,74,0.4);background:rgba(22,163,74,0.04); }
+.cal-row.is-next { border-color:rgba(37,99,235,0.35);background:rgba(37,99,235,0.04); }
+.cal-date { font-size:0.76rem;font-weight:600;color:var(--muted);font-family:'Courier New',monospace; }
+.cal-row.is-live .cal-date { color:#16a34a; }
+.cal-row.is-next .cal-date { color:#1d4ed8; }
+.cal-title-cell { font-size:0.88rem;font-weight:500;color:var(--text); }
+.cal-title-cell small { display:block;color:var(--muted);font-size:0.75rem;margin-top:0.1rem; }
+.cal-status { font-size:0.72rem;font-weight:700;padding:0.2rem 0.65rem;border-radius:6px;white-space:nowrap; }
+.cal-status.live { background:rgba(22,163,74,0.12);color:#16a34a; }
+.cal-status.next { background:rgba(37,99,235,0.12);color:#1d4ed8; }
+.cal-status.plan { background:rgba(15,23,42,0.06);color:var(--muted); }
+
+/* ─── AVANT/APRÈS TABLE ─── */
+.avant-apres {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0; border-radius: 12px; overflow: hidden;
+  border: 1px solid var(--border); margin: 1.25rem 0;
+  font-size: 0.85rem;
+}
+.aa-col { display: flex; flex-direction: column; }
+.aa-header {
+  padding: 0.75rem 1rem; font-weight: 700; font-size: 0.78rem;
+  letter-spacing: 0.05em; text-transform: uppercase;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.aa-avant .aa-header { background: #fee2e2; color: #b91c1c; border-bottom: 1px solid #fecaca; }
+.aa-apres .aa-header { background: #dcfce7; color: #15803d; border-bottom: 1px solid #bbf7d0; border-left: 1px solid var(--border); }
+.aa-row {
+  padding: 0.6rem 1rem; border-bottom: 1px solid var(--border);
+  color: var(--muted2); display: flex; align-items: flex-start; gap: 0.5rem;
+}
+.aa-apres .aa-row { border-left: 1px solid var(--border); }
+.aa-row:last-child { border-bottom: none; }
+.aa-avant .aa-row::before { content: '✗'; color: #ef4444; flex-shrink: 0; font-weight: 700; margin-top: 0.05rem; }
+.aa-apres .aa-row::before { content: '✓'; color: #22c55e; flex-shrink: 0; font-weight: 700; margin-top: 0.05rem; }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-brand" href="#">
+    <div class="brand-icon">⚡</div>
+    <span class="brand-name">Power<span>AutomateQC</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#articles" data-i18n="nav_articles">Articles</a></li>
+    <li><a href="#vote" data-i18n="nav_vote">Voter</a></li>
+    <li><a href="#newsletter" data-i18n="nav_newsletter">Infolettre</a></li>
+  </ul>
+  <div class="lang-toggle">
+    <button class="lang-btn active" onclick="setLang('fr')">FR</button>
+    <button class="lang-btn" onclick="setLang('en')">EN</button>
+  </div>
+  <a href="#newsletter" class="nav-cta" data-i18n="nav_cta">S'abonner</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-glow"></div>
+  <h1 data-i18n="hero_h1_html">Vous avez déjà accès<br>à des outils <em>puissants.</em><br>On vous montre comment automatiser vos processus administratifs.</h1>
+  <p class="hero-sub" data-i18n="hero_sub">Si votre organisation vous a fourni une licence Microsoft 365, Power Automate est probablement déjà disponible dans votre compte. Ces tutoriels pas à pas vous montrent comment l'utiliser concrètement — sans code, sans aide TI.</p>
+  <div class="hero-actions">
+    <a href="#articles" class="btn-primary" data-i18n="hero_btn1">Voir les tutoriels</a>
+    <a href="#vote" class="btn-ghost" data-i18n="hero_btn2">Voter pour le prochain sujet</a>
+  </div>
+  <p style="margin-top:1.5rem;font-size:0.78rem;color:var(--muted);max-width:480px;margin-left:auto;margin-right:auto;line-height:1.5" data-i18n="hero_note">⚠️ Power Automate est inclus dans les licences organisationnelles M365 (Business Basic, Standard, Premium, E3, E5). Il n'est <strong>pas</strong> inclus dans les abonnements personnels (M365 Personal ou Family).</p>
+</div>
+
+<div class="stats">
+  <div class="stat-item"><div class="stat-val">8+</div><div class="stat-lbl" data-i18n="stat1">Tutoriels publiés</div></div>
+  <div class="stat-item"><div class="stat-val">0</div><div class="stat-lbl" data-i18n="stat2">Ligne de code requise</div></div>
+  <div class="stat-item"><div class="stat-val">🔗</div><div class="stat-lbl" data-i18n="stat4">Sans connecteur Premium requis</div></div>
+</div>
+
+<div class="wrap">
+
+  <!-- ══ ARTICLE VEDETTE ══ -->
+  <section id="articles">
+    <div class="sec-header">
+      <h2 class="sec-title" data-i18n="sec_featured">✨ Article en vedette</h2>
+    </div>
+
+    <div class="featured-card" onclick="openModal('formulaires')">
+      <div class="feat-body">
+        <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:1rem">
+          <span class="tag tag-orange" data-i18n="tag_forms">Microsoft Forms</span>
+          <span style="background:rgba(22,163,74,0.12);color:#16a34a;border:1px solid rgba(22,163,74,0.25);padding:0.22rem 0.7rem;border-radius:999px;font-size:0.72rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase" data-i18n="badge_published">● Publié</span>
+        </div>
+        <h2 data-i18n="feat_title">Moderniser nos formulaires internes : remplacer Word par un processus automatisé</h2>
+        <p data-i18n="feat_desc">Fini le formulaire Word téléchargeable avec ses instructions conditionnelles! En 3 étapes simples — Microsoft Forms, Power Automate et SharePoint — vous obtenez un processus uniforme, traçable et sans erreur. Sans aucune ligne de code.</p>
+        <div class="art-meta">
+          <span data-i18n="feat_date">Mars 2025</span>
+          <span class="meta-chip">⏱ 6 min</span>
+          <span data-i18n="level_beg">Débutant</span>
+        </div>
+      </div>
+      <div class="feat-visual" style="border-right:none;border-left:1px solid var(--border)">
+        <div style="position:relative;z-index:1;width:100%">
+
+          <!-- Label -->
+          <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#1d4ed8;margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem">
+            <span style="display:inline-block;width:16px;height:2px;background:#2563eb;border-radius:2px"></span>
+            Demande de formation — Avant vs Après
+          </div>
+
+          <!-- Tableau Avant / Après -->
+          <div style="display:grid;grid-template-columns:1fr 1fr;border-radius:10px;overflow:hidden;border:1.5px solid #cbd5e1;font-size:0.8rem;box-shadow:0 3px 16px rgba(15,23,42,0.10)">
+
+            <!-- En-têtes -->
+            <div style="padding:0.7rem 1rem;background:#fde8e8;color:#991b1b;font-weight:800;font-size:0.73rem;letter-spacing:0.06em;text-transform:uppercase;border-bottom:1.5px solid #fca5a5">✗ &nbsp;Avant</div>
+            <div style="padding:0.7rem 1rem;background:#dcfce7;color:#166534;font-weight:800;font-size:0.73rem;letter-spacing:0.06em;text-transform:uppercase;border-bottom:1.5px solid #86efac;border-left:1.5px solid #cbd5e1">✓ &nbsp;Après</div>
+
+            <!-- Ligne 1 -->
+            <div style="padding:0.6rem 1rem;background:#fff5f5;color:#374151;border-bottom:1px solid #e5e7eb;display:flex;align-items:flex-start;gap:0.45rem;line-height:1.4"><span style="color:#dc2626;font-weight:800;flex-shrink:0;margin-top:0.05rem">✗</span>Formulaire Word à télécharger</div>
+            <div style="padding:0.6rem 1rem;background:#f0fdf4;color:#374151;border-bottom:1px solid #e5e7eb;border-left:1.5px solid #cbd5e1;display:flex;align-items:flex-start;gap:0.45rem;line-height:1.4"><span style="color:#16a34a;font-weight:800;flex-shrink:0;margin-top:0.05rem">✓</span>Microsoft Forms en ligne</div>
+
+            <!-- Ligne 2 -->
+            <div style="padding:0.6rem 1rem;background:#fff5f5;color:#374151;border-bottom:1px solid #e5e7eb;display:flex;align-items:flex-start;gap:0.45rem;line-height:1.4"><span style="color:#dc2626;font-weight:800;flex-shrink:0;margin-top:0.05rem">✗</span>Instructions différentes payant/gratuit</div>
+            <div style="padding:0.6rem 1rem;background:#f0fdf4;color:#374151;border-bottom:1px solid #e5e7eb;border-left:1.5px solid #cbd5e1;display:flex;align-items:flex-start;gap:0.45rem;line-height:1.4"><span style="color:#16a34a;font-weight:800;flex-shrink:0;margin-top:0.05rem">✓</span>Un seul formulaire pour tous les cas</div>
+
+            <!-- Ligne 3 -->
+            <div style="padding:0.6rem 1rem;background:#fff5f5;color:#374151;border-bottom:1px solid #e5e7eb;display:flex;align-items:flex-start;gap:0.45rem;line-height:1.4"><span style="color:#dc2626;font-weight:800;flex-shrink:0;margin-top:0.05rem">✗</span>Envoi manuel au bon courriel</div>
+            <div style="padding:0.6rem 1rem;background:#f0fdf4;color:#374151;border-bottom:1px solid #e5e7eb;border-left:1.5px solid #cbd5e1;display:flex;align-items:flex-start;gap:0.45rem;line-height:1.4"><span style="color:#16a34a;font-weight:800;flex-shrink:0;margin-top:0.05rem">✓</span>Acheminement automatique par PA</div>
+
+            <!-- Ligne 4 -->
+            <div style="padding:0.6rem 1rem;background:#fff5f5;color:#374151;border-bottom:1px solid #e5e7eb;display:flex;align-items:flex-start;gap:0.45rem;line-height:1.4"><span style="color:#dc2626;font-weight:800;flex-shrink:0;margin-top:0.05rem">✗</span>Aucune traçabilité centralisée</div>
+            <div style="padding:0.6rem 1rem;background:#f0fdf4;color:#374151;border-bottom:1px solid #e5e7eb;border-left:1.5px solid #cbd5e1;display:flex;align-items:flex-start;gap:0.45rem;line-height:1.4"><span style="color:#16a34a;font-weight:800;flex-shrink:0;margin-top:0.05rem">✓</span>Registre SharePoint automatique</div>
+
+            <!-- Ligne 5 -->
+            <div style="padding:0.6rem 1rem;background:#fff5f5;color:#374151;display:flex;align-items:flex-start;gap:0.45rem;line-height:1.4"><span style="color:#dc2626;font-weight:800;flex-shrink:0;margin-top:0.05rem">✗</span>Pas d'accusé de réception</div>
+            <div style="padding:0.6rem 1rem;background:#f0fdf4;color:#374151;border-left:1.5px solid #cbd5e1;display:flex;align-items:flex-start;gap:0.45rem;line-height:1.4"><span style="color:#16a34a;font-weight:800;flex-shrink:0;margin-top:0.05rem">✓</span>Confirmation immédiate par courriel</div>
+          </div>
+
+          <!-- Badges outils -->
+          <div style="margin-top:1rem;display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap">
+            <span style="background:#eff6ff;color:#1d4ed8;padding:0.25rem 0.65rem;border-radius:6px;font-weight:700;font-size:0.7rem;border:1px solid #bfdbfe">⚡ Power Automate</span>
+            <span style="background:#f0fdf4;color:#166534;padding:0.25rem 0.65rem;border-radius:6px;font-weight:700;font-size:0.7rem;border:1px solid #bbf7d0">📋 Microsoft Forms</span>
+            <span style="background:#f8fafc;color:#1d4ed8;padding:0.25rem 0.65rem;border-radius:6px;font-weight:700;font-size:0.7rem;border:1px solid #cbd5e1">☁️ SharePoint</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ SÉRIE ══ -->
+    <div class="series-banner">
+      <div class="series-badge" data-i18n="series_badge">🔁 Série en 3 parties</div>
+      <div class="series-info">
+        <h2 class="series-title" data-i18n="series_title">Automatiser le traitement de courriels par mots-clés</h2>
+        <p class="series-sub" data-i18n="series_sub">Du déclencheur intelligent jusqu'aux notifications — un guide complet étape par étape avec expressions, diagrammes et captures annotées.</p>
+      </div>
+      <div class="series-progress">
+        <div class="series-step active"><div class="ss-num">1</div><div class="ss-lbl" data-i18n="sp1">Déclencheur<br>& filtrage</div></div>
+        <div class="series-line"></div>
+        <div class="series-step active"><div class="ss-num">2</div><div class="ss-lbl" data-i18n="sp2">Pièces jointes<br>& conversion</div></div>
+        <div class="series-line"></div>
+        <div class="series-step active"><div class="ss-num">3</div><div class="ss-lbl" data-i18n="sp3">Archivage<br>& notifications</div></div>
+      </div>
+    </div>
+
+    <div class="series-grid">
+      <div class="series-card" onclick="openModal('serie1')">
+        <div class="series-card-header sc-blue">
+          <div class="sc-part" data-i18n="part1_of3">Partie 1 / 3</div>
+          <div class="sc-diagram">
+            <svg width="100%" height="90" viewBox="0 0 320 90" xmlns="http://www.w3.org/2000/svg">
+              <rect x="10" y="20" width="88" height="32" rx="8" fill="rgba(79,126,248,0.18)" stroke="rgba(79,126,248,0.5)" stroke-width="1.2"/>
+              <text x="54" y="40" text-anchor="middle" fill="#93b4ff" font-size="10" font-family="monospace">📧 Boîte partagée</text>
+              <line x1="98" y1="36" x2="118" y2="36" stroke="rgba(79,126,248,0.5)" stroke-width="1.5" marker-end="url(#arr)"/>
+              <rect x="118" y="20" width="80" height="32" rx="8" fill="rgba(79,126,248,0.18)" stroke="rgba(79,126,248,0.5)" stroke-width="1.2"/>
+              <text x="158" y="37" text-anchor="middle" fill="#93b4ff" font-size="10" font-family="monospace">🔍 contains()</text>
+              <text x="158" y="48" text-anchor="middle" fill="#93b4ff" font-size="9" font-family="monospace">startsWith()</text>
+              <line x1="198" y1="36" x2="218" y2="36" stroke="rgba(79,126,248,0.5)" stroke-width="1.5" marker-end="url(#arr)"/>
+              <rect x="218" y="20" width="88" height="32" rx="8" fill="rgba(34,211,238,0.15)" stroke="rgba(34,211,238,0.4)" stroke-width="1.2"/>
+              <text x="262" y="37" text-anchor="middle" fill="#67e8f9" font-size="10" font-family="monospace">✅ slice()</text>
+              <text x="262" y="48" text-anchor="middle" fill="#67e8f9" font-size="9" font-family="monospace">indexOf() trim()</text>
+              <text x="54" y="72" text-anchor="middle" fill="rgba(15,23,42,0.4)" font-size="9">Déclencheur</text>
+              <text x="158" y="72" text-anchor="middle" fill="rgba(15,23,42,0.4)" font-size="9">Filtrage</text>
+              <text x="262" y="72" text-anchor="middle" fill="rgba(15,23,42,0.4)" font-size="9">Extraction</text>
+              <defs><marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="rgba(79,126,248,0.5)"/></marker></defs>
+            </svg>
+          </div>
+        </div>
+        <div class="series-card-body">
+          <h3 data-i18n="serie1_title">Déclencheur, filtrage et extraction de métadonnées</h3>
+          <p data-i18n="serie1_desc">Connecter la boîte partagée, filtrer les bons courriels, extraire catégorie et date avec <code>slice()</code>, <code>indexOf()</code> et le tableau Excel de référence.</p>
+          <div class="card-foot">
+            <span data-i18n="serie1_meta">Juin 2025 · 12 min · Intermédiaire</span>
+            <span class="card-arrow">→</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="series-card" onclick="openModal('serie2')">
+        <div class="series-card-header sc-purple">
+          <div class="sc-part" data-i18n="part2_of3">Partie 2 / 3</div>
+          <div class="sc-diagram">
+            <svg width="100%" height="90" viewBox="0 0 320 90" xmlns="http://www.w3.org/2000/svg">
+              <rect x="10" y="20" width="80" height="32" rx="8" fill="rgba(192,132,252,0.15)" stroke="rgba(192,132,252,0.4)" stroke-width="1.2"/>
+              <text x="50" y="37" text-anchor="middle" fill="#d8b4fe" font-size="10" font-family="monospace">📎 Apply to</text>
+              <text x="50" y="48" text-anchor="middle" fill="#d8b4fe" font-size="9" font-family="monospace">each (boucle)</text>
+              <line x1="90" y1="36" x2="110" y2="36" stroke="rgba(192,132,252,0.5)" stroke-width="1.5" marker-end="url(#arr2)"/>
+              <rect x="110" y="20" width="90" height="32" rx="8" fill="rgba(192,132,252,0.15)" stroke="rgba(192,132,252,0.4)" stroke-width="1.2"/>
+              <text x="155" y="37" text-anchor="middle" fill="#d8b4fe" font-size="10" font-family="monospace">☁️ SharePoint</text>
+              <text x="155" y="48" text-anchor="middle" fill="#d8b4fe" font-size="9" font-family="monospace">temp + chunked</text>
+              <line x1="200" y1="36" x2="220" y2="36" stroke="rgba(192,132,252,0.5)" stroke-width="1.5" marker-end="url(#arr2)"/>
+              <rect x="220" y="20" width="88" height="32" rx="8" fill="rgba(74,222,128,0.12)" stroke="rgba(74,222,128,0.35)" stroke-width="1.2"/>
+              <text x="264" y="37" text-anchor="middle" fill="#86efac" font-size="10" font-family="monospace">📄 Word</text>
+              <text x="264" y="48" text-anchor="middle" fill="#86efac" font-size="9" font-family="monospace">→ PDF auto</text>
+              <text x="50" y="72" text-anchor="middle" fill="rgba(15,23,42,0.4)" font-size="9">Boucle PJ</text>
+              <text x="155" y="72" text-anchor="middle" fill="rgba(15,23,42,0.4)" font-size="9">Stockage temp</text>
+              <text x="264" y="72" text-anchor="middle" fill="rgba(15,23,42,0.4)" font-size="9">Conversion PDF</text>
+              <defs><marker id="arr2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="rgba(192,132,252,0.5)"/></marker></defs>
+            </svg>
+          </div>
+        </div>
+        <div class="series-card-body">
+          <h3 data-i18n="serie2_title">Récupérer les pièces jointes et les convertir en PDF</h3>
+          <p data-i18n="serie2_desc">Boucle <code>Apply to each</code> sur les pièces jointes, stockage temporaire SharePoint, transfert en mode <em>chunked</em> pour les gros fichiers, conversion automatique Word → PDF.</p>
+          <div class="card-foot">
+            <span data-i18n="serie2_meta">Juin 2025 · 14 min · Intermédiaire</span>
+            <span class="card-arrow">→</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="series-card" onclick="openModal('serie3')">
+        <div class="series-card-header sc-green">
+          <div class="sc-part" data-i18n="part3_of3">Partie 3 / 3</div>
+          <div class="sc-diagram">
+            <svg width="100%" height="90" viewBox="0 0 320 90" xmlns="http://www.w3.org/2000/svg">
+              <rect x="5" y="20" width="72" height="32" rx="8" fill="rgba(74,222,128,0.12)" stroke="rgba(74,222,128,0.35)" stroke-width="1.2"/>
+              <text x="41" y="37" text-anchor="middle" fill="#86efac" font-size="10" font-family="monospace">📁 Archive</text>
+              <text x="41" y="48" text-anchor="middle" fill="#86efac" font-size="9" font-family="monospace">SharePoint</text>
+              <line x1="77" y1="36" x2="97" y2="36" stroke="rgba(74,222,128,0.4)" stroke-width="1.5" marker-end="url(#arr3)"/>
+              <rect x="97" y="20" width="72" height="32" rx="8" fill="rgba(74,222,128,0.12)" stroke="rgba(74,222,128,0.35)" stroke-width="1.2"/>
+              <text x="133" y="37" text-anchor="middle" fill="#86efac" font-size="10" font-family="monospace">📊 Registre</text>
+              <text x="133" y="48" text-anchor="middle" fill="#86efac" font-size="9" font-family="monospace">Excel</text>
+              <line x1="169" y1="36" x2="189" y2="36" stroke="rgba(74,222,128,0.4)" stroke-width="1.5" marker-end="url(#arr3)"/>
+              <rect x="189" y="20" width="60" height="32" rx="8" fill="rgba(79,126,248,0.15)" stroke="rgba(79,126,248,0.4)" stroke-width="1.2"/>
+              <text x="219" y="37" text-anchor="middle" fill="#93b4ff" font-size="10" font-family="monospace">💬 Teams</text>
+              <text x="219" y="48" text-anchor="middle" fill="#93b4ff" font-size="9" font-family="monospace">+ courriel</text>
+              <line x1="249" y1="36" x2="269" y2="36" stroke="rgba(251,146,60,0.5)" stroke-width="1.5" marker-end="url(#arr3o)"/>
+              <rect x="269" y="20" width="46" height="32" rx="8" fill="rgba(251,146,60,0.1)" stroke="rgba(251,146,60,0.35)" stroke-width="1.2"/>
+              <text x="292" y="37" text-anchor="middle" fill="#fdba74" font-size="9" font-family="monospace">🛡️ Try</text>
+              <text x="292" y="48" text-anchor="middle" fill="#fdba74" font-size="8" font-family="monospace">Catch</text>
+              <text x="41" y="72" text-anchor="middle" fill="rgba(15,23,42,0.4)" font-size="9">Archivage</text>
+              <text x="133" y="72" text-anchor="middle" fill="rgba(15,23,42,0.4)" font-size="9">Registre</text>
+              <text x="219" y="72" text-anchor="middle" fill="rgba(15,23,42,0.4)" font-size="9">Notif.</text>
+              <text x="292" y="72" text-anchor="middle" fill="rgba(15,23,42,0.4)" font-size="9">Erreurs</text>
+              <defs>
+                <marker id="arr3" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="rgba(74,222,128,0.5)"/></marker>
+                <marker id="arr3o" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="rgba(251,146,60,0.5)"/></marker>
+              </defs>
+            </svg>
+          </div>
+        </div>
+        <div class="series-card-body">
+          <h3 data-i18n="serie3_title">Archiver, tenir le registre Excel et envoyer les notifications</h3>
+          <p data-i18n="serie3_desc">Nomenclature dynamique, structure hiérarchique SharePoint, ligne Excel avec liens, carte adaptative Teams, courriel HTML et pattern Try-Catch-Finally pour la gestion d'erreurs.</p>
+          <div class="card-foot">
+            <span data-i18n="serie3_meta">Juin 2025 · 15 min · Intermédiaire</span>
+            <span class="card-arrow">→</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ TOUS LES ARTICLES ══ -->
+    <div class="sec-header">
+      <h2 class="sec-title" data-i18n="sec_all">Tous les articles</h2>
+      <a href="#" class="sec-link" data-i18n="see_all">Voir tout →</a>
+    </div>
+
+    <div class="grid-3">
+
+      <div class="art-card" onclick="openModal('copilot')">
+        <div class="card-thumb thumb-5"><div class="thumb-emoji">🤖</div></div>
+        <div class="card-body">
+          <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap">
+            <span class="tag tag-green" data-i18n="tag_tip">Conseil de la semaine</span>
+            <span class="status-badge pub" data-i18n="badge_published">● Publié</span>
+          </div>
+          <h3 data-i18n="card5_title">La fonctionnalité de Copilot dans Word que beaucoup ignorent</h3>
+          <p data-i18n="card5_desc">Copilot lit votre document et insère du contenu directement — sans copier-coller, sans licence payante.</p>
+          <div class="card-foot">
+            <span>Lancement · <span data-i18n="min3">3 min</span></span>
+            <span class="card-arrow">→</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="art-card" onclick="openModal('cartes')">
+        <div class="card-thumb thumb-1"><div class="thumb-emoji">🪪</div></div>
+        <div class="card-body">
+          <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap">
+            <span class="tag tag-blue" data-i18n="tag_pa">Power Automate</span>
+            <span class="status-badge sched" data-i18n="badge_week1">📅 Semaine 1</span>
+          </div>
+          <h3 data-i18n="card1_title">Suivi automatisé des cartes d'accès avec alertes proactives</h3>
+          <p data-i18n="card1_desc">Un flow quotidien qui surveille les dates d'expiration et envoie un rapport HTML formaté chaque matin.</p>
+          <div class="card-foot">
+            <span>Planifié · <span data-i18n="min6">6 min</span></span>
+            <span class="card-arrow">→</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="art-card" onclick="openModal('deplacements')">
+        <div class="card-thumb thumb-2"><div class="thumb-emoji">✈️</div></div>
+        <div class="card-body">
+          <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap">
+            <span class="tag tag-cyan" data-i18n="tag_sp">SharePoint</span>
+            <span class="status-badge sched" data-i18n="badge_week2">📅 Semaine 2</span>
+          </div>
+          <h3 data-i18n="card2_title">Automatiser les réservations de déplacements professionnels</h3>
+          <p data-i18n="card2_desc">De la demande SharePoint jusqu'à la notification de l'adjointe — avec duplication automatique pour les groupes.</p>
+          <div class="card-foot">
+            <span>Planifié · <span data-i18n="min7">7 min</span></span>
+            <span class="card-arrow">→</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="art-card" onclick="openModal('publication')">
+        <div class="card-thumb thumb-6"><div class="thumb-emoji">📨</div></div>
+        <div class="card-body">
+          <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap">
+            <span class="tag tag-purple" data-i18n="tag_teams">Teams</span>
+            <span class="status-badge sched" data-i18n="badge_week4">📅 Semaine 4</span>
+          </div>
+          <h3 data-i18n="card6_title">Publier un message Teams à un utilisateur via Power Automate</h3>
+          <p data-i18n="card6_desc">Guide pas à pas pour envoyer des messages personnalisés à des utilisateurs spécifiques dans Teams.</p>
+          <div class="card-foot">
+            <span>Planifié · <span data-i18n="min4">4 min</span></span>
+            <span class="card-arrow">→</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="art-card" onclick="openModal('calendrier')">
+        <div class="card-thumb" style="background:linear-gradient(145deg,#101828,#070e1a);height:148px;display:flex;align-items:center;justify-content:center">
+          <div style="font-size:2.6rem;filter:drop-shadow(0 4px 16px rgba(0,0,0,.5))">⚡</div>
+        </div>
+        <div class="card-body">
+          <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap">
+            <span class="tag tag-blue" data-i18n="tag_pa">Power Automate</span>
+            <span class="status-badge meta" data-i18n="badge_meta">🔧 Dans les coulisses</span>
+          </div>
+          <h3 data-i18n="card_cal_title">Comment ce blog publie automatiquement 1 article par semaine</h3>
+          <p data-i18n="card_cal_desc">Le flow Power Automate qui gère notre calendrier éditorial : Excel → WordPress REST API → publication LinkedIn automatique.</p>
+          <div class="card-foot">
+            <span data-i18n="card_cal_meta">Bonus · 8 min · Intermédiaire</span>
+            <span class="card-arrow">→</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ CALENDRIER ÉDITORIAL ══ -->
+  <section id="calendrier-editorial">
+    <div class="sec-header">
+      <h2 class="sec-title" data-i18n="cal_title">📅 Calendrier éditorial</h2>
+      <span style="font-size:0.8rem;color:var(--muted)" data-i18n="cal_sub">Géré automatiquement par Power Automate</span>
+    </div>
+    <div class="cal-block">
+      <div class="cal-flow-hint">
+        <svg width="100%" height="52" viewBox="0 0 700 52" xmlns="http://www.w3.org/2000/svg" style="max-width:680px;margin:0 auto;display:block">
+          <rect x="0" y="10" width="120" height="32" rx="8" fill="rgba(79,126,248,0.12)" stroke="rgba(79,126,248,0.3)" stroke-width="1"/>
+          <text x="60" y="30" text-anchor="middle" fill="#93b4ff" font-size="11" font-family="monospace">📊 Excel</text>
+          <text x="60" y="43" text-anchor="middle" fill="rgba(15,23,42,0.4)" font-size="9">Calendrier</text>
+          <line x1="120" y1="26" x2="148" y2="26" stroke="rgba(79,126,248,0.4)" stroke-width="1.5" marker-end="url(#ca)"/>
+          <rect x="148" y="10" width="130" height="32" rx="8" fill="rgba(79,126,248,0.12)" stroke="rgba(79,126,248,0.3)" stroke-width="1"/>
+          <text x="213" y="30" text-anchor="middle" fill="#93b4ff" font-size="11" font-family="monospace">⏰ Récurrence</text>
+          <text x="213" y="43" text-anchor="middle" fill="rgba(15,23,42,0.4)" font-size="9">Lundi 8h00</text>
+          <line x1="278" y1="26" x2="306" y2="26" stroke="rgba(79,126,248,0.4)" stroke-width="1.5" marker-end="url(#ca)"/>
+          <rect x="306" y="10" width="130" height="32" rx="8" fill="rgba(34,211,238,0.1)" stroke="rgba(34,211,238,0.3)" stroke-width="1"/>
+          <text x="371" y="30" text-anchor="middle" fill="#67e8f9" font-size="11" font-family="monospace">🔍 Prochain</text>
+          <text x="371" y="43" text-anchor="middle" fill="rgba(15,23,42,0.4)" font-size="9">article planifié</text>
+          <line x1="436" y1="26" x2="464" y2="26" stroke="rgba(34,211,238,0.4)" stroke-width="1.5" marker-end="url(#ca2)"/>
+          <rect x="464" y="10" width="110" height="32" rx="8" fill="rgba(74,222,128,0.1)" stroke="rgba(74,222,128,0.3)" stroke-width="1"/>
+          <text x="519" y="30" text-anchor="middle" fill="#86efac" font-size="11" font-family="monospace">🚀 WordPress</text>
+          <text x="519" y="43" text-anchor="middle" fill="rgba(15,23,42,0.4)" font-size="9">REST API</text>
+          <line x1="574" y1="26" x2="602" y2="26" stroke="rgba(74,222,128,0.4)" stroke-width="1.5" marker-end="url(#ca3)"/>
+          <rect x="602" y="10" width="95" height="32" rx="8" fill="rgba(10,102,194,0.2)" stroke="rgba(10,102,194,0.5)" stroke-width="1"/>
+          <text x="649" y="30" text-anchor="middle" fill="#6aacff" font-size="11" font-family="monospace">🔵 LinkedIn</text>
+          <text x="649" y="43" text-anchor="middle" fill="rgba(15,23,42,0.4)" font-size="9">post auto</text>
+          <defs>
+            <marker id="ca" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="rgba(79,126,248,0.5)"/></marker>
+            <marker id="ca2" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="rgba(34,211,238,0.5)"/></marker>
+            <marker id="ca3" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto"><path d="M0,0 L6,3 L0,6 Z" fill="rgba(74,222,128,0.5)"/></marker>
+          </defs>
+        </svg>
+      </div>
+      <div class="cal-grid" id="cal-grid"><!-- généré par JS --></div>
+    </div>
+  </section>
+
+  <!-- ─── VOTE SECTION ─── -->
+  <section id="vote">
+    <div class="vote-section">
+      <div class="vote-header">
+        <div class="vote-title-block">
+          <h3 data-i18n="vote_title">🗳️ Quel article souhaitez-vous lire en premier?</h3>
+          <p data-i18n="vote_sub">Votre vote influence directement le prochain article publié. Résultats en temps réel.</p>
+        </div>
+        <div class="vote-total-badge">
+          <div class="vote-total-num" id="total-votes">0</div>
+          <div class="vote-total-lbl" data-i18n="votes_cast">Votes exprimés</div>
+        </div>
+      </div>
+
+      <div class="vote-grid" id="vote-grid">
+        <!-- generated by JS -->
+      </div>
+
+      <div class="vote-footer">
+        <span class="vote-disclaimer" data-i18n="vote_disclaimer">Un vote par session · Les résultats guident notre calendrier éditorial</span>
+        <span id="voted-msg" style="display:none;color:var(--cyan);font-weight:600" data-i18n="voted_thanks">✓ Merci pour votre vote!</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section id="newsletter">
+    <div class="newsletter-block">
+      <h3 class="nl-title" data-i18n="nl_title">Recevez les nouveaux articles</h3>
+      <p class="nl-sub" data-i18n="nl_sub">Un courriel par semaine, des tutoriels pratiques, aucun spam.</p>
+      <div class="nl-form">
+        <input class="nl-input" type="email" data-placeholder-i18n="nl_placeholder" placeholder="votre@courriel.com">
+        <button class="btn-primary" onclick="alert(currentLang==='fr'?'Merci! Connectez votre vrai formulaire ici.':'Thanks! Connect your real form here.')" data-i18n="nl_btn">S'abonner</button>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <span class="footer-brand">Power<span>AutomateQC</span></span>
+  <p data-i18n="footer_sub">Des tutoriels concrets pour aller plus loin avec Microsoft 365</p>
+  <p style="margin-top:0.5rem">© 2026 Flow Facile<span style="color:var(--accent)">.ca</span></p>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal-overlay" onclick="handleOverlayClick(event)">
+  <div class="modal" id="modal-box">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    <div class="modal-header" id="modal-header"></div>
+    <div class="modal-body" id="modal-body"></div>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════
+// I18N
+// ══════════════════════════════════
+const i18n = {
+  fr: {
+    nav_articles: 'Articles',
+    nav_vote: 'Voter',
+    nav_newsletter: 'Infolettre',
+    nav_cta: "S'abonner",
+    hero_h1_html: 'Vous avez déjà accès<br>à des outils <em>puissants.</em><br>On vous montre comment automatiser vos processus administratifs.',
+    hero_sub: 'Si votre organisation vous a fourni une licence Microsoft 365, Power Automate est probablement déjà disponible dans votre compte. Ces tutoriels pas à pas vous montrent comment l\'utiliser concrètement — sans code, sans aide TI.',
+    hero_note: '⚠️ Power Automate est inclus dans les licences organisationnelles M365 (Business Basic, Standard, Premium, E3, E5). Il n\'est <strong>pas</strong> inclus dans les abonnements personnels (M365 Personal ou Family).',
+    hero_btn1: 'Voir les tutoriels',
+    hero_btn2: 'Voter pour le prochain sujet',
+    stat1: 'Tutoriels publiés', stat2: 'Ligne de code requise', stat3: 'Licences organisationnelles M365', stat4: 'Sans connecteur Premium requis',
+    sec_featured: 'Article en vedette',
+    sec_all: 'Tous les articles',
+    see_all: 'Voir tout →',
+    tag_pa: 'Power Automate', tag_sp: 'SharePoint', tag_teams: 'Teams',
+    tag_forms: 'Microsoft Forms', tag_tip: 'Conseil de la semaine',
+    pipe1: 'Courriel reçu — mot-clé détecté', pipe2: 'Extraction catégorie + métadonnées',
+    pipe3: 'Conversion Word → PDF + archivage', pipe4: 'Notification Teams + registre Excel',
+    feat_title: 'Automatisation du traitement de courriels par mots-clés : classer, archiver, notifier',
+    feat_desc: "Comment un flow Power Automate surveille une boîte partagée, détecte des thématiques dans l'objet des courriels, puis classe automatiquement les pièces jointes dans Excel et SharePoint — zéro intervention humaine.",
+    min3:'3 min', min4:'4 min', min5:'5 min', min6:'6 min', min7:'7 min', min8:'⏱ 8 min',
+    level_adv: 'Avancé',
+    card1_title: "Suivi automatisé des cartes d'accès avec alertes proactives",
+    card1_desc: "Un flow quotidien qui surveille les dates d'expiration et envoie un rapport HTML formaté chaque matin.",
+    card2_title: 'Automatiser les réservations de déplacements professionnels',
+    card2_desc: "De la demande SharePoint jusqu'à la notification de l'adjointe — avec duplication automatique pour les groupes.",
+    card4_title: 'Moderniser nos formulaires internes : remplacer Word en 3 étapes',
+    card4_desc: 'Fini le formulaire Word téléchargeable! Comment passer à Microsoft Forms + Power Automate sans programmation.',
+    card5_title: 'La fonctionnalité de Copilot dans Word que beaucoup ignorent',
+    card5_desc: 'Copilot lit votre document et insère du contenu directement — sans copier-coller, sans licence payante.',
+    card6_title: 'Publier un message Teams à un utilisateur via Power Automate',
+    card6_desc: 'Guide pas à pas pour envoyer des messages personnalisés à des utilisateurs spécifiques dans Teams.',
+    vote_title: '🗳️ Quel article souhaitez-vous lire en premier?',
+    vote_sub: 'Votre vote influence directement le prochain article publié. Résultats en temps réel.',
+    votes_cast: 'Votes exprimés',
+    vote_btn: 'Voter',
+    voted_btn: '✓ Voté',
+    vote_disclaimer: 'Un vote par session · Les résultats guident notre calendrier éditorial',
+    voted_thanks: '✓ Merci pour votre vote!',
+    nl_title: 'Recevez les nouveaux articles',
+    nl_sub: 'Un courriel par semaine, des tutoriels pratiques, aucun spam.',
+    nl_placeholder: 'votre@courriel.com',
+    nl_btn: "S'abonner",
+    footer_sub: 'Des tutoriels concrets pour aller plus loin avec Microsoft 365',
+    badge_published: '● Publié', badge_week1: '📅 Sem. 1', badge_week2: '📅 Sem. 2',
+    badge_week3: '📅 Sem. 3', badge_week4: '📅 Sem. 4', badge_meta: '🔧 Dans les coulisses',
+    feat_date: 'Lancement', level_beg: 'Débutant',
+    cal_title: '📅 Calendrier éditorial', cal_sub: 'Géré automatiquement par Power Automate',
+    card_cal_title: 'Comment ce blog publie automatiquement 1 article par semaine',
+    card_cal_desc: 'Le flow Power Automate qui gère notre calendrier éditorial : Excel → WordPress REST API → publication LinkedIn automatique.',
+    card_cal_meta: 'Bonus · 8 min · Intermédiaire',
+    series_badge: '🔁 Série en 3 parties',
+    series_title: 'Automatiser le traitement de courriels par mots-clés',
+    series_sub: 'Du déclencheur intelligent jusqu\'aux notifications — un guide complet étape par étape avec expressions, diagrammes et captures annotées.',
+    sp1: 'Déclencheur\n& filtrage', sp2: 'Pièces jointes\n& conversion', sp3: 'Archivage\n& notifications',
+    part1_of3: 'Partie 1 / 3', part2_of3: 'Partie 2 / 3', part3_of3: 'Partie 3 / 3',
+    serie1_title: 'Déclencheur, filtrage et extraction de métadonnées',
+    serie1_desc: 'Connecter la boîte partagée, filtrer les bons courriels, extraire catégorie et date avec slice(), indexOf() et le tableau Excel de référence.',
+    serie1_meta: 'Juin 2025 · 12 min · Intermédiaire',
+    serie2_title: 'Récupérer les pièces jointes et les convertir en PDF',
+    serie2_desc: 'Boucle Apply to each sur les pièces jointes, stockage temporaire SharePoint, transfert en mode chunked pour les gros fichiers, conversion automatique Word → PDF.',
+    serie2_meta: 'Juin 2025 · 14 min · Intermédiaire',
+    serie3_title: 'Archiver, tenir le registre Excel et envoyer les notifications',
+    serie3_desc: 'Nomenclature dynamique, structure hiérarchique SharePoint, ligne Excel avec liens, carte adaptative Teams, courriel HTML et pattern Try-Catch-Finally.',
+    serie3_meta: 'Juin 2025 · 15 min · Intermédiaire',
+  },
+  en: {
+    nav_articles: 'Articles',
+    nav_vote: 'Vote',
+    nav_newsletter: 'Newsletter',
+    nav_cta: 'Subscribe',
+    hero_h1_html: 'You already have access<br>to <em>powerful tools.</em><br>Let us show you how.',
+    hero_sub: 'If your organization provided you with a Microsoft 365 license, Power Automate is likely already available in your account. These step-by-step tutorials show you how to use it concretely — no code, no IT help needed.',
+    hero_note: '⚠️ Power Automate is included in organizational M365 licenses (Business Basic, Standard, Premium, E3, E5). It is <strong>not</strong> included in personal subscriptions (M365 Personal or Family).',
+    hero_btn1: 'See the tutorials',
+    hero_btn2: 'Vote for the next topic',
+    stat1: 'Tutorials published', stat2: 'Lines of code needed', stat3: 'Organizational M365 licenses', stat4: 'No Premium connector required',
+    sec_featured: 'Featured article',
+    sec_all: 'All articles',
+    see_all: 'See all →',
+    tag_pa: 'Power Automate', tag_sp: 'SharePoint', tag_teams: 'Teams',
+    tag_forms: 'Microsoft Forms', tag_tip: 'Tip of the week',
+    pipe1: 'Email received — keyword detected', pipe2: 'Extract category + metadata',
+    pipe3: 'Convert Word → PDF + archive', pipe4: 'Teams notification + Excel register',
+    feat_title: 'Automating email processing by keyword: classify, archive, notify',
+    feat_desc: 'How a Power Automate flow monitors a shared mailbox, detects topics in email subject lines, then automatically files attachments into Excel and SharePoint — zero human intervention.',
+    min3:'3 min', min4:'4 min', min5:'5 min', min6:'6 min', min7:'7 min', min8:'⏱ 8 min',
+    level_adv: 'Advanced',
+    card1_title: 'Automated access card tracking with proactive alerts',
+    card1_desc: 'A daily flow that monitors expiry dates and sends a formatted HTML report every morning.',
+    card2_title: 'Automating professional travel reservations',
+    card2_desc: 'From the SharePoint request to the admin assistant notification — with auto-duplication for groups.',
+    card4_title: 'Modernizing internal forms: replace Word in 3 steps',
+    card4_desc: 'No more downloadable Word forms! How to switch to Microsoft Forms + Power Automate without coding.',
+    card5_title: 'The Copilot feature in Word most people overlook',
+    card5_desc: 'Copilot reads your open document and inserts content directly — no copy-paste, no paid license.',
+    card6_title: 'Post a Teams message to a user via Power Automate',
+    card6_desc: 'Step-by-step guide to sending personalized messages to specific Teams users using an automated flow.',
+    vote_title: '🗳️ Which article would you like to read first?',
+    vote_sub: 'Your vote directly influences the next article published. Live results.',
+    votes_cast: 'Votes cast',
+    vote_btn: 'Vote',
+    voted_btn: '✓ Voted',
+    vote_disclaimer: 'One vote per session · Results guide our editorial calendar',
+    voted_thanks: '✓ Thank you for your vote!',
+    nl_title: 'Get new articles in your inbox',
+    nl_sub: 'One email per week, practical tutorials, no spam.',
+    nl_placeholder: 'your@email.com',
+    nl_btn: 'Subscribe',
+    footer_sub: 'Practical tutorials to go further with Microsoft 365',
+    badge_published: '● Published', badge_week1: '📅 Week 1', badge_week2: '📅 Week 2',
+    badge_week3: '📅 Week 3', badge_week4: '📅 Week 4', badge_meta: '🔧 Behind the scenes',
+    feat_date: 'Launch', level_beg: 'Beginner',
+    cal_title: '📅 Editorial Calendar', cal_sub: 'Managed automatically by Power Automate',
+    card_cal_title: 'How this blog automatically publishes 1 article per week',
+    card_cal_desc: 'The Power Automate flow managing our editorial calendar: Excel → WordPress REST API → automatic LinkedIn post.',
+    card_cal_meta: 'Bonus · 8 min · Intermediate',
+    series_badge: '🔁 3-Part Series',
+    series_title: 'Automating email processing by keyword',
+    series_sub: 'From smart trigger to notifications — a complete step-by-step guide with expressions, diagrams and annotated screenshots.',
+    sp1: 'Trigger\n& filtering', sp2: 'Attachments\n& conversion', sp3: 'Archive\n& notifications',
+    part1_of3: 'Part 1 / 3', part2_of3: 'Part 2 / 3', part3_of3: 'Part 3 / 3',
+    serie1_title: 'Trigger, filtering and metadata extraction',
+    serie1_desc: 'Connect the shared mailbox, filter the right emails, extract category and date with slice(), indexOf() and the Excel reference table.',
+    serie1_meta: 'June 2025 · 12 min · Intermediate',
+    serie2_title: 'Retrieve attachments and convert them to PDF',
+    serie2_desc: 'Apply to each loop on attachments, temporary SharePoint storage, chunked transfer for large files, automatic Word → PDF conversion.',
+    serie2_meta: 'June 2025 · 14 min · Intermediate',
+    serie3_title: 'Archive, maintain the Excel register and send notifications',
+    serie3_desc: 'Dynamic naming, hierarchical SharePoint structure, Excel row with links, Teams adaptive card, HTML email and Try-Catch-Finally error handling.',
+    serie3_meta: 'June 2025 · 15 min · Intermediate',
+  }
+};
+
+let currentLang = 'fr';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
+  document.documentElement.lang = lang;
+
+  const t = i18n[lang];
+
+  // Update all data-i18n elements
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (!t[key]) return;
+    if (key === 'hero_h1_html' || key === 'hero_note') { el.innerHTML = t[key]; return; }
+    el.textContent = t[key];
+  });
+
+  // Placeholder
+  document.querySelectorAll('[data-placeholder-i18n]').forEach(el => {
+    const key = el.getAttribute('data-placeholder-i18n');
+    if (t[key]) el.placeholder = t[key];
+  });
+
+  // Re-render vote grid + calendar
+  renderVoteGrid();
+  renderCalendar();
+}
+
+// ══════════════════════════════════
+// VOTE SYSTEM
+// ══════════════════════════════════
+const voteTopics = [
+  { id: 'formation',   fr: 'Automatiser les 4 étapes de demande de formation',        en: 'Automate the 4 steps of training requests',           desc_fr: 'Soumission → approbation gestionnaire → inscription → suivi — tout en automatique!', desc_en: 'Submit → manager approval → registration → tracking — fully automated!' },
+  { id: 'vacances',    fr: 'Remplacer le fichier Excel des vacances',                  en: 'Replace the vacation tracking Excel file',            desc_fr: 'Approbation dans Teams, événement Outlook automatique, solde mis à jour',           desc_en: 'Teams approval, automatic Outlook calendar event, balance updated' },
+  { id: 'onboarding',  fr: 'Automatiser l\'accueil d\'un nouvel employé',              en: 'Automate new employee onboarding',                    desc_fr: 'Du formulaire RH jusqu\'aux accès Teams et courriel de bienvenue',                   desc_en: 'From HR form to Teams access and welcome email' },
+  { id: 'evals',       fr: 'Suivi des évaluations annuelles de performance',           en: 'Annual performance review tracking',                  desc_fr: 'Rappels automatiques, formulaire Forms, tableau de bord SharePoint',               desc_en: 'Automated reminders, Forms questionnaire, SharePoint dashboard' },
+  { id: 'feuille',     fr: 'Remplacer la feuille de temps Word / PDF',                 en: 'Replace the Word / PDF timesheet',                    desc_fr: 'Forms + approbation automatique + consolidation SharePoint hebdomadaire',           desc_en: 'Forms + auto-approval + weekly SharePoint consolidation' },
+  { id: 'achats',      fr: 'Automatiser les demandes d\'achat et approbations',        en: 'Automate purchase requests and approvals',            desc_fr: 'Formulaire → courriel gestionnaire → bon de commande → archivage',                 desc_en: 'Form → manager email → purchase order → archiving' },
+];
+
+// Initialize vote counts
+let votes = {};
+voteTopics.forEach(t => { votes[t.id] = Math.floor(Math.random() * 30) + 8; });
+// Formation en tête — c'est le sujet le plus douloureux!
+votes['formation'] += 40; votes['vacances'] += 20; votes['onboarding'] += 12;
+
+let userVote = null; // id of topic user voted for
+
+function getTotalVotes() {
+  return Object.values(votes).reduce((a,b) => a+b, 0);
+}
+
+function getSorted() {
+  return [...voteTopics].sort((a,b) => votes[b.id] - votes[a.id]);
+}
+
+function renderVoteGrid() {
+  const t = i18n[currentLang];
+  const grid = document.getElementById('vote-grid');
+  const total = getTotalVotes();
+  const sorted = getSorted();
+  document.getElementById('total-votes').textContent = total;
+
+  grid.innerHTML = sorted.map((topic, idx) => {
+    const count = votes[topic.id];
+    const pct = Math.round((count / total) * 100);
+    const rankClass = idx === 0 ? 'rank-1' : idx === 1 ? 'rank-2' : idx === 2 ? 'rank-3' : 'rank-other';
+    const isTop = idx === 0;
+    const isVoted = userVote === topic.id;
+    const hasVoted = userVote !== null;
+    const label = currentLang === 'fr' ? topic.fr : topic.en;
+    const desc = currentLang === 'fr' ? topic.desc_fr : topic.desc_en;
+    const btnLabel = isVoted ? t.voted_btn : t.vote_btn;
+
+    return `
+      <div class="vote-item ${isTop ? 'top-vote' : ''}" id="vitem-${topic.id}">
+        <div class="vote-bar-bg" style="width:${pct}%"></div>
+        <div class="vote-rank ${rankClass}">${idx + 1}</div>
+        <div class="vote-text">
+          <h4>${label}</h4>
+          <p>${desc}</p>
+        </div>
+        <div class="vote-stats">
+          <span class="vote-count">${count}</span>
+          <span class="vote-pct">${pct}%</span>
+        </div>
+        <button class="vote-btn ${isVoted ? 'voted' : ''}" 
+          onclick="castVote('${topic.id}')" 
+          ${hasVoted ? 'disabled' : ''}>${btnLabel}</button>
+      </div>
+    `;
+  }).join('');
+}
+
+function castVote(id) {
+  if (userVote !== null) return;
+  userVote = id;
+  votes[id] += 1;
+  renderVoteGrid();
+  document.getElementById('voted-msg').style.display = 'block';
+  // Animate the bar
+  setTimeout(() => {
+    const total = getTotalVotes();
+    const sorted = getSorted();
+    sorted.forEach(topic => {
+      const el = document.getElementById('vitem-' + topic.id);
+      if (el) {
+        const bar = el.querySelector('.vote-bar-bg');
+        const pct = Math.round((votes[topic.id] / total) * 100);
+        if (bar) bar.style.width = pct + '%';
+      }
+    });
+  }, 50);
+}
+
+// ══════════════════════════════════
+// ARTICLES MODAL
+// ══════════════════════════════════
+const articleData = {
+  serie1: {
+    tag: 'tag-blue', tagKey: 'tag_pa',
+    fr: {
+      title: 'Série Partie 1/3 — Déclencheur, filtrage et extraction de métadonnées',
+      meta: 'Juin 2025 · 12 min · Intermédiaire',
+      body: `
+<p>Dans cette première partie, nous allons construire les fondations du flow : connecter la boîte partagée, filtrer uniquement les bons courriels, puis extraire les métadonnées utiles depuis l'objet du message. C'est la phase la plus critique — tout le reste en dépend.</p>
+
+<div class="step-block">
+  <div class="step-num">Étape 1</div>
+  <div class="step-title">Créer le flow et connecter la boîte partagée</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Dans Power Automate, créez un nouveau flow automatisé. Choisissez le déclencheur <strong>« When a new email arrives in a shared mailbox (V2) »</strong>.</p>
+  <div class="mockup">
+    <div class="mockup-row"><span class="mb-label">Déclencheur</span><span class="mb-val">When a new email arrives in a shared mailbox (V2)</span></div>
+    <div class="mockup-row"><span class="mb-label">Mailbox Address</span><span class="mb-val">courriers@votreorg.ca</span></div>
+    <div class="mockup-row"><span class="mb-label">Folder</span><span class="mb-val">Inbox</span></div>
+    <div class="mockup-row"><span class="mb-label">Include Attachments</span><span class="mb-val mb-tag">Yes</span></div>
+  </div>
+  <div class="tip-box"><strong>💡 Conseil :</strong> Activez « Include Attachments » dès le déclencheur — cela évite un appel API supplémentaire plus tard pour récupérer les pièces jointes.</div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Étape 2</div>
+  <div class="step-title">Filtrer les courriels pertinents avec une condition</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Ajoutez une action <strong>« Condition »</strong>. L'objectif : ne traiter que les courriels dont l'objet contient votre mot-clé, et qui ne sont pas des réponses.</p>
+  <div class="code-block"><span class="cm">// Condition 1 — l'objet contient le mot-clé</span>
+<span class="fn">contains</span>(<span class="kw">triggerOutputs()</span>?['body/subject'], <span class="st">'rapport'</span>)
+
+<span class="cm">// Condition 2 — n'est PAS une réponse</span>
+<span class="fn">not</span>(<span class="fn">startsWith</span>(<span class="kw">triggerOutputs()</span>?['body/subject'], <span class="st">'Re:'</span>))
+
+<span class="cm">// Condition 3 — n'est PAS un transfert</span>
+<span class="fn">not</span>(<span class="fn">startsWith</span>(<span class="kw">triggerOutputs()</span>?['body/subject'], <span class="st">'Tr:'</span>))</div>
+  <div class="warn-box"><strong>⚠️ Attention :</strong> Combinez ces trois conditions avec l'opérateur <code>AND</code> dans la condition, sinon les réponses seront traitées en double.</div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Étape 3</div>
+  <div class="step-title">Construire le tableau Excel de référence</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Avant d'aller plus loin dans le flow, créez ce tableau dans un fichier Excel sur SharePoint. C'est le cerveau de toute la solution — il associe chaque mot-clé à une destination.</p>
+  <table class="excel-table">
+    <thead><tr><th>MotCle</th><th>DossierSharePoint</th><th>CanalTeams</th><th>Destinataires</th></tr></thead>
+    <tbody>
+      <tr><td>rapport-finances</td><td>/Documents/Finances/2025</td><td>finances-equipe</td><td>fin@org.ca</td></tr>
+      <tr><td>compte-rendu</td><td>/Documents/Reunions/2025</td><td>direction</td><td>dir@org.ca</td></tr>
+      <tr><td>facture</td><td>/Documents/Comptabilite</td><td>comptabilite</td><td>cpt@org.ca</td></tr>
+    </tbody>
+  </table>
+  <div class="tip-box"><strong>💡 Conseil :</strong> Ajoutez un nouveau mot-clé = ajoutez une ligne. Aucune modification du flow requise. C'est ce qui rend la solution scalable.</div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Étape 4</div>
+  <div class="step-title">Extraire les métadonnées depuis l'objet du courriel</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Ajoutez une action <strong>« Initialize variable »</strong> pour chaque métadonnée à extraire. Voici les expressions clés :</p>
+  <div class="code-block"><span class="cm">// Récupérer l'objet du courriel et le normaliser</span>
+<span class="kw">variables</span>('ObjetNormalise') =
+  <span class="fn">replace</span>(
+    <span class="fn">toUpper</span>(<span class="fn">trim</span>(<span class="kw">triggerOutputs()</span>?['body/subject'])),
+    <span class="st">'–'</span>, <span class="st">'-'</span>
+  )
+
+<span class="cm">// Extraire la catégorie (tout ce qui est avant le premier tiret)</span>
+<span class="kw">variables</span>('Categorie') =
+  <span class="fn">trim</span>(<span class="fn">substring</span>(
+    <span class="kw">variables</span>('ObjetNormalise'),
+    0,
+    <span class="fn">indexOf</span>(<span class="kw">variables</span>('ObjetNormalise'), <span class="st">'-'</span>)
+  ))
+
+<span class="cm">// Extraire la date (format YYYYMMDD dans l'objet)</span>
+<span class="kw">variables</span>('DateDoc') =
+  <span class="fn">substring</span>(
+    <span class="kw">variables</span>('ObjetNormalise'),
+    <span class="fn">indexOf</span>(<span class="kw">variables</span>('ObjetNormalise'), <span class="st">'20'</span>),
+    8
+  )</div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Étape 5</div>
+  <div class="step-title">Chercher la correspondance dans le tableau Excel</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Ajoutez <strong>« List rows present in a table »</strong> pour lire le tableau Excel de référence, puis une boucle <strong>« Apply to each »</strong> avec une condition interne :</p>
+  <div class="code-block"><span class="cm">// Condition dans la boucle — le mot-clé du tableau</span>
+<span class="cm">// correspond-il à la catégorie extraite?</span>
+<span class="fn">contains</span>(
+  <span class="fn">toUpper</span>(<span class="kw">items('Apply_to_each')?['MotCle']</span>),
+  <span class="kw">variables</span>('Categorie')
+)</div>
+  <p style="color:var(--muted2);font-size:.88rem;margin-top:.75rem">Lorsque la correspondance est trouvée, sauvegardez le chemin SharePoint, le canal Teams et les destinataires dans des variables — vous en aurez besoin dans les parties 2 et 3.</p>
+  <div class="mockup">
+    <div class="mockup-row"><span class="mb-label">DossierDestination</span><span class="mb-val">/Documents/Finances/2025</span><span class="mb-tag blue">variable</span></div>
+    <div class="mockup-row"><span class="mb-label">CanalTeams</span><span class="mb-val">finances-equipe</span><span class="mb-tag blue">variable</span></div>
+    <div class="mockup-row"><span class="mb-label">Destinataires</span><span class="mb-val">fin@org.ca</span><span class="mb-tag blue">variable</span></div>
+  </div>
+</div>
+
+<div class="nav-series">
+  <span style="color:var(--muted);font-size:.82rem">Partie 1 / 3</span>
+  <button class="nav-btn primary" onclick="closeModal();openModal('serie2')">Partie 2 — Pièces jointes &amp; PDF →</button>
+</div>
+
+<div style="display:flex;align-items:center;gap:0.75rem;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:0.875rem 1.1rem;margin-top:1.25rem;font-size:0.83rem;color:var(--muted2)">
+  <span style="font-size:1.4rem;flex-shrink:0">📖</span>
+  <div>
+    <strong style="color:var(--text)">Pour aller plus loin avec les fonctions de texte</strong> — Les fonctions <code>indexOf()</code>, <code>trim()</code> et <code>substring()</code> utilisées dans cet article sont bien documentées avec des exemples concrets sur
+    <a href="https://www.enjoysharepoint.com/power-automate-string-functions/" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600;text-decoration:none">EnjoySharePoint</a> :
+    <em>Power Automate String Functions + 10 Examples</em>.
+    <a href="https://www.enjoysharepoint.com/power-automate-string-functions/" target="_blank" rel="noopener" style="color:var(--accent);font-size:0.78rem;margin-left:0.35rem">Lire l'article →</a>
+  </div>
+</div>`
+    },
+    en: {
+      title: 'Series Part 1/3 — Trigger, filtering and metadata extraction',
+      meta: 'June 2025 · 12 min · Intermediate',
+      body: `
+<p>In this first part, we'll build the foundation of the flow: connect the shared mailbox, filter only the right emails, then extract useful metadata from the message subject. This is the most critical phase — everything else depends on it.</p>
+
+<div class="step-block">
+  <div class="step-num">Step 1</div>
+  <div class="step-title">Create the flow and connect the shared mailbox</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">In Power Automate, create a new automated flow. Choose the trigger <strong>"When a new email arrives in a shared mailbox (V2)"</strong>.</p>
+  <div class="mockup">
+    <div class="mockup-row"><span class="mb-label">Trigger</span><span class="mb-val">When a new email arrives in a shared mailbox (V2)</span></div>
+    <div class="mockup-row"><span class="mb-label">Mailbox Address</span><span class="mb-val">incoming@yourorg.ca</span></div>
+    <div class="mockup-row"><span class="mb-label">Folder</span><span class="mb-val">Inbox</span></div>
+    <div class="mockup-row"><span class="mb-label">Include Attachments</span><span class="mb-val mb-tag">Yes</span></div>
+  </div>
+  <div class="tip-box"><strong>💡 Tip:</strong> Enable "Include Attachments" at the trigger — this avoids an extra API call later to retrieve attachments separately.</div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Step 2</div>
+  <div class="step-title">Filter relevant emails with a condition</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Add a <strong>"Condition"</strong> action. The goal: only process emails whose subject contains your keyword, and which are not replies.</p>
+  <div class="code-block"><span class="cm">// Condition 1 — subject contains the keyword</span>
+<span class="fn">contains</span>(<span class="kw">triggerOutputs()</span>?['body/subject'], <span class="st">'report'</span>)
+
+<span class="cm">// Condition 2 — is NOT a reply</span>
+<span class="fn">not</span>(<span class="fn">startsWith</span>(<span class="kw">triggerOutputs()</span>?['body/subject'], <span class="st">'Re:'</span>))
+
+<span class="cm">// Condition 3 — is NOT a forward</span>
+<span class="fn">not</span>(<span class="fn">startsWith</span>(<span class="kw">triggerOutputs()</span>?['body/subject'], <span class="st">'Fw:'</span>))</div>
+  <div class="warn-box"><strong>⚠️ Warning:</strong> Combine these three conditions with the <code>AND</code> operator, otherwise replies will be processed twice.</div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Step 3</div>
+  <div class="step-title">Build the Excel reference table</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Before going further in the flow, create this table in an Excel file on SharePoint. It's the brain of the entire solution — it maps each keyword to a destination.</p>
+  <table class="excel-table">
+    <thead><tr><th>Keyword</th><th>SharePointFolder</th><th>TeamsChannel</th><th>Recipients</th></tr></thead>
+    <tbody>
+      <tr><td>finance-report</td><td>/Documents/Finance/2025</td><td>finance-team</td><td>fin@org.ca</td></tr>
+      <tr><td>meeting-notes</td><td>/Documents/Meetings/2025</td><td>management</td><td>mgmt@org.ca</td></tr>
+      <tr><td>invoice</td><td>/Documents/Accounting</td><td>accounting</td><td>acct@org.ca</td></tr>
+    </tbody>
+  </table>
+  <div class="tip-box"><strong>💡 Tip:</strong> Add a new keyword = add a row. No changes to the flow required. This is what makes the solution scalable.</div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Step 4</div>
+  <div class="step-title">Extract metadata from the email subject</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Add an <strong>"Initialize variable"</strong> action for each piece of metadata to extract. Here are the key expressions:</p>
+  <div class="code-block"><span class="cm">// Get the email subject and normalize it</span>
+<span class="kw">variables</span>('NormalizedSubject') =
+  <span class="fn">replace</span>(
+    <span class="fn">toUpper</span>(<span class="fn">trim</span>(<span class="kw">triggerOutputs()</span>?['body/subject'])),
+    <span class="st">'–'</span>, <span class="st">'-'</span>
+  )
+
+<span class="cm">// Extract category (everything before the first dash)</span>
+<span class="kw">variables</span>('Category') =
+  <span class="fn">trim</span>(<span class="fn">substring</span>(
+    <span class="kw">variables</span>('NormalizedSubject'),
+    0,
+    <span class="fn">indexOf</span>(<span class="kw">variables</span>('NormalizedSubject'), <span class="st">'-'</span>)
+  ))
+
+<span class="cm">// Extract date (YYYYMMDD format in the subject)</span>
+<span class="kw">variables</span>('DocDate') =
+  <span class="fn">substring</span>(
+    <span class="kw">variables</span>('NormalizedSubject'),
+    <span class="fn">indexOf</span>(<span class="kw">variables</span>('NormalizedSubject'), <span class="st">'20'</span>),
+    8
+  )</div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Step 5</div>
+  <div class="step-title">Look up the match in the Excel reference table</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Add <strong>"List rows present in a table"</strong> to read the Excel reference table, then an <strong>"Apply to each"</strong> loop with an internal condition:</p>
+  <div class="code-block"><span class="cm">// Condition inside the loop — does the table keyword</span>
+<span class="cm">// match the extracted category?</span>
+<span class="fn">contains</span>(
+  <span class="fn">toUpper</span>(<span class="kw">items('Apply_to_each')?['Keyword']</span>),
+  <span class="kw">variables</span>('Category')
+)</div>
+  <p style="color:var(--muted2);font-size:.88rem;margin-top:.75rem">When a match is found, save the SharePoint path, Teams channel and recipients in variables — you'll need them in parts 2 and 3.</p>
+</div>
+
+<div class="nav-series">
+  <span style="color:var(--muted);font-size:.82rem">Part 1 / 3</span>
+  <button class="nav-btn primary" onclick="closeModal();openModal('serie2')">Part 2 — Attachments &amp; PDF →</button>
+</div>
+
+<div style="display:flex;align-items:center;gap:0.75rem;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:0.875rem 1.1rem;margin-top:1.25rem;font-size:0.83rem;color:var(--muted2)">
+  <span style="font-size:1.4rem;flex-shrink:0">📖</span>
+  <div>
+    <strong style="color:var(--text)">Want to go deeper with text functions?</strong> — The <code>indexOf()</code>, <code>trim()</code> and <code>substring()</code> functions used in this article are thoroughly documented with practical examples on
+    <a href="https://www.enjoysharepoint.com/power-automate-string-functions/" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600;text-decoration:none">EnjoySharePoint</a>:
+    <em>Power Automate String Functions + 10 Examples</em>.
+    <a href="https://www.enjoysharepoint.com/power-automate-string-functions/" target="_blank" rel="noopener" style="color:var(--accent);font-size:0.78rem;margin-left:0.35rem">Read the article →</a>
+  </div>
+</div>`
+    }
+  },
+
+  serie2: {
+    tag: 'tag-purple', tagKey: 'tag_pa',
+    fr: {
+      title: 'Série Partie 2/3 — Récupérer les pièces jointes et les convertir en PDF',
+      meta: 'Juin 2025 · 14 min · Intermédiaire',
+      body: `
+<p>Dans cette deuxième partie, nous allons traiter les pièces jointes : les extraire de la boîte partagée, les déposer temporairement dans SharePoint, puis convertir automatiquement les fichiers Word en PDF. C'est la phase la plus technique — mais chaque étape est expliquée en détail.</p>
+
+<div class="step-block">
+  <div class="step-num">Étape 1</div>
+  <div class="step-title">Boucler sur les pièces jointes avec « Apply to each »</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Ajoutez l'action <strong>« Apply to each »</strong>. Dans le champ <em>Select an output from previous steps</em>, sélectionnez <code>Attachments</code> depuis le déclencheur.</p>
+  <div class="mockup">
+    <div class="mockup-row"><span class="mb-label">Action</span><span class="mb-val">Apply to each</span></div>
+    <div class="mockup-row"><span class="mb-label">Input</span><span class="mb-val">triggerOutputs()?['body/attachments']</span></div>
+  </div>
+  <div class="tip-box"><strong>💡 Conseil :</strong> Si le courriel ne contient pas toujours des pièces jointes, enveloppez la boucle dans une condition <code>greater(length(triggerOutputs()?['body/attachments']), 0)</code> pour éviter les erreurs.</div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Étape 2</div>
+  <div class="step-title">Récupérer le contenu de la pièce jointe</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">À l'intérieur de la boucle, ajoutez <strong>« Get attachment (V2) »</strong> depuis le connecteur Outlook. Cette action retourne le contenu binaire de la pièce jointe.</p>
+  <div class="code-block"><span class="cm">// Paramètres de Get attachment (V2)</span>
+Message Id : <span class="kw">triggerOutputs()</span>?['body/id']
+Attachment Id : <span class="kw">items('Apply_to_each')?['id']</span>
+Mailbox Address : <span class="st">'courriers@votreorg.ca'</span></div>
+  <div class="warn-box"><strong>⚠️ Attention :</strong> Ne pas confondre <code>items('Apply_to_each')?['contentBytes']</code> (contenu base64 du déclencheur) avec le résultat de <em>Get attachment</em>. Utilisez toujours <em>Get attachment</em> pour les fichiers > 3 Mo — le déclencheur tronque les gros fichiers.</div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Étape 3</div>
+  <div class="step-title">Déposer la pièce jointe dans un dossier temporaire SharePoint</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Ajoutez <strong>« Create file »</strong> depuis le connecteur SharePoint pour déposer le fichier dans un dossier <code>/temp</code>. Ce dépôt temporaire est nécessaire pour la conversion PDF.</p>
+  <div class="mockup">
+    <div class="mockup-row"><span class="mb-label">Site Address</span><span class="mb-val">https://votreorg.sharepoint.com/sites/DRH</span></div>
+    <div class="mockup-row"><span class="mb-label">Folder Path</span><span class="mb-val">/Documents/temp</span></div>
+    <div class="mockup-row"><span class="mb-label">File Name</span><span class="mb-val">items('Apply_to_each')?['name']</span></div>
+    <div class="mockup-row"><span class="mb-label">File Content</span><span class="mb-val">body('Get_attachment_(V2)')?['contentBytes']</span></div>
+  </div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Étape 4</div>
+  <div class="step-title">Gérer les gros fichiers en mode « chunked »</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Pour les fichiers dépassant 4 Mo, activez le <strong>transfert par blocs (chunking)</strong> dans les paramètres de l'action <em>Create file</em>. Cela évite les erreurs de timeout sur les gros documents.</p>
+  <div class="code-block"><span class="cm">// Dans les paramètres de l'action Create file :</span>
+<span class="cm">// Paramètres → Chunked Transfer → Activé</span>
+<span class="cm">// Taille des blocs → 4 Mo (recommandé)</span>
+
+<span class="cm">// Expression pour détecter si c'est un fichier Word :</span>
+<span class="fn">endsWith</span>(
+  <span class="fn">toLower</span>(<span class="kw">items('Apply_to_each')?['name']</span>),
+  <span class="st">'.docx'</span>
+)</div>
+  <div class="tip-box"><strong>💡 Conseil :</strong> Testez d'abord avec un fichier léger, puis avec un fichier de 10+ Mo pour valider que le mode chunked fonctionne correctement dans votre environnement.</div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Étape 5</div>
+  <div class="step-title">Convertir le fichier Word en PDF</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Ajoutez une condition : si la pièce jointe est un <code>.docx</code>, utilisez l'action <strong>« Convert file (preview) »</strong> depuis le connecteur OneDrive / SharePoint.</p>
+  <div class="code-block"><span class="cm">// Condition — c'est un fichier Word?</span>
+<span class="fn">endsWith</span>(<span class="fn">toLower</span>(<span class="kw">items('Apply_to_each')?['name']</span>), <span class="st">'.docx'</span>)
+
+<span class="cm">// Action Convert file</span>
+File : <span class="kw">outputs('Create_file')?['body/Id']</span>
+Target type : <span class="st">'PDF'</span>
+
+<span class="cm">// Nom du PDF généré (remplacer .docx par .pdf)</span>
+<span class="fn">replace</span>(
+  <span class="kw">items('Apply_to_each')?['name']</span>,
+  <span class="st">'.docx'</span>,
+  <span class="st">'.pdf'</span>
+)</div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Étape 6</div>
+  <div class="step-title">Sauvegarder le PDF dans une variable tableau</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Initialisez une variable de type <strong>Array</strong> avant la boucle, puis à l'intérieur, ajoutez chaque pièce jointe traitée avec <strong>« Append to array variable »</strong> :</p>
+  <div class="code-block"><span class="cm">// Avant la boucle — initialiser le tableau</span>
+Initialize variable → <span class="st">'AttachmentArray'</span> → Type: Array
+
+<span class="cm">// Dans la boucle — ajouter chaque pièce jointe</span>
+Append to array variable
+Name : <span class="st">'AttachmentArray'</span>
+Value : {
+  <span class="st">"nom"</span>: <span class="kw">items('Apply_to_each')?['name']</span>,
+  <span class="st">"idWord"</span>: <span class="kw">outputs('Create_file')?['body/Id']</span>,
+  <span class="st">"idPDF"</span>:  <span class="kw">outputs('Convert_file')?['body/id']</span>
+}</div>
+  <div class="tip-box"><strong>💡 Conseil :</strong> Ce tableau vous sera utile dans la Partie 3 pour construire les liens SharePoint à insérer dans le registre Excel et le message Teams.</div>
+</div>
+
+<div class="nav-series">
+  <button class="nav-btn" onclick="closeModal();openModal('serie1')">← Partie 1</button>
+  <button class="nav-btn primary" onclick="closeModal();openModal('serie3')">Partie 3 — Archivage &amp; notifications →</button>
+</div>`
+    },
+    en: {
+      title: 'Series Part 2/3 — Retrieve attachments and convert to PDF',
+      meta: 'June 2025 · 14 min · Intermediate',
+      body: `
+<p>In this second part, we'll handle attachments: extract them from the shared mailbox, temporarily store them in SharePoint, then automatically convert Word files to PDF. This is the most technical phase — but every step is explained in detail.</p>
+
+<div class="step-block">
+  <div class="step-num">Step 1</div>
+  <div class="step-title">Loop over attachments with "Apply to each"</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Add the <strong>"Apply to each"</strong> action. In the <em>Select an output from previous steps</em> field, select <code>Attachments</code> from the trigger.</p>
+  <div class="mockup">
+    <div class="mockup-row"><span class="mb-label">Action</span><span class="mb-val">Apply to each</span></div>
+    <div class="mockup-row"><span class="mb-label">Input</span><span class="mb-val">triggerOutputs()?['body/attachments']</span></div>
+  </div>
+  <div class="tip-box"><strong>💡 Tip:</strong> If emails don't always have attachments, wrap the loop in a condition: <code>greater(length(triggerOutputs()?['body/attachments']), 0)</code> to avoid errors.</div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Step 2</div>
+  <div class="step-title">Retrieve the attachment content</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Inside the loop, add <strong>"Get attachment (V2)"</strong> from the Outlook connector. This action returns the binary content of the attachment.</p>
+  <div class="code-block"><span class="cm">// Parameters for Get attachment (V2)</span>
+Message Id : <span class="kw">triggerOutputs()</span>?['body/id']
+Attachment Id : <span class="kw">items('Apply_to_each')?['id']</span>
+Mailbox Address : <span class="st">'incoming@yourorg.ca'</span></div>
+  <div class="warn-box"><strong>⚠️ Warning:</strong> Don't confuse <code>items('Apply_to_each')?['contentBytes']</code> (base64 content from the trigger) with the result of <em>Get attachment</em>. Always use <em>Get attachment</em> for files > 3 MB — the trigger truncates large files.</div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Step 3</div>
+  <div class="step-title">Save the attachment to a temporary SharePoint folder</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Add <strong>"Create file"</strong> from the SharePoint connector to deposit the file in a <code>/temp</code> folder. This temporary deposit is required for PDF conversion.</p>
+  <div class="mockup">
+    <div class="mockup-row"><span class="mb-label">Site Address</span><span class="mb-val">https://yourorg.sharepoint.com/sites/HR</span></div>
+    <div class="mockup-row"><span class="mb-label">Folder Path</span><span class="mb-val">/Documents/temp</span></div>
+    <div class="mockup-row"><span class="mb-label">File Name</span><span class="mb-val">items('Apply_to_each')?['name']</span></div>
+    <div class="mockup-row"><span class="mb-label">File Content</span><span class="mb-val">body('Get_attachment_(V2)')?['contentBytes']</span></div>
+  </div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Step 4</div>
+  <div class="step-title">Handle large files with chunked transfer</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">For files over 4 MB, enable <strong>chunked transfer</strong> in the settings of the <em>Create file</em> action. This prevents timeout errors on large documents.</p>
+  <div class="code-block"><span class="cm">// In the Create file action settings:</span>
+<span class="cm">// Settings → Chunked Transfer → Enabled</span>
+<span class="cm">// Chunk size → 4 MB (recommended)</span>
+
+<span class="cm">// Expression to detect if it's a Word file:</span>
+<span class="fn">endsWith</span>(
+  <span class="fn">toLower</span>(<span class="kw">items('Apply_to_each')?['name']</span>),
+  <span class="st">'.docx'</span>
+)</div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Step 5</div>
+  <div class="step-title">Convert the Word file to PDF</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Add a condition: if the attachment is a <code>.docx</code>, use the <strong>"Convert file (preview)"</strong> action from the OneDrive / SharePoint connector.</p>
+  <div class="code-block"><span class="cm">// Condition — is it a Word file?</span>
+<span class="fn">endsWith</span>(<span class="fn">toLower</span>(<span class="kw">items('Apply_to_each')?['name']</span>), <span class="st">'.docx'</span>)
+
+<span class="cm">// Convert file action</span>
+File : <span class="kw">outputs('Create_file')?['body/Id']</span>
+Target type : <span class="st">'PDF'</span>
+
+<span class="cm">// Generated PDF name (.docx → .pdf)</span>
+<span class="fn">replace</span>(
+  <span class="kw">items('Apply_to_each')?['name']</span>,
+  <span class="st">'.docx'</span>,
+  <span class="st">'.pdf'</span>
+)</div>
+</div>
+
+<div class="nav-series">
+  <button class="nav-btn" onclick="closeModal();openModal('serie1')">← Part 1</button>
+  <button class="nav-btn primary" onclick="closeModal();openModal('serie3')">Part 3 — Archive &amp; Notify →</button>
+</div>`
+    }
+  },
+
+  serie3: {
+    tag: 'tag-green', tagKey: 'tag_pa',
+    fr: {
+      title: 'Série Partie 3/3 — Archiver, registre Excel, notifications et gestion d\'erreurs',
+      meta: 'Juin 2025 · 15 min · Intermédiaire',
+      body: `
+<p>Dans cette troisième et dernière partie, nous finalisons le flow : archiver les documents dans la bonne structure SharePoint, consigner chaque traitement dans un registre Excel, envoyer les notifications Teams et courriel, puis encapsuler le tout dans un pattern Try-Catch-Finally pour une robustesse maximale.</p>
+
+<div class="step-block">
+  <div class="step-num">Étape 1</div>
+  <div class="step-title">Déplacer les fichiers vers leur dossier définitif dans SharePoint</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Utilisez l'action <strong>« Move file »</strong> pour déplacer chaque fichier du dossier <code>/temp</code> vers sa destination finale (récupérée depuis le tableau Excel de référence en Partie 1).</p>
+  <div class="code-block"><span class="cm">// Construire le nom de fichier final avec nomenclature dynamique</span>
+<span class="cm">// Format : YYYYMMDD_Categorie_NomOriginal.docx</span>
+<span class="fn">concat</span>(
+  <span class="kw">variables</span>('DateDoc'), <span class="st">'_'</span>,
+  <span class="kw">variables</span>('Categorie'), <span class="st">'_'</span>,
+  <span class="kw">items('Apply_to_each')?['name']</span>
+)
+
+<span class="cm">// Chemin de destination depuis le tableau de référence</span>
+<span class="fn">concat</span>(
+  <span class="kw">variables</span>('DossierDestination'), <span class="st">'/'</span>,
+  <span class="fn">formatDateTime</span>(<span class="fn">utcNow</span>(), <span class="st">'yyyy'</span>)
+)</div>
+  <div class="mockup">
+    <div class="mockup-row"><span class="mb-label">Résultat</span><span class="mb-val">/Documents/Finances/2025/20250612_RAPPORT-FINANCES_budget-T2.docx</span><span class="mb-tag">✓</span></div>
+  </div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Étape 2</div>
+  <div class="step-title">Construire les liens SharePoint vers les documents</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Après le déplacement, récupérez les métadonnées des fichiers avec <strong>« Get file metadata using path »</strong> pour obtenir l'URL de partage.</p>
+  <div class="code-block"><span class="cm">// URL du fichier Word dans SharePoint</span>
+<span class="kw">outputs</span>('Get_file_metadata_Word')?['body/{Link}']
+
+<span class="cm">// URL du fichier PDF dans SharePoint</span>
+<span class="kw">outputs</span>('Get_file_metadata_PDF')?['body/{Link}']</div>
+  <div class="tip-box"><strong>💡 Conseil :</strong> Sauvegardez ces URLs dans des variables — vous en avez besoin à la fois pour la ligne Excel ET pour le message Teams.</div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Étape 3</div>
+  <div class="step-title">Ajouter une ligne dans le registre Excel</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Utilisez <strong>« Add a row into a table »</strong> pour consigner chaque traitement dans votre fichier Excel de suivi sur SharePoint.</p>
+  <div class="mockup">
+    <div class="mockup-row"><span class="mb-label">Date</span><span class="mb-val">formatDateTime(utcNow(), 'yyyy-MM-dd')</span></div>
+    <div class="mockup-row"><span class="mb-label">Catégorie</span><span class="mb-val">variables('Categorie')</span></div>
+    <div class="mockup-row"><span class="mb-label">NomFichier</span><span class="mb-val">items('Apply_to_each')?['name']</span></div>
+    <div class="mockup-row"><span class="mb-label">LienWord</span><span class="mb-val">variables('LienWord')</span></div>
+    <div class="mockup-row"><span class="mb-label">LienPDF</span><span class="mb-val">variables('LienPDF')</span></div>
+    <div class="mockup-row"><span class="mb-label">Expéditeur</span><span class="mb-val">triggerOutputs()?['body/from']</span></div>
+  </div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Étape 4</div>
+  <div class="step-title">Envoyer un message dans le canal Teams approprié</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Utilisez <strong>« Post message in a chat or channel »</strong>. Le canal Teams provient de la variable récupérée dans le tableau Excel de référence (Partie 1).</p>
+  <div class="code-block"><span class="cm">// Corps du message en HTML adaptatif</span>
+&lt;p&gt;&lt;b&gt;📄 Nouveau document reçu et archivé&lt;/b&gt;&lt;/p&gt;
+&lt;p&gt;Catégorie : <span class="kw">@{variables('Categorie')}</span>&lt;/p&gt;
+&lt;p&gt;Date : <span class="kw">@{variables('DateDoc')}</span>&lt;/p&gt;
+&lt;p&gt;
+  &lt;a href="<span class="kw">@{variables('LienWord')}</span>"&gt;📝 Ouvrir Word&lt;/a&gt; &nbsp;
+  &lt;a href="<span class="kw">@{variables('LienPDF')}</span>"&gt;📋 Ouvrir PDF&lt;/a&gt;
+&lt;/p&gt;</div>
+  <div class="tip-box"><strong>💡 Conseil :</strong> Pour un rendu plus professionnel, utilisez une <em>Adaptive Card</em> plutôt que du HTML simple — elle permet d'ajouter des boutons d'action directement dans le message Teams.</div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Étape 5</div>
+  <div class="step-title">Envoyer le courriel récapitulatif HTML</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Ajoutez <strong>« Send an email (V2) »</strong> depuis Office 365 Outlook. Utilisez du HTML avec CSS inline pour garantir la compatibilité avec tous les clients de messagerie.</p>
+  <div class="code-block"><span class="cm">// Tableau HTML pour le courriel — CSS inline requis</span>
+&lt;table style="border-collapse:collapse;font-family:Arial"&gt;
+  &lt;tr style="background:#1e3a5f;color:white"&gt;
+    &lt;th style="padding:8px 12px"&gt;Champ&lt;/th&gt;
+    &lt;th style="padding:8px 12px"&gt;Valeur&lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td style="padding:6px 12px;border:1px solid #ddd"&gt;Catégorie&lt;/td&gt;
+    &lt;td style="padding:6px 12px;border:1px solid #ddd"&gt;<span class="kw">@{variables('Categorie')}</span>&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;</div>
+  <div class="warn-box"><strong>⚠️ Attention :</strong> N'utilisez jamais de balises <code>&lt;style&gt;</code> dans un courriel HTML — la majorité des clients de messagerie (Outlook, Gmail) les ignorent. Toujours du CSS inline.</div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Étape 6</div>
+  <div class="step-title">Encapsuler dans un pattern Try-Catch-Finally</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">C'est la dernière étape — et la plus importante pour la robustesse. Créez trois <strong>« Scope »</strong> consécutifs et configurez leurs conditions d'exécution :</p>
+  <div class="mockup">
+    <div class="mockup-row"><span class="mb-label">Scope TRY</span><span class="mb-val">Toute la logique métier (étapes 1 à 5)</span><span class="mb-tag blue">Run after: default</span></div>
+    <div class="mockup-row"><span class="mb-label">Scope CATCH</span><span class="mb-val">Courriel d'alerte aux admins avec détails de l'erreur</span><span class="mb-tag warn">Run after: TRY failed</span></div>
+    <div class="mockup-row"><span class="mb-label">Scope FINALLY</span><span class="mb-val">Supprimer les fichiers du dossier /temp</span><span class="mb-tag">Run after: TRY + CATCH</span></div>
+  </div>
+  <div class="code-block"><span class="cm">// Expression pour récupérer le message d'erreur dans CATCH</span>
+<span class="fn">result</span>(<span class="st">'Scope_TRY'</span>)?[0]?['error']?['message']
+
+<span class="cm">// Supprimer le fichier temporaire dans FINALLY</span>
+Delete file → <span class="kw">outputs('Create_file')?['body/Id']</span></div>
+  <div class="tip-box"><strong>💡 Conseil :</strong> Pour le scope FINALLY, configurez « Run after » pour qu'il s'exécute que TRY ait réussi, échoué ou été ignoré. C'est la garantie que le dossier <code>/temp</code> est toujours nettoyé.</div>
+</div>
+
+<div class="nav-series">
+  <button class="nav-btn" onclick="closeModal();openModal('serie2')">← Partie 2</button>
+  <span style="color:var(--green);font-weight:700;font-size:.88rem">✅ Série complétée!</span>
+</div>`
+    },
+    en: {
+      title: 'Series Part 3/3 — Archive, Excel register, notifications and error handling',
+      meta: 'June 2025 · 15 min · Intermediate',
+      body: `
+<p>In this third and final part, we complete the flow: archive documents in the right SharePoint structure, log each processing in an Excel register, send Teams and email notifications, then wrap everything in a Try-Catch-Finally pattern for maximum robustness.</p>
+
+<div class="step-block">
+  <div class="step-num">Step 1</div>
+  <div class="step-title">Move files to their final SharePoint folder</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Use the <strong>"Move file"</strong> action to move each file from the <code>/temp</code> folder to its final destination (retrieved from the Excel reference table in Part 1).</p>
+  <div class="code-block"><span class="cm">// Build the final filename with dynamic naming convention</span>
+<span class="cm">// Format: YYYYMMDD_Category_OriginalName.docx</span>
+<span class="fn">concat</span>(
+  <span class="kw">variables</span>('DocDate'), <span class="st">'_'</span>,
+  <span class="kw">variables</span>('Category'), <span class="st">'_'</span>,
+  <span class="kw">items('Apply_to_each')?['name']</span>
+)
+
+<span class="cm">// Destination path from the reference table</span>
+<span class="fn">concat</span>(
+  <span class="kw">variables</span>('DestinationFolder'), <span class="st">'/'</span>,
+  <span class="fn">formatDateTime</span>(<span class="fn">utcNow</span>(), <span class="st">'yyyy'</span>)
+)</div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Step 2</div>
+  <div class="step-title">Build SharePoint links to the documents</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">After moving, retrieve file metadata with <strong>"Get file metadata using path"</strong> to get the sharing URL.</p>
+  <div class="code-block"><span class="cm">// Word file URL in SharePoint</span>
+<span class="kw">outputs</span>('Get_file_metadata_Word')?['body/{Link}']
+
+<span class="cm">// PDF file URL in SharePoint</span>
+<span class="kw">outputs</span>('Get_file_metadata_PDF')?['body/{Link}']</div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Step 3</div>
+  <div class="step-title">Add a row to the Excel register</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Use <strong>"Add a row into a table"</strong> to log each processing in your tracking Excel file on SharePoint.</p>
+  <div class="mockup">
+    <div class="mockup-row"><span class="mb-label">Date</span><span class="mb-val">formatDateTime(utcNow(), 'yyyy-MM-dd')</span></div>
+    <div class="mockup-row"><span class="mb-label">Category</span><span class="mb-val">variables('Category')</span></div>
+    <div class="mockup-row"><span class="mb-label">FileName</span><span class="mb-val">items('Apply_to_each')?['name']</span></div>
+    <div class="mockup-row"><span class="mb-label">WordLink</span><span class="mb-val">variables('WordLink')</span></div>
+    <div class="mockup-row"><span class="mb-label">PDFLink</span><span class="mb-val">variables('PDFLink')</span></div>
+  </div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Step 4</div>
+  <div class="step-title">Post a message in the appropriate Teams channel</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Use <strong>"Post message in a chat or channel"</strong>. The Teams channel comes from the variable retrieved from the Excel reference table (Part 1).</p>
+  <div class="code-block"><span class="cm">// Message body in adaptive HTML</span>
+&lt;p&gt;&lt;b&gt;📄 New document received and archived&lt;/b&gt;&lt;/p&gt;
+&lt;p&gt;Category: <span class="kw">@{variables('Category')}</span>&lt;/p&gt;
+&lt;p&gt;Date: <span class="kw">@{variables('DocDate')}</span>&lt;/p&gt;
+&lt;p&gt;
+  &lt;a href="<span class="kw">@{variables('WordLink')}</span>"&gt;📝 Open Word&lt;/a&gt; &nbsp;
+  &lt;a href="<span class="kw">@{variables('PDFLink')}</span>"&gt;📋 Open PDF&lt;/a&gt;
+&lt;/p&gt;</div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Step 5</div>
+  <div class="step-title">Wrap everything in a Try-Catch-Finally pattern</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Create three consecutive <strong>"Scope"</strong> actions and configure their run-after conditions:</p>
+  <div class="mockup">
+    <div class="mockup-row"><span class="mb-label">Scope TRY</span><span class="mb-val">All business logic (steps 1–4)</span><span class="mb-tag blue">Run after: default</span></div>
+    <div class="mockup-row"><span class="mb-label">Scope CATCH</span><span class="mb-val">Alert email to admins with error details</span><span class="mb-tag warn">Run after: TRY failed</span></div>
+    <div class="mockup-row"><span class="mb-label">Scope FINALLY</span><span class="mb-val">Delete files from /temp folder</span><span class="mb-tag">Run after: TRY + CATCH</span></div>
+  </div>
+  <div class="code-block"><span class="cm">// Expression to get the error message in CATCH</span>
+<span class="fn">result</span>(<span class="st">'Scope_TRY'</span>)?[0]?['error']?['message']
+
+<span class="cm">// Delete temp file in FINALLY</span>
+Delete file → <span class="kw">outputs('Create_file')?['body/Id']</span></div>
+  <div class="warn-box"><strong>⚠️ Important:</strong> For the FINALLY scope, configure "Run after" to execute whether TRY succeeded, failed, or was skipped. This guarantees the <code>/temp</code> folder is always cleaned up.</div>
+</div>
+
+<div class="nav-series">
+  <button class="nav-btn" onclick="closeModal();openModal('serie2')">← Part 2</button>
+  <span style="color:var(--green);font-weight:700;font-size:.88rem">✅ Series complete!</span>
+</div>`
+    }
+  },
+
+  topos: {
+    tag: 'tag-blue', tagKey: 'tag_pa',
+    fr: {
+      title: 'Automatiser le traitement des demandes de formation reçues par courriel',
+      meta: 'Juin 2025 · 8 min · Débutant-Intermédiaire · Pas à pas',
+      body: `
+<p style="background:rgba(79,126,248,0.08);border-left:3px solid var(--accent);padding:.875rem 1rem;border-radius:0 8px 8px 0;font-size:.9rem;color:var(--muted2);margin-bottom:1.5rem">
+  <strong style="color:var(--text)">Ce que vous allez construire</strong> — Un flow qui surveille une boîte partagée 
+  (<code>formations@votreorg.ca</code>), détecte les demandes de formation dans l'objet des courriels, 
+  classe automatiquement les documents dans SharePoint et avertit le bon gestionnaire. 
+  Zéro intervention manuelle.
+</p>
+
+<div class="step-block">
+  <div class="step-num">Le problème qu'on règle</div>
+  <div class="step-title">La boîte formations@ déborde et personne ne sait qui doit traiter quoi</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">
+    Votre boîte partagée <code>formations@votreorg.ca</code> reçoit des courriels de demande de formation 
+    avec des pièces jointes (formulaires, devis, confirmations). Actuellement, quelqu'un ouvre chaque 
+    courriel, lit l'objet, détermine de quel type de formation il s'agit, transfère au bon gestionnaire 
+    et classe le document manuellement. C'est répétitif, long, et des courriels tombent parfois entre 
+    les craques.
+  </p>
+  <p style="color:var(--muted2);font-size:.9rem">
+    Convention de nommage attendue dans l'objet du courriel :
+  </p>
+  <div class="mockup">
+    <div class="mockup-row"><span class="mb-label">Exemple 1</span><span class="mb-val">FORMATION-TECH - Power Automate intro - Cole Caufield - 2025-04-07</span></div>
+    <div class="mockup-row"><span class="mb-label">Exemple 2</span><span class="mb-val">FORMATION-GESTION - Agile avancé - Nathan MacKinnon - 2025-05-19</span></div>
+    <div class="mockup-row"><span class="mb-label">Exemple 3</span><span class="mb-val">FORMATION-RH - Communication efficace - Stefon Diggs - 2025-05-05</span></div>
+  </div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Le tableau Excel de référence</div>
+  <div class="step-title">Le « cerveau » du flow — à créer avant de commencer</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">
+    Avant de construire le flow, créez ce tableau dans un fichier Excel sur SharePoint. 
+    C'est lui qui décide où classer chaque demande et qui aviser. 
+    Ajouter un nouveau type de formation = ajouter une ligne. Aucune modification du flow.
+  </p>
+  <table class="excel-table">
+    <thead><tr><th>MotCle</th><th>DossierSharePoint</th><th>CourrielGestionnaire</th><th>NomGestionnaire</th></tr></thead>
+    <tbody>
+      <tr><td>FORMATION-TECH</td><td>/Formations/Technologies</td><td>nick.suzuki@formation-demo.ca</td><td>Nick Suzuki</td></tr>
+      <tr><td>FORMATION-GESTION</td><td>/Formations/Gestion</td><td>cale.makar@formation-demo.ca</td><td>Cale Makar</td></tr>
+      <tr><td>FORMATION-RH</td><td>/Formations/RessourcesHumaines</td><td>carey.price@formation-demo.ca</td><td>Carey Price</td></tr>
+      <tr><td>FORMATION-COMM</td><td>/Formations/Communications</td><td>patrick.kane@formation-demo.ca</td><td>Patrick Kane</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Étape 1</div>
+  <div class="step-title">Créer le flow — déclencheur boîte partagée</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">
+    Sur <strong>make.powerautomate.com</strong>, cliquez <strong>+ Créer → Flow cloud automatisé</strong>. 
+    Dans la barre de recherche du déclencheur, tapez <strong>« boîte partagée »</strong> et choisissez 
+    <strong>« Quand un nouvel e-mail arrive dans une boîte aux lettres partagée (V2) »</strong>.
+  </p>
+  <div class="mockup">
+    <div class="mockup-row"><span class="mb-label">Adresse de la boîte</span><span class="mb-val">formations@votreorg.ca</span></div>
+    <div class="mockup-row"><span class="mb-label">Dossier</span><span class="mb-val">Inbox</span></div>
+    <div class="mockup-row"><span class="mb-label">Inclure les pièces jointes</span><span class="mb-val mb-tag">Oui</span></div>
+  </div>
+  <div class="tip-box"><strong>💡 Pourquoi « Inclure les pièces jointes »?</strong> En activant cette option dès le déclencheur, Power Automate récupère les pièces jointes en même temps que le courriel. Sans ça, vous auriez besoin d'une étape supplémentaire pour les chercher séparément.</div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Étape 2</div>
+  <div class="step-title">Filtrer — ne traiter que les demandes de formation</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">
+    Ajoutez une <strong>Condition</strong>. On veut traiter seulement les courriels dont l'objet 
+    commence par <code>FORMATION-</code> et qui ne sont pas des réponses.
+  </p>
+  <div class="code-block"><span class="cm">// Condition 1 — l'objet contient notre préfixe</span>
+<span class="fn">startsWith</span>(
+  <span class="fn">toUpper</span>(<span class="kw">triggerOutputs()</span>?[<span class="st">'body/subject'</span>]),
+  <span class="st">'FORMATION-'</span>
+)
+
+<span class="cm">// Condition 2 — n'est PAS une réponse (AND)</span>
+<span class="fn">not</span>(<span class="fn">startsWith</span>(<span class="kw">triggerOutputs()</span>?[<span class="st">'body/subject'</span>], <span class="st">'Re:'</span>))</div>
+  <div class="warn-box"><strong>⚠️ Combinez avec AND</strong> — Les deux conditions doivent être vraies en même temps. Utilisez l'opérateur <strong>ET</strong> (pas OU) dans l'interface pour éviter de traiter les réponses en double.</div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Étape 3</div>
+  <div class="step-title">Extraire le type de formation depuis l'objet du courriel</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">
+    Dans la branche <strong>« Si oui »</strong>, ajoutez <strong>« Initialiser une variable »</strong> 
+    pour extraire le mot-clé (tout ce qui est avant le premier espace après le tiret).
+  </p>
+  <div class="code-block"><span class="cm">// Nom : TypeFormation | Type : Chaîne</span>
+<span class="cm">// Valeur (expression) :</span>
+<span class="fn">trim</span>(<span class="fn">substring</span>(
+  <span class="fn">toUpper</span>(<span class="kw">triggerOutputs()</span>?[<span class="st">'body/subject'</span>]),
+  0,
+  <span class="fn">indexOf</span>(
+    <span class="fn">toUpper</span>(<span class="kw">triggerOutputs()</span>?[<span class="st">'body/subject'</span>]),
+    <span class="st">' - '</span>
+  )
+))</div>
+  <p style="color:var(--muted2);font-size:.88rem;margin-top:.75rem">
+    Pour l'objet <code>FORMATION-TECH - Power Automate intro - Cole Caufield - 2025-04-07</code>, 
+    cette expression retourne <code>FORMATION-TECH</code>.
+  </p>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Étape 4</div>
+  <div class="step-title">Chercher la correspondance dans le tableau Excel</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">
+    Ajoutez <strong>« Répertorier les lignes présentes dans un tableau »</strong> pour lire votre 
+    tableau de référence, puis une boucle <strong>« Appliquer à chacun »</strong> avec une condition interne.
+  </p>
+  <div class="code-block"><span class="cm">// Condition dans la boucle :</span>
+<span class="fn">equals</span>(
+  <span class="fn">toUpper</span>(<span class="kw">items('Appliquer_à_chacun')?['MotCle']</span>),
+  <span class="kw">variables('TypeFormation')</span>
+)</div>
+  <p style="color:var(--muted2);font-size:.88rem;margin-top:.75rem">
+    Quand la correspondance est trouvée, sauvegardez le dossier et le courriel du gestionnaire 
+    dans des variables : <code>DossierDestination</code> et <code>CourrielGestionnaire</code>.
+  </p>
+  <div class="tip-box"><strong>💡 Que se passe-t-il si aucune correspondance?</strong> Ajoutez une variable <code>CorrespondanceTrouvee</code> initialisée à <code>false</code>, passée à <code>true</code> dans la boucle. Après la boucle, une condition vérifie cette valeur et envoie un courriel d'alerte si aucun type n'a été reconnu.</div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Étape 5</div>
+  <div class="step-title">Sauvegarder la pièce jointe dans SharePoint</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">
+    Ajoutez une boucle <strong>« Appliquer à chacun »</strong> sur les pièces jointes du déclencheur, 
+    puis l'action <strong>« Créer un fichier »</strong> (SharePoint).
+  </p>
+  <div class="mockup">
+    <div class="mockup-row"><span class="mb-label">Chemin du dossier</span><span class="mb-val">variables('DossierDestination')</span></div>
+    <div class="mockup-row"><span class="mb-label">Nom du fichier</span><span class="mb-val">items('Appliquer_à_chacun')?['name']</span><span class="mb-tag blue">dynamique</span></div>
+    <div class="mockup-row"><span class="mb-label">Contenu du fichier</span><span class="mb-val">items('Appliquer_à_chacun')?['contentBytes']</span><span class="mb-tag blue">dynamique</span></div>
+  </div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Étape 6</div>
+  <div class="step-title">Aviser le gestionnaire par courriel</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">
+    Après la boucle, ajoutez <strong>« Envoyer un e-mail (V2) »</strong> avec un message personnalisé 
+    pour le gestionnaire responsable de ce type de formation.
+  </p>
+  <div class="mockup">
+    <div class="mockup-row"><span class="mb-label">À</span><span class="mb-val">variables('CourrielGestionnaire')</span></div>
+    <div class="mockup-row"><span class="mb-label">Objet</span><span class="mb-val">📋 Nouvelle demande de formation — @{variables('TypeFormation')}</span></div>
+    <div class="mockup-row"><span class="mb-label">Corps</span><span class="mb-val">Bonjour @{variables('NomGestionnaire')}, une nouvelle demande a été reçue et classée automatiquement dans SharePoint.</span></div>
+  </div>
+  <div class="tip-box"><strong>🎉 Voilà!</strong> Enregistrez et testez avec le bouton <strong>Tester → Manuellement</strong>. Envoyez un courriel de test à votre boîte partagée avec l'objet <code>FORMATION-TECH - Test - Cole Caufield - 2025-04-07</code> et regardez le flow s'exécuter en temps réel.</div>
+</div>`
+    },
+    en: {
+      title: 'Automating training request processing from a shared mailbox',
+      meta: 'June 2025 · 8 min · Beginner-Intermediate · Step by step',
+      body: `
+<p style="background:rgba(79,126,248,0.08);border-left:3px solid var(--accent);padding:.875rem 1rem;border-radius:0 8px 8px 0;font-size:.9rem;color:var(--muted2);margin-bottom:1.5rem">
+  <strong style="color:var(--text)">What you'll build</strong> — A flow that monitors a shared mailbox 
+  (<code>training@yourorg.ca</code>), detects training requests in email subject lines, 
+  automatically files documents in SharePoint and notifies the right manager. Zero manual work.
+</p>
+
+<div class="step-block">
+  <div class="step-num">The problem we're solving</div>
+  <div class="step-title">The training@ mailbox is overflowing and nobody knows who handles what</div>
+  <p style="color:var(--muted2);font-size:.9rem">
+    Your shared mailbox receives training request emails with attachments (forms, quotes, confirmations). 
+    Currently someone opens each email, reads the subject, figures out the training type, forwards to the 
+    right manager and files the document manually. It's repetitive, slow, and emails sometimes fall through 
+    the cracks.
+  </p>
+  <p style="color:var(--muted2);font-size:.9rem;margin-top:.75rem">Expected naming convention in the subject line:</p>
+  <div class="mockup">
+    <div class="mockup-row"><span class="mb-label">Example 1</span><span class="mb-val">TRAINING-TECH - Power Automate intro - Cole Caufield - 2025-04-07</span></div>
+    <div class="mockup-row"><span class="mb-label">Example 2</span><span class="mb-val">TRAINING-MGMT - Advanced Agile - Nathan MacKinnon - 2025-05-19</span></div>
+  </div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Steps 1–6</div>
+  <div class="step-title">Trigger → Filter → Extract → Lookup → Save → Notify</div>
+  <p style="color:var(--muted2);font-size:.9rem">
+    Follow the same 6-step pattern described in the French version above. All action names are available 
+    in English in your Power Automate interface. Replace <code>FORMATION-</code> prefixes with 
+    <code>TRAINING-</code> and adapt folder names and manager emails to your organization.
+  </p>
+  <div class="tip-box"><strong>🎉 Done!</strong> Save and test with <strong>Test → Manually</strong>. Send a test email to your shared mailbox with subject <code>TRAINING-TECH - Test - Cole Caufield - 2025-04-07</code> and watch the flow run in real time.</div>
+</div>`
+    }
+  },
+  cartes: {
+    tag: 'tag-blue', tagKey: 'tag_pa',
+    fr: {
+      title: "Suivi automatisé des cartes d'accès — votre premier flow qui tourne tout seul",
+      meta: 'Juin 2025 · 10 min · Débutant · Pas à pas',
+      body: `
+<p style="background:rgba(79,126,248,0.08);border-left:3px solid var(--accent);padding:.875rem 1rem;border-radius:0 8px 8px 0;font-size:.9rem;color:var(--muted2);margin-bottom:1.5rem">
+  <strong style="color:var(--text)">Avant de commencer</strong> — Power Automate est accessible à l'adresse 
+  <strong>make.powerautomate.com</strong>. Vous n'avez besoin d'aucun mot de passe supplémentaire : 
+  connectez-vous avec votre compte Microsoft 365 habituel (le même que pour Outlook et Teams). 
+  C'est gratuit et déjà inclus dans votre abonnement.
+</p>
+
+<div class="step-block">
+  <div class="step-num">Le problème qu'on règle</div>
+  <div class="step-title">Chaque matin, quelqu'un vérifie manuellement les cartes d'accès dans Excel</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">
+    Votre organisation maintient une liste d'employés avec les dates d'expiration de leurs cartes d'accès. 
+    Actuellement, quelqu'un doit ouvrir le fichier chaque matin, trier par date, et envoyer un courriel d'alerte manuellement. 
+    C'est 15 à 30 minutes par jour, tous les jours ouvrables.
+  </p>
+  <p style="color:var(--muted2);font-size:.9rem">
+    À la fin de ce tutoriel, ce flow tournera automatiquement chaque matin à 8h00 et enverra un rapport 
+    seulement quand il y a quelque chose à signaler. <strong style="color:var(--text)">Vous n'aurez plus rien à faire.</strong>
+  </p>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Ce dont vous avez besoin</div>
+  <div class="step-title">Un fichier Excel avec la liste des employés sur SharePoint</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">
+    Votre fichier Excel doit être enregistré sur <strong>SharePoint</strong> (pas sur votre ordinateur local) 
+    et contenir un tableau formaté avec au minimum ces colonnes :
+  </p>
+  <table class="excel-table">
+    <thead><tr><th>NomComplet</th><th>Département</th><th>CourrielEmploye</th><th>DateFinCarte</th></tr></thead>
+    <tbody>
+      <tr><td>Cole Caufield</td><td>Technologies</td><td>cole.caufield@formation-demo.ca</td><td>2025-04-12</td></tr>
+      <tr><td>Patrick Mahomes</td><td>Technologies</td><td>patrick.mahomes@formation-demo.ca</td><td>2025-04-18</td></tr>
+      <tr><td>Stefon Diggs</td><td>Ressources humaines</td><td>stefon.diggs@formation-demo.ca</td><td></td></tr>
+      <tr><td>Josh Allen</td><td>Technologies</td><td>josh.allen@formation-demo.ca</td><td>2025-06-30</td></tr>
+    </tbody>
+  </table>
+  <div class="tip-box"><strong>💡 Comment formater en tableau?</strong> Dans Excel, sélectionnez vos données → onglet <strong>Accueil</strong> → <strong>Mettre sous forme de tableau</strong>. Donnez-lui un nom comme <code>ListeEmployes</code> dans l'onglet <strong>Création de tableau</strong>. C'est obligatoire pour que Power Automate puisse lire vos données.</div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Étape 1</div>
+  <div class="step-title">Créer le flow — choisir le bon point de départ</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">
+    Sur <strong>make.powerautomate.com</strong>, cliquez sur <strong>+ Créer</strong> dans le menu de gauche, 
+    puis choisissez <strong>« Flow cloud planifié »</strong>.
+  </p>
+  <div class="mockup">
+    <div class="mockup-row"><span class="mb-label">Nom du flow</span><span class="mb-val">Rapport quotidien — Cartes d'accès</span></div>
+    <div class="mockup-row"><span class="mb-label">Début</span><span class="mb-val">Aujourd'hui</span></div>
+    <div class="mockup-row"><span class="mb-label">Répéter toutes les</span><span class="mb-val">1 Jour</span></div>
+  </div>
+  <p style="color:var(--muted2);font-size:.88rem;margin-top:.75rem">
+    Cliquez <strong>Créer</strong>. Vous arrivez sur le concepteur de flow — c'est votre espace de travail visuel.
+  </p>
+  <div class="tip-box"><strong>💡 C'est quoi un « flow cloud planifié »?</strong> C'est un flow qui se déclenche automatiquement selon un horaire que vous définissez. Comme un réveil-matin, mais pour vos tâches répétitives.</div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Étape 2</div>
+  <div class="step-title">Éviter les fins de semaine — votre première condition</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">
+    Cliquez <strong>+ Nouvelle étape</strong>, cherchez <strong>« Condition »</strong> et sélectionnez-la. 
+    Cette condition va vérifier si aujourd'hui est un samedi ou dimanche.
+  </p>
+  <div class="code-block"><span class="cm">// Dans le champ gauche de la condition, collez cette expression :</span>
+<span class="cm">// (cliquez sur "Expression" dans le panneau qui s'ouvre)</span>
+<span class="fn">formatDateTime</span>(<span class="fn">utcNow</span>(), <span class="st">'dddd'</span>)</div>
+  <div class="mockup">
+    <div class="mockup-row"><span class="mb-label">Valeur</span><span class="mb-val">formatDateTime(utcNow(), 'dddd')</span></div>
+    <div class="mockup-row"><span class="mb-label">Opérateur</span><span class="mb-val">n'est pas égal à</span></div>
+    <div class="mockup-row"><span class="mb-label">Valeur</span><span class="mb-val">Saturday</span></div>
+  </div>
+  <p style="color:var(--muted2);font-size:.88rem;margin-top:.75rem">
+    Ajoutez une deuxième ligne avec <strong>ET</strong> → même expression → n'est pas égal à → <strong>Sunday</strong>.
+    Toute la suite du flow se place dans la branche <strong>« Si oui »</strong>.
+  </p>
+  <div class="warn-box"><strong>⚠️ Attention :</strong> Les jours de la semaine sont en anglais dans les expressions Power Automate, même si votre interface est en français : <code>Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday</code>.</div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Étape 3</div>
+  <div class="step-title">Calculer la date limite — 15 jours à partir d'aujourd'hui</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">
+    Dans la branche <strong>« Si oui »</strong>, ajoutez l'action <strong>« Initialiser une variable »</strong>.
+  </p>
+  <div class="mockup">
+    <div class="mockup-row"><span class="mb-label">Nom</span><span class="mb-val">DateLimite</span></div>
+    <div class="mockup-row"><span class="mb-label">Type</span><span class="mb-val">Chaîne</span></div>
+    <div class="mockup-row"><span class="mb-label">Valeur</span><span class="mb-val">formatDateTime(addDays(utcNow(), 15), 'yyyy-MM-dd')</span></div>
+  </div>
+  <div class="tip-box"><strong>💡 Ce que fait cette expression :</strong> <code>utcNow()</code> = aujourd'hui. <code>addDays(..., 15)</code> = ajoute 15 jours. <code>formatDateTime(..., 'yyyy-MM-dd')</code> = formate en 2025-04-15. C'est votre fenêtre de surveillance.</div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Étape 4</div>
+  <div class="step-title">Lire la liste des employés depuis SharePoint</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">
+    Ajoutez l'action <strong>« Répertorier les lignes présentes dans un tableau »</strong> (connecteur Excel Online — Business).
+  </p>
+  <div class="mockup">
+    <div class="mockup-row"><span class="mb-label">Emplacement</span><span class="mb-val">SharePoint</span></div>
+    <div class="mockup-row"><span class="mb-label">Bibliothèque de documents</span><span class="mb-val">Documents</span></div>
+    <div class="mockup-row"><span class="mb-label">Fichier</span><span class="mb-val">ListeEmployes_FormationDemo.xlsx</span></div>
+    <div class="mockup-row"><span class="mb-label">Tableau</span><span class="mb-val">ListeEmployes</span></div>
+  </div>
+  <div class="tip-box"><strong>💡 Conseil :</strong> Utilisez le bouton 📁 pour naviguer vers votre fichier plutôt que de taper le chemin manuellement. Moins d'erreurs et Power Automate mémorise le lien exact.</div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Étape 5</div>
+  <div class="step-title">Filtrer — garder seulement les cartes qui expirent bientôt</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">
+    Ajoutez l'action <strong>« Filtrer un tableau »</strong> (connecteur Données). Elle va parcourir toutes les lignes 
+    et ne garder que celles où la date d'expiration est dans les 15 prochains jours.
+  </p>
+  <div class="mockup">
+    <div class="mockup-row"><span class="mb-label">De</span><span class="mb-val">Valeur (résultat de l'étape précédente)</span></div>
+    <div class="mockup-row"><span class="mb-label">Colonne gauche</span><span class="mb-val">DateFinCarte</span><span class="mb-tag blue">contenu dynamique</span></div>
+    <div class="mockup-row"><span class="mb-label">Opérateur</span><span class="mb-val">est inférieur ou égal à</span></div>
+    <div class="mockup-row"><span class="mb-label">Colonne droite</span><span class="mb-val">variables('DateLimite')</span></div>
+  </div>
+  <div class="warn-box"><strong>⚠️ Les employés sans date (comme Stefon Diggs)</strong> ne seront pas captés par ce filtre — c'est normal. On les traitera séparément à l'étape suivante.</div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Étape 6</div>
+  <div class="step-title">Créer le tableau HTML du rapport</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">
+    Ajoutez l'action <strong>« Sélectionner »</strong> pour reformater les données, puis <strong>« Créer un tableau HTML »</strong>. 
+    Ces deux actions transforment votre liste filtrée en un beau tableau lisible par courriel.
+  </p>
+  <div class="mockup">
+    <div class="mockup-row"><span class="mb-label">Action</span><span class="mb-val">Sélectionner</span></div>
+    <div class="mockup-row"><span class="mb-label">De</span><span class="mb-val">Corps (résultat du filtre)</span></div>
+    <div class="mockup-row"><span class="mb-label">Mapper — Prénom et Nom</span><span class="mb-val">NomComplet</span></div>
+    <div class="mockup-row"><span class="mb-label">Mapper — Date d'expiration</span><span class="mb-val">DateFinCarte</span></div>
+    <div class="mockup-row"><span class="mb-label">Mapper — Département</span><span class="mb-val">Département</span></div>
+  </div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Étape 7</div>
+  <div class="step-title">Envoyer le courriel — seulement s'il y a des alertes</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">
+    Ajoutez une <strong>« Condition »</strong> : envoyer le courriel seulement si le tableau n'est pas vide.
+  </p>
+  <div class="code-block"><span class="cm">// Condition : y a-t-il des cartes à signaler?</span>
+<span class="fn">length</span>(<span class="fn">body</span>(<span class="st">'Créer_un_tableau_HTML'</span>)) <span class="kw">est supérieur à</span> 50</div>
+  <p style="color:var(--muted2);font-size:.88rem;margin-top:.75rem">
+    Dans <strong>« Si oui »</strong>, ajoutez <strong>« Envoyer un e-mail (V2) »</strong> :
+  </p>
+  <div class="mockup">
+    <div class="mockup-row"><span class="mb-label">À</span><span class="mb-val">nick.suzuki@formation-demo.ca</span></div>
+    <div class="mockup-row"><span class="mb-label">Objet</span><span class="mb-val">⚠️ Cartes d'accès — Expirations dans les 15 prochains jours</span></div>
+    <div class="mockup-row"><span class="mb-label">Corps</span><span class="mb-val">Résultat de « Créer un tableau HTML »</span><span class="mb-tag blue">contenu dynamique</span></div>
+    <div class="mockup-row"><span class="mb-label">Est-ce HTML</span><span class="mb-val">Oui</span></div>
+  </div>
+  <div class="tip-box"><strong>🎉 C'est tout!</strong> Enregistrez votre flow avec le bouton <strong>Enregistrer</strong> en haut à droite. Il tournera automatiquement chaque matin à 8h00, du lundi au vendredi, et ne vous enverra un courriel que lorsqu'il y a des cartes à renouveler dans les 15 prochains jours.</div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Pour aller plus loin</div>
+  <div class="step-title">Tester votre flow avant d'attendre demain matin</div>
+  <p style="color:var(--muted2);font-size:.9rem">
+    En haut du concepteur, cliquez <strong>« Tester »</strong> → <strong>« Manuellement »</strong> → <strong>« Tester »</strong>. 
+    Power Automate exécutera le flow immédiatement et vous montrera le résultat de chaque étape en vert ✅ ou rouge ❌. 
+    C'est la meilleure façon de valider que tout fonctionne sans attendre le lendemain matin.
+  </p>
+</div>`
+    },
+    en: {
+      title: "Automated access card tracking — your first self-running flow",
+      meta: 'June 2025 · 10 min · Beginner · Step by step',
+      body: `
+<p style="background:rgba(79,126,248,0.08);border-left:3px solid var(--accent);padding:.875rem 1rem;border-radius:0 8px 8px 0;font-size:.9rem;color:var(--muted2);margin-bottom:1.5rem">
+  <strong style="color:var(--text)">Before you start</strong> — Power Automate is available at 
+  <strong>make.powerautomate.com</strong>. No extra password needed: sign in with your regular 
+  Microsoft 365 account (the same one you use for Outlook and Teams). It's free and already 
+  included in your subscription.
+</p>
+
+<div class="step-block">
+  <div class="step-num">The problem we're solving</div>
+  <div class="step-title">Every morning, someone manually checks access cards in Excel</div>
+  <p style="color:var(--muted2);font-size:.9rem">
+    Your organization keeps a list of employees with their access card expiry dates. Right now, someone 
+    opens the file every morning, sorts by date, and manually sends an alert email. That's 15–30 minutes 
+    per day, every business day. By the end of this tutorial, this flow will run automatically every 
+    morning at 8:00 AM. <strong style="color:var(--text)">You won't have to do anything.</strong>
+  </p>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Step 1</div>
+  <div class="step-title">Create the flow — choose a Scheduled cloud flow</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">
+    On <strong>make.powerautomate.com</strong>, click <strong>+ Create</strong> in the left menu, 
+    then choose <strong>"Scheduled cloud flow"</strong>.
+  </p>
+  <div class="mockup">
+    <div class="mockup-row"><span class="mb-label">Flow name</span><span class="mb-val">Daily Report — Access Cards</span></div>
+    <div class="mockup-row"><span class="mb-label">Starting</span><span class="mb-val">Today</span></div>
+    <div class="mockup-row"><span class="mb-label">Repeat every</span><span class="mb-val">1 Day</span></div>
+  </div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Step 2</div>
+  <div class="step-title">Skip weekends — your first condition</div>
+  <div class="code-block"><span class="cm">// Left field of the condition (click "Expression"):</span>
+<span class="fn">formatDateTime</span>(<span class="fn">utcNow</span>(), <span class="st">'dddd'</span>)</div>
+  <div class="mockup">
+    <div class="mockup-row"><span class="mb-label">Value</span><span class="mb-val">formatDateTime(utcNow(), 'dddd')</span></div>
+    <div class="mockup-row"><span class="mb-label">Operator</span><span class="mb-val">is not equal to</span></div>
+    <div class="mockup-row"><span class="mb-label">Value</span><span class="mb-val">Saturday</span></div>
+  </div>
+  <p style="color:var(--muted2);font-size:.88rem;margin-top:.75rem">Add a second row with <strong>AND</strong> → same expression → is not equal to → <strong>Sunday</strong>. All remaining steps go inside the <strong>"If yes"</strong> branch.</p>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Steps 3–7</div>
+  <div class="step-title">Initialize date variable → Read Excel → Filter → HTML table → Send email</div>
+  <p style="color:var(--muted2);font-size:.9rem">Follow the same pattern as the French version above — all action names are available in English in your Power Automate interface. The key expressions remain identical regardless of your interface language.</p>
+  <div class="tip-box"><strong>🎉 Done!</strong> Save your flow with the <strong>Save</strong> button. Test it immediately by clicking <strong>Test → Manually → Test</strong> at the top of the designer. Each step will show green ✅ or red ❌ so you can validate everything works before tomorrow morning.</div>
+</div>`
+    }
+  },
+  deplacements: {
+    tag: 'tag-cyan', tagKey: 'tag_sp',
+    fr: {
+      title: 'Automatiser les réservations de déplacements professionnels',
+      meta: 'Mai 2025 · 7 min · Intermédiaire',
+      body: `<p>La gestion des déplacements implique de nombreux intervenants. Les processus manuels souffrent de suivis fragmentés, de demandes perdues et d'absence de standardisation.</p>
+      <h3>Composants</h3><ul>
+        <li><strong>Liste SharePoint :</strong> formulaire structuré avec validation des données</li>
+        <li><strong>Power Automate :</strong> déclenché à chaque nouvelle demande (vérif. 5 min)</li>
+        <li><strong>Outlook :</strong> notification formatée à l'adjointe</li>
+      </ul>
+      <h3>Duplication automatique pour les groupes</h3><p>Quand un gestionnaire soumet pour plusieurs employés, le flow détecte les participants supplémentaires et crée une entrée distincte pour chacun — avec la note « duplication de la demande no.X ».</p>
+      <h3>Logique de délai</h3><p>Soumission avant 10h → traitement le jour même. Après 10h → lendemain. Vendredi après-midi → lundi suivant. Le message de confirmation s'adapte automatiquement.</p>`
+    },
+    en: {
+      title: 'Automating professional travel reservations',
+      meta: 'May 2025 · 7 min · Intermediate',
+      body: `<p>Travel management involves many stakeholders. Manual processes suffer from fragmented tracking, lost requests and lack of standardization.</p>
+      <h3>Components</h3><ul>
+        <li><strong>SharePoint List:</strong> structured request form with data validation</li>
+        <li><strong>Power Automate:</strong> triggered on each new submission (5-min check)</li>
+        <li><strong>Outlook:</strong> formatted notification to the admin assistant</li>
+      </ul>
+      <h3>Auto-Duplication for Groups</h3><p>When a manager submits for multiple employees, the flow detects additional participants and creates a separate entry for each — with the note "duplicate of request #X".</p>
+      <h3>Processing Delay Logic</h3><p>Before 10 AM → same-day processing. After 10 AM → next day. Friday afternoon → following Monday. The confirmation message adapts automatically.</p>`
+    }
+  },
+  formulaires: {
+    tag: 'tag-orange', tagKey: 'tag_forms',
+    fr: {
+      title: 'Moderniser nos formulaires internes : comment remplacer un formulaire Word par un processus automatisé',
+      meta: 'Avril 2025 · 12 min · Débutant · Pas à pas',
+      body: `<p>La majorité de nos processus internes reposent encore sur des formulaires Word téléchargés depuis l'intranet et envoyés manuellement par courriel, avec des consignes différentes selon les cas.</p>
+      <p>Résultat : erreurs, oublis, doublons, versions périmées, suivis manuels interminables.</p>
+      <p>Pourtant, il est possible de moderniser ce type de processus en seulement trois étapes simples, sans programmation et sans intelligence artificielle.</p>
+
+      <h3>📌 Exemple concret : la demande de participation à une formation</h3>
+      <p>Actuellement, pour demander une formation, l'employé doit :</p>
+      <ul>
+        <li>télécharger un formulaire Word ;</li>
+        <li>le remplir à la main ;</li>
+        <li>lire les instructions : Formation payante ? envoyer à <code>factures@formation-demo.ca</code>, avec <code>formations@formation-demo.ca</code> en copie conforme ;</li>
+        <li>Formation gratuite ? envoyer uniquement à <code>formations@formation-demo.ca</code> ;</li>
+        <li>joindre la facture (si applicable) ;</li>
+        <li>espérer ne rien avoir oublié.</li>
+      </ul>
+      <p>À grande échelle, cela génère des écarts, des retours, des relances, des erreurs — et beaucoup de temps perdu.</p>
+
+      <h3>🎯 Résultat visé</h3>
+      <p>L'employé remplit un formulaire en ligne → Power Automate fait le reste automatiquement : archivage SharePoint, acheminement au bon courriel, accusé de réception envoyé. Vous allez construire les trois composantes suivantes.</p>
+
+      <div style="background:rgba(234,88,12,0.06);border-left:3px solid var(--orange);padding:.875rem 1rem;border-radius:0 8px 8px 0;font-size:.88rem;color:var(--muted2);margin:1.25rem 0">
+        <strong style="color:var(--text)">⏱ Temps de réalisation estimé :</strong> 45 à 90 minutes la première fois. Une fois que vous avez fait ce type de flow une fois, la prochaine vous prendra moins de 30 minutes.
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 1 — Microsoft Forms</div>
+        <div class="step-title">Créer le formulaire en ligne</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">
+          Rendez-vous sur <strong>forms.office.com</strong> (même compte M365). Cliquez sur <strong>+ Nouveau formulaire</strong>. Donnez-lui un titre clair :
+        </p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">Titre</span><span class="mb-val">Demande de participation à une formation</span></div>
+          <div class="mockup-row"><span class="mb-label">Description</span><span class="mb-val">Remplissez ce formulaire pour toute demande de formation, payante ou gratuite.</span></div>
+        </div>
+        <p style="color:var(--muted2);font-size:.9rem;margin:.875rem 0 .5rem">Ajoutez ces champs avec le bouton <strong>+ Ajouter une question</strong> :</p>
+        <table class="excel-table">
+          <thead><tr><th>Champ</th><th>Type</th><th>Obligatoire</th></tr></thead>
+          <tbody>
+            <tr><td>Nom complet</td><td>Texte</td><td>✅ Oui</td></tr>
+            <tr><td>Département</td><td>Choix (liste)</td><td>✅ Oui</td></tr>
+            <tr><td>Titre de la formation</td><td>Texte</td><td>✅ Oui</td></tr>
+            <tr><td>Fournisseur / Institution</td><td>Texte</td><td>✅ Oui</td></tr>
+            <tr><td>Date de la formation</td><td>Date</td><td>✅ Oui</td></tr>
+            <tr><td>Formation payante?</td><td>Choix : Oui / Non</td><td>✅ Oui</td></tr>
+            <tr><td>Coût (si applicable)</td><td>Texte</td><td>Non</td></tr>
+            <tr><td>Nom du gestionnaire</td><td>Texte</td><td>✅ Oui</td></tr>
+            <tr><td>Commentaires</td><td>Texte long</td><td>Non</td></tr>
+          </tbody>
+        </table>
+        <div class="tip-box"><strong>💡 Le champ « Formation payante? »</strong> est la clé de toute la logique. C'est lui qui déterminera automatiquement quel courriel envoyer — sans que l'employé ait à lire des instructions.</div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 2 — SharePoint</div>
+        <div class="step-title">Préparer la liste de suivi</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">
+          Sur votre site SharePoint, cliquez sur <strong>+ Nouveau → Liste</strong>. Nommez-la <strong>DemandesFormation</strong>. Ajoutez ces colonnes via <strong>+ Ajouter une colonne</strong> :
+        </p>
+        <table class="excel-table">
+          <thead><tr><th>Nom de la colonne</th><th>Type</th></tr></thead>
+          <tbody>
+            <tr><td>NomComplet</td><td>Ligne de texte unique</td></tr>
+            <tr><td>Département</td><td>Ligne de texte unique</td></tr>
+            <tr><td>TitreFormation</td><td>Ligne de texte unique</td></tr>
+            <tr><td>Fournisseur</td><td>Ligne de texte unique</td></tr>
+            <tr><td>DateFormation</td><td>Date et heure</td></tr>
+            <tr><td>FormationPayante</td><td>Oui/Non</td></tr>
+            <tr><td>Cout</td><td>Nombre</td></tr>
+            <tr><td>NomGestionnaire</td><td>Ligne de texte unique</td></tr>
+            <tr><td>Statut</td><td>Choix : En attente / Approuvée / Refusée</td></tr>
+            <tr><td>Commentaires</td><td>Plusieurs lignes de texte</td></tr>
+          </tbody>
+        </table>
+        <div class="tip-box"><strong>💡 Pourquoi une liste SharePoint plutôt qu'Excel?</strong> La liste SharePoint est consultable par plusieurs personnes en même temps, filtrée et triée facilement, et Power Automate peut y écrire directement sans ouvrir de fichier. C'est le registre idéal pour ce type de processus.</div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 3 — Power Automate</div>
+        <div class="step-title">Créer le flow — déclencheur Microsoft Forms</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">
+          Sur <strong>make.powerautomate.com</strong>, cliquez <strong>+ Créer → Flow cloud automatisé</strong>. Dans la barre de recherche, tapez <strong>« Forms »</strong> et choisissez <strong>« Quand une nouvelle réponse est soumise »</strong>.
+        </p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">ID du formulaire</span><span class="mb-val">Demande de participation à une formation</span><span class="mb-tag blue">liste déroulante</span></div>
+        </div>
+        <div class="tip-box"><strong>💡 Le formulaire n'apparaît pas dans la liste?</strong> Assurez-vous d'être connecté avec le même compte M365 que celui qui a créé le formulaire sur forms.office.com.</div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 4 — Power Automate</div>
+        <div class="step-title">Récupérer les détails de la réponse</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">
+          Le déclencheur Forms ne donne que l'ID de la réponse — pas les données. Ajoutez l'action <strong>« Obtenir les détails de la réponse »</strong> (connecteur Microsoft Forms).
+        </p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">ID du formulaire</span><span class="mb-val">Demande de participation à une formation</span></div>
+          <div class="mockup-row"><span class="mb-label">ID de la réponse</span><span class="mb-val">ID de la réponse</span><span class="mb-tag blue">contenu dynamique du déclencheur</span></div>
+        </div>
+        <p style="color:var(--muted2);font-size:.88rem;margin-top:.75rem">
+          Après cette étape, toutes vos réponses (Nom complet, Département, etc.) apparaissent dans le volet <strong>Contenu dynamique</strong> — prêtes à être utilisées dans les étapes suivantes.
+        </p>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 5 — Power Automate</div>
+        <div class="step-title">Enregistrer la demande dans SharePoint</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">
+          Ajoutez l'action <strong>« Créer un élément »</strong> (connecteur SharePoint). Chaque champ du formulaire s'associe à une colonne de votre liste.
+        </p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">Site</span><span class="mb-val">https://votreorg.sharepoint.com/sites/RH</span></div>
+          <div class="mockup-row"><span class="mb-label">Nom de la liste</span><span class="mb-val">DemandesFormation</span></div>
+          <div class="mockup-row"><span class="mb-label">NomComplet</span><span class="mb-val">Nom complet (réponse Forms)</span><span class="mb-tag blue">dynamique</span></div>
+          <div class="mockup-row"><span class="mb-label">TitreFormation</span><span class="mb-val">Titre de la formation (réponse Forms)</span><span class="mb-tag blue">dynamique</span></div>
+          <div class="mockup-row"><span class="mb-label">Statut</span><span class="mb-val">En attente</span></div>
+        </div>
+        <p style="color:var(--muted2);font-size:.88rem;margin-top:.75rem">Remplissez toutes les colonnes de la même façon en pigeant dans le contenu dynamique.</p>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 6 — Power Automate</div>
+        <div class="step-title">Appliquer la règle : payante ou gratuite?</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">
+          C'est ici que la magie opère. Ajoutez une <strong>Condition</strong> — elle lira la réponse au champ « Formation payante? » et bifurquera automatiquement.
+        </p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">Valeur</span><span class="mb-val">Formation payante? (réponse Forms)</span><span class="mb-tag blue">dynamique</span></div>
+          <div class="mockup-row"><span class="mb-label">Opérateur</span><span class="mb-val">est égal à</span></div>
+          <div class="mockup-row"><span class="mb-label">Valeur</span><span class="mb-val">Oui</span></div>
+        </div>
+        <p style="color:var(--muted2);font-size:.88rem;margin:.875rem 0 .5rem"><strong>Dans « Si oui » — formation payante :</strong> ajoutez <strong>« Envoyer un e-mail (V2) »</strong> avec :</p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">À</span><span class="mb-val">factures@formation-demo.ca</span></div>
+          <div class="mockup-row"><span class="mb-label">CC</span><span class="mb-val">formations@formation-demo.ca</span></div>
+          <div class="mockup-row"><span class="mb-label">Objet</span><span class="mb-val">Demande de formation — @{Titre de la formation} — @{Nom complet}</span></div>
+          <div class="mockup-row"><span class="mb-label">Corps</span><span class="mb-val">Bonjour,<br><br>Une nouvelle demande de formation payante a été soumise automatiquement.<br><br>• Employé : @{Nom complet}<br>• Département : @{Département}<br>• Formation : @{Titre de la formation}<br>• Fournisseur : @{Fournisseur / Institution}<br>• Date : @{Date de la formation}<br>• Coût : @{Coût (si applicable)}<br>• Gestionnaire : @{Nom du gestionnaire}<br><br>Veuillez traiter cette demande et faire parvenir la facture au service des finances.<br><br>Ce courriel a été généré automatiquement par Power Automate.</span></div>
+          <div class="mockup-row"><span class="mb-label">Est-ce HTML</span><span class="mb-val">Non</span></div>
+        </div>
+        <p style="color:var(--muted2);font-size:.88rem;margin:.875rem 0 .5rem"><strong>Dans « Si non » — formation gratuite :</strong> ajoutez <strong>« Envoyer un e-mail (V2) »</strong> avec :</p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">À</span><span class="mb-val">formations@formation-demo.ca</span></div>
+          <div class="mockup-row"><span class="mb-label">Objet</span><span class="mb-val">Demande de formation (gratuite) — @{Titre de la formation} — @{Nom complet}</span></div>
+          <div class="mockup-row"><span class="mb-label">Corps</span><span class="mb-val">Bonjour,<br><br>Une nouvelle demande de formation gratuite a été soumise automatiquement.<br><br>• Employé : @{Nom complet}<br>• Département : @{Département}<br>• Formation : @{Titre de la formation}<br>• Fournisseur : @{Fournisseur / Institution}<br>• Date : @{Date de la formation}<br>• Gestionnaire : @{Nom du gestionnaire}<br><br>Aucuns frais associés à cette demande.<br><br>Ce courriel a été généré automatiquement par Power Automate.</span></div>
+          <div class="mockup-row"><span class="mb-label">Est-ce HTML</span><span class="mb-val">Non</span></div>
+        </div>
+        <div class="warn-box"><strong>⚠️ Rappel :</strong> Microsoft Forms peut retourner <code>Yes</code> / <code>No</code> en anglais selon la configuration de votre tenant. Testez votre flow pour voir exactement ce que retourne votre instance avant de valider la condition.</div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 7 — Power Automate</div>
+        <div class="step-title">Envoyer l'accusé de réception à l'employé</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">
+          Après la condition (en dehors des branches « Si oui » / « Si non »), ajoutez un dernier <strong>« Envoyer un e-mail (V2) »</strong>.
+        </p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">À</span><span class="mb-val">Courriel de la personne connectée</span><span class="mb-tag blue">dynamique — déclencheur Forms</span></div>
+          <div class="mockup-row"><span class="mb-label">Objet</span><span class="mb-val">✅ Votre demande de formation a bien été reçue</span></div>
+          <div class="mockup-row"><span class="mb-label">Corps</span><span class="mb-val">Bonjour @{Nom complet}, votre demande pour « @{Titre de la formation} » a été enregistrée et acheminée automatiquement. Vous recevrez une réponse sous peu.</span></div>
+        </div>
+        <div class="tip-box"><strong>🎉 C'est tout!</strong> Enregistrez puis testez immédiatement : <strong>Tester → Manuellement → Tester</strong>, soumettez une réponse de test dans votre formulaire Forms, et observez chaque étape s'exécuter en temps réel. Cole Caufield peut vous servir de cobaye fictif pour le test 😄</div>
+        <div class="warn-box"><strong>🧪 C'est l'heure de tester votre flow!</strong> Avant de partager quoi que ce soit, remplacez temporairement les adresses courriel dans les deux branches de la condition par <strong>votre propre adresse</strong>. Remplissez ensuite le formulaire vous-même pour soumettre une vraie réponse de test. Si tout est conforme — courriel reçu, entrée créée dans SharePoint, accusé de réception envoyé — remettez les bonnes adresses et partagez le lien du formulaire à vos collègues. Sinon, faites les ajustements nécessaires au texte des courriels avant de le diffuser.</div>
+      </div>
+
+      <h3>🎯 Résultat final</h3>
+      <p>L'employé remplit un formulaire clair et moderne. Power Automate applique automatiquement la règle payant/gratuit, archive dans SharePoint, envoie au bon courriel et confirme à l'employé — le tout en moins de 30 secondes. Zéro intervention humaine requise.</p>
+      <p>⭐ <strong>Le plus beau : tout cela fonctionne sans aucune intelligence artificielle.</strong> Uniquement avec les outils Microsoft 365 que nous avons déjà.</p>`
+    },
+    en: {
+      title: 'Modernizing internal forms: how to replace a Word form with an automated process',
+      meta: 'April 2025 · 12 min · Beginner · Step by step',
+      body: `<p>Most of our internal processes still rely on Word forms downloaded from the intranet and sent manually by email, with different instructions depending on the case.</p>
+      <p>The result: errors, oversights, duplicates, outdated versions, endless manual follow-ups.</p>
+      <p>Yet it's possible to modernize this type of process in just three simple steps — no coding, no artificial intelligence required.</p>
+
+      <h3>📌 Concrete Example: Training Participation Request</h3>
+      <p>Currently, to request training, an employee must download a Word form, fill it in by hand, read conditional instructions (paid vs. free training routes), attach invoices, and hope they forgot nothing. At scale, this generates errors and wasted time.</p>
+
+      <div style="background:rgba(234,88,12,0.06);border-left:3px solid var(--orange);padding:.875rem 1rem;border-radius:0 8px 8px 0;font-size:.88rem;color:var(--muted2);margin:1.25rem 0">
+        <strong style="color:var(--text)">⏱ Estimated build time:</strong> 45 to 90 minutes the first time. Once you've done this type of flow once, the next one will take less than 30 minutes.
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Step 1 — Microsoft Forms</div>
+        <div class="step-title">Create the online form</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Go to <strong>forms.office.com</strong>. Click <strong>+ New form</strong>. Add these fields: Full name (Text), Department (Choice), Training title (Text), Provider (Text), Training date (Date), Paid training? (Choice: Yes/No), Cost (Text), Manager name (Text), Comments (Long text).</p>
+        <div class="tip-box"><strong>💡 The "Paid training?" field</strong> is the key to all the logic — it determines which email to send automatically, without the employee reading any instructions.</div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Step 2 — SharePoint</div>
+        <div class="step-title">Create the tracking list</div>
+        <p style="color:var(--muted2);font-size:.9rem">On your SharePoint site, click <strong>+ New → List</strong>. Name it <strong>TrainingRequests</strong>. Add columns matching your form fields, plus a <strong>Status</strong> column (Choice: Pending / Approved / Declined).</p>
+        <div class="tip-box"><strong>💡 Why a SharePoint list instead of Excel?</strong> Multiple people can view it simultaneously, it filters and sorts easily, and Power Automate can write to it directly without opening a file.</div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Step 3 — Power Automate</div>
+        <div class="step-title">Create the flow — Forms trigger</div>
+        <p style="color:var(--muted2);font-size:.9rem">On <strong>make.powerautomate.com</strong>, click <strong>+ Create → Automated cloud flow</strong>. Search for <strong>"Forms"</strong> and choose <strong>"When a new response is submitted"</strong>. Select your form from the dropdown.</p>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Steps 4–7</div>
+        <div class="step-title">Get response details → Create SharePoint item → Condition (paid/free) → Confirmation email</div>
+        <p style="color:var(--muted2);font-size:.9rem">Follow the same pattern as the French version above. The key condition checks "Paid training?" equals <code>Yes</code> to route to the right email. The confirmation email goes after the condition branches, not inside them.</p>
+        <div class="tip-box"><strong>🎉 Done!</strong> Save and test: <strong>Test → Manually → Test</strong>, submit a test response in your Forms form, and watch each step execute in real time. Use Cole Caufield as your fictional test subject 😄</div>
+      </div>
+
+      <h3>🎯 Final Result</h3>
+      <p>The employee fills out a clear, modern form. Power Automate automatically applies the paid/free rule, archives to SharePoint, sends to the right email, and confirms to the employee — all in under 30 seconds. Zero human intervention required.</p>
+      <p>⭐ <strong>The best part: this all works without any artificial intelligence.</strong> Only with the Microsoft 365 tools you already have.</p>`
+    }
+  },
+  copilot: {
+    tag: 'tag-green', tagKey: 'tag_tip',
+    fr: {
+      title: 'La fonctionnalité de Copilot dans Word que beaucoup ignorent',
+      meta: 'Mars 2025 · 3 min · Débutant',
+      body: `
+      <div style="display:flex;align-items:center;gap:0.75rem;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:0.875rem 1.1rem;margin-bottom:1.5rem;font-size:0.83rem;color:var(--muted2)">
+        <span style="font-size:1.4rem;flex-shrink:0">💡</span>
+        <div>
+          <strong style="color:var(--text)">Source : conseil de la semaine</strong> — Reçu par courriel le 2 mars 2026, partagé par
+          <a href="https://www.linkedin.com/posts/scottbrant2018_your365coach-microsoft365-teams-activity-7416772961942044673--rZk" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600;text-decoration:none">Scott Brant</a>,
+          fondateur de <strong>Your 365 Coach</strong> et Microsoft MVP (M365 &amp; Copilot).
+          <a href="https://www.linkedin.com/posts/scottbrant2018_your365coach-microsoft365-teams-activity-7416772961942044673--rZk" target="_blank" rel="noopener" style="color:var(--accent);font-size:0.78rem;margin-left:0.35rem">Voir le post LinkedIn →</a>
+        </div>
+      </div>
+      <p>Copilot dans Microsoft 365 évolue rapidement, et ses fonctions les plus utiles passent encore souvent inaperçues — notamment dans Word.</p>
+      <h3>La capacité méconnue</h3><p>Quand vous ouvrez Word et cliquez sur Copilot dans le ruban, le volet Copilot Chat peut <strong>lire automatiquement votre document ouvert</strong>. Plus besoin de copier-coller!</p>
+      <h3>Essayez vous-même</h3><ul>
+        <li>Demandez : « Résume ce document. »</li>
+        <li>Puis : « Crée un résumé exécutif. »</li>
+        <li>Cliquez sur l'icône <strong>+</strong> sous la réponse → le contenu s'insère directement dans votre document!</li>
+      </ul>
+      <h3>Bonus important</h3><p><strong>Aucune licence Copilot payante requise</strong> pour cette fonctionnalité. Disponible dans Microsoft 365 standard. Idéal pour préparer des rapports, résumer des documents longs, générer des notes de réunion.</p>`
+    },
+    en: {
+      title: 'The Copilot feature in Word most people overlook',
+      meta: 'March 2025 · 3 min · Beginner',
+      body: `
+      <div style="display:flex;align-items:center;gap:0.75rem;background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:0.875rem 1.1rem;margin-bottom:1.5rem;font-size:0.83rem;color:var(--muted2)">
+        <span style="font-size:1.4rem;flex-shrink:0">💡</span>
+        <div>
+          <strong style="color:var(--text)">Source: tip of the week</strong> — Received by email on March 2, 2026, shared by
+          <a href="https://www.linkedin.com/posts/scottbrant2018_your365coach-microsoft365-teams-activity-7416772961942044673--rZk" target="_blank" rel="noopener" style="color:var(--accent);font-weight:600;text-decoration:none">Scott Brant</a>,
+          founder of <strong>Your 365 Coach</strong> and Microsoft MVP (M365 &amp; Copilot).
+          <a href="https://www.linkedin.com/posts/scottbrant2018_your365coach-microsoft365-teams-activity-7416772961942044673--rZk" target="_blank" rel="noopener" style="color:var(--accent);font-size:0.78rem;margin-left:0.35rem">View LinkedIn post →</a>
+        </div>
+      </div>
+      <p>Copilot in Microsoft 365 is evolving quickly, and some of its most useful features still fly under the radar — especially in Word.</p>
+      <h3>The Hidden Capability</h3><p>When you open Word and click Copilot in the ribbon, the Copilot Chat pane can <strong>automatically read your open document</strong>. No more copy-pasting!</p>
+      <h3>Try It Yourself</h3><ul>
+        <li>Ask: "Summarize this document."</li>
+        <li>Then: "Create an executive summary."</li>
+        <li>Click the <strong>+</strong> icon below the response → content is inserted directly into your Word document!</li>
+      </ul>
+      <h3>Important Bonus</h3><p><strong>No paid Copilot license required</strong> for this feature. Available in standard Microsoft 365. Perfect for preparing reports, summarizing long documents, generating meeting notes.</p>`
+    }
+  },
+  publication: {
+    tag: 'tag-purple', tagKey: 'tag_teams',
+    fr: {
+      title: 'Publier un message Teams à un utilisateur via Power Automate',
+      meta: 'Mars 2025 · 4 min · Débutant',
+      body: `<p>Envoyer des messages personnalisés à des utilisateurs spécifiques dans Microsoft Teams via Power Automate est une fonctionnalité puissante pour automatiser les communications internes.</p>
+      <h3>L'action clé</h3><p>« Post message in a chat or channel » permet d'envoyer des messages au nom d'un bot ou d'un utilisateur. Pour cibler une personne : choisissez « Chat with a user » comme destination.</p>
+      <h3>Configuration recommandée</h3><ul>
+        <li><strong>Post as :</strong> Flow bot (évite d'usurper l'identité d'un collègue)</li>
+        <li><strong>Post in :</strong> Chat with a user</li>
+        <li><strong>Recipient :</strong> adresse courriel de l'utilisateur (peut venir d'une liste SharePoint)</li>
+        <li><strong>Message :</strong> formaté en HTML ou Markdown</li>
+      </ul>
+      <h3>Bonnes pratiques</h3><p>Toujours vérifier les heures de bureau avant l'envoi. Personnalisez avec le prénom. Évitez les messages trop fréquents pour ne pas créer du bruit informationnel.</p>`
+    },
+    en: {
+      title: 'Post a Teams message to a user via Power Automate',
+      meta: 'March 2025 · 4 min · Beginner',
+      body: `<p>Sending personalized messages to specific Microsoft Teams users via Power Automate is a powerful way to automate internal communications.</p>
+      <h3>The Key Action</h3><p>"Post message in a chat or channel" lets you send messages on behalf of a bot or user. To target a specific person: choose "Chat with a user" as the destination.</p>
+      <h3>Recommended Setup</h3><ul>
+        <li><strong>Post as:</strong> Flow bot (avoids impersonating a colleague)</li>
+        <li><strong>Post in:</strong> Chat with a user</li>
+        <li><strong>Recipient:</strong> user's email address (can come from a SharePoint list)</li>
+        <li><strong>Message:</strong> formatted in HTML or Markdown</li>
+      </ul>
+      <h3>Best Practices</h3><p>Always verify business hours before sending. Personalize with the person's first name. Avoid overly frequent messages to prevent notification fatigue.</p>`
+    }
+  }
+};
+
+function openModal(key) {
+  const art = articleData[key];
+  if (!art) return;
+  const d = art[currentLang];
+  const t = i18n[currentLang];
+  document.getElementById('modal-header').innerHTML = `
+    <span class="tag ${art.tag}">${t[art.tagKey]}</span>
+    <h2>${d.title}</h2>
+    <div class="modal-meta"><span>📅 ${d.meta}</span></div>
+  `;
+  document.getElementById('modal-body').innerHTML = d.body;
+  document.getElementById('modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function handleOverlayClick(e) {
+  if (e.target === document.getElementById('modal-overlay')) closeModal();
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+// ══════════════════════════════════
+// CALENDRIER ÉDITORIAL
+// ══════════════════════════════════
+const calArticles = [
+  { date: 'Lancement',  fr: 'Moderniser nos formulaires internes',                    en: 'Modernizing our internal forms',                    tag_fr:'Microsoft Forms', status:'live' },
+  { date: 'Lancement',  fr: 'La fonctionnalité Copilot dans Word que beaucoup ignorent', en: 'The Copilot feature in Word most people overlook', tag_fr:'Conseil',        status:'live' },
+  { date: 'Semaine 1',  fr: 'Suivi automatisé des cartes d\'accès',                   en: 'Automated access card tracking',                    tag_fr:'Power Automate',  status:'next' },
+  { date: 'Semaine 2',  fr: 'Réservations de déplacements professionnels',            en: 'Professional travel reservations',                  tag_fr:'SharePoint',      status:'plan' },
+  { date: 'Semaine 3',  fr: 'Notifications Teams selon les heures de bureau',         en: 'Teams notifications by business hours',             tag_fr:'Teams',           status:'plan' },
+  { date: 'Semaine 4',  fr: 'Publier un message Teams à un utilisateur',              en: 'Post a Teams message to a user',                    tag_fr:'Teams',           status:'plan' },
+  { date: 'Semaine 5',  fr: 'Série courriels — Partie 1/3 : Déclencheur & filtrage', en: 'Email series — Part 1/3: Trigger & filtering',      tag_fr:'Power Automate',  status:'plan' },
+  { date: 'Semaine 6',  fr: 'Série courriels — Partie 2/3 : Pièces jointes & PDF',   en: 'Email series — Part 2/3: Attachments & PDF',        tag_fr:'Power Automate',  status:'plan' },
+  { date: 'Semaine 7',  fr: 'Série courriels — Partie 3/3 : Archivage & notifications', en: 'Email series — Part 3/3: Archive & notifications', tag_fr:'Power Automate', status:'plan' },
+  { date: 'Semaine 8',  fr: 'Comment ce blog publie automatiquement 1 article/semaine', en: 'How this blog auto-publishes 1 article/week',     tag_fr:'Dans les coulisses', status:'plan' },
+];
+
+function renderCalendar() {
+  const grid = document.getElementById('cal-grid');
+  if (!grid) return;
+  const lang = currentLang;
+  const statusLabel = { live: lang==='fr'?'✅ Publié':'✅ Published', next: lang==='fr'?'🔜 Prochain':'🔜 Next', plan: lang==='fr'?'🕐 Planifié':'🕐 Scheduled' };
+  grid.innerHTML = calArticles.map(a => `
+    <div class="cal-row ${a.status==='live'?'is-live':a.status==='next'?'is-next':''}">
+      <div class="cal-date">${a.date}</div>
+      <div class="cal-title-cell">${lang==='fr'?a.fr:a.en}<small>${a.tag_fr}</small></div>
+      <div class="cal-status ${a.status}">${statusLabel[a.status]}</div>
+    </div>`).join('');
+}
+
+// Patch setLang to also re-render calendar
+const _origSetLang = setLang;
+// (already defined above — we hook into it at init)
+
+// Calendrier article modal data
+articleData['calendrier'] = {
+  tag: 'tag-blue', tagKey: 'tag_pa',
+  fr: {
+    title: 'Comment ce blog publie automatiquement 1 article par semaine',
+    meta: 'Bonus · 8 min · Intermédiaire',
+    body: `
+<p>Ce blog pratique ce qu'il prêche : la publication hebdomadaire est entièrement gérée par un flow Power Automate. Voici exactement comment il fonctionne.</p>
+
+<div class="step-block">
+  <div class="step-num">L'idée</div>
+  <div class="step-title">Un fichier Excel comme calendrier éditorial</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Tous les articles à venir sont consignés dans un tableau Excel sur SharePoint avec les colonnes suivantes :</p>
+  <table class="excel-table">
+    <thead><tr><th>Titre</th><th>Contenu</th><th>Categorie</th><th>DatePublication</th><th>Statut</th></tr></thead>
+    <tbody>
+      <tr><td>Suivi des cartes d'accès</td><td>...</td><td>Power Automate</td><td>2025-03-17</td><td>Planifié</td></tr>
+      <tr><td>Réservations déplacements</td><td>...</td><td>SharePoint</td><td>2025-03-24</td><td>Planifié</td></tr>
+      <tr><td>Notifications Teams</td><td>...</td><td>Teams</td><td>2025-03-31</td><td>Planifié</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Étape 1</div>
+  <div class="step-title">Déclencheur : tous les lundis à 8h00</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Le flow utilise le déclencheur <strong>Recurrence</strong> configuré ainsi :</p>
+  <div class="mockup">
+    <div class="mockup-row"><span class="mb-label">Interval</span><span class="mb-val">1</span></div>
+    <div class="mockup-row"><span class="mb-label">Frequency</span><span class="mb-val">Week</span></div>
+    <div class="mockup-row"><span class="mb-label">On these days</span><span class="mb-val">Monday</span></div>
+    <div class="mockup-row"><span class="mb-label">At these hours</span><span class="mb-val">8</span></div>
+    <div class="mockup-row"><span class="mb-label">Time zone</span><span class="mb-val">Eastern Standard Time</span></div>
+  </div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Étape 2</div>
+  <div class="step-title">Trouver le prochain article planifié</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Le flow lit le tableau Excel et filtre la prochaine ligne dont le statut est <code>Planifié</code> et la date est aujourd'hui ou antérieure :</p>
+  <div class="code-block"><span class="cm">// Action : List rows present in a table</span>
+<span class="cm">// Filter Query (OData) :</span>
+Statut <span class="kw">eq</span> <span class="st">'Planifié'</span> <span class="kw">and</span> DatePublication <span class="kw">le</span> '<span class="fn">@{formatDateTime(utcNow(),'yyyy-MM-dd')}</span>'
+
+<span class="cm">// Trier par date croissante pour prendre le plus ancien</span>
+Order By : DatePublication <span class="kw">asc</span>
+Top Count : <span class="st">1</span></div>
+  <div class="tip-box"><strong>💡 Conseil :</strong> Le filtre OData évite de charger toutes les lignes en mémoire. Pour de grands tableaux, c'est beaucoup plus performant qu'un filtre <em>Apply to each</em>.</div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Étape 3</div>
+  <div class="step-title">Publier via la WordPress REST API</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Ajoutez l'action <strong>« HTTP »</strong> pour appeler l'API WordPress. Vous devez d'abord créer un <em>Application Password</em> dans votre tableau de bord WordPress (Utilisateurs → Votre profil → Mots de passe d'application).</p>
+  <div class="code-block"><span class="cm">// Action HTTP — créer un article WordPress</span>
+Method : <span class="kw">POST</span>
+URI    : <span class="st">https://flowfacile.ca/wp-json/wp/v2/posts</span>
+
+Headers :
+  Content-Type  : <span class="st">application/json</span>
+  Authorization : <span class="st">Basic </span><span class="fn">@{base64(concat('votre_user:',variables('WP_AppPassword')))}</span>
+
+Body :
+{
+  <span class="st">"title"</span>   : <span class="kw">@{first(body('List_rows')?['value'])?['Titre']}</span>,
+  <span class="st">"content"</span> : <span class="kw">@{first(body('List_rows')?['value'])?['Contenu']}</span>,
+  <span class="st">"status"</span>  : <span class="st">"publish"</span>,
+  <span class="st">"categories"</span>: [<span class="kw">@{variables('WP_CategoryId')}</span>]
+}</div>
+  <div class="warn-box"><strong>⚠️ Sécurité :</strong> Ne jamais mettre votre mot de passe WordPress directement dans le flow. Stockez-le dans une variable d'environnement Power Automate (Solutions → Variables d'environnement) ou dans Azure Key Vault.</div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Étape 4</div>
+  <div class="step-title">Mettre le statut à jour dans Excel</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Après la publication réussie, mettez à jour la ligne Excel pour marquer l'article comme publié :</p>
+  <div class="code-block"><span class="cm">// Action : Update a row</span>
+Key Column : DatePublication
+Key Value  : <span class="kw">@{first(body('List_rows')?['value'])?['DatePublication']}</span>
+Statut     : <span class="st">'Publié'</span>
+URLArticle : <span class="kw">@{body('HTTP')?['link']}</span></div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Étape 5</div>
+  <div class="step-title">Publier automatiquement sur LinkedIn</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Ajoutez l'action <strong>« Share an article V2 »</strong> depuis le connecteur <strong>LinkedIn V2</strong>. Connectez votre compte personnel lors de la première utilisation — Power Automate gérera le token OAuth automatiquement.</p>
+  <div class="mockup">
+    <div class="mockup-row"><span class="mb-label">Connecteur</span><span class="mb-val">LinkedIn V2</span><span class="mb-tag blue">Natif</span></div>
+    <div class="mockup-row"><span class="mb-label">Action</span><span class="mb-val">Share an article V2</span></div>
+    <div class="mockup-row"><span class="mb-label">Visibility</span><span class="mb-val">PUBLIC</span></div>
+    <div class="mockup-row"><span class="mb-label">Content URL</span><span class="mb-val">@{body('HTTP_WordPress')?['link']}</span></div>
+    <div class="mockup-row"><span class="mb-label">Title</span><span class="mb-val">@{first(body('List_rows')?['value'])?['Titre']}</span></div>
+    <div class="mockup-row"><span class="mb-label">Description</span><span class="mb-val">@{first(body('List_rows')?['value'])?['Resume']}</span></div>
+  </div>
+  <div class="code-block"><span class="cm">// Texte du post LinkedIn (champ "Commentary")</span>
+<span class="fn">concat</span>(
+  <span class="st">'📝 Nouvel article sur Flow Facile :\n\n'</span>,
+  <span class="kw">first(body('List_rows')?['value'])?['Titre']</span>,
+  <span class="st">'\n\n'</span>,
+  <span class="kw">first(body('List_rows')?['value'])?['Resume']</span>,
+  <span class="st">'\n\n🔗 '</span>,
+  <span class="kw">body('HTTP_WordPress')?['link']</span>
+)</div>
+  <div class="tip-box"><strong>💡 Conseil :</strong> Ajoutez une colonne <code>Resume</code> dans votre tableau Excel — 2-3 phrases résumant l'article. C'est ce texte qui apparaîtra dans le post LinkedIn et incitera les gens à cliquer.</div>
+  <div class="warn-box"><strong>⚠️ Limite du connecteur natif :</strong> Le connecteur LinkedIn V2 de Power Automate ne supporte que les publications sur profil personnel. Pour publier sur une <em>Page entreprise</em>, il faudra passer par l'API LinkedIn v2 avec une action HTTP et un token OAuth géré manuellement.</div>
+</div>
+
+<div class="tip-box"><strong>💡 Pour aller plus loin :</strong> Ajoutez une colonne <code>Hashtags</code> dans Excel (<code>#PowerAutomate #M365 #Québec</code>) et concaténez-la à la fin du commentary LinkedIn — vos posts auront une meilleure portée organique sans aucun effort supplémentaire.</div>`
+  },
+  en: {
+    title: 'How this blog automatically publishes 1 article per week',
+    meta: 'Bonus · 8 min · Intermediate',
+    body: `
+<p>This blog practices what it preaches: weekly publishing is entirely managed by a Power Automate flow. Here's exactly how it works.</p>
+
+<div class="step-block">
+  <div class="step-num">The Idea</div>
+  <div class="step-title">An Excel file as the editorial calendar</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">All upcoming articles are logged in an Excel table on SharePoint with these columns:</p>
+  <table class="excel-table">
+    <thead><tr><th>Title</th><th>Content</th><th>Category</th><th>PublishDate</th><th>Status</th></tr></thead>
+    <tbody>
+      <tr><td>Access card tracking</td><td>...</td><td>Power Automate</td><td>2025-03-17</td><td>Scheduled</td></tr>
+      <tr><td>Travel reservations</td><td>...</td><td>SharePoint</td><td>2025-03-24</td><td>Scheduled</td></tr>
+      <tr><td>Teams notifications</td><td>...</td><td>Teams</td><td>2025-03-31</td><td>Scheduled</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Step 1</div>
+  <div class="step-title">Trigger: every Monday at 8:00 AM</div>
+  <div class="mockup">
+    <div class="mockup-row"><span class="mb-label">Interval</span><span class="mb-val">1</span></div>
+    <div class="mockup-row"><span class="mb-label">Frequency</span><span class="mb-val">Week</span></div>
+    <div class="mockup-row"><span class="mb-label">On these days</span><span class="mb-val">Monday</span></div>
+    <div class="mockup-row"><span class="mb-label">At these hours</span><span class="mb-val">8</span></div>
+    <div class="mockup-row"><span class="mb-label">Time zone</span><span class="mb-val">Eastern Standard Time</span></div>
+  </div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Step 2</div>
+  <div class="step-title">Find the next scheduled article</div>
+  <div class="code-block"><span class="cm">// Action: List rows present in a table</span>
+<span class="cm">// OData Filter Query:</span>
+Status <span class="kw">eq</span> <span class="st">'Scheduled'</span> <span class="kw">and</span> PublishDate <span class="kw">le</span> '<span class="fn">@{formatDateTime(utcNow(),'yyyy-MM-dd')}</span>'
+
+Order By : PublishDate <span class="kw">asc</span>
+Top Count : <span class="st">1</span></div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Step 3</div>
+  <div class="step-title">Publish via the WordPress REST API</div>
+  <div class="code-block"><span class="cm">// HTTP Action — create a WordPress post</span>
+Method : <span class="kw">POST</span>
+URI    : <span class="st">https://flowfacile.ca/wp-json/wp/v2/posts</span>
+
+Authorization : <span class="st">Basic </span><span class="fn">@{base64(concat('your_user:',variables('WP_AppPassword')))}</span>
+
+Body :
+{
+  <span class="st">"title"</span>   : <span class="kw">@{first(body('List_rows')?['value'])?['Title']}</span>,
+  <span class="st">"content"</span> : <span class="kw">@{first(body('List_rows')?['value'])?['Content']}</span>,
+  <span class="st">"status"</span>  : <span class="st">"publish"</span>
+}</div>
+  <div class="warn-box"><strong>⚠️ Security:</strong> Never hardcode your WordPress password in the flow. Store it in a Power Automate environment variable or Azure Key Vault.</div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Step 5</div>
+  <div class="step-title">Automatically publish to LinkedIn</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Add the <strong>"Share an article V2"</strong> action from the <strong>LinkedIn V2</strong> connector. Connect your personal account on first use — Power Automate will manage the OAuth token automatically.</p>
+  <div class="mockup">
+    <div class="mockup-row"><span class="mb-label">Connector</span><span class="mb-val">LinkedIn V2</span><span class="mb-tag blue">Native</span></div>
+    <div class="mockup-row"><span class="mb-label">Action</span><span class="mb-val">Share an article V2</span></div>
+    <div class="mockup-row"><span class="mb-label">Visibility</span><span class="mb-val">PUBLIC</span></div>
+    <div class="mockup-row"><span class="mb-label">Content URL</span><span class="mb-val">@{body('HTTP_WordPress')?['link']}</span></div>
+    <div class="mockup-row"><span class="mb-label">Title</span><span class="mb-val">@{first(body('List_rows')?['value'])?['Title']}</span></div>
+    <div class="mockup-row"><span class="mb-label">Description</span><span class="mb-val">@{first(body('List_rows')?['value'])?['Summary']}</span></div>
+  </div>
+  <div class="code-block"><span class="cm">// LinkedIn post text (Commentary field)</span>
+<span class="fn">concat</span>(
+  <span class="st">'📝 New article on Flow Facile:\n\n'</span>,
+  <span class="kw">first(body('List_rows')?['value'])?['Title']</span>,
+  <span class="st">'\n\n'</span>,
+  <span class="kw">first(body('List_rows')?['value'])?['Summary']</span>,
+  <span class="st">'\n\n🔗 '</span>,
+  <span class="kw">body('HTTP_WordPress')?['link']</span>
+)</div>
+  <div class="tip-box"><strong>💡 Tip:</strong> Add a <code>Summary</code> column to your Excel table — 2-3 sentences summarizing the article. This text will appear in the LinkedIn post and drive clicks.</div>
+  <div class="warn-box"><strong>⚠️ Native connector limitation:</strong> The LinkedIn V2 connector in Power Automate only supports posting to a personal profile. To post to a <em>Company Page</em>, you'll need to use the LinkedIn API v2 via an HTTP action with a manually managed OAuth token.</div>
+</div>
+
+<div class="tip-box"><strong>💡 Going further:</strong> Add a <code>Hashtags</code> column in Excel (<code>#PowerAutomate #M365 #Quebec</code>) and concatenate it to the end of the LinkedIn commentary — your posts will get better organic reach with zero extra effort.</div>`
+  }
+};
+
+// ── INIT ──
+renderVoteGrid();
+renderCalendar();
+</script>
+</body>
+</html>
