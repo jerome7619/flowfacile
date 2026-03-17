@@ -969,6 +969,75 @@ footer {
       </div>
     </div>
 
+    <!-- ══ SÉRIE FORMULAIRES INTELLIGENTS ══ -->
+    <div class="series-banner" style="margin-top:2.5rem;background:linear-gradient(135deg,rgba(234,88,12,0.08),rgba(234,88,12,0.03));border-color:rgba(234,88,12,0.25)">
+      <div class="series-badge" style="background:rgba(234,88,12,0.12);color:#ea580c;border-color:rgba(234,88,12,0.3)" data-i18n="series2_badge">📋 Série en 3 parties</div>
+      <div class="series-info">
+        <h2 class="series-title" data-i18n="series2_title">Formulaires intelligents — Forms + Power Automate</h2>
+        <p class="series-sub" data-i18n="series2_sub">Du formulaire Word jusqu'à l'approbation automatique — construisez un processus complet pas à pas, sans aucune ligne de code.</p>
+      </div>
+      <div class="series-progress">
+        <div class="series-step active"><div class="ss-num" style="background:rgba(234,88,12,0.15);color:#ea580c;border-color:rgba(234,88,12,0.4)">1</div><div class="ss-lbl" data-i18n="sf1_step">Remplacer<br>le formulaire</div></div>
+        <div class="series-line"></div>
+        <div class="series-step active"><div class="ss-num" style="background:rgba(234,88,12,0.15);color:#ea580c;border-color:rgba(234,88,12,0.4)">2</div><div class="ss-lbl" data-i18n="sf2_step">Accusé de<br>réception</div></div>
+        <div class="series-line"></div>
+        <div class="series-step active"><div class="ss-num" style="background:rgba(234,88,12,0.15);color:#ea580c;border-color:rgba(234,88,12,0.4)">3</div><div class="ss-lbl" data-i18n="sf3_step">Approbation<br>gestionnaire</div></div>
+      </div>
+    </div>
+
+    <div class="series-grid">
+      <div class="series-card" onclick="openModal('formulaire1')">
+        <div class="series-card-header" style="background:linear-gradient(135deg,rgba(234,88,12,0.12),rgba(234,88,12,0.04))">
+          <div class="sc-part">Partie 1 / 3</div>
+          <div class="sc-diagram" style="display:flex;align-items:center;justify-content:center;height:90px;font-size:2.5rem;gap:.75rem">
+            📄 → 📋 → ☁️
+          </div>
+        </div>
+        <div class="series-card-body">
+          <h3 data-i18n="sf1_title">Remplacer un formulaire Word par un processus automatisé</h3>
+          <p data-i18n="sf1_desc">Créer le Forms, configurer SharePoint et brancher le flow en 7 étapes.</p>
+          <div class="card-foot">
+            <span>Avril 2025 · 12 min · Débutant</span>
+            <span class="card-arrow">→</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="series-card" onclick="openModal('formulaire2')">
+        <div class="series-card-header" style="background:linear-gradient(135deg,rgba(234,88,12,0.12),rgba(234,88,12,0.04))">
+          <div class="sc-part">Partie 2 / 3</div>
+          <div class="sc-diagram" style="display:flex;align-items:center;justify-content:center;height:90px;font-size:2.5rem;gap:.75rem">
+            📋 → ✅ → 📧
+          </div>
+        </div>
+        <div class="series-card-body">
+          <h3 data-i18n="sf2_title">Envoyer un accusé de réception automatique</h3>
+          <p data-i18n="sf2_desc">Valider le courriel avec contains(@) et confirmer la réception automatiquement.</p>
+          <div class="card-foot">
+            <span>Mai 2025 · 10 min · Débutant</span>
+            <span class="card-arrow">→</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="series-card" onclick="openModal('formulaire3')">
+        <div class="series-card-header" style="background:linear-gradient(135deg,rgba(234,88,12,0.12),rgba(234,88,12,0.04))">
+          <div class="sc-part">Partie 3 / 3</div>
+          <div class="sc-diagram" style="display:flex;align-items:center;justify-content:center;height:90px;font-size:2.5rem;gap:.75rem">
+            ✅ → 🔁 → 📊
+          </div>
+        </div>
+        <div class="series-card-body">
+          <h3 data-i18n="sf3_title">Approbation, relance et rapport hebdomadaire</h3>
+          <p data-i18n="sf3_desc">Le gestionnaire approuve en un clic, relance automatique après 5 jours, rapport hebdomadaire des demandes en attente.</p>
+          <div class="card-foot">
+            <span>Juin 2025 · 18 min · Intermédiaire</span>
+            <span class="card-arrow">→</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- ══ TOUS LES ARTICLES ══ -->
     <div class="sec-header">
       <h2 class="sec-title" data-i18n="sec_all">Tous les articles</h2>
@@ -2503,6 +2572,285 @@ Delete file → <span class="kw">outputs('Create_file')?['body/Id']</span></div>
       <h3>Processing Delay Logic</h3><p>Before 10 AM → same-day processing. After 10 AM → next day. Friday afternoon → following Monday. The confirmation message adapts automatically.</p>`
     }
   },
+
+  formulaire1: {
+    tag: 'tag-orange', tagKey: 'tag_forms',
+    fr: {
+      title: 'Série Formulaires — Partie 1/3 : Remplacer un formulaire Word par un processus automatisé',
+      meta: 'Avril 2025 · 12 min · Débutant · Pas à pas',
+      body: `<p>Voir l'article complet <a href="#" onclick="closeModal();openModal('formulaires');return false;" style="color:var(--accent)">Moderniser nos formulaires internes</a> — le contenu de cette partie est intégralement couvert dans cet article vedette.</p>
+      <div class="nav-series">
+        <button class="nav-btn primary" onclick="closeModal();openModal('formulaire2')">Partie 2 — Accusé de réception →</button>
+      </div>`
+    },
+    en: {
+      title: 'Forms Series — Part 1/3: Replace a Word form with an automated process',
+      meta: 'April 2025 · 12 min · Beginner',
+      body: `<p>See the full article <a href="#" onclick="closeModal();openModal('formulaires');return false;" style="color:var(--accent)">Modernizing internal forms</a> — the content of this part is fully covered in the featured article.</p>
+      <div class="nav-series">
+        <button class="nav-btn primary" onclick="closeModal();openModal('formulaire2')">Part 2 — Acknowledgement →</button>
+      </div>`
+    }
+  },
+
+  formulaire2: {
+    tag: 'tag-orange', tagKey: 'tag_forms',
+    fr: {
+      title: 'Série Formulaires — Partie 2/3 : Envoyer un accusé de réception automatique',
+      meta: 'Mai 2025 · 10 min · Débutant · Pas à pas',
+      body: `<p>Dans la <a href="#" onclick="closeModal();openModal('formulaires');return false;" style="color:var(--accent)">Partie 1</a>, vous avez remplacé votre formulaire Word par un Microsoft Forms relié à SharePoint. Maintenant, allons plus loin : dès qu'une personne soumet une demande, elle reçoit <strong>automatiquement un accusé de réception</strong>. Fini les « Est-ce que vous avez bien reçu ma demande? ».</p>
+
+      <div style="background:rgba(234,88,12,0.06);border-left:3px solid var(--orange);padding:.875rem 1rem;border-radius:0 8px 8px 0;font-size:.88rem;color:var(--muted2);margin:1.25rem 0">
+        <strong style="color:var(--text)">⏱ Temps de réalisation estimé :</strong> 20 à 30 minutes — le flow de la Partie 1 est déjà en place, on ajoute simplement des étapes.
+      </div>
+
+      <div class="tip-box"><strong>💡 Inspiration :</strong> Cette approche est documentée par <a href="https://www.lecfomasque.com/power-automate-et-microsoft-forms-mise-en-place-dun-flux-pour-les-reponses/" target="_blank" rel="noopener" style="color:var(--accent)">Le CFO Masqué</a> (Kim Leblanc, octobre 2024). Nous l'adaptons ici au contexte administratif avec des exemples concrets.</div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 1 — Microsoft Forms</div>
+        <div class="step-title">Ajouter un champ courriel au formulaire</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Retournez dans <strong>forms.office.com</strong> → ouvrez votre formulaire existant → ajoutez une question :</p>
+        <table class="excel-table">
+          <thead><tr><th>Champ</th><th>Type</th><th>Obligatoire</th></tr></thead>
+          <tbody><tr><td>Votre adresse courriel</td><td>Texte</td><td>✅ Oui</td></tr></tbody>
+        </table>
+        <div class="tip-box"><strong>💡 Pourquoi ajouter ce champ?</strong> Si votre formulaire est accessible à l'extérieur de votre organisation, Power Automate ne capture pas le courriel automatiquement. En l'ajoutant comme question, vous l'avez toujours — peu importe d'où vient le répondant.</div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 2 — Power Automate</div>
+        <div class="step-title">Ouvrir votre flow existant</div>
+        <p style="color:var(--muted2);font-size:.9rem">Sur <strong>make.powerautomate.com</strong>, retrouvez votre flow de la Partie 1 et cliquez <strong>Modifier</strong>. Vous allez ajouter des étapes après l'enregistrement SharePoint existant.</p>
+        <div class="tip-box"><strong>💡 Bonne pratique :</strong> Toujours modifier un flow existant plutôt qu'en créer un nouveau pour la même soumission Forms — un seul déclencheur par formulaire évite les doublons.</div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 3 — Power Automate</div>
+        <div class="step-title">Ajouter une condition de validation du courriel</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Avant d'envoyer quoi que ce soit, on vérifie que l'adresse saisie ressemble bien à un courriel. Ajoutez une <strong>Condition</strong> après l'étape SharePoint :</p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">Valeur</span><span class="mb-val">Votre adresse courriel (réponse Forms)</span><span class="mb-tag blue">dynamique</span></div>
+          <div class="mockup-row"><span class="mb-label">Opérateur</span><span class="mb-val">contient</span></div>
+          <div class="mockup-row"><span class="mb-label">Valeur</span><span class="mb-val">@</span></div>
+        </div>
+        <div class="tip-box"><strong>💡 Pourquoi vérifier le @?</strong> Si quelqu'un saisit son nom plutôt que son courriel, Power Automate essaierait d'envoyer à une adresse invalide. Cette condition simple évite l'erreur avant qu'elle ne se produise.</div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 4 — Power Automate</div>
+        <div class="step-title">Configurer l'accusé de réception dans « Si oui »</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Dans la branche <strong>« Si oui »</strong>, ajoutez <strong>« Envoyer un e-mail (V2) »</strong> :</p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">À</span><span class="mb-val">Votre adresse courriel (réponse Forms)</span><span class="mb-tag blue">dynamique</span></div>
+          <div class="mockup-row"><span class="mb-label">Objet</span><span class="mb-val">✅ Votre demande a bien été reçue — @{Titre de la demande}</span></div>
+          <div class="mockup-row"><span class="mb-label">Corps</span><span class="mb-val">Bonjour @{Nom complet},<br><br>Nous confirmons la bonne réception de votre demande soumise le @{Date de soumission}.<br><br>• Demande : @{Titre de la demande}<br>• Département : @{Département}<br>• Statut actuel : En attente de traitement<br><br>Vous serez informé(e) dès qu'une décision sera prise.<br><br>Ce message a été généré automatiquement.</span></div>
+        </div>
+        <div class="warn-box"><strong>⚠️ Dans « Si non » :</strong> optionnel — vous pouvez envoyer un courriel vers votre propre adresse pour signaler qu'une soumission avait un courriel invalide, et permettre un suivi manuel.</div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 5 — Tester</div>
+        <div class="step-title">Valider les deux scénarios avant de partager</div>
+        <table class="excel-table">
+          <thead><tr><th>Test</th><th>Courriel saisi</th><th>Résultat attendu</th></tr></thead>
+          <tbody>
+            <tr><td>✅ Valide</td><td>cole.caufield@formation-demo.ca</td><td>Accusé de réception reçu</td></tr>
+            <tr><td>⚠️ Invalide</td><td>Cole Caufield</td><td>Aucun courriel envoyé</td></tr>
+          </tbody>
+        </table>
+        <div class="warn-box"><strong>🧪 C'est l'heure de tester!</strong> Remplacez temporairement l'adresse dynamique par la vôtre pour les tests. Une fois les deux scénarios validés, remettez l'adresse dynamique et partagez le formulaire. La demande de Nick Suzuki n'attendra plus jamais dans le vide.</div>
+      </div>
+
+      <h3>🎯 Résultat final</h3>
+      <p>L'employé soumet sa demande → reçoit immédiatement un accusé de réception personnalisé → sait que tout est bien enregistré. Fini les suivis inutiles.</p>
+      <p>⭐ <strong>Une seule condition, une seule action — et votre processus devient professionnel en 30 minutes.</strong></p>
+
+      <div class="nav-series">
+        <button class="nav-btn secondary" onclick="closeModal();openModal('formulaires')">← Partie 1 — Remplacer le formulaire Word</button>
+        <button class="nav-btn primary" onclick="closeModal();openModal('formulaire3')">Partie 3 — Approbation du gestionnaire →</button>
+      </div>`
+    },
+    en: {
+      title: 'Forms Series — Part 2/3: Send an automatic acknowledgement',
+      meta: 'May 2025 · 10 min · Beginner · Step by step',
+      body: `<p>In <a href="#" onclick="closeModal();openModal('formulaires');return false;" style="color:var(--accent)">Part 1</a>, you replaced your Word form with a Microsoft Forms connected to SharePoint. Now let's add an automatic acknowledgement email whenever someone submits a request.</p>
+      <div class="step-block">
+        <div class="step-num">Step 1 — Microsoft Forms</div>
+        <div class="step-title">Add an email field to your form</div>
+        <p style="color:var(--muted2);font-size:.9rem">Go back to <strong>forms.office.com</strong> → open your existing form → add: <strong>Your email address</strong> (Text, Required).</p>
+      </div>
+      <div class="step-block">
+        <div class="step-num">Steps 2–5</div>
+        <div class="step-title">Edit flow → Condition (contains @) → Send acknowledgement → Test</div>
+        <p style="color:var(--muted2);font-size:.9rem">Follow the same pattern as the French version. The key condition checks if "Your email address" contains <code>@</code> before sending. Test with both a valid email and a name without @.</p>
+        <div class="tip-box"><strong>💡 Credit:</strong> This validation approach was documented by <a href="https://www.lecfomasque.com/power-automate-et-microsoft-forms-mise-en-place-dun-flux-pour-les-reponses/" target="_blank" rel="noopener" style="color:var(--accent)">Le CFO Masqué</a> (Kim Leblanc, October 2024).</div>
+      </div>
+      <div class="nav-series">
+        <button class="nav-btn secondary" onclick="closeModal();openModal('formulaires')">← Part 1 — Replace the Word form</button>
+        <button class="nav-btn primary" onclick="closeModal();openModal('formulaire3')">Part 3 — Manager approval →</button>
+      </div>`
+    }
+  },
+
+  formulaire3: {
+    tag: 'tag-orange', tagKey: 'tag_forms',
+    fr: {
+      title: "Série Formulaires — Partie 3/3 : Approbation, relance automatique et rapport hebdomadaire",
+      meta: 'Juin 2025 · 18 min · Intermédiaire · Pas à pas',
+      body: `<p>Dans les parties précédentes, vous avez remplacé le formulaire Word et ajouté un accusé de réception. Maintenant on complète le cycle : <strong>le gestionnaire reçoit une demande d'approbation</strong>, répond en un clic, et l'employé est informé automatiquement. En bonus : une relance si le gestionnaire tarde, et un rapport hebdomadaire des demandes en attente.</p>
+
+      <div style="background:rgba(234,88,12,0.06);border-left:3px solid var(--orange);padding:.875rem 1rem;border-radius:0 8px 8px 0;font-size:.88rem;color:var(--muted2);margin:1.25rem 0">
+        <strong style="color:var(--text)">⏱ Temps de réalisation estimé :</strong> 45 à 60 minutes — trois flows distincts, mais chacun est court et ciblé.
+      </div>
+
+      <h3>🗺️ Vue d'ensemble — 3 flows complémentaires</h3>
+      <table class="excel-table">
+        <thead><tr><th>Flow</th><th>Déclencheur</th><th>Rôle</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Flow A</strong></td><td>Soumission Forms</td><td>Envoie la demande au gestionnaire pour approbation</td></tr>
+          <tr><td><strong>Flow B</strong></td><td>Quotidien</td><td>Relance le gestionnaire après 5 jours, expire après 10 jours</td></tr>
+          <tr><td><strong>Flow C</strong></td><td>Vendredi 10h</td><td>Rapport hebdomadaire des demandes en attente</td></tr>
+        </tbody>
+      </table>
+
+      <h3>⚙️ Prérequis — liste SharePoint des employés</h3>
+      <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Les trois flows utilisent une liste SharePoint <strong>ListeEmployes</strong> pour trouver automatiquement le gestionnaire de chaque employé. Assurez-vous qu'elle contient ces colonnes :</p>
+      <table class="excel-table">
+        <thead><tr><th>Colonne</th><th>Type</th><th>Exemple</th></tr></thead>
+        <tbody>
+          <tr><td>Courriel</td><td>Texte</td><td>cole.caufield@formation-demo.ca</td></tr>
+          <tr><td>Approbateur</td><td>Texte</td><td>nick.suzuki@formation-demo.ca</td></tr>
+          <tr><td>Gestionnaire</td><td>Texte</td><td>nick.suzuki@formation-demo.ca</td></tr>
+        </tbody>
+      </table>
+
+      <div class="step-block">
+        <div class="step-num">Flow A — Étape 1</div>
+        <div class="step-title">Déclencheur : soumission du formulaire Forms</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Créez un nouveau flow automatisé avec le déclencheur <strong>« Lorsqu'une nouvelle réponse est envoyée »</strong>, puis ajoutez <strong>« Obtenir les détails de la réponse »</strong> pour récupérer tous les champs.</p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">Déclencheur</span><span class="mb-val">Lorsqu'une nouvelle réponse est envoyée</span></div>
+          <div class="mockup-row"><span class="mb-label">Action 1</span><span class="mb-val">Obtenir les détails de la réponse</span></div>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Flow A — Étape 2</div>
+        <div class="step-title">Trouver le gestionnaire dans la liste SharePoint</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Ajoutez <strong>« Obtenir des éléments »</strong> (SharePoint) pour chercher l'employé dans votre liste et récupérer son gestionnaire :</p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">Site</span><span class="mb-val">https://votreorg.sharepoint.com/sites/RH</span></div>
+          <div class="mockup-row"><span class="mb-label">Nom de la liste</span><span class="mb-val">ListeEmployes</span></div>
+          <div class="mockup-row"><span class="mb-label">Filtre</span><span class="mb-val">Courriel eq '@{body/responder}'</span><span class="mb-tag blue">dynamique</span></div>
+        </div>
+        <p style="color:var(--muted2);font-size:.88rem;margin-top:.75rem">Ajoutez ensuite une action <strong>Sélectionner</strong> pour extraire les courriels des approbateurs, puis <strong>Joindre</strong> pour les concaténer en une seule chaîne séparée par des point-virgules — Power Automate en a besoin pour envoyer l'approbation à plusieurs personnes si nécessaire.</p>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Flow A — Étape 3</div>
+        <div class="step-title">Créer la demande d'approbation</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Ajoutez <strong>« Créer une approbation »</strong> (connecteur Approbations) :</p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">Type</span><span class="mb-val">Réponse personnalisée — Attendre une réponse</span></div>
+          <div class="mockup-row"><span class="mb-label">Titre</span><span class="mb-val">Demande de participation à une formation</span></div>
+          <div class="mockup-row"><span class="mb-label">Assigné à</span><span class="mb-val">@{résultat Joindre — gestionnaire}</span><span class="mb-tag blue">dynamique</span></div>
+          <div class="mockup-row"><span class="mb-label">Options</span><span class="mb-val">Approuver ; Refuser</span></div>
+          <div class="mockup-row"><span class="mb-label">Détails</span><span class="mb-val">Bonjour, merci de donner suite à la demande de @{Nom complet} pour la formation @{Titre de la formation} prévue le @{Date}.</span></div>
+        </div>
+        <p style="color:var(--muted2);font-size:.88rem;margin-top:.75rem">Puis ajoutez <strong>« Attendre une approbation »</strong> — le flow se met en pause jusqu'à la réponse du gestionnaire.</p>
+        <div class="tip-box"><strong>💡 Le connecteur Approbations</strong> envoie automatiquement une notification dans Teams et par courriel au gestionnaire avec les boutons Approuver / Refuser directement cliquables — sans qu'il ait à ouvrir Power Automate.</div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Flow A — Étape 4</div>
+        <div class="step-title">Traiter la réponse — Condition Approuver / Refuser</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Après l'attente, ajoutez une boucle <strong>Apply to each</strong> sur les réponses, puis une <strong>Condition</strong> :</p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">Valeur</span><span class="mb-val">approverResponse</span><span class="mb-tag blue">dynamique</span></div>
+          <div class="mockup-row"><span class="mb-label">Opérateur</span><span class="mb-val">est égal à</span></div>
+          <div class="mockup-row"><span class="mb-label">Valeur</span><span class="mb-val">Approuver</span></div>
+        </div>
+        <p style="color:var(--muted2);font-size:.88rem;margin:.875rem 0 .5rem"><strong>Si oui — Approuvé :</strong></p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">À</span><span class="mb-val">@{body/responder}</span><span class="mb-tag blue">courriel du demandeur</span></div>
+          <div class="mockup-row"><span class="mb-label">Objet</span><span class="mb-val">✅ Retour sur votre demande de participation à une formation</span></div>
+          <div class="mockup-row"><span class="mb-label">Corps</span><span class="mb-val">Bonjour @{Nom complet}, votre participation à la formation @{Titre} a été autorisée par votre gestionnaire. @{Commentaires}</span></div>
+          <div class="mockup-row"><span class="mb-label">Mise à jour SharePoint</span><span class="mb-val">Statut → Approuvée</span></div>
+        </div>
+        <p style="color:var(--muted2);font-size:.88rem;margin:.875rem 0 .5rem"><strong>Si non — Refusé :</strong></p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">Objet</span><span class="mb-val">Retour sur votre demande de participation à une formation</span></div>
+          <div class="mockup-row"><span class="mb-label">Corps</span><span class="mb-val">Bonjour @{Nom complet}, votre demande pour la formation @{Titre} a été refusée par votre gestionnaire. @{Commentaires}</span></div>
+          <div class="mockup-row"><span class="mb-label">Mise à jour SharePoint</span><span class="mb-val">Statut → Refusée</span></div>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Flow B — Relance automatique</div>
+        <div class="step-title">Déclencheur quotidien — surveiller les demandes sans réponse</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Créez un second flow avec un déclencheur <strong>Planification (Récurrence)</strong> — fréquence : 1 jour. Ce flow surveille les demandes en attente et agit selon leur âge :</p>
+        <table class="excel-table">
+          <thead><tr><th>Condition</th><th>Action</th></tr></thead>
+          <tbody>
+            <tr><td>+5 jours sans réponse ET RelanceCount = 0</td><td>Rappel courriel au gestionnaire + RelanceCount → 1</td></tr>
+            <tr><td>+10 jours sans réponse ET statut = En attente</td><td>Statut → Expirée + courriel à l'employé</td></tr>
+          </tbody>
+        </table>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">Filtre SharePoint</span><span class="mb-val">Statut eq 'Transmise' or Statut eq 'En attente d''approbation'</span></div>
+          <div class="mockup-row"><span class="mb-label">Condition relance</span><span class="mb-val">addDays(DateSoumission, 5) ≤ utcNow() ET RelanceCount = 0</span></div>
+          <div class="mockup-row"><span class="mb-label">Condition expiration</span><span class="mb-val">addDays(DateSoumission, 10) ≤ utcNow()</span></div>
+        </div>
+        <div class="tip-box"><strong>💡 La fonction addDays()</strong> calcule automatiquement une date future ou passée. <code>addDays(DateSoumission, 5)</code> donne la date de soumission + 5 jours — si cette date est déjà passée, la relance se déclenche.</div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Flow C — Rapport hebdomadaire</div>
+        <div class="step-title">Déclencheur vendredi 10h — tableau HTML des demandes en attente</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Créez un troisième flow avec une <strong>Récurrence hebdomadaire</strong> — vendredi à 10h. Il génère et envoie un tableau HTML des demandes encore en attente :</p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">Fréquence</span><span class="mb-val">Semaine — Vendredi — 10:00</span></div>
+          <div class="mockup-row"><span class="mb-label">Filtre SharePoint</span><span class="mb-val">Statut eq 'En attente d''approbation' or Statut eq 'Transmise'</span></div>
+          <div class="mockup-row"><span class="mb-label">Action Sélectionner</span><span class="mb-val">Demandeur, Formation, Date, Gestionnaire, Approbateur, Date soumission</span></div>
+          <div class="mockup-row"><span class="mb-label">Action Créer un tableau HTML</span><span class="mb-val">à partir du Sélectionner</span></div>
+          <div class="mockup-row"><span class="mb-label">Condition</span><span class="mb-val">Longueur du tableau &gt; 101 (= tableau non vide)</span></div>
+          <div class="mockup-row"><span class="mb-label">Courriel</span><span class="mb-val">Rapport hebdomadaire avec tableau HTML stylisé</span></div>
+        </div>
+        <div class="warn-box"><strong>⚠️ Pourquoi vérifier la longueur > 101?</strong> Un tableau HTML vide généré par Power Automate contient quand même les balises d'en-tête — environ 101 caractères. Si la longueur dépasse ce seuil, c'est qu'il y a de vraies données. Astuce tirée directement du flow réel!</div>
+      </div>
+
+      <h3>🎯 Résultat final — le cycle complet</h3>
+      <table class="excel-table">
+        <thead><tr><th>Étape</th><th>Qui</th><th>Quoi</th><th>Quand</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Employé</td><td>Soumet le formulaire</td><td>N'importe quand</td></tr>
+          <tr><td>2</td><td>Flow A</td><td>Accusé de réception + demande d'approbation au gestionnaire</td><td>Immédiat</td></tr>
+          <tr><td>3</td><td>Gestionnaire</td><td>Approuve ou refuse en un clic dans Teams ou courriel</td><td>Dans les 5 jours</td></tr>
+          <tr><td>4</td><td>Flow A</td><td>Notifie l'employé du résultat + met à jour SharePoint</td><td>Immédiat</td></tr>
+          <tr><td>5</td><td>Flow B</td><td>Relance le gestionnaire si pas de réponse après 5 jours</td><td>Quotidien</td></tr>
+          <tr><td>6</td><td>Flow B</td><td>Expire la demande et notifie l'employé après 10 jours</td><td>Quotidien</td></tr>
+          <tr><td>7</td><td>Flow C</td><td>Rapport hebdomadaire des demandes encore en attente</td><td>Vendredi 10h</td></tr>
+        </tbody>
+      </table>
+      <p>⭐ <strong>Trois flows, zéro suivi manuel. Votre processus de formation devient traçable, uniforme et automatique — du premier clic jusqu'à la décision finale.</strong></p>
+
+      <div class="nav-series">
+        <button class="nav-btn secondary" onclick="closeModal();openModal('formulaire2')">← Partie 2 — Accusé de réception</button>
+      </div>`
+    },
+    en: {
+      title: "Forms Series — Part 3/3: Add a manager approval step",
+      meta: 'June 2025 · 15 min · Intermediate',
+      body: `<p>Parts 1 and 2 set up the form and automatic acknowledgement. In this third part, we add the approval step.</p>
+      <div style="background:rgba(234,88,12,0.06);border-left:3px solid var(--orange);padding:.875rem 1rem;border-radius:0 8px 8px 0;font-size:.88rem;color:var(--muted2);margin:1.25rem 0">
+        <strong style="color:var(--text)">🚧 Coming soon</strong> — <a href="#newsletter" style="color:var(--accent)">Subscribe to the newsletter</a> to be notified when it's published.
+      </div>
+      <div class="nav-series">
+        <button class="nav-btn secondary" onclick="closeModal();openModal('formulaire2')">← Part 2 — Acknowledgement</button>
+      </div>`
+    }
+  },
+
   formulaires: {
     tag: 'tag-orange', tagKey: 'tag_forms',
     fr: {
