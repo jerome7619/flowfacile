@@ -1467,19 +1467,19 @@ function setLang(lang) {
 // VOTE SYSTEM
 // ══════════════════════════════════
 const voteTopics = [
-  { id: 'formation',   fr: 'Automatiser les 4 étapes de demande de formation',        en: 'Automate the 4 steps of training requests',           desc_fr: 'Soumission → approbation gestionnaire → inscription → suivi — tout en automatique!', desc_en: 'Submit → manager approval → registration → tracking — fully automated!' },
   { id: 'vacances',    fr: 'Remplacer le fichier Excel des vacances',                  en: 'Replace the vacation tracking Excel file',            desc_fr: 'Approbation dans Teams, événement Outlook automatique, solde mis à jour',           desc_en: 'Teams approval, automatic Outlook calendar event, balance updated' },
   { id: 'onboarding',  fr: 'Automatiser l\'accueil d\'un nouvel employé',              en: 'Automate new employee onboarding',                    desc_fr: 'Du formulaire RH jusqu\'aux accès Teams et courriel de bienvenue',                   desc_en: 'From HR form to Teams access and welcome email' },
   { id: 'evals',       fr: 'Suivi des évaluations annuelles de performance',           en: 'Annual performance review tracking',                  desc_fr: 'Rappels automatiques, formulaire Forms, tableau de bord SharePoint',               desc_en: 'Automated reminders, Forms questionnaire, SharePoint dashboard' },
   { id: 'feuille',     fr: 'Remplacer la feuille de temps Word / PDF',                 en: 'Replace the Word / PDF timesheet',                    desc_fr: 'Forms + approbation automatique + consolidation SharePoint hebdomadaire',           desc_en: 'Forms + auto-approval + weekly SharePoint consolidation' },
   { id: 'achats',      fr: 'Automatiser les demandes d\'achat et approbations',        en: 'Automate purchase requests and approvals',            desc_fr: 'Formulaire → courriel gestionnaire → bon de commande → archivage',                 desc_en: 'Form → manager email → purchase order → archiving' },
+  { id: 'reunion',     fr: 'Automatiser la gestion des réunions récurrentes',          en: 'Automate recurring meeting management',               desc_fr: 'Ordre du jour généré automatiquement, rappels, compte-rendu archivé dans SharePoint', desc_en: 'Auto-generated agenda, reminders, minutes archived in SharePoint' },
 ];
 
 // Initialize vote counts
 let votes = {};
 voteTopics.forEach(t => { votes[t.id] = Math.floor(Math.random() * 30) + 8; });
-// Formation en tête — c'est le sujet le plus douloureux!
-votes['formation'] += 40; votes['vacances'] += 20; votes['onboarding'] += 12;
+// Vacances et onboarding en tête
+votes['vacances'] += 20; votes['onboarding'] += 12;
 
 let userVote = null; // id of topic user voted for
 
