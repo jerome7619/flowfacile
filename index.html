@@ -1112,15 +1112,16 @@ footer {
 
       <div class="art-card" onclick="openModal('calendrier')">
         <div class="card-thumb" style="background:linear-gradient(145deg,#101828,#070e1a);height:148px;display:flex;align-items:center;justify-content:center">
-          <div style="font-size:2.6rem;filter:drop-shadow(0 4px 16px rgba(0,0,0,.5))">⚡</div>
+          <div style="font-size:2.6rem;filter:drop-shadow(0 4px 16px rgba(0,0,0,.5))">💼</div>
         </div>
         <div class="card-body">
           <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap">
             <span class="tag tag-blue" data-i18n="tag_pa">Power Automate</span>
-            <span class="status-badge meta" data-i18n="badge_meta">🔧 Dans les coulisses</span>
+            <span style="background:#e8f0fe;color:#0a66c2;border:1px solid #b3c8f5;padding:0.22rem 0.7rem;border-radius:999px;font-size:0.72rem;font-weight:700">LinkedIn</span>
+            <span class="status-badge pub" data-i18n="badge_published">● Publié</span>
           </div>
-          <h3 data-i18n="card_cal_title">Comment ce blog publie automatiquement 1 article par semaine</h3>
-          <p data-i18n="card_cal_desc">Le flow Power Automate qui gère notre calendrier éditorial : Excel → WordPress REST API → publication LinkedIn automatique.</p>
+          <h3 data-i18n="card_cal_title">Automatiser l'annonce LinkedIn de vos nouveaux articles</h3>
+          <p data-i18n="card_cal_desc">Annoncer automatiquement chaque nouvel article sur LinkedIn via Power Automate — calendrier Excel, filtre OData, connecteur LinkedIn V2.</p>
           <div class="card-foot">
             <span data-i18n="card_cal_meta">Bonus · 8 min · Intermédiaire</span>
             <span class="card-arrow">→</span>
@@ -1347,8 +1348,8 @@ const i18n = {
     badge_week3: '📅 Sem. 3', badge_week4: '📅 Sem. 4', badge_meta: '🔧 Dans les coulisses',
     feat_date: 'Lancement', level_beg: 'Débutant',
     cal_title: '📅 Calendrier éditorial', cal_sub: 'Géré automatiquement par Power Automate',
-    card_cal_title: 'Comment ce blog publie automatiquement 1 article par semaine',
-    card_cal_desc: 'Le flow Power Automate qui gère notre calendrier éditorial : Excel → WordPress REST API → publication LinkedIn automatique.',
+    card_cal_title: 'Automatiser l\'annonce LinkedIn de vos nouveaux articles',
+    card_cal_desc: 'Annoncer automatiquement chaque nouvel article sur LinkedIn via Power Automate — calendrier Excel, filtre OData, connecteur LinkedIn V2.',
     card_cal_meta: 'Bonus · 8 min · Intermédiaire',
     series_badge: '🔁 Série en 3 parties',
     series_title: 'Automatiser le traitement de courriels par mots-clés',
@@ -1418,8 +1419,8 @@ const i18n = {
     badge_week3: '📅 Week 3', badge_week4: '📅 Week 4', badge_meta: '🔧 Behind the scenes',
     feat_date: 'Launch', level_beg: 'Beginner',
     cal_title: '📅 Editorial Calendar', cal_sub: 'Managed automatically by Power Automate',
-    card_cal_title: 'How this blog automatically publishes 1 article per week',
-    card_cal_desc: 'The Power Automate flow managing our editorial calendar: Excel → WordPress REST API → automatic LinkedIn post.',
+    card_cal_title: 'Automate your LinkedIn article announcements',
+    card_cal_desc: 'Automatically announce each new article on LinkedIn via Power Automate — Excel calendar, OData filter, LinkedIn V2 connector.',
     card_cal_meta: 'Bonus · 8 min · Intermediate',
     series_badge: '🔁 3-Part Series',
     series_title: 'Automating email processing by keyword',
@@ -2589,27 +2590,87 @@ Delete file → <span class="kw">outputs('Create_file')?['body/Id']</span></div>
     tag: 'tag-cyan', tagKey: 'tag_sp',
     fr: {
       title: 'Automatiser les réservations de déplacements professionnels',
-      meta: 'Mai 2025 · 7 min · Intermédiaire',
-      body: `<p>La gestion des déplacements implique de nombreux intervenants. Les processus manuels souffrent de suivis fragmentés, de demandes perdues et d'absence de standardisation.</p>
-      <h3>Composants</h3><ul>
-        <li><strong>Liste SharePoint :</strong> formulaire structuré avec validation des données</li>
-        <li><strong>Power Automate :</strong> déclenché à chaque nouvelle demande (vérif. 5 min)</li>
-        <li><strong>Outlook :</strong> notification formatée à l'adjointe</li>
-      </ul>
-      <h3>Duplication automatique pour les groupes</h3><p>Quand un gestionnaire soumet pour plusieurs employés, le flow détecte les participants supplémentaires et crée une entrée distincte pour chacun — avec la note « duplication de la demande no.X ».</p>
-      <h3>Logique de délai</h3><p>Soumission avant 10h → traitement le jour même. Après 10h → lendemain. Vendredi après-midi → lundi suivant. Le message de confirmation s'adapte automatiquement.</p>`
+      meta: 'Mai 2025 · 12 min · Débutant · Pas à pas',
+      body: `<p>Chaque déplacement professionnel génère une cascade de tâches manuelles : remplir un formulaire, l'envoyer à la bonne personne, attendre une confirmation, relancer si rien ne vient. Power Automate peut gérer tout ça automatiquement dès la soumission.</p>
+
+      <div style="background:rgba(8,130,168,0.06);border-left:3px solid var(--cyan);padding:.875rem 1rem;border-radius:0 8px 8px 0;font-size:.88rem;color:var(--muted2);margin:1.25rem 0">
+        <strong style="color:var(--text)">⏱ Temps de réalisation estimé :</strong> 30 à 45 minutes — liste SharePoint, flow automatisé, notification et accusé de réception.
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 1 — SharePoint</div>
+        <div class="step-title">Créer la liste de demandes de déplacement</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Sur votre site SharePoint, créez une liste <strong>DemandesDeplacement</strong> avec ces colonnes :</p>
+        <table class="excel-table">
+          <thead><tr><th>Colonne</th><th>Type</th><th>Obligatoire</th></tr></thead>
+          <tbody>
+            <tr><td>Demandeur</td><td>Texte</td><td>✅ Oui</td></tr>
+            <tr><td>Destination</td><td>Texte</td><td>✅ Oui</td></tr>
+            <tr><td>DateDepart</td><td>Date et heure</td><td>✅ Oui</td></tr>
+            <tr><td>DateRetour</td><td>Date et heure</td><td>✅ Oui</td></tr>
+            <tr><td>Objet</td><td>Texte long</td><td>✅ Oui</td></tr>
+            <tr><td>Statut</td><td>Choix : En attente / Confirmée / Refusée</td><td>✅ Oui</td></tr>
+            <tr><td>DocumentsJoints</td><td>Lien hypertexte</td><td>Non</td></tr>
+          </tbody>
+        </table>
+        <div class="tip-box"><strong>💡 La colonne DocumentsJoints</strong> permet de lier les bons de commande et factures directement à chaque demande — les employés peuvent consulter leur historique complet en un clic depuis SharePoint.</div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 2 — Power Automate</div>
+        <div class="step-title">Déclencheur : nouvelle entrée dans la liste SharePoint</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Créez un flow automatisé avec le déclencheur <strong>« When an item is created »</strong> (SharePoint) :</p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">Site</span><span class="mb-val">https://votreorg.sharepoint.com/sites/RH</span></div>
+          <div class="mockup-row"><span class="mb-label">Nom de la liste</span><span class="mb-val">DemandesDeplacement</span></div>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 3 — Power Automate</div>
+        <div class="step-title">Envoyer la notification à l'adjointe administrative</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Ajoutez <strong>« Envoyer un e-mail (V2) »</strong> avec tous les détails de la demande :</p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">À</span><span class="mb-val">adjointe@formation-demo.ca</span></div>
+          <div class="mockup-row"><span class="mb-label">Objet</span><span class="mb-val">Nouvelle demande de déplacement — @{Demandeur} → @{Destination}</span></div>
+          <div class="mockup-row"><span class="mb-label">Corps</span><span class="mb-val">Nouvelle demande soumise par @{Demandeur}.<br>Destination : @{Destination}<br>Départ : @{DateDepart}<br>Retour : @{DateRetour}<br>Objet : @{Objet}<br><br>Statut actuel : En attente de traitement.</span></div>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 4 — Power Automate</div>
+        <div class="step-title">Envoyer l'accusé de réception au demandeur</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Ajoutez un second courriel au demandeur pour confirmer que sa demande a bien été reçue :</p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">À</span><span class="mb-val">@{Demandeur}</span><span class="mb-tag blue">dynamique</span></div>
+          <div class="mockup-row"><span class="mb-label">Objet</span><span class="mb-val">✅ Votre demande de déplacement a bien été reçue</span></div>
+          <div class="mockup-row"><span class="mb-label">Corps</span><span class="mb-val">Bonjour @{Demandeur}, votre demande de déplacement vers @{Destination} du @{DateDepart} au @{DateRetour} a été enregistrée et transmise à votre adjointe administrative. Vous recevrez une confirmation dès que la réservation sera effectuée.</span></div>
+        </div>
+        <div class="warn-box"><strong>🧪 C'est l'heure de tester!</strong> Soumettez une entrée dans la liste SharePoint avec votre propre courriel comme demandeur. Vérifiez que l'adjointe et le demandeur reçoivent chacun leur courriel avec les bons détails.</div>
+      </div>
+
+      <h3>🎯 Bénéfices du traitement automatisé</h3>
+      <p>Un seul flow, quatre étapes — et votre processus de déplacement devient traçable, uniforme et professionnel.</p>
+      <ul>
+        <li><strong>Pour les employés :</strong> consulter leur historique de déplacements et les documents qui s'y rapportent (bons de commande et factures) directement dans SharePoint, en tout temps.</li>
+        <li><strong>Pour les employés qui voyagent rarement :</strong> compléter rapidement et sans aide administrative une nouvelle demande qui contient l'ensemble des informations requises.</li>
+        <li><strong>Pour les adjointes administratives :</strong> recevoir, traiter et conserver les détails des déplacements en un seul endroit — et favoriser l'entraide au sein du bureau adjoint.</li>
+      </ul>`
     },
     en: {
       title: 'Automating professional travel reservations',
-      meta: 'May 2025 · 7 min · Intermediate',
-      body: `<p>Travel management involves many stakeholders. Manual processes suffer from fragmented tracking, lost requests and lack of standardization.</p>
-      <h3>Components</h3><ul>
-        <li><strong>SharePoint List:</strong> structured request form with data validation</li>
-        <li><strong>Power Automate:</strong> triggered on each new submission (5-min check)</li>
-        <li><strong>Outlook:</strong> formatted notification to the admin assistant</li>
-      </ul>
-      <h3>Auto-Duplication for Groups</h3><p>When a manager submits for multiple employees, the flow detects additional participants and creates a separate entry for each — with the note "duplicate of request #X".</p>
-      <h3>Processing Delay Logic</h3><p>Before 10 AM → same-day processing. After 10 AM → next day. Friday afternoon → following Monday. The confirmation message adapts automatically.</p>`
+      meta: 'May 2025 · 12 min · Beginner · Step by step',
+      body: `<p>Every professional trip generates a cascade of manual tasks: filling out a form, sending it to the right person, waiting for confirmation, following up if nothing comes back. Power Automate can handle all of this automatically from the moment of submission.</p>
+
+      <div class="step-block">
+        <div class="step-num">Steps 1–6</div>
+        <div class="step-title">SharePoint list → Trigger → Delay logic → Admin notification → Group duplication → Acknowledgement</div>
+        <p style="color:var(--muted2);font-size:.9rem">Follow the same 4-step pattern as the French version above: SharePoint list → trigger → notification to admin assistant → acknowledgement to requester. The key is giving the admin assistant all details in one structured email, and confirming receipt to the employee immediately.</p>
+        <div class="tip-box"><strong>💡 The DocumentsJoints column</strong> lets you link purchase orders and invoices directly to each request — employees can consult their full travel history in SharePoint at any time.</div>
+      </div>
+
+      <h3>🎯 Final Result</h3>
+      <p>One flow, six steps — your travel request process becomes traceable, standardized, and professional from day one.</p>`
     }
   },
 
@@ -3249,111 +3310,93 @@ const _origSetLang = setLang;
 articleData['calendrier'] = {
   tag: 'tag-blue', tagKey: 'tag_pa',
   fr: {
-    title: 'Comment ce blog publie automatiquement 1 article par semaine',
+    title: 'Comment automatiser la publication LinkedIn de vos articles',
     meta: 'Bonus · 8 min · Intermédiaire',
     body: `
-<p>Ce blog pratique ce qu'il prêche : la publication hebdomadaire est entièrement gérée par un flow Power Automate. Voici exactement comment il fonctionne.</p>
+<p>Ce site est hébergé sur GitHub Pages — la mise à jour du contenu se fait manuellement pour l'instant. Mais ce qui peut être automatisé dès aujourd'hui, c'est <strong>l'annonce de chaque nouvel article sur LinkedIn</strong> via Power Automate. Voici exactement comment.</p>
+
+<div style="background:rgba(234,88,12,0.06);border-left:3px solid var(--orange);padding:.875rem 1rem;border-radius:0 8px 8px 0;font-size:.88rem;color:var(--muted2);margin:1.25rem 0">
+  <strong style="color:var(--text)">🗺️ Ce que vous allez automatiser :</strong> Chaque lundi matin, Power Automate lit votre calendrier éditorial Excel → vérifie s'il y a un article à annoncer → publie automatiquement sur LinkedIn. Zéro oubli, zéro copier-coller.
+</div>
 
 <div class="step-block">
-  <div class="step-num">L'idée</div>
-  <div class="step-title">Un fichier Excel comme calendrier éditorial</div>
-  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Tous les articles à venir sont consignés dans un tableau Excel sur SharePoint avec les colonnes suivantes :</p>
+  <div class="step-num">Prérequis</div>
+  <div class="step-title">Préparer le calendrier éditorial dans Excel</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Créez un tableau Excel sur OneDrive ou SharePoint avec ces colonnes :</p>
   <table class="excel-table">
-    <thead><tr><th>Titre</th><th>Contenu</th><th>Categorie</th><th>DatePublication</th><th>Statut</th></tr></thead>
+    <thead><tr><th>Titre</th><th>Resume</th><th>URLArticle</th><th>DatePublication</th><th>Statut</th></tr></thead>
     <tbody>
-      <tr><td>Suivi des cartes d'accès</td><td>...</td><td>Power Automate</td><td>2025-03-17</td><td>Planifié</td></tr>
-      <tr><td>Réservations déplacements</td><td>...</td><td>SharePoint</td><td>2025-03-24</td><td>Planifié</td></tr>
-      <tr><td>Notifications Teams</td><td>...</td><td>Teams</td><td>2025-03-31</td><td>Planifié</td></tr>
+      <tr><td>Accusé de réception automatique</td><td>Fini les suivis inutiles...</td><td>jerome7619.github.io/...</td><td>2025-05-05</td><td>Planifié</td></tr>
+      <tr><td>Approbation par le gestionnaire</td><td>Trois flows, zéro suivi...</td><td>jerome7619.github.io/...</td><td>2025-05-12</td><td>Planifié</td></tr>
     </tbody>
   </table>
+  <div class="tip-box"><strong>💡 La colonne URLArticle</strong> pointe vers votre site GitHub Pages. Mettez-la à jour manuellement quand vous uploadez un nouveau fichier index.html — c'est la seule étape manuelle qui reste!</div>
 </div>
 
 <div class="step-block">
   <div class="step-num">Étape 1</div>
   <div class="step-title">Déclencheur : tous les lundis à 8h00</div>
-  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Le flow utilise le déclencheur <strong>Recurrence</strong> configuré ainsi :</p>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Créez un flow avec le déclencheur <strong>Recurrence</strong> :</p>
   <div class="mockup">
-    <div class="mockup-row"><span class="mb-label">Interval</span><span class="mb-val">1</span></div>
-    <div class="mockup-row"><span class="mb-label">Frequency</span><span class="mb-val">Week</span></div>
-    <div class="mockup-row"><span class="mb-label">On these days</span><span class="mb-val">Monday</span></div>
-    <div class="mockup-row"><span class="mb-label">At these hours</span><span class="mb-val">8</span></div>
-    <div class="mockup-row"><span class="mb-label">Time zone</span><span class="mb-val">Eastern Standard Time</span></div>
+    <div class="mockup-row"><span class="mb-label">Fréquence</span><span class="mb-val">Semaine</span></div>
+    <div class="mockup-row"><span class="mb-label">Jour</span><span class="mb-val">Lundi</span></div>
+    <div class="mockup-row"><span class="mb-label">Heure</span><span class="mb-val">8h00</span></div>
+    <div class="mockup-row"><span class="mb-label">Fuseau horaire</span><span class="mb-val">Eastern Standard Time</span></div>
   </div>
 </div>
 
 <div class="step-block">
   <div class="step-num">Étape 2</div>
-  <div class="step-title">Trouver le prochain article planifié</div>
-  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Le flow lit le tableau Excel et filtre la prochaine ligne dont le statut est <code>Planifié</code> et la date est aujourd'hui ou antérieure :</p>
-  <div class="code-block"><span class="cm">// Action : List rows present in a table</span>
-<span class="cm">// Filter Query (OData) :</span>
+  <div class="step-title">Lire le prochain article à annoncer</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Ajoutez <strong>« List rows present in a table »</strong> avec ce filtre OData :</p>
+  <div class="code-block"><span class="cm">// Filtre OData — article planifié dont la date est passée</span>
 Statut <span class="kw">eq</span> <span class="st">'Planifié'</span> <span class="kw">and</span> DatePublication <span class="kw">le</span> '<span class="fn">@{formatDateTime(utcNow(),'yyyy-MM-dd')}</span>'
 
-<span class="cm">// Trier par date croissante pour prendre le plus ancien</span>
 Order By : DatePublication <span class="kw">asc</span>
 Top Count : <span class="st">1</span></div>
-  <div class="tip-box"><strong>💡 Conseil :</strong> Le filtre OData évite de charger toutes les lignes en mémoire. Pour de grands tableaux, c'est beaucoup plus performant qu'un filtre <em>Apply to each</em>.</div>
+  <div class="tip-box"><strong>💡 Top Count : 1</strong> garantit que vous ne prenez qu'un seul article à la fois — le plus ancien dont la date est arrivée.</div>
 </div>
 
 <div class="step-block">
   <div class="step-num">Étape 3</div>
-  <div class="step-title">Publier via la WordPress REST API</div>
-  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Ajoutez l'action <strong>« HTTP »</strong> pour appeler l'API WordPress. Vous devez d'abord créer un <em>Application Password</em> dans votre tableau de bord WordPress (Utilisateurs → Votre profil → Mots de passe d'application).</p>
-  <div class="code-block"><span class="cm">// Action HTTP — créer un article WordPress</span>
-Method : <span class="kw">POST</span>
-URI    : <span class="st">https://flowfacile.ca/wp-json/wp/v2/posts</span>
-
-Headers :
-  Content-Type  : <span class="st">application/json</span>
-  Authorization : <span class="st">Basic </span><span class="fn">@{base64(concat('votre_user:',variables('WP_AppPassword')))}</span>
-
-Body :
-{
-  <span class="st">"title"</span>   : <span class="kw">@{first(body('List_rows')?['value'])?['Titre']}</span>,
-  <span class="st">"content"</span> : <span class="kw">@{first(body('List_rows')?['value'])?['Contenu']}</span>,
-  <span class="st">"status"</span>  : <span class="st">"publish"</span>,
-  <span class="st">"categories"</span>: [<span class="kw">@{variables('WP_CategoryId')}</span>]
-}</div>
-  <div class="warn-box"><strong>⚠️ Sécurité :</strong> Ne jamais mettre votre mot de passe WordPress directement dans le flow. Stockez-le dans une variable d'environnement Power Automate (Solutions → Variables d'environnement) ou dans Azure Key Vault.</div>
-</div>
-
-<div class="step-block">
-  <div class="step-num">Étape 4</div>
-  <div class="step-title">Mettre le statut à jour dans Excel</div>
-  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Après la publication réussie, mettez à jour la ligne Excel pour marquer l'article comme publié :</p>
-  <div class="code-block"><span class="cm">// Action : Update a row</span>
-Key Column : DatePublication
-Key Value  : <span class="kw">@{first(body('List_rows')?['value'])?['DatePublication']}</span>
-Statut     : <span class="st">'Publié'</span>
-URLArticle : <span class="kw">@{body('HTTP')?['link']}</span></div>
-</div>
-
-<div class="step-block">
-  <div class="step-num">Étape 5</div>
-  <div class="step-title">Publier automatiquement sur LinkedIn</div>
-  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Ajoutez l'action <strong>« Share an article V2 »</strong> depuis le connecteur <strong>LinkedIn V2</strong>. Connectez votre compte personnel lors de la première utilisation — Power Automate gérera le token OAuth automatiquement.</p>
+  <div class="step-title">Publier sur LinkedIn</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Ajoutez l'action <strong>« Share an article V2 »</strong> du connecteur <strong>LinkedIn V2</strong>. Connectez votre compte personnel lors de la première utilisation :</p>
   <div class="mockup">
     <div class="mockup-row"><span class="mb-label">Connecteur</span><span class="mb-val">LinkedIn V2</span><span class="mb-tag blue">Natif</span></div>
     <div class="mockup-row"><span class="mb-label">Action</span><span class="mb-val">Share an article V2</span></div>
     <div class="mockup-row"><span class="mb-label">Visibility</span><span class="mb-val">PUBLIC</span></div>
-    <div class="mockup-row"><span class="mb-label">Content URL</span><span class="mb-val">@{body('HTTP_WordPress')?['link']}</span></div>
-    <div class="mockup-row"><span class="mb-label">Title</span><span class="mb-val">@{first(body('List_rows')?['value'])?['Titre']}</span></div>
-    <div class="mockup-row"><span class="mb-label">Description</span><span class="mb-val">@{first(body('List_rows')?['value'])?['Resume']}</span></div>
+    <div class="mockup-row"><span class="mb-label">Content URL</span><span class="mb-val">@{first(body('List_rows')?['value'])?['URLArticle']}</span><span class="mb-tag blue">dynamique</span></div>
+    <div class="mockup-row"><span class="mb-label">Title</span><span class="mb-val">@{first(body('List_rows')?['value'])?['Titre']}</span><span class="mb-tag blue">dynamique</span></div>
+    <div class="mockup-row"><span class="mb-label">Description</span><span class="mb-val">@{first(body('List_rows')?['value'])?['Resume']}</span><span class="mb-tag blue">dynamique</span></div>
   </div>
   <div class="code-block"><span class="cm">// Texte du post LinkedIn (champ "Commentary")</span>
 <span class="fn">concat</span>(
-  <span class="st">'📝 Nouvel article sur Flow Facile :\n\n'</span>,
+  <span class="st">'📝 Nouvel article sur Automatisez vos tâches répétitives :\n\n'</span>,
   <span class="kw">first(body('List_rows')?['value'])?['Titre']</span>,
   <span class="st">'\n\n'</span>,
   <span class="kw">first(body('List_rows')?['value'])?['Resume']</span>,
   <span class="st">'\n\n🔗 '</span>,
-  <span class="kw">body('HTTP_WordPress')?['link']</span>
+  <span class="kw">first(body('List_rows')?['value'])?['URLArticle']</span>,
+  <span class="st">'\n\n#PowerAutomate #M365 #Automatisation'</span>
 )</div>
-  <div class="tip-box"><strong>💡 Conseil :</strong> Ajoutez une colonne <code>Resume</code> dans votre tableau Excel — 2-3 phrases résumant l'article. C'est ce texte qui apparaîtra dans le post LinkedIn et incitera les gens à cliquer.</div>
-  <div class="warn-box"><strong>⚠️ Limite du connecteur natif :</strong> Le connecteur LinkedIn V2 de Power Automate ne supporte que les publications sur profil personnel. Pour publier sur une <em>Page entreprise</em>, il faudra passer par l'API LinkedIn v2 avec une action HTTP et un token OAuth géré manuellement.</div>
+  <div class="warn-box"><strong>⚠️ Limite du connecteur natif :</strong> Le connecteur LinkedIn V2 ne supporte que les publications sur profil personnel. Pour une Page entreprise, il faudra passer par l'API LinkedIn avec une action HTTP.</div>
 </div>
 
-<div class="tip-box"><strong>💡 Pour aller plus loin :</strong> Ajoutez une colonne <code>Hashtags</code> dans Excel (<code>#PowerAutomate #M365 #Québec</code>) et concaténez-la à la fin du commentary LinkedIn — vos posts auront une meilleure portée organique sans aucun effort supplémentaire.</div>`
+<div class="step-block">
+  <div class="step-num">Étape 4</div>
+  <div class="step-title">Marquer l'article comme annoncé dans Excel</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Mettez à jour la ligne Excel pour ne pas republier le même article la semaine suivante :</p>
+  <div class="code-block"><span class="cm">// Action : Update a row</span>
+Key Column : DatePublication
+Key Value  : <span class="kw">@{first(body('List_rows')?['value'])?['DatePublication']}</span>
+Statut     : <span class="st">'Publié'</span></div>
+</div>
+
+<h3>🎯 Résultat</h3>
+<p>Chaque lundi matin, votre article est annoncé automatiquement sur LinkedIn avec le bon texte, le bon lien et les bons hashtags — sans que vous ayez à y penser.</p>
+<div style="background:rgba(234,88,12,0.06);border-left:3px solid var(--orange);padding:.875rem 1rem;border-radius:0 8px 8px 0;font-size:.88rem;color:var(--muted2);margin:1.25rem 0">
+  <strong style="color:var(--text)">🚧 Prochaine étape :</strong> Automatiser la mise à jour du fichier index.html sur GitHub directement depuis Power Automate via l'API GitHub — un article à venir sur ce site!
+</div>`
   },
   en: {
     title: 'How this blog automatically publishes 1 article per week',
@@ -3400,7 +3443,7 @@ Top Count : <span class="st">1</span></div>
 
 <div class="step-block">
   <div class="step-num">Step 3</div>
-  <div class="step-title">Publish via the WordPress REST API</div>
+  <div class="step-title">Post automatically to LinkedIn</div>
   <div class="code-block"><span class="cm">// HTTP Action — create a WordPress post</span>
 Method : <span class="kw">POST</span>
 URI    : <span class="st">https://flowfacile.ca/wp-json/wp/v2/posts</span>
