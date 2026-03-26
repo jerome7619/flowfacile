@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="page-title">Série Formulaires — Partie 4/5 : Relancer automatiquement le gestionnaire si aucune réponse — Automatisez vos tâches répétitives</title>
+<meta name="description" content="Juin 2025 · 12 min · Intermédiaire · Pas à pas">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+</head>
+<body>
+
+<nav class="nav-bar">
+  <a href="../index.html" class="nav-brand">
+    <div class="brand-icon">⚡</div>
+    <span class="brand-name"><span data-i18n="brand_main">Automatisez vos tâches</span> <span data-i18n="brand_accent" style="color:var(--accent)">répétitives</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="../index.html#articles" data-i18n="nav_articles">Articles</a></li>
+    <li><a href="../index.html#vote" data-i18n="nav_vote">Voter</a></li>
+    <li><a href="../index.html#proposez" data-i18n="nav_suggest">Proposez un sujet</a></li>
+    <li><a href="../index.html#newsletter" data-i18n="nav_newsletter">Infolettre</a></li>
+  </ul>
+  <a href="../index.html#newsletter" class="nav-cta" data-i18n="nav_cta">S'abonner</a>
+  <button class="lang-toggle" id="lang-btn" onclick="toggleLang()">EN</button>
+</nav>
+
+<main class="article-page">
+  <div class="article-container">
+
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb">
+      <a href="../index.html" data-i18n="nav_home">Accueil</a>
+      <span>›</span>
+      <span data-i18n="article_section">Articles</span>
+    </nav>
+
+    <!-- ARTICLE HEADER -->
+    <header class="article-header">
+      <h1 id="article-title" class="article-title" data-lang-fr="Série Formulaires — Partie 4/5 : Relancer automatiquement le gestionnaire si aucune réponse" data-lang-en="Forms Series — Part 4/5: Automatically follow up with the manager if no response">Série Formulaires — Partie 4/5 : Relancer automatiquement le gestionnaire si aucune réponse</h1>
+      <p class="article-meta">Juin 2025 · 12 min · Intermédiaire · Pas à pas</p>
+    </header>
+
+    <!-- ARTICLE BODY FR -->
+    <div id="article-body-fr" class="article-body lang-fr">
+      <p>Le gestionnaire ne répond pas toujours rapidement. Ce flow quotidien surveille les demandes sans réponse et agit automatiquement : <strong>rappel après 5 jours, expiration après 10 jours</strong>.</p>
+
+      <div style="background:rgba(234,88,12,0.06);border-left:3px solid var(--orange);padding:.875rem 1rem;border-radius:0 8px 8px 0;font-size:.88rem;color:var(--muted2);margin:1.25rem 0">
+        <strong style="color:var(--text)">⏱ Temps de réalisation estimé :</strong> 30 à 40 minutes — déclencheur quotidien, filtre SharePoint, deux conditions imbriquées.
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 1</div>
+        <div class="step-title">Déclencheur : tous les jours à 10h</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Créez un nouveau flow avec le déclencheur <strong>Planification (Récurrence)</strong> :</p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">Intervalle</span><span class="mb-val">1</span></div>
+          <div class="mockup-row"><span class="mb-label">Fréquence</span><span class="mb-val">Jour</span></div>
+          <div class="mockup-row"><span class="mb-label">Heure de début</span><span class="mb-val">2025-11-21T15:00:00Z</span><span class="mb-tag blue">= 10h EST</span></div>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 2</div>
+        <div class="step-title">Récupérer les demandes en attente depuis SharePoint</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Ajoutez <strong>« Obtenir des éléments »</strong> (SharePoint) pour récupérer uniquement les demandes qui n'ont pas encore reçu de réponse :</p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">Liste</span><span class="mb-val">DemandesFormation</span></div>
+          <div class="mockup-row"><span class="mb-label">Filtre</span><span class="mb-val">Statut eq 'Transmise' or Statut eq 'En attente d''approbation'</span></div>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 3</div>
+        <div class="step-title">Boucle sur chaque demande + Condition de relance</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Ajoutez <strong>Apply to each</strong> sur les résultats, puis une <strong>Condition</strong> pour détecter les demandes de plus de 5 jours sans relance :</p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">Condition A — Valeur 1</span><span class="mb-val">items('Apply_to_each')?['RelanceCount']</span><span class="mb-tag blue">dynamique</span></div>
+          <div class="mockup-row"><span class="mb-label">Opérateur</span><span class="mb-val">est égal à</span></div>
+          <div class="mockup-row"><span class="mb-label">Valeur 2</span><span class="mb-val">0</span></div>
+          <div class="mockup-row"><span class="mb-label">ET — Valeur 1</span><span class="mb-val">addDays(formatDateTime(items('Apply_to_each')?['DateSoumission'],'yyyy-MM-ddTHH:mm:ss'),5)</span><span class="mb-tag blue">expression</span></div>
+          <div class="mockup-row"><span class="mb-label">Opérateur</span><span class="mb-val">est inférieur ou égal à</span></div>
+          <div class="mockup-row"><span class="mb-label">Valeur 2</span><span class="mb-val">utcNow()</span><span class="mb-tag blue">expression</span></div>
+        </div>
+        <div class="tip-box"><strong>💡 La fonction addDays()</strong> calcule une date future ou passée. <code>addDays(DateSoumission, 5)</code> donne la date de soumission + 5 jours. Si cette date est déjà passée (<code>≤ utcNow()</code>), la relance se déclenche. <code>RelanceCount = 0</code> garantit qu'on ne relance qu'une seule fois.</div>
+        <p style="color:var(--muted2);font-size:.88rem;margin:.875rem 0 .5rem"><strong>Si oui — envoyer le rappel au gestionnaire :</strong></p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">À</span><span class="mb-val">@{items('Apply_to_each')?['Gestionnaire']}</span><span class="mb-tag blue">dynamique</span></div>
+          <div class="mockup-row"><span class="mb-label">Objet</span><span class="mb-val">Rappel : Demande d'approbation en attente depuis 5 jours</span></div>
+          <div class="mockup-row"><span class="mb-label">Corps</span><span class="mb-val">Bonjour, une demande de @{Demandeur} pour la formation @{Formation} soumise le @{DateSoumission} nécessite votre attention. Lien d'approbation : @{LienApprobation}</span></div>
+        </div>
+        <p style="color:var(--muted2);font-size:.88rem;margin:.875rem 0 .5rem">Après l'envoi du rappel, mettez à jour la demande dans SharePoint :</p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">Mettre à jour l'élément</span><span class="mb-val">RelanceCount → 1 · Statut → En attente d'approbation</span></div>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 4</div>
+        <div class="step-title">Condition d'expiration après 10 jours</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Dans la branche <strong>« Si non »</strong> de la Condition A, ajoutez une seconde condition pour détecter les demandes expirées :</p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">Condition B — Valeur 1</span><span class="mb-val">items('Apply_to_each')?['Statut']</span><span class="mb-tag blue">dynamique</span></div>
+          <div class="mockup-row"><span class="mb-label">Opérateur</span><span class="mb-val">commence par</span></div>
+          <div class="mockup-row"><span class="mb-label">Valeur 2</span><span class="mb-val">En attente</span></div>
+          <div class="mockup-row"><span class="mb-label">ET — Valeur 1</span><span class="mb-val">addDays(formatDateTime(items('Apply_to_each')?['DateSoumission'],'yyyy-MM-ddTHH:mm:ss'),10)</span><span class="mb-tag blue">expression</span></div>
+          <div class="mockup-row"><span class="mb-label">Opérateur</span><span class="mb-val">est inférieur ou égal à</span></div>
+          <div class="mockup-row"><span class="mb-label">Valeur 2</span><span class="mb-val">utcNow()</span><span class="mb-tag blue">expression</span></div>
+        </div>
+        <p style="color:var(--muted2);font-size:.88rem;margin:.875rem 0 .5rem"><strong>Si oui — expirer la demande et notifier l'employé :</strong></p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">Mettre à jour l'élément</span><span class="mb-val">Statut → Expirée</span></div>
+          <div class="mockup-row"><span class="mb-label">Courriel à l'employé</span><span class="mb-val">Objet : Votre demande de formation est expirée · Corps : Votre demande pour @{Formation} n'a pas été traitée dans le délai requis. Veuillez contacter votre gestionnaire.</span></div>
+        </div>
+      </div>
+
+      <h3>🎯 Résultat</h3>
+      <table class="excel-table">
+        <thead><tr><th>Délai</th><th>Action automatique</th></tr></thead>
+        <tbody>
+          <tr><td>+ 5 jours sans réponse</td><td>Rappel courriel au gestionnaire · RelanceCount → 1</td></tr>
+          <tr><td>+ 10 jours sans réponse</td><td>Statut → Expirée · Notification à l'employé</td></tr>
+        </tbody>
+      </table>
+
+      <div class="nav-series">
+        <button class="nav-btn secondary" onclick="closeModal();openModal('formulaire3a')">← Partie 3 — Approbation</button>
+        <button class="nav-btn primary" onclick="closeModal();openModal('formulaire3c')">Partie 5 — Rapport hebdomadaire →</button>
+      </div>
+      <div class="nav-series" style="margin-top:2rem"><a href="formulaire3a.html" class="nav-btn secondary">← Partie 3 — Approbation</a><a href="formulaire3c.html" class="nav-btn primary">Partie 5 — Rapport →</a></div>
+    </div>
+
+    <!-- ARTICLE BODY EN -->
+    <div id="article-body-en" class="article-body lang-en" style="display:none">
+      <p>This daily flow monitors unanswered requests and acts automatically: reminder after 5 days, expiration after 10 days.</p>
+      <div class="step-block">
+        <div class="step-num">Steps 1–4</div>
+        <div class="step-title">Daily trigger → Get pending items → Condition A (5 days, RelanceCount=0) → Condition B (10 days, expire)</div>
+        <p style="color:var(--muted2);font-size:.9rem">The key expressions: <code>addDays(DateSoumission, 5) ≤ utcNow()</code> triggers the reminder. <code>RelanceCount = 0</code> ensures only one reminder is sent. <code>addDays(DateSoumission, 10) ≤ utcNow()</code> with status starting with "En attente" triggers expiration.</p>
+      </div>
+      <div class="nav-series">
+        <button class="nav-btn secondary" onclick="closeModal();openModal('formulaire3a')">← Part 3 — Approval</button>
+        <button class="nav-btn primary" onclick="closeModal();openModal('formulaire3c')">Part 5 — Weekly report →</button>
+      </div>
+      <div class="nav-series" style="margin-top:2rem"><a href="formulaire3a.html" class="nav-btn secondary">← Part 3 — Approval</a><a href="formulaire3c.html" class="nav-btn primary">Part 5 — Report →</a></div>
+    </div>
+
+  </div>
+</main>
+
+<footer style="text-align:center;padding:2rem;color:var(--muted);font-size:.85rem;border-top:1px solid var(--border);margin-top:4rem">
+  <span class="footer-brand"><span data-i18n="brand_main">Automatisez vos tâches</span> <span data-i18n="brand_accent">répétitives</span></span>
+  <p style="margin:.5rem 0 0" data-i18n="footer_sub">Des tutoriels concrets pour aller plus loin avec Microsoft 365</p>
+  <p style="margin:.25rem 0 0">© 2026 AutomatisezVousMême.ca</p>
+</footer>
+
+<script src="../js/article.js"></script>
+</body>
+</html>

@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="page-title">Série Formulaires — Partie 5/5 : Rapport hebdomadaire des demandes en attente ou non traitées — Automatisez vos tâches répétitives</title>
+<meta name="description" content="Juin 2025 · 10 min · Intermédiaire · Pas à pas">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+</head>
+<body>
+
+<nav class="nav-bar">
+  <a href="../index.html" class="nav-brand">
+    <div class="brand-icon">⚡</div>
+    <span class="brand-name"><span data-i18n="brand_main">Automatisez vos tâches</span> <span data-i18n="brand_accent" style="color:var(--accent)">répétitives</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="../index.html#articles" data-i18n="nav_articles">Articles</a></li>
+    <li><a href="../index.html#vote" data-i18n="nav_vote">Voter</a></li>
+    <li><a href="../index.html#proposez" data-i18n="nav_suggest">Proposez un sujet</a></li>
+    <li><a href="../index.html#newsletter" data-i18n="nav_newsletter">Infolettre</a></li>
+  </ul>
+  <a href="../index.html#newsletter" class="nav-cta" data-i18n="nav_cta">S'abonner</a>
+  <button class="lang-toggle" id="lang-btn" onclick="toggleLang()">EN</button>
+</nav>
+
+<main class="article-page">
+  <div class="article-container">
+
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb">
+      <a href="../index.html" data-i18n="nav_home">Accueil</a>
+      <span>›</span>
+      <span data-i18n="article_section">Articles</span>
+    </nav>
+
+    <!-- ARTICLE HEADER -->
+    <header class="article-header">
+      <h1 id="article-title" class="article-title" data-lang-fr="Série Formulaires — Partie 5/5 : Rapport hebdomadaire des demandes en attente ou non traitées" data-lang-en="Forms Series — Part 5/5: Weekly report of pending or unprocessed requests">Série Formulaires — Partie 5/5 : Rapport hebdomadaire des demandes en attente ou non traitées</h1>
+      <p class="article-meta">Juin 2025 · 10 min · Intermédiaire · Pas à pas</p>
+    </header>
+
+    <!-- ARTICLE BODY FR -->
+    <div id="article-body-fr" class="article-body lang-fr">
+      <p>Chaque vendredi matin, ce flow génère automatiquement un tableau récapitulatif de toutes les demandes encore en attente et l'envoie par courriel — sans aucune intervention manuelle.</p>
+
+      <div style="background:rgba(234,88,12,0.06);border-left:3px solid var(--orange);padding:.875rem 1rem;border-radius:0 8px 8px 0;font-size:.88rem;color:var(--muted2);margin:1.25rem 0">
+        <strong style="color:var(--text)">⏱ Temps de réalisation estimé :</strong> 20 à 30 minutes — le plus court des trois flows de la Partie 3.
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 1</div>
+        <div class="step-title">Déclencheur : vendredi matin à 10h</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Créez un nouveau flow avec le déclencheur <strong>Planification (Récurrence)</strong> :</p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">Fréquence</span><span class="mb-val">Semaine</span></div>
+          <div class="mockup-row"><span class="mb-label">Intervalle</span><span class="mb-val">1</span></div>
+          <div class="mockup-row"><span class="mb-label">Jour</span><span class="mb-val">Vendredi</span></div>
+          <div class="mockup-row"><span class="mb-label">Heure</span><span class="mb-val">10:00</span></div>
+          <div class="mockup-row"><span class="mb-label">Fuseau horaire</span><span class="mb-val">Eastern Standard Time</span></div>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 2</div>
+        <div class="step-title">Récupérer les demandes en attente depuis SharePoint</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Ajoutez <strong>« Obtenir des éléments »</strong> (SharePoint) avec ce filtre et ce tri :</p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">Liste</span><span class="mb-val">DemandesFormation</span></div>
+          <div class="mockup-row"><span class="mb-label">Filtre</span><span class="mb-val">Statut eq 'En attente d''approbation' or Statut eq 'Transmise'</span></div>
+          <div class="mockup-row"><span class="mb-label">Trier par</span><span class="mb-val">DateFormation croissant</span></div>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 3</div>
+        <div class="step-title">Sélectionner les colonnes à afficher dans le rapport</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Ajoutez l'action <strong>« Sélectionner »</strong> pour choisir quelles colonnes apparaîtront dans le tableau du rapport :</p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">De</span><span class="mb-val">body/value (résultat Obtenir des éléments)</span><span class="mb-tag blue">dynamique</span></div>
+          <div class="mockup-row"><span class="mb-label">Mapper : Demandeur</span><span class="mb-val">item()?['Demandeur']</span></div>
+          <div class="mockup-row"><span class="mb-label">Mapper : Formation</span><span class="mb-val">item()?['Formation']</span></div>
+          <div class="mockup-row"><span class="mb-label">Mapper : Date de la formation</span><span class="mb-val">item()?['DateFormation']</span></div>
+          <div class="mockup-row"><span class="mb-label">Mapper : Gestionnaire</span><span class="mb-val">item()?['Gestionnaire']</span></div>
+          <div class="mockup-row"><span class="mb-label">Mapper : Date de soumission</span><span class="mb-val">formatDateTime(item()?['DateSoumission'],'yyyy-MM-dd HH:mm')</span></div>
+        </div>
+        <div class="tip-box"><strong>💡 Pourquoi l'action Sélectionner?</strong> Elle permet de choisir exactement quelles colonnes apparaissent dans le tableau — et de renommer les en-têtes en français lisible plutôt qu'avec les noms techniques SharePoint.</div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 4</div>
+        <div class="step-title">Générer le tableau HTML</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Ajoutez l'action <strong>« Créer un tableau HTML »</strong> — elle transforme automatiquement les données en un tableau HTML formaté :</p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">De</span><span class="mb-val">Résultat de l'action Sélectionner</span><span class="mb-tag blue">dynamique</span></div>
+          <div class="mockup-row"><span class="mb-label">Colonnes</span><span class="mb-val">Automatique</span></div>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 5</div>
+        <div class="step-title">Vérifier que le tableau contient des données</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Un tableau HTML vide généré par Power Automate contient toujours les balises d'en-tête — environ 101 caractères. Ajoutez un <strong>Compose</strong> pour calculer la longueur, puis une <strong>Condition</strong> :</p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">Compose</span><span class="mb-val">length(body('Créer_un_tableau_HTML'))</span><span class="mb-tag blue">expression</span></div>
+          <div class="mockup-row"><span class="mb-label">Condition — Valeur</span><span class="mb-val">Résultat du Compose</span><span class="mb-tag blue">dynamique</span></div>
+          <div class="mockup-row"><span class="mb-label">Opérateur</span><span class="mb-val">est supérieur à</span></div>
+          <div class="mockup-row"><span class="mb-label">Valeur</span><span class="mb-val">101</span></div>
+        </div>
+        <div class="warn-box"><strong>⚠️ Pourquoi 101?</strong> Un tableau HTML sans données contient quand même les balises &lt;table&gt;, &lt;thead&gt;, &lt;tr&gt;, &lt;th&gt; — ce qui représente environ 101 caractères. Si la longueur dépasse 101, il y a de vraies données à envoyer. Cette astuce évite d'envoyer un courriel avec un tableau vide chaque vendredi.</div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 6</div>
+        <div class="step-title">Envoyer le rapport par courriel (si données présentes)</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Dans la branche <strong>« Si oui »</strong>, ajoutez <strong>« Envoyer un e-mail (V2) »</strong> avec le tableau HTML dans le corps :</p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">À</span><span class="mb-val">gestionnaire@formation-demo.ca</span></div>
+          <div class="mockup-row"><span class="mb-label">Objet</span><span class="mb-val">📋 Rapport hebdomadaire — Demandes de formation en attente</span></div>
+          <div class="mockup-row"><span class="mb-label">Corps</span><span class="mb-val">Envoi automatisé chaque vendredi matin.<br><br>@{body('Créer_un_tableau_HTML')}</span></div>
+          <div class="mockup-row"><span class="mb-label">Est-ce HTML</span><span class="mb-val">Oui</span></div>
+        </div>
+        <div class="tip-box"><strong>💡 Est-ce HTML : Oui</strong> est important — sans cette option, le tableau s'affiche comme du texte brut dans le courriel plutôt qu'un vrai tableau formaté.</div>
+      </div>
+
+      <h3>🎯 Résultat final — Le cycle complet en 5 parties</h3>
+      <table class="excel-table">
+        <thead><tr><th>Partie</th><th>Ce qui se passe</th><th>Qui est impliqué</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Employé remplit le formulaire en ligne</td><td>Employé</td></tr>
+          <tr><td>2</td><td>Accusé de réception automatique</td><td>Flow → Employé</td></tr>
+          <tr><td>3</td><td>Demande d'approbation au gestionnaire dans Teams</td><td>Flow → Gestionnaire → Flow → Employé</td></tr>
+          <tr><td>4</td><td>Rappel si pas de réponse après 5 jours / Expiration après 10 jours</td><td>Flow → Gestionnaire ou Employé</td></tr>
+          <tr><td>5</td><td>Rapport hebdomadaire des demandes non traitées</td><td>Flow → Gestionnaire</td></tr>
+        </tbody>
+      </table>
+      <p>⭐ <strong>Cinq flows, aucune intervention manuelle — votre processus de demande est complet, traçable et professionnel du premier clic jusqu'au rapport du vendredi.</strong></p>
+
+      <div class="nav-series">
+        <button class="nav-btn secondary" onclick="closeModal();openModal('formulaire3b')">← Partie 4 — Relance automatique</button>
+      </div>
+      <div class="nav-series" style="margin-top:2rem"><a href="formulaire3b.html" class="nav-btn secondary">← Partie 4 — Relance</a></div>
+    </div>
+
+    <!-- ARTICLE BODY EN -->
+    <div id="article-body-en" class="article-body lang-en" style="display:none">
+      <p>Every Friday morning, this flow automatically generates a summary table of all pending requests and sends it by email.</p>
+      <div class="step-block">
+        <div class="step-num">Steps 1–6</div>
+        <div class="step-title">Friday trigger → Get items → Select columns → Create HTML table → Check length > 101 → Send email</div>
+        <p style="color:var(--muted2);font-size:.9rem">The key trick: check <code>length(HTML table) > 101</code> before sending — an empty HTML table still contains ~101 characters of header markup. Set <strong>Is HTML: Yes</strong> on the email to render the table properly.</p>
+      </div>
+      <div class="nav-series">
+        <button class="nav-btn secondary" onclick="closeModal();openModal('formulaire3b')">← Part 4 — Automatic follow-up</button>
+      </div>
+      <div class="nav-series" style="margin-top:2rem"><a href="formulaire3b.html" class="nav-btn secondary">← Part 4 — Follow-up</a></div>
+    </div>
+
+  </div>
+</main>
+
+<footer style="text-align:center;padding:2rem;color:var(--muted);font-size:.85rem;border-top:1px solid var(--border);margin-top:4rem">
+  <span class="footer-brand"><span data-i18n="brand_main">Automatisez vos tâches</span> <span data-i18n="brand_accent">répétitives</span></span>
+  <p style="margin:.5rem 0 0" data-i18n="footer_sub">Des tutoriels concrets pour aller plus loin avec Microsoft 365</p>
+  <p style="margin:.25rem 0 0">© 2026 AutomatisezVousMême.ca</p>
+</footer>
+
+<script src="../js/article.js"></script>
+</body>
+</html>

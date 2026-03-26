@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="page-title">Automatiser les réservations de déplacements professionnels — Automatisez vos tâches répétitives</title>
+<meta name="description" content="Mai 2025 · 12 min · Débutant · Pas à pas">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+</head>
+<body>
+
+<nav class="nav-bar">
+  <a href="../index.html" class="nav-brand">
+    <div class="brand-icon">⚡</div>
+    <span class="brand-name"><span data-i18n="brand_main">Automatisez vos tâches</span> <span data-i18n="brand_accent" style="color:var(--accent)">répétitives</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="../index.html#articles" data-i18n="nav_articles">Articles</a></li>
+    <li><a href="../index.html#vote" data-i18n="nav_vote">Voter</a></li>
+    <li><a href="../index.html#proposez" data-i18n="nav_suggest">Proposez un sujet</a></li>
+    <li><a href="../index.html#newsletter" data-i18n="nav_newsletter">Infolettre</a></li>
+  </ul>
+  <a href="../index.html#newsletter" class="nav-cta" data-i18n="nav_cta">S'abonner</a>
+  <button class="lang-toggle" id="lang-btn" onclick="toggleLang()">EN</button>
+</nav>
+
+<main class="article-page">
+  <div class="article-container">
+
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb">
+      <a href="../index.html" data-i18n="nav_home">Accueil</a>
+      <span>›</span>
+      <span data-i18n="article_section">Articles</span>
+    </nav>
+
+    <!-- ARTICLE HEADER -->
+    <header class="article-header">
+      <h1 id="article-title" class="article-title" data-lang-fr="Automatiser les réservations de déplacements professionnels" data-lang-en="Automating professional travel reservations">Automatiser les réservations de déplacements professionnels</h1>
+      <p class="article-meta">Mai 2025 · 12 min · Débutant · Pas à pas</p>
+    </header>
+
+    <!-- ARTICLE BODY FR -->
+    <div id="article-body-fr" class="article-body lang-fr">
+      <p>Chaque déplacement professionnel génère une cascade de tâches manuelles : remplir un formulaire, l'envoyer à la bonne personne, attendre une confirmation, relancer si rien ne vient. Power Automate peut gérer tout ça automatiquement dès la soumission.</p>
+
+      <div style="background:rgba(8,130,168,0.06);border-left:3px solid var(--cyan);padding:.875rem 1rem;border-radius:0 8px 8px 0;font-size:.88rem;color:var(--muted2);margin:1.25rem 0">
+        <strong style="color:var(--text)">⏱ Temps de réalisation estimé :</strong> 30 à 45 minutes — liste SharePoint, flow automatisé, notification et accusé de réception.
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 1 — SharePoint</div>
+        <div class="step-title">Créer la liste de demandes de déplacement</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Sur votre site SharePoint, créez une liste <strong>DemandesDeplacement</strong> avec ces colonnes :</p>
+        <table class="excel-table">
+          <thead><tr><th>Colonne</th><th>Type</th><th>Obligatoire</th></tr></thead>
+          <tbody>
+            <tr><td>Demandeur</td><td>Texte</td><td>✅ Oui</td></tr>
+            <tr><td>Destination</td><td>Texte</td><td>✅ Oui</td></tr>
+            <tr><td>DateDepart</td><td>Date et heure</td><td>✅ Oui</td></tr>
+            <tr><td>DateRetour</td><td>Date et heure</td><td>✅ Oui</td></tr>
+            <tr><td>Objet</td><td>Texte long</td><td>✅ Oui</td></tr>
+            <tr><td>Statut</td><td>Choix : En attente / Confirmée / Refusée</td><td>✅ Oui</td></tr>
+            <tr><td>DocumentsJoints</td><td>Lien hypertexte</td><td>Non</td></tr>
+          </tbody>
+        </table>
+        <div class="tip-box"><strong>💡 La colonne DocumentsJoints</strong> permet de lier les bons de commande et factures directement à chaque demande — les employés peuvent consulter leur historique complet en un clic depuis SharePoint.</div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 2 — Power Automate</div>
+        <div class="step-title">Déclencheur : nouvelle entrée dans la liste SharePoint</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Créez un flow automatisé avec le déclencheur <strong>« When an item is created »</strong> (SharePoint) :</p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">Site</span><span class="mb-val">https://votreorg.sharepoint.com/sites/RH</span></div>
+          <div class="mockup-row"><span class="mb-label">Nom de la liste</span><span class="mb-val">DemandesDeplacement</span></div>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 3 — Power Automate</div>
+        <div class="step-title">Envoyer la notification à l'adjointe administrative</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Ajoutez <strong>« Envoyer un e-mail (V2) »</strong> avec tous les détails de la demande :</p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">À</span><span class="mb-val">adjointe@formation-demo.ca</span></div>
+          <div class="mockup-row"><span class="mb-label">Objet</span><span class="mb-val">Nouvelle demande de déplacement — @{Demandeur} → @{Destination}</span></div>
+          <div class="mockup-row"><span class="mb-label">Corps</span><span class="mb-val">Nouvelle demande soumise par @{Demandeur}.<br>Destination : @{Destination}<br>Départ : @{DateDepart}<br>Retour : @{DateRetour}<br>Objet : @{Objet}<br><br>Statut actuel : En attente de traitement.</span></div>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 4 — Power Automate</div>
+        <div class="step-title">Envoyer l'accusé de réception au demandeur</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Ajoutez un second courriel au demandeur pour confirmer que sa demande a bien été reçue :</p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">À</span><span class="mb-val">@{Demandeur}</span><span class="mb-tag blue">dynamique</span></div>
+          <div class="mockup-row"><span class="mb-label">Objet</span><span class="mb-val">✅ Votre demande de déplacement a bien été reçue</span></div>
+          <div class="mockup-row"><span class="mb-label">Corps</span><span class="mb-val">Bonjour @{Demandeur}, votre demande de déplacement vers @{Destination} du @{DateDepart} au @{DateRetour} a été enregistrée et transmise à votre adjointe administrative. Vous recevrez une confirmation dès que la réservation sera effectuée.</span></div>
+        </div>
+        <div class="warn-box"><strong>🧪 C'est l'heure de tester!</strong> Soumettez une entrée dans la liste SharePoint avec votre propre courriel comme demandeur. Vérifiez que l'adjointe et le demandeur reçoivent chacun leur courriel avec les bons détails.</div>
+      </div>
+
+      <h3>🎯 Bénéfices du traitement automatisé</h3>
+      <p>Un seul flow, quatre étapes — et votre processus de déplacement devient traçable, uniforme et professionnel.</p>
+      <ul>
+        <li><strong>Pour les employés :</strong> consulter leur historique de déplacements et les documents qui s'y rapportent (bons de commande et factures) directement dans SharePoint, en tout temps.</li>
+        <li><strong>Pour les employés qui voyagent rarement :</strong> compléter rapidement et sans aide administrative une nouvelle demande qui contient l'ensemble des informations requises.</li>
+        <li><strong>Pour les adjointes administratives :</strong> recevoir, traiter et conserver les détails des déplacements en un seul endroit — et favoriser l'entraide au sein du bureau adjoint.</li>
+      </ul>
+      
+    </div>
+
+    <!-- ARTICLE BODY EN -->
+    <div id="article-body-en" class="article-body lang-en" style="display:none">
+      <p>Every professional trip generates a cascade of manual tasks: filling out a form, sending it to the right person, waiting for confirmation, following up if nothing comes back. Power Automate can handle all of this automatically from the moment of submission.</p>
+
+      <div class="step-block">
+        <div class="step-num">Steps 1–6</div>
+        <div class="step-title">SharePoint list → Trigger → Delay logic → Admin notification → Group duplication → Acknowledgement</div>
+        <p style="color:var(--muted2);font-size:.9rem">Follow the same 4-step pattern as the French version above: SharePoint list → trigger → notification to admin assistant → acknowledgement to requester. The key is giving the admin assistant all details in one structured email, and confirming receipt to the employee immediately.</p>
+        <div class="tip-box"><strong>💡 The DocumentsJoints column</strong> lets you link purchase orders and invoices directly to each request — employees can consult their full travel history in SharePoint at any time.</div>
+      </div>
+
+      <h3>🎯 Final Result</h3>
+      <p>One flow, six steps — your travel request process becomes traceable, standardized, and professional from day one.</p>
+      
+    </div>
+
+  </div>
+</main>
+
+<footer style="text-align:center;padding:2rem;color:var(--muted);font-size:.85rem;border-top:1px solid var(--border);margin-top:4rem">
+  <span class="footer-brand"><span data-i18n="brand_main">Automatisez vos tâches</span> <span data-i18n="brand_accent">répétitives</span></span>
+  <p style="margin:.5rem 0 0" data-i18n="footer_sub">Des tutoriels concrets pour aller plus loin avec Microsoft 365</p>
+  <p style="margin:.25rem 0 0">© 2026 AutomatisezVousMême.ca</p>
+</footer>
+
+<script src="../js/article.js"></script>
+</body>
+</html>

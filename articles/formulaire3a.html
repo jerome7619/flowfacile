@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="page-title">Série Formulaires — Partie 3/5 : Soumettre la demande à l\'approbation du gestionnaire — Automatisez vos tâches répétitives</title>
+<meta name="description" content="Juin 2025 · 15 min · Intermédiaire · Pas à pas">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+</head>
+<body>
+
+<nav class="nav-bar">
+  <a href="../index.html" class="nav-brand">
+    <div class="brand-icon">⚡</div>
+    <span class="brand-name"><span data-i18n="brand_main">Automatisez vos tâches</span> <span data-i18n="brand_accent" style="color:var(--accent)">répétitives</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="../index.html#articles" data-i18n="nav_articles">Articles</a></li>
+    <li><a href="../index.html#vote" data-i18n="nav_vote">Voter</a></li>
+    <li><a href="../index.html#proposez" data-i18n="nav_suggest">Proposez un sujet</a></li>
+    <li><a href="../index.html#newsletter" data-i18n="nav_newsletter">Infolettre</a></li>
+  </ul>
+  <a href="../index.html#newsletter" class="nav-cta" data-i18n="nav_cta">S'abonner</a>
+  <button class="lang-toggle" id="lang-btn" onclick="toggleLang()">EN</button>
+</nav>
+
+<main class="article-page">
+  <div class="article-container">
+
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb">
+      <a href="../index.html" data-i18n="nav_home">Accueil</a>
+      <span>›</span>
+      <span data-i18n="article_section">Articles</span>
+    </nav>
+
+    <!-- ARTICLE HEADER -->
+    <header class="article-header">
+      <h1 id="article-title" class="article-title" data-lang-fr="Série Formulaires — Partie 3/5 : Soumettre la demande à l\'approbation du gestionnaire" data-lang-en="Forms Series — Part 3/5: Submit the request for manager approval">Série Formulaires — Partie 3/5 : Soumettre la demande à l\'approbation du gestionnaire</h1>
+      <p class="article-meta">Juin 2025 · 15 min · Intermédiaire · Pas à pas</p>
+    </header>
+
+    <!-- ARTICLE BODY FR -->
+    <div id="article-body-fr" class="article-body lang-fr">
+      <p>Dans les parties précédentes, vous avez créé le formulaire et configuré l'accusé de réception automatique. Maintenant, on ajoute l'essentiel : <strong>le gestionnaire reçoit une demande d'approbation</strong>, l'approuve ou la refuse en un clic, et l'employé est informé automatiquement du résultat.</p>
+
+      <div style="background:rgba(234,88,12,0.06);border-left:3px solid var(--orange);padding:.875rem 1rem;border-radius:0 8px 8px 0;font-size:.88rem;color:var(--muted2);margin:1.25rem 0">
+        <strong style="color:var(--text)">⏱ Temps de réalisation estimé :</strong> 45 à 60 minutes. Ce flow utilise le connecteur <strong>Approbations</strong> — inclus dans votre licence M365, aucun coût supplémentaire.
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 1</div>
+        <div class="step-title">Déclencheur : soumission du formulaire Forms</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Créez un nouveau flow automatisé avec le déclencheur <strong>« Lorsqu'une nouvelle réponse est envoyée »</strong>, puis ajoutez <strong>« Obtenir les détails de la réponse »</strong> :</p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">Déclencheur</span><span class="mb-val">Lorsqu'une nouvelle réponse est envoyée (Microsoft Forms)</span></div>
+          <div class="mockup-row"><span class="mb-label">Action</span><span class="mb-val">Obtenir les détails de la réponse</span></div>
+          <div class="mockup-row"><span class="mb-label">ID du formulaire</span><span class="mb-val">Demande de participation à une formation</span><span class="mb-tag blue">liste déroulante</span></div>
+          <div class="mockup-row"><span class="mb-label">ID de la réponse</span><span class="mb-val">ID de la réponse</span><span class="mb-tag blue">dynamique</span></div>
+        </div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 2</div>
+        <div class="step-title">Trouver le gestionnaire dans la liste SharePoint</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Le flow doit trouver automatiquement à qui envoyer la demande d'approbation. Ajoutez <strong>« Obtenir des éléments »</strong> (SharePoint) pour chercher l'employé dans votre liste :</p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">Site</span><span class="mb-val">https://votreorg.sharepoint.com/sites/RH</span></div>
+          <div class="mockup-row"><span class="mb-label">Liste</span><span class="mb-val">ListeEmployes</span></div>
+          <div class="mockup-row"><span class="mb-label">Filtre</span><span class="mb-val">Courriel eq '@{body/responder}'</span><span class="mb-tag blue">dynamique — courriel du répondant</span></div>
+        </div>
+        <p style="color:var(--muted2);font-size:.88rem;margin:.875rem 0 .5rem">Cette action retourne une liste d'éléments. Comme il peut y avoir plusieurs résultats, on doit extraire uniquement le courriel du gestionnaire. Ajoutez deux actions supplémentaires :</p>
+        <p style="color:var(--muted2);font-size:.88rem;margin-bottom:.5rem"><strong>Action « Sélectionner »</strong> — extrait seulement le champ Approbateur de chaque ligne :</p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">De</span><span class="mb-val">body/value (résultat Obtenir des éléments)</span><span class="mb-tag blue">dynamique</span></div>
+          <div class="mockup-row"><span class="mb-label">Mapper : Courriel</span><span class="mb-val">item()?['Approbateur']</span><span class="mb-tag blue">expression</span></div>
+        </div>
+        <p style="color:var(--muted2);font-size:.88rem;margin:.875rem 0 .5rem"><strong>Action « Joindre »</strong> — concatène les adresses en une seule chaîne séparée par des point-virgules, car Power Automate en a besoin pour envoyer l'approbation :</p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">De</span><span class="mb-val">Résultat de l'action Sélectionner</span><span class="mb-tag blue">dynamique</span></div>
+          <div class="mockup-row"><span class="mb-label">Joindre avec</span><span class="mb-val">;</span></div>
+        </div>
+        <div class="tip-box"><strong>💡 Pourquoi Sélectionner + Joindre?</strong> L'action « Obtenir des éléments » retourne un tableau d'objets complets. « Sélectionner » extrait uniquement la colonne qui vous intéresse. « Joindre » transforme le tableau en texte utilisable comme destinataire — c'est la combinaison standard pour ce type de lookup dans Power Automate.</div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 3</div>
+        <div class="step-title">Créer la demande d'approbation</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Ajoutez <strong>« Créer une approbation »</strong> (connecteur Approbations). Le gestionnaire recevra une notification dans Teams et par courriel avec les boutons Approuver / Refuser directement cliquables :</p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">Type</span><span class="mb-val">Réponse personnalisée — Attendre une réponse</span></div>
+          <div class="mockup-row"><span class="mb-label">Titre</span><span class="mb-val">Demande de participation à une formation — @{Nom complet}</span></div>
+          <div class="mockup-row"><span class="mb-label">Assigné à</span><span class="mb-val">Résultat de l'action Joindre</span><span class="mb-tag blue">dynamique</span></div>
+          <div class="mockup-row"><span class="mb-label">Options de réponse</span><span class="mb-val">Approuver ; Refuser</span></div>
+          <div class="mockup-row"><span class="mb-label">Détails</span><span class="mb-val">Bonjour, merci de donner suite à la demande de @{Nom complet} pour la formation @{Titre de la formation} prévue le @{Date}. Commentaires du demandeur : @{Commentaires}</span></div>
+        </div>
+        <p style="color:var(--muted2);font-size:.88rem;margin-top:.75rem">Ajoutez ensuite <strong>« Attendre une approbation »</strong> — le flow se met en pause jusqu'à la réponse du gestionnaire. Pas de panique : Power Automate gère cette attente en arrière-plan sans consommer de ressources.</p>
+        <div class="tip-box"><strong>💡 Le connecteur Approbations</strong> envoie automatiquement une notification adaptative dans Teams — le gestionnaire voit les détails et les boutons directement dans son fil de conversation, sans avoir à ouvrir Power Automate.</div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 4</div>
+        <div class="step-title">Traiter la réponse du gestionnaire</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Ajoutez une boucle <strong>Apply to each</strong> sur les réponses reçues, puis une <strong>Condition</strong> :</p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">Apply to each</span><span class="mb-val">outputs('Attendre_une_approbation')?['body/responses']</span><span class="mb-tag blue">dynamique</span></div>
+          <div class="mockup-row"><span class="mb-label">Condition — Valeur</span><span class="mb-val">items('Apply_to_each')?['approverResponse']</span><span class="mb-tag blue">dynamique</span></div>
+          <div class="mockup-row"><span class="mb-label">Opérateur</span><span class="mb-val">est égal à</span></div>
+          <div class="mockup-row"><span class="mb-label">Valeur</span><span class="mb-val">Approuver</span></div>
+        </div>
+        <p style="color:var(--muted2);font-size:.88rem;margin:.875rem 0 .5rem"><strong>Si oui — Approuvé :</strong></p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">À</span><span class="mb-val">body/responder</span><span class="mb-tag blue">courriel du demandeur</span></div>
+          <div class="mockup-row"><span class="mb-label">Objet</span><span class="mb-val">✅ Votre demande de formation a été approuvée</span></div>
+          <div class="mockup-row"><span class="mb-label">Corps</span><span class="mb-val">Bonjour @{Nom complet}, votre demande pour la formation @{Titre} a été autorisée par votre gestionnaire. @{Commentaires du gestionnaire}</span></div>
+          <div class="mockup-row"><span class="mb-label">Mise à jour SharePoint</span><span class="mb-val">Statut → Approuvée</span></div>
+        </div>
+        <p style="color:var(--muted2);font-size:.88rem;margin:.875rem 0 .5rem"><strong>Si non — Refusé :</strong></p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">Objet</span><span class="mb-val">Retour sur votre demande de formation</span></div>
+          <div class="mockup-row"><span class="mb-label">Corps</span><span class="mb-val">Bonjour @{Nom complet}, votre demande pour la formation @{Titre} n'a pas été retenue. @{Commentaires du gestionnaire}</span></div>
+          <div class="mockup-row"><span class="mb-label">Mise à jour SharePoint</span><span class="mb-val">Statut → Refusée</span></div>
+        </div>
+        <div class="warn-box"><strong>🧪 C'est l'heure de tester!</strong> Soumettez une réponse test dans votre formulaire. Vérifiez que la demande d'approbation arrive bien dans Teams et par courriel. Testez Approuver ET Refuser pour valider les deux branches.</div>
+      </div>
+
+      <h3>🎯 Résultat</h3>
+      <p>L'employé soumet sa demande → le gestionnaire reçoit une notification dans Teams → approuve ou refuse en un clic → l'employé est informé automatiquement. Zéro courriel manuel, zéro suivi, zéro oubli.</p>
+
+      <div class="nav-series">
+        <button class="nav-btn secondary" onclick="closeModal();openModal('formulaire2')">← Partie 2 — Accusé de réception</button>
+        <button class="nav-btn primary" onclick="closeModal();openModal('formulaire3b')">Partie 4 — Relance automatique →</button>
+      </div>
+      <div class="nav-series" style="margin-top:2rem"><a href="formulaire2.html" class="nav-btn secondary">← Partie 2 — Accusé de réception</a><a href="formulaire3b.html" class="nav-btn primary">Partie 4 — Relance →</a></div>
+    </div>
+
+    <!-- ARTICLE BODY EN -->
+    <div id="article-body-en" class="article-body lang-en" style="display:none">
+      <p>The manager receives an approval request in Teams, approves or rejects with one click, and the employee is automatically notified of the outcome.</p>
+      <div class="step-block">
+        <div class="step-num">Steps 1–4</div>
+        <div class="step-title">Forms trigger → Find manager (Get items + Select + Join) → Create approval → Process response</div>
+        <p style="color:var(--muted2);font-size:.9rem">Follow the same 4-step pattern as the French version. The key is the Select + Join combination to extract the manager's email from the SharePoint employee list — Select extracts the Approbateur field, Join converts the array to a semicolon-separated string usable as an approval recipient.</p>
+      </div>
+      <div class="nav-series">
+        <button class="nav-btn secondary" onclick="closeModal();openModal('formulaire2')">← Part 2 — Acknowledgement</button>
+        <button class="nav-btn primary" onclick="closeModal();openModal('formulaire3b')">Part 4 — Automatic follow-up →</button>
+      </div>
+      <div class="nav-series" style="margin-top:2rem"><a href="formulaire2.html" class="nav-btn secondary">← Part 2 — Acknowledgement</a><a href="formulaire3b.html" class="nav-btn primary">Part 4 — Follow-up →</a></div>
+    </div>
+
+  </div>
+</main>
+
+<footer style="text-align:center;padding:2rem;color:var(--muted);font-size:.85rem;border-top:1px solid var(--border);margin-top:4rem">
+  <span class="footer-brand"><span data-i18n="brand_main">Automatisez vos tâches</span> <span data-i18n="brand_accent">répétitives</span></span>
+  <p style="margin:.5rem 0 0" data-i18n="footer_sub">Des tutoriels concrets pour aller plus loin avec Microsoft 365</p>
+  <p style="margin:.25rem 0 0">© 2026 AutomatisezVousMême.ca</p>
+</footer>
+
+<script src="../js/article.js"></script>
+</body>
+</html>

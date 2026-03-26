@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="page-title">Automatiser les réservations de déplacements professionnels — Automatisez vos tâches répétitives</title>
+<meta name="description" content="Juin 2025 · 10 min · Débutant · Pas à pas">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+</head>
+<body>
+
+<nav class="nav-bar">
+  <a href="../index.html" class="nav-brand">
+    <div class="brand-icon">⚡</div>
+    <span class="brand-name"><span data-i18n="brand_main">Automatisez vos tâches</span> <span data-i18n="brand_accent" style="color:var(--accent)">répétitives</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="../index.html#articles" data-i18n="nav_articles">Articles</a></li>
+    <li><a href="../index.html#vote" data-i18n="nav_vote">Voter</a></li>
+    <li><a href="../index.html#proposez" data-i18n="nav_suggest">Proposez un sujet</a></li>
+    <li><a href="../index.html#newsletter" data-i18n="nav_newsletter">Infolettre</a></li>
+  </ul>
+  <a href="../index.html#newsletter" class="nav-cta" data-i18n="nav_cta">S'abonner</a>
+  <button class="lang-toggle" id="lang-btn" onclick="toggleLang()">EN</button>
+</nav>
+
+<main class="article-page">
+  <div class="article-container">
+
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb">
+      <a href="../index.html" data-i18n="nav_home">Accueil</a>
+      <span>›</span>
+      <span data-i18n="article_section">Articles</span>
+    </nav>
+
+    <!-- ARTICLE HEADER -->
+    <header class="article-header">
+      <h1 id="article-title" class="article-title" data-lang-fr="Automatiser les réservations de déplacements professionnels" data-lang-en="Automatiser les réservations de déplacements professionnels">Automatiser les réservations de déplacements professionnels</h1>
+      <p class="article-meta">Juin 2025 · 10 min · Débutant · Pas à pas</p>
+    </header>
+
+    <!-- ARTICLE BODY FR -->
+    <div id="article-body-fr" class="article-body lang-fr">
+      
+<p style="background:rgba(79,126,248,0.08);border-left:3px solid var(--accent);padding:.875rem 1rem;border-radius:0 8px 8px 0;font-size:.9rem;color:var(--muted2);margin-bottom:1.5rem">
+  <strong style="color:var(--text)">Avant de commencer</strong> — Power Automate est accessible à l'adresse 
+  <strong>make.powerautomate.com</strong>. Vous n'avez besoin d'aucun mot de passe supplémentaire : 
+  connectez-vous avec votre compte Microsoft 365 habituel (le même que pour Outlook et Teams). 
+  C'est gratuit et déjà inclus dans votre abonnement.
+</p>
+
+<div class="step-block">
+  <div class="step-num">Le problème qu'on règle</div>
+  <div class="step-title">Chaque matin, quelqu'un vérifie manuellement les cartes d'accès dans Excel</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">
+    Votre organisation maintient une liste d'employés avec les dates d'expiration de leurs cartes d'accès. 
+    Actuellement, quelqu'un doit ouvrir le fichier chaque matin, trier par date, et envoyer un courriel d'alerte manuellement. 
+    C'est 15 à 30 minutes par jour, tous les jours ouvrables.
+  </p>
+  <p style="color:var(--muted2);font-size:.9rem">
+    À la fin de ce tutoriel, ce flow tournera automatiquement chaque matin à 8h00 et enverra un rapport 
+    seulement quand il y a quelque chose à signaler. <strong style="color:var(--text)">Vous n'aurez plus rien à faire.</strong>
+  </p>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Ce dont vous avez besoin</div>
+  <div class="step-title">Un fichier Excel avec la liste des employés sur SharePoint</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">
+    Votre fichier Excel doit être enregistré sur <strong>SharePoint</strong> (pas sur votre ordinateur local) 
+    et contenir un tableau formaté avec au minimum ces colonnes :
+  </p>
+  <table class="excel-table">
+    <thead><tr><th>NomComplet</th><th>Département</th><th>CourrielEmploye</th><th>DateFinCarte</th></tr></thead>
+    <tbody>
+      <tr><td>Cole Caufield</td><td>Technologies</td><td>cole.caufield@formation-demo.ca</td><td>2025-04-12</td></tr>
+      <tr><td>Patrick Mahomes</td><td>Technologies</td><td>patrick.mahomes@formation-demo.ca</td><td>2025-04-18</td></tr>
+      <tr><td>Stefon Diggs</td><td>Ressources humaines</td><td>stefon.diggs@formation-demo.ca</td><td></td></tr>
+      <tr><td>Josh Allen</td><td>Technologies</td><td>josh.allen@formation-demo.ca</td><td>2025-06-30</td></tr>
+    </tbody>
+  </table>
+  <div class="tip-box"><strong>💡 Comment formater en tableau?</strong> Dans Excel, sélectionnez vos données → onglet <strong>Accueil</strong> → <strong>Mettre sous forme de tableau</strong>. Donnez-lui un nom comme <code>ListeEmployes</code> dans l'onglet <strong>Création de tableau</strong>. C'est obligatoire pour que Power Automate puisse lire vos données.</div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Étape 1</div>
+  <div class="step-title">Créer le flow — choisir le bon point de départ</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">
+    Sur <strong>make.powerautomate.com</strong>, cliquez sur <strong>+ Créer</strong> dans le menu de gauche, 
+    puis choisissez <strong>« Flow cloud planifié »</strong>.
+  </p>
+  <div class="mockup">
+    <div class="mockup-row"><span class="mb-label">Nom du flow</span><span class="mb-val">Rapport quotidien — Cartes d'accès</span></div>
+    <div class="mockup-row"><span class="mb-label">Début</span><span class="mb-val">Aujourd'hui</span></div>
+    <div class="mockup-row"><span class="mb-label">Répéter toutes les</span><span class="mb-val">1 Jour</span></div>
+  </div>
+  <p style="color:var(--muted2);font-size:.88rem;margin-top:.75rem">
+    Cliquez <strong>Créer</strong>. Vous arrivez sur le concepteur de flow — c'est votre espace de travail visuel.
+  </p>
+  <div class="tip-box"><strong>💡 C'est quoi un « flow cloud planifié »?</strong> C'est un flow qui se déclenche automatiquement selon un horaire que vous définissez. Comme un réveil-matin, mais pour vos tâches répétitives.</div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Étape 2</div>
+  <div class="step-title">Éviter les fins de semaine — votre première condition</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">
+    Cliquez <strong>+ Nouvelle étape</strong>, cherchez <strong>« Condition »</strong> et sélectionnez-la. 
+    Cette condition va vérifier si aujourd'hui est un samedi ou dimanche.
+  </p>
+  <div class="code-block"><span class="cm">// Dans le champ gauche de la condition, collez cette expression :</span>
+<span class="cm">// (cliquez sur "Expression" dans le panneau qui s'ouvre)</span>
+<span class="fn">formatDateTime</span>(<span class="fn">utcNow</span>(), <span class="st">'dddd'</span>)</div>
+  <div class="mockup">
+    <div class="mockup-row"><span class="mb-label">Valeur</span><span class="mb-val">formatDateTime(utcNow(), 'dddd')</span></div>
+    <div class="mockup-row"><span class="mb-label">Opérateur</span><span class="mb-val">n'est pas égal à</span></div>
+    <div class="mockup-row"><span class="mb-label">Valeur</span><span class="mb-val">Saturday</span></div>
+  </div>
+  <p style="color:var(--muted2);font-size:.88rem;margin-top:.75rem">
+    Ajoutez une deuxième ligne avec <strong>ET</strong> → même expression → n'est pas égal à → <strong>Sunday</strong>.
+    Toute la suite du flow se place dans la branche <strong>« Si oui »</strong>.
+  </p>
+  <div class="warn-box"><strong>⚠️ Attention :</strong> Les jours de la semaine sont en anglais dans les expressions Power Automate, même si votre interface est en français : <code>Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday</code>.</div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Étape 3</div>
+  <div class="step-title">Calculer la date limite — 15 jours à partir d'aujourd'hui</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">
+    Dans la branche <strong>« Si oui »</strong>, ajoutez l'action <strong>« Initialiser une variable »</strong>.
+  </p>
+  <div class="mockup">
+    <div class="mockup-row"><span class="mb-label">Nom</span><span class="mb-val">DateLimite</span></div>
+    <div class="mockup-row"><span class="mb-label">Type</span><span class="mb-val">Chaîne</span></div>
+    <div class="mockup-row"><span class="mb-label">Valeur</span><span class="mb-val">formatDateTime(addDays(utcNow(), 15), 'yyyy-MM-dd')</span></div>
+  </div>
+  <div class="tip-box"><strong>💡 Ce que fait cette expression :</strong> <code>utcNow()</code> = aujourd'hui. <code>addDays(..., 15)</code> = ajoute 15 jours. <code>formatDateTime(..., 'yyyy-MM-dd')</code> = formate en 2025-04-15. C'est votre fenêtre de surveillance.</div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Étape 4</div>
+  <div class="step-title">Lire la liste des employés depuis SharePoint</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">
+    Ajoutez l'action <strong>« Répertorier les lignes présentes dans un tableau »</strong> (connecteur Excel Online — Business).
+  </p>
+  <div class="mockup">
+    <div class="mockup-row"><span class="mb-label">Emplacement</span><span class="mb-val">SharePoint</span></div>
+    <div class="mockup-row"><span class="mb-label">Bibliothèque de documents</span><span class="mb-val">Documents</span></div>
+    <div class="mockup-row"><span class="mb-label">Fichier</span><span class="mb-val">ListeEmployes_FormationDemo.xlsx</span></div>
+    <div class="mockup-row"><span class="mb-label">Tableau</span><span class="mb-val">ListeEmployes</span></div>
+  </div>
+  <div class="tip-box"><strong>💡 Conseil :</strong> Utilisez le bouton 📁 pour naviguer vers votre fichier plutôt que de taper le chemin manuellement. Moins d'erreurs et Power Automate mémorise le lien exact.</div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Étape 5</div>
+  <div class="step-title">Filtrer — garder seulement les cartes qui expirent bientôt</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">
+    Ajoutez l'action <strong>« Filtrer un tableau »</strong> (connecteur Données). Elle va parcourir toutes les lignes 
+    et ne garder que celles où la date d'expiration est dans les 15 prochains jours.
+  </p>
+  <div class="mockup">
+    <div class="mockup-row"><span class="mb-label">De</span><span class="mb-val">Valeur (résultat de l'étape précédente)</span></div>
+    <div class="mockup-row"><span class="mb-label">Colonne gauche</span><span class="mb-val">DateFinCarte</span><span class="mb-tag blue">contenu dynamique</span></div>
+    <div class="mockup-row"><span class="mb-label">Opérateur</span><span class="mb-val">est inférieur ou égal à</span></div>
+    <div class="mockup-row"><span class="mb-label">Colonne droite</span><span class="mb-val">variables('DateLimite')</span></div>
+  </div>
+  <div class="warn-box"><strong>⚠️ Les employés sans date (comme Stefon Diggs)</strong> ne seront pas captés par ce filtre — c'est normal. On les traitera séparément à l'étape suivante.</div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Étape 6</div>
+  <div class="step-title">Créer le tableau HTML du rapport</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">
+    Ajoutez l'action <strong>« Sélectionner »</strong> pour reformater les données, puis <strong>« Créer un tableau HTML »</strong>. 
+    Ces deux actions transforment votre liste filtrée en un beau tableau lisible par courriel.
+  </p>
+  <div class="mockup">
+    <div class="mockup-row"><span class="mb-label">Action</span><span class="mb-val">Sélectionner</span></div>
+    <div class="mockup-row"><span class="mb-label">De</span><span class="mb-val">Corps (résultat du filtre)</span></div>
+    <div class="mockup-row"><span class="mb-label">Mapper — Prénom et Nom</span><span class="mb-val">NomComplet</span></div>
+    <div class="mockup-row"><span class="mb-label">Mapper — Date d'expiration</span><span class="mb-val">DateFinCarte</span></div>
+    <div class="mockup-row"><span class="mb-label">Mapper — Département</span><span class="mb-val">Département</span></div>
+  </div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Étape 7</div>
+  <div class="step-title">Envoyer le courriel — seulement s'il y a des alertes</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">
+    Ajoutez une <strong>« Condition »</strong> : envoyer le courriel seulement si le tableau n'est pas vide.
+  </p>
+  <div class="code-block"><span class="cm">// Condition : y a-t-il des cartes à signaler?</span>
+<span class="fn">length</span>(<span class="fn">body</span>(<span class="st">'Créer_un_tableau_HTML'</span>)) <span class="kw">est supérieur à</span> 50</div>
+  <p style="color:var(--muted2);font-size:.88rem;margin-top:.75rem">
+    Dans <strong>« Si oui »</strong>, ajoutez <strong>« Envoyer un e-mail (V2) »</strong> :
+  </p>
+  <div class="mockup">
+    <div class="mockup-row"><span class="mb-label">À</span><span class="mb-val">nick.suzuki@formation-demo.ca</span></div>
+    <div class="mockup-row"><span class="mb-label">Objet</span><span class="mb-val">⚠️ Cartes d'accès — Expirations dans les 15 prochains jours</span></div>
+    <div class="mockup-row"><span class="mb-label">Corps</span><span class="mb-val">Résultat de « Créer un tableau HTML »</span><span class="mb-tag blue">contenu dynamique</span></div>
+    <div class="mockup-row"><span class="mb-label">Est-ce HTML</span><span class="mb-val">Oui</span></div>
+  </div>
+  <div class="tip-box"><strong>🎉 C'est tout!</strong> Enregistrez votre flow avec le bouton <strong>Enregistrer</strong> en haut à droite. Il tournera automatiquement chaque matin à 8h00, du lundi au vendredi, et ne vous enverra un courriel que lorsqu'il y a des cartes à renouveler dans les 15 prochains jours.</div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Pour aller plus loin</div>
+  <div class="step-title">Tester votre flow avant d'attendre demain matin</div>
+  <p style="color:var(--muted2);font-size:.9rem">
+    En haut du concepteur, cliquez <strong>« Tester »</strong> → <strong>« Manuellement »</strong> → <strong>« Tester »</strong>. 
+    Power Automate exécutera le flow immédiatement et vous montrera le résultat de chaque étape en vert ✅ ou rouge ❌. 
+    C'est la meilleure façon de valider que tout fonctionne sans attendre le lendemain matin.
+  </p>
+</div>
+      
+    </div>
+
+    <!-- ARTICLE BODY EN -->
+    <div id="article-body-en" class="article-body lang-en" style="display:none">
+      
+<p style="background:rgba(79,126,248,0.08);border-left:3px solid var(--accent);padding:.875rem 1rem;border-radius:0 8px 8px 0;font-size:.9rem;color:var(--muted2);margin-bottom:1.5rem">
+  <strong style="color:var(--text)">Before you start</strong> — Power Automate is available at 
+  <strong>make.powerautomate.com</strong>. No extra password needed: sign in with your regular 
+  Microsoft 365 account (the same one you use for Outlook and Teams). It's free and already 
+  included in your subscription.
+</p>
+
+<div class="step-block">
+  <div class="step-num">The problem we're solving</div>
+  <div class="step-title">Every morning, someone manually checks access cards in Excel</div>
+  <p style="color:var(--muted2);font-size:.9rem">
+    Your organization keeps a list of employees with their access card expiry dates. Right now, someone 
+    opens the file every morning, sorts by date, and manually sends an alert email. That's 15–30 minutes 
+    per day, every business day. By the end of this tutorial, this flow will run automatically every 
+    morning at 8:00 AM. <strong style="color:var(--text)">You won't have to do anything.</strong>
+  </p>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Step 1</div>
+  <div class="step-title">Create the flow — choose a Scheduled cloud flow</div>
+  <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">
+    On <strong>make.powerautomate.com</strong>, click <strong>+ Create</strong> in the left menu, 
+    then choose <strong>"Scheduled cloud flow"</strong>.
+  </p>
+  <div class="mockup">
+    <div class="mockup-row"><span class="mb-label">Flow name</span><span class="mb-val">Daily Report — Access Cards</span></div>
+    <div class="mockup-row"><span class="mb-label">Starting</span><span class="mb-val">Today</span></div>
+    <div class="mockup-row"><span class="mb-label">Repeat every</span><span class="mb-val">1 Day</span></div>
+  </div>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Step 2</div>
+  <div class="step-title">Skip weekends — your first condition</div>
+  <div class="code-block"><span class="cm">// Left field of the condition (click "Expression"):</span>
+<span class="fn">formatDateTime</span>(<span class="fn">utcNow</span>(), <span class="st">'dddd'</span>)</div>
+  <div class="mockup">
+    <div class="mockup-row"><span class="mb-label">Value</span><span class="mb-val">formatDateTime(utcNow(), 'dddd')</span></div>
+    <div class="mockup-row"><span class="mb-label">Operator</span><span class="mb-val">is not equal to</span></div>
+    <div class="mockup-row"><span class="mb-label">Value</span><span class="mb-val">Saturday</span></div>
+  </div>
+  <p style="color:var(--muted2);font-size:.88rem;margin-top:.75rem">Add a second row with <strong>AND</strong> → same expression → is not equal to → <strong>Sunday</strong>. All remaining steps go inside the <strong>"If yes"</strong> branch.</p>
+</div>
+
+<div class="step-block">
+  <div class="step-num">Steps 3–7</div>
+  <div class="step-title">Initialize date variable → Read Excel → Filter → HTML table → Send email</div>
+  <p style="color:var(--muted2);font-size:.9rem">Follow the same pattern as the French version above — all action names are available in English in your Power Automate interface. The key expressions remain identical regardless of your interface language.</p>
+  <div class="tip-box"><strong>🎉 Done!</strong> Save your flow with the <strong>Save</strong> button. Test it immediately by clicking <strong>Test → Manually → Test</strong> at the top of the designer. Each step will show green ✅ or red ❌ so you can validate everything works before tomorrow morning.</div>
+</div>
+      
+    </div>
+
+  </div>
+</main>
+
+<footer style="text-align:center;padding:2rem;color:var(--muted);font-size:.85rem;border-top:1px solid var(--border);margin-top:4rem">
+  <span class="footer-brand"><span data-i18n="brand_main">Automatisez vos tâches</span> <span data-i18n="brand_accent">répétitives</span></span>
+  <p style="margin:.5rem 0 0" data-i18n="footer_sub">Des tutoriels concrets pour aller plus loin avec Microsoft 365</p>
+  <p style="margin:.25rem 0 0">© 2026 AutomatisezVousMême.ca</p>
+</footer>
+
+<script src="../js/article.js"></script>
+</body>
+</html>

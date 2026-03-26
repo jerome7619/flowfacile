@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="page-title">Série Formulaires — Partie 2/3 : Envoyer un accusé de réception automatique — Automatisez vos tâches répétitives</title>
+<meta name="description" content="Mai 2025 · 10 min · Débutant · Pas à pas">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+</head>
+<body>
+
+<nav class="nav-bar">
+  <a href="../index.html" class="nav-brand">
+    <div class="brand-icon">⚡</div>
+    <span class="brand-name"><span data-i18n="brand_main">Automatisez vos tâches</span> <span data-i18n="brand_accent" style="color:var(--accent)">répétitives</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="../index.html#articles" data-i18n="nav_articles">Articles</a></li>
+    <li><a href="../index.html#vote" data-i18n="nav_vote">Voter</a></li>
+    <li><a href="../index.html#proposez" data-i18n="nav_suggest">Proposez un sujet</a></li>
+    <li><a href="../index.html#newsletter" data-i18n="nav_newsletter">Infolettre</a></li>
+  </ul>
+  <a href="../index.html#newsletter" class="nav-cta" data-i18n="nav_cta">S'abonner</a>
+  <button class="lang-toggle" id="lang-btn" onclick="toggleLang()">EN</button>
+</nav>
+
+<main class="article-page">
+  <div class="article-container">
+
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb">
+      <a href="../index.html" data-i18n="nav_home">Accueil</a>
+      <span>›</span>
+      <span data-i18n="article_section">Articles</span>
+    </nav>
+
+    <!-- ARTICLE HEADER -->
+    <header class="article-header">
+      <h1 id="article-title" class="article-title" data-lang-fr="Série Formulaires — Partie 2/3 : Envoyer un accusé de réception automatique" data-lang-en="Forms Series — Part 2/3: Send an automatic acknowledgement">Série Formulaires — Partie 2/3 : Envoyer un accusé de réception automatique</h1>
+      <p class="article-meta">Mai 2025 · 10 min · Débutant · Pas à pas</p>
+    </header>
+
+    <!-- ARTICLE BODY FR -->
+    <div id="article-body-fr" class="article-body lang-fr">
+      <p>Dans la <a href="#" onclick="closeModal();openModal('formulaires');return false;" style="color:var(--accent)">Partie 1</a>, vous avez remplacé votre formulaire Word par un Microsoft Forms relié à SharePoint. Maintenant, allons plus loin : dès qu'une personne soumet une demande, elle reçoit <strong>automatiquement un accusé de réception</strong>. Fini les « Est-ce que vous avez bien reçu ma demande? ».</p>
+
+      <div style="background:rgba(234,88,12,0.06);border-left:3px solid var(--orange);padding:.875rem 1rem;border-radius:0 8px 8px 0;font-size:.88rem;color:var(--muted2);margin:1.25rem 0">
+        <strong style="color:var(--text)">⏱ Temps de réalisation estimé :</strong> 20 à 30 minutes — le flow de la Partie 1 est déjà en place, on ajoute simplement des étapes.
+      </div>
+
+      <div class="tip-box"><strong>💡 Inspiration :</strong> Cette approche est documentée par <a href="https://www.lecfomasque.com/power-automate-et-microsoft-forms-mise-en-place-dun-flux-pour-les-reponses/" target="_blank" rel="noopener" style="color:var(--accent)">Le CFO Masqué</a> (Kim Leblanc, octobre 2024). Nous l'adaptons ici au contexte administratif avec des exemples concrets.</div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 1 — Microsoft Forms</div>
+        <div class="step-title">Ajouter un champ courriel au formulaire</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Retournez dans <strong>forms.office.com</strong> → ouvrez votre formulaire existant → ajoutez une question :</p>
+        <table class="excel-table">
+          <thead><tr><th>Champ</th><th>Type</th><th>Obligatoire</th></tr></thead>
+          <tbody><tr><td>Votre adresse courriel</td><td>Texte</td><td>✅ Oui</td></tr></tbody>
+        </table>
+        <div class="tip-box"><strong>💡 Pourquoi ajouter ce champ?</strong> Si votre formulaire est accessible à l'extérieur de votre organisation, Power Automate ne capture pas le courriel automatiquement. En l'ajoutant comme question, vous l'avez toujours — peu importe d'où vient le répondant.</div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 2 — Power Automate</div>
+        <div class="step-title">Ouvrir votre flow existant</div>
+        <p style="color:var(--muted2);font-size:.9rem">Sur <strong>make.powerautomate.com</strong>, retrouvez votre flow de la Partie 1 et cliquez <strong>Modifier</strong>. Vous allez ajouter des étapes après l'enregistrement SharePoint existant.</p>
+        <div class="tip-box"><strong>💡 Bonne pratique :</strong> Toujours modifier un flow existant plutôt qu'en créer un nouveau pour la même soumission Forms — un seul déclencheur par formulaire évite les doublons.</div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 3 — Power Automate</div>
+        <div class="step-title">Ajouter une condition de validation du courriel</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Avant d'envoyer quoi que ce soit, on vérifie que l'adresse saisie ressemble bien à un courriel. Ajoutez une <strong>Condition</strong> après l'étape SharePoint :</p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">Valeur</span><span class="mb-val">Votre adresse courriel (réponse Forms)</span><span class="mb-tag blue">dynamique</span></div>
+          <div class="mockup-row"><span class="mb-label">Opérateur</span><span class="mb-val">contient</span></div>
+          <div class="mockup-row"><span class="mb-label">Valeur</span><span class="mb-val">@</span></div>
+        </div>
+        <div class="tip-box"><strong>💡 Pourquoi vérifier le @?</strong> Si quelqu'un saisit son nom plutôt que son courriel, Power Automate essaierait d'envoyer à une adresse invalide. Cette condition simple évite l'erreur avant qu'elle ne se produise.</div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 4 — Power Automate</div>
+        <div class="step-title">Configurer l'accusé de réception dans « Si oui »</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Dans la branche <strong>« Si oui »</strong>, ajoutez <strong>« Envoyer un e-mail (V2) »</strong> :</p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">À</span><span class="mb-val">Votre adresse courriel (réponse Forms)</span><span class="mb-tag blue">dynamique</span></div>
+          <div class="mockup-row"><span class="mb-label">Objet</span><span class="mb-val">✅ Votre demande a bien été reçue — @{Titre de la demande}</span></div>
+          <div class="mockup-row"><span class="mb-label">Corps</span><span class="mb-val">Bonjour @{Nom complet},<br><br>Nous confirmons la bonne réception de votre demande soumise le @{Date de soumission}.<br><br>• Demande : @{Titre de la demande}<br>• Département : @{Département}<br>• Statut actuel : En attente de traitement<br><br>Vous serez informé(e) dès qu'une décision sera prise.<br><br>Ce message a été généré automatiquement.</span></div>
+        </div>
+        <div class="warn-box"><strong>⚠️ Dans « Si non » :</strong> optionnel — vous pouvez envoyer un courriel vers votre propre adresse pour signaler qu'une soumission avait un courriel invalide, et permettre un suivi manuel.</div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 5 — Tester</div>
+        <div class="step-title">Valider les deux scénarios avant de partager</div>
+        <table class="excel-table">
+          <thead><tr><th>Test</th><th>Courriel saisi</th><th>Résultat attendu</th></tr></thead>
+          <tbody>
+            <tr><td>✅ Valide</td><td>cole.caufield@formation-demo.ca</td><td>Accusé de réception reçu</td></tr>
+            <tr><td>⚠️ Invalide</td><td>Cole Caufield</td><td>Aucun courriel envoyé</td></tr>
+          </tbody>
+        </table>
+        <div class="warn-box"><strong>🧪 C'est l'heure de tester!</strong> Remplacez temporairement l'adresse dynamique par la vôtre pour les tests. Une fois les deux scénarios validés, remettez l'adresse dynamique et partagez le formulaire. La demande de Nick Suzuki n'attendra plus jamais dans le vide.</div>
+      </div>
+
+      <h3>🎯 Résultat final</h3>
+      <p>L'employé soumet sa demande → reçoit immédiatement un accusé de réception personnalisé → sait que tout est bien enregistré. Fini les suivis inutiles.</p>
+      <p>⭐ <strong>Une seule condition, une seule action — et votre processus devient professionnel en 30 minutes.</strong></p>
+
+      <div class="nav-series">
+        <button class="nav-btn secondary" onclick="closeModal();openModal('formulaires')">← Partie 1 — Remplacer le formulaire Word</button>
+        <button class="nav-btn primary" onclick="closeModal();openModal('formulaire3a')">Partie 3 — Approbation du gestionnaire →</button>
+      </div>
+      <div class="nav-series" style="margin-top:2rem"><a href="formulaire1.html" class="nav-btn secondary">← Partie 1 — Formulaire en ligne</a><a href="formulaire3a.html" class="nav-btn primary">Partie 3 — Approbation →</a></div>
+    </div>
+
+    <!-- ARTICLE BODY EN -->
+    <div id="article-body-en" class="article-body lang-en" style="display:none">
+      <p>In <a href="#" onclick="closeModal();openModal('formulaires');return false;" style="color:var(--accent)">Part 1</a>, you replaced your Word form with a Microsoft Forms connected to SharePoint. Now let's add an automatic acknowledgement email whenever someone submits a request.</p>
+      <div class="step-block">
+        <div class="step-num">Step 1 — Microsoft Forms</div>
+        <div class="step-title">Add an email field to your form</div>
+        <p style="color:var(--muted2);font-size:.9rem">Go back to <strong>forms.office.com</strong> → open your existing form → add: <strong>Your email address</strong> (Text, Required).</p>
+      </div>
+      <div class="step-block">
+        <div class="step-num">Steps 2–5</div>
+        <div class="step-title">Edit flow → Condition (contains @) → Send acknowledgement → Test</div>
+        <p style="color:var(--muted2);font-size:.9rem">Follow the same pattern as the French version. The key condition checks if "Your email address" contains <code>@</code> before sending. Test with both a valid email and a name without @.</p>
+        <div class="tip-box"><strong>💡 Credit:</strong> This validation approach was documented by <a href="https://www.lecfomasque.com/power-automate-et-microsoft-forms-mise-en-place-dun-flux-pour-les-reponses/" target="_blank" rel="noopener" style="color:var(--accent)">Le CFO Masqué</a> (Kim Leblanc, October 2024).</div>
+      </div>
+      <div class="nav-series">
+        <button class="nav-btn secondary" onclick="closeModal();openModal('formulaires')">← Part 1 — Replace the Word form</button>
+        <button class="nav-btn primary" onclick="closeModal();openModal('formulaire3a')">Part 3 — Manager approval →</button>
+      </div>
+      <div class="nav-series" style="margin-top:2rem"><a href="formulaire1.html" class="nav-btn secondary">← Part 1 — Online form</a><a href="formulaire3a.html" class="nav-btn primary">Part 3 — Approval →</a></div>
+    </div>
+
+  </div>
+</main>
+
+<footer style="text-align:center;padding:2rem;color:var(--muted);font-size:.85rem;border-top:1px solid var(--border);margin-top:4rem">
+  <span class="footer-brand"><span data-i18n="brand_main">Automatisez vos tâches</span> <span data-i18n="brand_accent">répétitives</span></span>
+  <p style="margin:.5rem 0 0" data-i18n="footer_sub">Des tutoriels concrets pour aller plus loin avec Microsoft 365</p>
+  <p style="margin:.25rem 0 0">© 2026 AutomatisezVousMême.ca</p>
+</footer>
+
+<script src="../js/article.js"></script>
+</body>
+</html>

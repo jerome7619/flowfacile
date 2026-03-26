@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title id="page-title">Moderniser nos formulaires internes : comment remplacer un formulaire Word par un processus automatisé — Automatisez vos tâches répétitives</title>
+<meta name="description" content="Avril 2025 · 12 min · Débutant · Pas à pas">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+<link rel="icon" type="image/x-icon" href="../favicon.ico">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+</head>
+<body>
+
+<nav class="nav-bar">
+  <a href="../index.html" class="nav-brand">
+    <div class="brand-icon">⚡</div>
+    <span class="brand-name"><span data-i18n="brand_main">Automatisez vos tâches</span> <span data-i18n="brand_accent" style="color:var(--accent)">répétitives</span></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="../index.html#articles" data-i18n="nav_articles">Articles</a></li>
+    <li><a href="../index.html#vote" data-i18n="nav_vote">Voter</a></li>
+    <li><a href="../index.html#proposez" data-i18n="nav_suggest">Proposez un sujet</a></li>
+    <li><a href="../index.html#newsletter" data-i18n="nav_newsletter">Infolettre</a></li>
+  </ul>
+  <a href="../index.html#newsletter" class="nav-cta" data-i18n="nav_cta">S'abonner</a>
+  <button class="lang-toggle" id="lang-btn" onclick="toggleLang()">EN</button>
+</nav>
+
+<main class="article-page">
+  <div class="article-container">
+
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb">
+      <a href="../index.html" data-i18n="nav_home">Accueil</a>
+      <span>›</span>
+      <span data-i18n="article_section">Articles</span>
+    </nav>
+
+    <!-- ARTICLE HEADER -->
+    <header class="article-header">
+      <h1 id="article-title" class="article-title" data-lang-fr="Moderniser nos formulaires internes : comment remplacer un formulaire Word par un processus automatisé" data-lang-en="Modernizing internal forms: how to replace a Word form with an automated process">Moderniser nos formulaires internes : comment remplacer un formulaire Word par un processus automatisé</h1>
+      <p class="article-meta">Avril 2025 · 12 min · Débutant · Pas à pas</p>
+    </header>
+
+    <!-- ARTICLE BODY FR -->
+    <div id="article-body-fr" class="article-body lang-fr">
+      <p>La majorité de nos processus internes reposent encore sur des formulaires Word téléchargés depuis l'intranet et envoyés manuellement par courriel, avec des consignes différentes selon les cas.</p>
+      <p>Résultat : erreurs, oublis, doublons, versions périmées, suivis manuels interminables.</p>
+      <p>Pourtant, il est possible de moderniser ce type de processus en seulement trois étapes simples, sans programmation et sans intelligence artificielle.</p>
+
+      <h3>📌 Exemple concret : la demande de participation à une formation</h3>
+      <p>Actuellement, pour demander une formation, l'employé doit :</p>
+      <ul>
+        <li>télécharger un formulaire Word ;</li>
+        <li>le remplir à la main ;</li>
+        <li>lire les instructions : Formation payante ? envoyer à <code>factures@formation-demo.ca</code>, avec <code>formations@formation-demo.ca</code> en copie conforme ;</li>
+        <li>Formation gratuite ? envoyer uniquement à <code>formations@formation-demo.ca</code> ;</li>
+        <li>joindre la facture (si applicable) ;</li>
+        <li>espérer ne rien avoir oublié.</li>
+      </ul>
+      <p>À grande échelle, cela génère des écarts, des retours, des relances, des erreurs — et beaucoup de temps perdu.</p>
+
+      <h3>🎯 Résultat visé</h3>
+      <p>L'employé remplit un formulaire en ligne → Power Automate fait le reste automatiquement : archivage SharePoint, acheminement au bon courriel, accusé de réception envoyé. Vous allez construire les trois composantes suivantes.</p>
+
+      <div style="background:rgba(234,88,12,0.06);border-left:3px solid var(--orange);padding:.875rem 1rem;border-radius:0 8px 8px 0;font-size:.88rem;color:var(--muted2);margin:1.25rem 0">
+        <strong style="color:var(--text)">⏱ Temps de réalisation estimé :</strong> 45 à 90 minutes la première fois. Une fois que vous avez fait ce type de flow une fois, la prochaine vous prendra moins de 30 minutes.
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 1 — Microsoft Forms</div>
+        <div class="step-title">Créer le formulaire en ligne</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">
+          Rendez-vous sur <strong>forms.office.com</strong> (même compte M365). Cliquez sur <strong>+ Nouveau formulaire</strong>. Donnez-lui un titre clair :
+        </p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">Titre</span><span class="mb-val">Demande de participation à une formation</span></div>
+          <div class="mockup-row"><span class="mb-label">Description</span><span class="mb-val">Remplissez ce formulaire pour toute demande de formation, payante ou gratuite.</span></div>
+        </div>
+        <p style="color:var(--muted2);font-size:.9rem;margin:.875rem 0 .5rem">Ajoutez ces champs avec le bouton <strong>+ Ajouter une question</strong> :</p>
+        <table class="excel-table">
+          <thead><tr><th>Champ</th><th>Type</th><th>Obligatoire</th></tr></thead>
+          <tbody>
+            <tr><td>Nom complet</td><td>Texte</td><td>✅ Oui</td></tr>
+            <tr><td>Département</td><td>Choix (liste)</td><td>✅ Oui</td></tr>
+            <tr><td>Titre de la formation</td><td>Texte</td><td>✅ Oui</td></tr>
+            <tr><td>Fournisseur / Institution</td><td>Texte</td><td>✅ Oui</td></tr>
+            <tr><td>Date de la formation</td><td>Date</td><td>✅ Oui</td></tr>
+            <tr><td>Formation payante?</td><td>Choix : Oui / Non</td><td>✅ Oui</td></tr>
+            <tr><td>Coût (si applicable)</td><td>Texte</td><td>Non</td></tr>
+            <tr><td>Nom du gestionnaire</td><td>Texte</td><td>✅ Oui</td></tr>
+            <tr><td>Commentaires</td><td>Texte long</td><td>Non</td></tr>
+          </tbody>
+        </table>
+        <div class="tip-box"><strong>💡 Le champ « Formation payante? »</strong> est la clé de toute la logique. C'est lui qui déterminera automatiquement quel courriel envoyer — sans que l'employé ait à lire des instructions.</div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 2 — SharePoint</div>
+        <div class="step-title">Préparer la liste de suivi</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">
+          Sur votre site SharePoint, cliquez sur <strong>+ Nouveau → Liste</strong>. Nommez-la <strong>DemandesFormation</strong>. Ajoutez ces colonnes via <strong>+ Ajouter une colonne</strong> :
+        </p>
+        <table class="excel-table">
+          <thead><tr><th>Nom de la colonne</th><th>Type</th></tr></thead>
+          <tbody>
+            <tr><td>NomComplet</td><td>Ligne de texte unique</td></tr>
+            <tr><td>Département</td><td>Ligne de texte unique</td></tr>
+            <tr><td>TitreFormation</td><td>Ligne de texte unique</td></tr>
+            <tr><td>Fournisseur</td><td>Ligne de texte unique</td></tr>
+            <tr><td>DateFormation</td><td>Date et heure</td></tr>
+            <tr><td>FormationPayante</td><td>Oui/Non</td></tr>
+            <tr><td>Cout</td><td>Nombre</td></tr>
+            <tr><td>NomGestionnaire</td><td>Ligne de texte unique</td></tr>
+            <tr><td>Statut</td><td>Choix : En attente / Approuvée / Refusée</td></tr>
+            <tr><td>Commentaires</td><td>Plusieurs lignes de texte</td></tr>
+          </tbody>
+        </table>
+        <div class="tip-box"><strong>💡 Pourquoi une liste SharePoint plutôt qu'Excel?</strong> La liste SharePoint est consultable par plusieurs personnes en même temps, filtrée et triée facilement, et Power Automate peut y écrire directement sans ouvrir de fichier. C'est le registre idéal pour ce type de processus.</div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 3 — Power Automate</div>
+        <div class="step-title">Créer le flow — déclencheur Microsoft Forms</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">
+          Sur <strong>make.powerautomate.com</strong>, cliquez <strong>+ Créer → Flow cloud automatisé</strong>. Dans la barre de recherche, tapez <strong>« Forms »</strong> et choisissez <strong>« Quand une nouvelle réponse est soumise »</strong>.
+        </p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">ID du formulaire</span><span class="mb-val">Demande de participation à une formation</span><span class="mb-tag blue">liste déroulante</span></div>
+        </div>
+        <div class="tip-box"><strong>💡 Le formulaire n'apparaît pas dans la liste?</strong> Assurez-vous d'être connecté avec le même compte M365 que celui qui a créé le formulaire sur forms.office.com.</div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 4 — Power Automate</div>
+        <div class="step-title">Récupérer les détails de la réponse</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">
+          Le déclencheur Forms ne donne que l'ID de la réponse — pas les données. Ajoutez l'action <strong>« Obtenir les détails de la réponse »</strong> (connecteur Microsoft Forms).
+        </p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">ID du formulaire</span><span class="mb-val">Demande de participation à une formation</span></div>
+          <div class="mockup-row"><span class="mb-label">ID de la réponse</span><span class="mb-val">ID de la réponse</span><span class="mb-tag blue">contenu dynamique du déclencheur</span></div>
+        </div>
+        <p style="color:var(--muted2);font-size:.88rem;margin-top:.75rem">
+          Après cette étape, toutes vos réponses (Nom complet, Département, etc.) apparaissent dans le volet <strong>Contenu dynamique</strong> — prêtes à être utilisées dans les étapes suivantes.
+        </p>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 5 — Power Automate</div>
+        <div class="step-title">Enregistrer la demande dans SharePoint</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">
+          Ajoutez l'action <strong>« Créer un élément »</strong> (connecteur SharePoint). Chaque champ du formulaire s'associe à une colonne de votre liste.
+        </p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">Site</span><span class="mb-val">https://votreorg.sharepoint.com/sites/RH</span></div>
+          <div class="mockup-row"><span class="mb-label">Nom de la liste</span><span class="mb-val">DemandesFormation</span></div>
+          <div class="mockup-row"><span class="mb-label">NomComplet</span><span class="mb-val">Nom complet (réponse Forms)</span><span class="mb-tag blue">dynamique</span></div>
+          <div class="mockup-row"><span class="mb-label">TitreFormation</span><span class="mb-val">Titre de la formation (réponse Forms)</span><span class="mb-tag blue">dynamique</span></div>
+          <div class="mockup-row"><span class="mb-label">Statut</span><span class="mb-val">En attente</span></div>
+        </div>
+        <p style="color:var(--muted2);font-size:.88rem;margin-top:.75rem">Remplissez toutes les colonnes de la même façon en pigeant dans le contenu dynamique.</p>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 6 — Power Automate</div>
+        <div class="step-title">Appliquer la règle : payante ou gratuite?</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">
+          C'est ici que la magie opère. Ajoutez une <strong>Condition</strong> — elle lira la réponse au champ « Formation payante? » et bifurquera automatiquement.
+        </p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">Valeur</span><span class="mb-val">Formation payante? (réponse Forms)</span><span class="mb-tag blue">dynamique</span></div>
+          <div class="mockup-row"><span class="mb-label">Opérateur</span><span class="mb-val">est égal à</span></div>
+          <div class="mockup-row"><span class="mb-label">Valeur</span><span class="mb-val">Oui</span></div>
+        </div>
+        <p style="color:var(--muted2);font-size:.88rem;margin:.875rem 0 .5rem"><strong>Dans « Si oui » — formation payante :</strong> ajoutez <strong>« Envoyer un e-mail (V2) »</strong> avec :</p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">À</span><span class="mb-val">factures@formation-demo.ca</span></div>
+          <div class="mockup-row"><span class="mb-label">CC</span><span class="mb-val">formations@formation-demo.ca</span></div>
+          <div class="mockup-row"><span class="mb-label">Objet</span><span class="mb-val">Demande de formation — @{Titre de la formation} — @{Nom complet}</span></div>
+          <div class="mockup-row"><span class="mb-label">Corps</span><span class="mb-val">Bonjour,<br><br>Une nouvelle demande de formation payante a été soumise automatiquement.<br><br>• Employé : @{Nom complet}<br>• Département : @{Département}<br>• Formation : @{Titre de la formation}<br>• Fournisseur : @{Fournisseur / Institution}<br>• Date : @{Date de la formation}<br>• Coût : @{Coût (si applicable)}<br>• Gestionnaire : @{Nom du gestionnaire}<br><br>Veuillez traiter cette demande et faire parvenir la facture au service des finances.<br><br>Ce courriel a été généré automatiquement par Power Automate.</span></div>
+          <div class="mockup-row"><span class="mb-label">Est-ce HTML</span><span class="mb-val">Non</span></div>
+        </div>
+        <p style="color:var(--muted2);font-size:.88rem;margin:.875rem 0 .5rem"><strong>Dans « Si non » — formation gratuite :</strong> ajoutez <strong>« Envoyer un e-mail (V2) »</strong> avec :</p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">À</span><span class="mb-val">formations@formation-demo.ca</span></div>
+          <div class="mockup-row"><span class="mb-label">Objet</span><span class="mb-val">Demande de formation (gratuite) — @{Titre de la formation} — @{Nom complet}</span></div>
+          <div class="mockup-row"><span class="mb-label">Corps</span><span class="mb-val">Bonjour,<br><br>Une nouvelle demande de formation gratuite a été soumise automatiquement.<br><br>• Employé : @{Nom complet}<br>• Département : @{Département}<br>• Formation : @{Titre de la formation}<br>• Fournisseur : @{Fournisseur / Institution}<br>• Date : @{Date de la formation}<br>• Gestionnaire : @{Nom du gestionnaire}<br><br>Aucuns frais associés à cette demande.<br><br>Ce courriel a été généré automatiquement par Power Automate.</span></div>
+          <div class="mockup-row"><span class="mb-label">Est-ce HTML</span><span class="mb-val">Non</span></div>
+        </div>
+        <div class="warn-box"><strong>⚠️ Rappel :</strong> Microsoft Forms peut retourner <code>Yes</code> / <code>No</code> en anglais selon la configuration de votre tenant. Testez votre flow pour voir exactement ce que retourne votre instance avant de valider la condition.</div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Étape 7 — Power Automate</div>
+        <div class="step-title">Envoyer l'accusé de réception à l'employé</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">
+          Après la condition (en dehors des branches « Si oui » / « Si non »), ajoutez un dernier <strong>« Envoyer un e-mail (V2) »</strong>.
+        </p>
+        <div class="mockup">
+          <div class="mockup-row"><span class="mb-label">À</span><span class="mb-val">Courriel de la personne connectée</span><span class="mb-tag blue">dynamique — déclencheur Forms</span></div>
+          <div class="mockup-row"><span class="mb-label">Objet</span><span class="mb-val">✅ Votre demande de formation a bien été reçue</span></div>
+          <div class="mockup-row"><span class="mb-label">Corps</span><span class="mb-val">Bonjour @{Nom complet}, votre demande pour « @{Titre de la formation} » a été enregistrée et acheminée automatiquement. Vous recevrez une réponse sous peu.</span></div>
+        </div>
+        <div class="tip-box"><strong>🎉 C'est tout!</strong> Enregistrez puis testez immédiatement : <strong>Tester → Manuellement → Tester</strong>, soumettez une réponse de test dans votre formulaire Forms, et observez chaque étape s'exécuter en temps réel. Cole Caufield peut vous servir de cobaye fictif pour le test 😄</div>
+        <div class="warn-box"><strong>🧪 C'est l'heure de tester votre flow!</strong> Avant de partager quoi que ce soit, remplacez temporairement les adresses courriel dans les deux branches de la condition par <strong>votre propre adresse</strong>. Remplissez ensuite le formulaire vous-même pour soumettre une vraie réponse de test. Si tout est conforme — courriel reçu, entrée créée dans SharePoint, accusé de réception envoyé — remettez les bonnes adresses et partagez le lien du formulaire à vos collègues. Sinon, faites les ajustements nécessaires au texte des courriels avant de le diffuser.</div>
+      </div>
+
+      <h3>🎯 Résultat final</h3>
+      <p>L'employé remplit un formulaire clair et moderne. Power Automate applique automatiquement la règle payant/gratuit, archive dans SharePoint, envoie au bon courriel et confirme à l'employé — le tout en moins de 30 secondes. Zéro intervention humaine requise.</p>
+      <p>⭐ <strong>Le plus beau : tout cela fonctionne sans aucune intelligence artificielle.</strong> Uniquement avec les outils Microsoft 365 que nous avons déjà.</p>
+      <div class="nav-series" style="margin-top:2rem"><a href="formulaire1.html" class="nav-btn primary">Série Formulaires — Partie 1 →</a></div>
+    </div>
+
+    <!-- ARTICLE BODY EN -->
+    <div id="article-body-en" class="article-body lang-en" style="display:none">
+      <p>Most of our internal processes still rely on Word forms downloaded from the intranet and sent manually by email, with different instructions depending on the case.</p>
+      <p>The result: errors, oversights, duplicates, outdated versions, endless manual follow-ups.</p>
+      <p>Yet it's possible to modernize this type of process in just three simple steps — no coding, no artificial intelligence required.</p>
+
+      <h3>📌 Concrete Example: Training Participation Request</h3>
+      <p>Currently, to request training, an employee must download a Word form, fill it in by hand, read conditional instructions (paid vs. free training routes), attach invoices, and hope they forgot nothing. At scale, this generates errors and wasted time.</p>
+
+      <div style="background:rgba(234,88,12,0.06);border-left:3px solid var(--orange);padding:.875rem 1rem;border-radius:0 8px 8px 0;font-size:.88rem;color:var(--muted2);margin:1.25rem 0">
+        <strong style="color:var(--text)">⏱ Estimated build time:</strong> 45 to 90 minutes the first time. Once you've done this type of flow once, the next one will take less than 30 minutes.
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Step 1 — Microsoft Forms</div>
+        <div class="step-title">Create the online form</div>
+        <p style="color:var(--muted2);font-size:.9rem;margin-bottom:.75rem">Go to <strong>forms.office.com</strong>. Click <strong>+ New form</strong>. Add these fields: Full name (Text), Department (Choice), Training title (Text), Provider (Text), Training date (Date), Paid training? (Choice: Yes/No), Cost (Text), Manager name (Text), Comments (Long text).</p>
+        <div class="tip-box"><strong>💡 The "Paid training?" field</strong> is the key to all the logic — it determines which email to send automatically, without the employee reading any instructions.</div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Step 2 — SharePoint</div>
+        <div class="step-title">Create the tracking list</div>
+        <p style="color:var(--muted2);font-size:.9rem">On your SharePoint site, click <strong>+ New → List</strong>. Name it <strong>TrainingRequests</strong>. Add columns matching your form fields, plus a <strong>Status</strong> column (Choice: Pending / Approved / Declined).</p>
+        <div class="tip-box"><strong>💡 Why a SharePoint list instead of Excel?</strong> Multiple people can view it simultaneously, it filters and sorts easily, and Power Automate can write to it directly without opening a file.</div>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Step 3 — Power Automate</div>
+        <div class="step-title">Create the flow — Forms trigger</div>
+        <p style="color:var(--muted2);font-size:.9rem">On <strong>make.powerautomate.com</strong>, click <strong>+ Create → Automated cloud flow</strong>. Search for <strong>"Forms"</strong> and choose <strong>"When a new response is submitted"</strong>. Select your form from the dropdown.</p>
+      </div>
+
+      <div class="step-block">
+        <div class="step-num">Steps 4–7</div>
+        <div class="step-title">Get response details → Create SharePoint item → Condition (paid/free) → Confirmation email</div>
+        <p style="color:var(--muted2);font-size:.9rem">Follow the same pattern as the French version above. The key condition checks "Paid training?" equals <code>Yes</code> to route to the right email. The confirmation email goes after the condition branches, not inside them.</p>
+        <div class="tip-box"><strong>🎉 Done!</strong> Save and test: <strong>Test → Manually → Test</strong>, submit a test response in your Forms form, and watch each step execute in real time. Use Cole Caufield as your fictional test subject 😄</div>
+      </div>
+
+      <h3>🎯 Final Result</h3>
+      <p>The employee fills out a clear, modern form. Power Automate automatically applies the paid/free rule, archives to SharePoint, sends to the right email, and confirms to the employee — all in under 30 seconds. Zero human intervention required.</p>
+      <p>⭐ <strong>The best part: this all works without any artificial intelligence.</strong> Only with the Microsoft 365 tools you already have.</p>
+      <div class="nav-series" style="margin-top:2rem"><a href="formulaire1.html" class="nav-btn primary">Forms Series — Part 1 →</a></div>
+    </div>
+
+  </div>
+</main>
+
+<footer style="text-align:center;padding:2rem;color:var(--muted);font-size:.85rem;border-top:1px solid var(--border);margin-top:4rem">
+  <span class="footer-brand"><span data-i18n="brand_main">Automatisez vos tâches</span> <span data-i18n="brand_accent">répétitives</span></span>
+  <p style="margin:.5rem 0 0" data-i18n="footer_sub">Des tutoriels concrets pour aller plus loin avec Microsoft 365</p>
+  <p style="margin:.25rem 0 0">© 2026 AutomatisezVousMême.ca</p>
+</footer>
+
+<script src="../js/article.js"></script>
+</body>
+</html>
