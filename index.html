@@ -634,8 +634,10 @@ function renderVoteGrid() {
 }
 
 // Init
-setLang('fr');
-renderVoteGrid();
+document.addEventListener('DOMContentLoaded', function() {
+  setLang('fr');
+  renderVoteGrid();
+});
 </script>
 <script>
   window.REQUIRED_CODE_ERROR_MESSAGE = 'Please choose a country code';
