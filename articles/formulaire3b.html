@@ -125,10 +125,7 @@
         </tbody>
       </table>
 
-      <div class="nav-series">
-        <button class="nav-btn secondary" onclick="closeModal();openModal('formulaire3a')">← Partie 3 — Approbation</button>
-        <button class="nav-btn primary" onclick="closeModal();openModal('formulaire3c')">Partie 5 — Rapport hebdomadaire →</button>
-      </div>
+      
       <div class="nav-series" style="margin-top:2rem"><a href="formulaire3a.html" class="nav-btn secondary">← Partie 3 — Approbation</a><a href="formulaire3c.html" class="nav-btn primary">Partie 5 — Rapport →</a></div>
     </div>
 
@@ -140,10 +137,7 @@
         <div class="step-title">Daily trigger → Get pending items → Condition A (5 days, RelanceCount=0) → Condition B (10 days, expire)</div>
         <p style="color:var(--muted2);font-size:.9rem">The key expressions: <code>addDays(DateSoumission, 5) ≤ utcNow()</code> triggers the reminder. <code>RelanceCount = 0</code> ensures only one reminder is sent. <code>addDays(DateSoumission, 10) ≤ utcNow()</code> with status starting with "En attente" triggers expiration.</p>
       </div>
-      <div class="nav-series">
-        <button class="nav-btn secondary" onclick="closeModal();openModal('formulaire3a')">← Part 3 — Approval</button>
-        <button class="nav-btn primary" onclick="closeModal();openModal('formulaire3c')">Part 5 — Weekly report →</button>
-      </div>
+      
       <div class="nav-series" style="margin-top:2rem"><a href="formulaire3a.html" class="nav-btn secondary">← Part 3 — Approval</a><a href="formulaire3c.html" class="nav-btn primary">Part 5 — Report →</a></div>
     </div>
 
