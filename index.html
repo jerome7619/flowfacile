@@ -276,41 +276,6 @@
 
 
 
-      <div class="art-card" onclick="window.location='articles/formulaire2.html'">
-        <div class="card-thumb" style="background:linear-gradient(145deg,#7c2d12,#431407);height:148px;display:flex;align-items:center;justify-content:center">
-          <div style="font-size:2.6rem;filter:drop-shadow(0 4px 16px rgba(0,0,0,.5))">📧</div>
-        </div>
-        <div class="card-body">
-          <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap">
-            <span class="tag tag-orange" data-i18n="tag_forms">Microsoft Forms</span>
-            <span class="status-badge pub" data-i18n="badge_published">● Publié</span>
-          </div>
-          <h3 data-i18n="card_f2_title">Accusé de réception automatique après une soumission Forms</h3>
-          <p data-i18n="card_f2_desc">Valider le courriel avec contains(@) et confirmer automatiquement la réception — fini les « avez-vous reçu ma demande? ».</p>
-          <div class="card-foot">
-            <span>Série Formulaires · 2/3 · 10 min · Débutant</span>
-            <span class="card-arrow">→</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="art-card" onclick="window.location='articles/formulaire3a.html'">
-        <div class="card-thumb" style="background:linear-gradient(145deg,#7c2d12,#431407);height:148px;display:flex;align-items:center;justify-content:center">
-          <div style="font-size:2.6rem;filter:drop-shadow(0 4px 16px rgba(0,0,0,.5))">✅</div>
-        </div>
-        <div class="card-body">
-          <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap">
-            <span class="tag tag-orange" data-i18n="tag_forms">Microsoft Forms</span>
-            <span class="status-badge pub" data-i18n="badge_published">● Publié</span>
-          </div>
-          <h3 data-i18n="card_f3_title">Approbation, relance et rapport — la série complète</h3>
-          <p data-i18n="card_f3_desc">Trois flows complémentaires : approbation en un clic, relance après 5 jours, rapport du vendredi — le cycle complet.</p>
-          <div class="card-foot">
-            <span>Série Formulaires · 3/3 · 18 min · Intermédiaire</span>
-            <span class="card-arrow">→</span>
-          </div>
-        </div>
-      </div>
 
     </div>
   </section>
@@ -600,43 +565,6 @@ function getSorted() {
   return [...voteTopics].sort((a,b) => votes[b.id] - votes[a.id]);
 }
 
-function renderVoteGrid() {
-  const t = i18n[currentLang];
-  const grid = document.getElementById('vote-grid');
-  const total = getTotalVotes();
-  const sorted = getSorted();
-  document.getElementById('total-votes').textContent = total;
-
-  grid.innerHTML = sorted.map((topic, idx) => {
-    const count = votes[topic.id];
-    const pct = Math.round((count / total) * 100);
-    const rankClass = idx === 0 ? 'rank-1' : idx === 1 ? 'rank-2' : idx === 2 ? 'rank-3' : 'rank-other';
-    const isTop = idx === 0;
-    const isVoted = userVote === topic.id;
-    const hasVoted = userVote !== null;
-    const label = currentLang === 'fr' ? topic.fr : topic.en;
-    const desc = currentLang === 'fr' ? topic.desc_fr : topic.desc_en;
-    const btnLabel = isVoted ? t.voted_btn : t.vote_btn;
-
-    return `
-      <div class="vote-item ${isTop ? 'top-vote' : ''}" id="vitem-${topic.id}">
-        <div class="vote-bar-bg" style="width:${pct}%"></div>
-        <div class="vote-rank ${rankClass}">${idx + 1}</div>
-        <div class="vote-text">
-          <h4>${label}</h4>
-          <p>${desc}</p>
-        </div>
-        <div class="vote-stats">
-          <span class="vote-count">${count}</span>
-          <span class="vote-pct">${pct}%</span>
-        </div>
-        <button class="vote-btn ${isVoted ? 'voted' : ''}" 
-          onclick="castVote('${topic.id}')" 
-          ${hasVoted ? 'disabled' : ''}>${btnLabel}</button>
-      </div>
-    `;
-  }).join('');
-}
 
 function castVote(id) {
   if (userVote !== null) return;
@@ -698,9 +626,7 @@ function renderVoteGrid() {
       </div>
     `;
   }).join('');
-}
-renderVoteGrid();
-</script>
+}</script>
 </script>
 <script>
   window.REQUIRED_CODE_ERROR_MESSAGE = 'Please choose a country code';
