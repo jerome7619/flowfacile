@@ -1,124 +1,183 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Pourquoi quitter Excel pour SharePoint Lists | Automatisez-vous-mêmes</title>
-  <meta name="description" content="Pourquoi Excel n’est plus adapté pour gérer des processus collaboratifs et pourquoi SharePoint Lists est la meilleure base pour l’automatisation." />
-  <link rel="stylesheet" href="../styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+    Pourquoi quitter Excel pour SharePoint Lists — Automatisez vos tâches répétitives
+  </title>
+
+  <meta name="description" content="Avril 2026 · 5 min · Fondations · Pourquoi sortir des fichiers Excel pour structurer et automatiser avec SharePoint Lists.">
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" type="image/x-icon" href="../favicon.ico">
 </head>
 
 <body>
-  <header>
-    <nav>
-      <a href="../index.html">← Retour à l’accueil</a>
+
+<nav class="nav-bar">
+  <a href="../index.html" class="nav-brand">
+    <div class="brand-icon">⚡</div>
+    <span class="brand-name">
+      <span data-i18n="brand_main">Automatisez vos tâches</span>
+      <span data-i18n="brand_accent" style="color:var(--accent)">répétitives</span>
+    </span>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="../index.html#articles">Articles</a></li>
+    <li><a href="../index.html#vote">Voter</a></li>
+    <li><a href="../index.html#proposez">Proposez un sujet</a></li>
+    <li><a href="../index.html#newsletter">Infolettre</a></li>
+  </ul>
+
+  <a href="../index.html#newsletter" class="nav-cta">S'abonner</a>
+  <button class="lang-toggle" id="lang-btn" onclick="toggleLang()">EN</button>
+</nav>
+
+<main class="article-page">
+  <div class="article-container">
+
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb">
+      <a href="../index.html">Accueil</a>
+      <span>›</span>
+      <span>Articles</span>
     </nav>
-  </header>
 
-  <main class="article">
-    <h1>Pourquoi quitter Excel pour SharePoint Lists ?</h1>
+    <!-- ARTICLE HEADER -->
+    <header class="article-header">
+      <h1
+        id="article-title"
+        class="article-title"
+        data-lang-fr="Pourquoi quitter Excel pour SharePoint Lists ?"
+        data-lang-en="Why move from Excel to SharePoint Lists?"
+      >
+        Pourquoi quitter Excel pour SharePoint Lists ?
+      </h1>
 
-    <p class="article-intro">
-      Excel est partout. Mais lorsqu’il sert à gérer un processus, il devient souvent le problème.
-      Cet article explique pourquoi — sans jargon, avec des situations vécues.
-    </p>
+      <p class="article-meta">
+        Avril 2026 · 5 min · Fondations
+      </p>
+    </header>
 
-    <h2>Excel dans la vraie vie</h2>
+    <!-- ARTICLE BODY FR -->
+    <div id="article-body-fr" class="article-body lang-fr">
 
-    <ul>
-      <li>Plusieurs personnes modifient le même fichier en même temps</li>
-      <li>« Qui a la dernière version ? »</li>
-      <li>Aucune notification lorsqu’une ligne est ajoutée</li>
-      <li>Filtrer ou trier casse le travail des autres</li>
-      <li>Aucune traçabilité claire des changements</li>
-    </ul>
+      <p>
+        Excel est partout. Pour suivre des demandes, des listes, des tâches, des validations.
+        Et pourtant, dès qu’il est utilisé pour gérer un processus, il devient souvent le problème.
+      </p>
 
-    <p>
-      Excel n’est pas mauvais. Il est simplement utilisé pour ce pour quoi
-      il n’a jamais été conçu : être le cœur d’un processus collaboratif.
-    </p>
+      <p>
+        Cet article ne parle pas de théorie ni d’outils complexes.  
+        Juste de situations que tout le monde reconnaît.
+      </p>
 
-    <h2>Excel n’est pas un système</h2>
+      <h3>Excel dans la vraie vie</h3>
 
-    <p>
-      Un fichier Excel ne comprend pas les notions de statut, de responsabilité,
-      de workflow ou d’historique exploitable.
-      Dès que ces besoins apparaissent, l’outil montre ses limites.
-    </p>
+      <ul>
+        <li>Plusieurs personnes modifient le même fichier en même temps</li>
+        <li>« Qui a la dernière version ? »</li>
+        <li>Aucune notification lorsqu’une ligne est ajoutée</li>
+        <li>Filtrer ou trier casse le travail des autres</li>
+        <li>Aucune traçabilité claire des changements</li>
+      </ul>
 
-    <h2>La bascule : passer à SharePoint Lists</h2>
+      <div class="warn-box">
+        <strong>Excel n’est pas mauvais.</strong><br>
+        Il est simplement utilisé pour ce pour quoi il n’a jamais été conçu :  
+        être le cœur d’un processus collaboratif.
+      </div>
 
-    <p>
-      Une liste SharePoint n’est pas un Excel en ligne.
-      C’est une base de données simple, partagée et structurée.
-    </p>
+      <h3>Excel n’est pas un système</h3>
 
-    <table>
-      <thead>
-        <tr>
-          <th>Besoin courant</th>
-          <th>Excel</th>
-          <th>SharePoint Lists</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Travail à plusieurs</td>
-          <td>Fragile</td>
-          <td>Natif</td>
-        </tr>
-        <tr>
-          <td>Version unique</td>
-          <td>Non</td>
-          <td>Oui</td>
-        </tr>
-        <tr>
-          <td>Notifications</td>
-          <td>Non</td>
-          <td>Oui</td>
-        </tr>
-        <tr>
-          <td>Statuts structurés</td>
-          <td>Non</td>
-          <td>Oui</td>
-        </tr>
-        <tr>
-          <td>Historique clair</td>
-          <td>Limité</td>
-          <td>Complet</td>
-        </tr>
-      </tbody>
-    </table>
+      <p>
+        Un fichier Excel ne connaît pas les notions de statut métier, de responsabilité,
+        de workflow ou d’historique exploitable.
+        Dès que ces besoins apparaissent, on bricole autour du fichier…
+        plutôt que de régler le vrai problème.
+      </p>
 
-    <h2>Le vrai gain : l’automatisation devient accessible</h2>
+      <h3>La bascule : passer à SharePoint Lists</h3>
 
-    <p>
-      Une fois les données dans SharePoint Lists, l’automatisation
-      ne nécessite pas forcément Power Automate :
-    </p>
+      <p>
+        Une liste SharePoint n’est pas « un Excel en ligne ».  
+        C’est une base de données simple, structurée et partagée.
+      </p>
 
-    <ul>
-      <li>Règles automatiques</li>
-      <li>Quick Steps</li>
-      <li>Approbations natives</li>
-    </ul>
+      <table class="excel-table">
+        <thead>
+          <tr>
+            <th>Besoin courant</th>
+            <th>Excel</th>
+            <th>SharePoint Lists</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Travail à plusieurs</td>
+            <td>Fragile</td>
+            <td>✅ Natif</td>
+          </tr>
+          <tr>
+            <td>Version unique</td>
+            <td>❌</td>
+            <td>✅</td>
+          </tr>
+          <tr>
+            <td>Notifications</td>
+            <td>❌</td>
+            <td>✅</td>
+          </tr>
+          <tr>
+            <td>Statuts structurés</td>
+            <td>❌</td>
+            <td>✅</td>
+          </tr>
+          <tr>
+            <td>Historique exploitable</td>
+            <td>Limité</td>
+            <td>✅ Complet</td>
+          </tr>
+        </tbody>
+      </table>
 
-    <p>
-      L’automatisation commence par de bonnes fondations.
-      Et ces fondations ne sont pas Excel.
-    </p>
+      <h3>Le vrai gain : l’automatisation devient simple</h3>
 
-    <hr />
+      <p>
+        Quand les données sont dans une liste SharePoint :
+      </p>
 
-    <p class="article-conclusion">
-      <strong>Message clé :</strong><br />
-      Tant que vos données restent dans Excel, vous luttez contre l’outil.
-      Commencez par structurer avant d’automatiser.
-    </p>
-  </main>
+      <ul>
+        <li>les règles deviennent natives</li>
+        <li>les notifications sont intégrées</li>
+        <li>les approbations ne nécessitent pas forcément Power Automate</li>
+      </ul>
 
-  <footer>
-    <p>© Automatisez-vous-mêmes</p>
-  </footer>
-</body>
-</html>
+      <div class="tip-box">
+        <strong>Message clé :</strong><br>
+        Tant que vos données restent dans Excel,  
+        vous complexifiez inutilement l’automatisation.
+      </div>
+
+      <p>
+        Avant Power Automate. Avant les workflows avancés.  
+        <strong>Commencez par sortir les données d’Excel.</strong>
+      </p>
+
+    </div>
+
+    <!-- ARTICLE BODY EN -->
+    <div id="article-body-en" class="article-body lang-en" style="display:none">
+      <p>
+        This article explains why Excel is not designed to be the foundation of collaborative
+        processes, and why SharePoint Lists are a better starting point for automation.
+      </p>
+    </div>
+
+  </div>
+</main>
+
