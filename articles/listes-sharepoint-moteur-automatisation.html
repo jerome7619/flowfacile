@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>
+    Les listes SharePoint : le moteur d’automatisation caché de Microsoft 365 — Automatisez vos tâches répétitives
+  </title>
+
+  <meta name="description" content="Avril 2026 · 6 min · Fondations · Pourquoi les listes SharePoint sont la base d’une automatisation simple, durable et accessible dans Microsoft 365.">
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" type="image/x-icon" href="../favicon.ico">
+</head>
+
+<body>
+
+<nav class="nav-bar">
+  <a href="../index.html" class="nav-brand">
+    <div class="brand-icon">⚡</div>
+    <span class="brand-name">
+      <span data-i18n="brand_main">Automatisez vos tâches</span>
+      <span data-i18n="brand_accent" style="color:var(--accent)">répétitives</span>
+    </span>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="../index.html#articles">Articles</a></li>
+    <li><a href="../index.html#vote">Voter</a></li>
+    <li><a href="../index.html#proposez">Proposez un sujet</a></li>
+    <li><a href="../index.html#newsletter">Infolettre</a></li>
+  </ul>
+
+  <a href="../index.html#newsletter" class="nav-cta">S'abonner</a>
+  <button class="lang-toggle" id="lang-btn" onclick="toggleLang()">EN</button>
+</nav>
+
+<main class="article-page">
+  <div class="article-container">
+
+    <!-- BREADCRUMB -->
+    <nav class="breadcrumb">
+      <a href="../index.html">Accueil</a>
+      <span>›</span>
+      <span>Articles</span>
+    </nav>
+
+    <!-- ARTICLE HEADER -->
+    <header class="article-header">
+      <h1
+        id="article-title"
+        class="article-title"
+        data-lang-fr="Les listes SharePoint : le moteur d’automatisation caché de Microsoft 365"
+        data-lang-en="SharePoint Lists: the hidden automation engine of Microsoft 365">
+        Les listes SharePoint : le moteur d’automatisation caché de Microsoft 365
+      </h1>
+
+      <p class="article-meta">
+        Avril 2026 · 6 min · Fondations
+      </p>
+    </header>
+
+    <!-- ARTICLE BODY FR -->
+    <div id="article-body-fr" class="article-body lang-fr">
+
+      <p>
+        Beaucoup d’organisations disposent déjà de SharePoint… sans vraiment l’exploiter.
+        Les listes sont perçues comme des tableaux quelconques,
+        alors qu’elles constituent en réalité
+        <strong>le véritable moteur d’automatisation natif de Microsoft 365</strong>.
+      </p>
+
+      <p>
+        Dans cet article, on va voir pourquoi les listes SharePoint sont souvent
+        <em>le point de départ oublié</em> de l’automatisation — et pourquoi Power Automate
+        n’est pas toujours la première étape logique.
+      </p>
+
+      <h3>Une liste SharePoint, ce n’est pas un tableau</h3>
+
+      <p>
+        Une liste SharePoint, c’est avant tout :
+      </p>
+
+      <ul>
+        <li>une structure de données contrôlée</li>
+        <li>des types de colonnes stricts</li>
+        <li>des validations natives</li>
+        <li>un historique détaillé</li>
+        <li>des permissions granulaires</li>
+      </ul>
+
+      <div class="tip-box">
+        <strong>💡 Idée clé :</strong><br>
+        l’automatisation repose toujours sur des données fiables.
+        Les listes SharePoint sont conçues pour ça.
+      </div>
+
+      <h3>Ce que les listes font déjà… sans automatisation</h3>
+
+      <ul>
+        <li>vues filtrées pour chaque rôle</li>
+        <li>tri et regroupement dynamiques</li>
+        <li>colonnes calculées</li>
+        <li>mise en forme conditionnelle</li>
+        <li>recherche instantanée</li>
+      </ul>
+
+      <p>
+        Rien de tout cela n’exige Power Automate.
+        Et pourtant, cela élimine déjà une grande partie du travail manuel.
+      </p>
+
+      <h3>Pourquoi les listes sont la base idéale pour automatiser</h3>
+
+      <table class="excel-table">
+        <thead>
+          <tr>
+            <th>Fonction</th>
+            <th>Excel</th>
+            <th>SharePoint Lists</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Données stables</td>
+            <td>Fragile</td>
+            <td>✅ Structuré</td>
+          </tr>
+          <tr>
+            <td>Historique</td>
+            <td>Limité</td>
+            <td>✅ Complet</td>
+          </tr>
+          <tr>
+            <td>Déclencheurs natifs</td>
+            <td>❌</td>
+            <td>✅</td>
+          </tr>
+          <tr>
+            <td>Permissions</td>
+            <td>Générales</td>
+            <td>✅ Par élément</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <h3>Automatiser sans Power Automate : c’est déjà possible</h3>
+
+      <p>
+        SharePoint Lists intègre déjà des briques d’automatisation simples :
+      </p>
+
+      <ul>
+        <li>Rules (notifications automatiques)</li>
+        <li>Quick Steps (actions guidées)</li>
+        <li>Approbations natives</li>
+      </ul>
+
+      <div class="warn-box">
+        <strong>⚠️ Erreur fréquente :</strong><br>
+        commencer par Power Automate alors que le besoin est encore simple.
+      </div>
+
+      <h3>Quand Power Automate devient pertinent</h3>
+
+      <p>
+        Power Automate est formidable — mais il faut l’utiliser
+        <strong>quand la logique dépasse ce que la liste peut faire seule</strong>.
+      </p>
+
+      <ul>
+        <li>logique conditionnelle complexe</li>
+        <li>intégration de plusieurs systèmes</li>
+        <li>boucles avancées</li>
+        <li>gestion d’erreurs structurée</li>
+      </ul>
+
+      <div class="tip-box">
+        <strong>Règle d’or :</strong><br>
+        si le processus fonctionne déjà bien dans la liste,
+        Power Automate ne fera que l’accélérer.
+      </div>
+
+      <p>
+        Dans le prochain article, nous entrerons dans le concret avec
+        <strong>les Rules dans SharePoint Lists</strong> :
+        notifier la bonne personne au bon moment — sans écrire un seul flow.
+      </p>
+
+    </div>
+
+    <!-- ARTICLE BODY EN -->
+    <div id="article-body-en" class="article-body lang-en" style="display:none">
+      <p>
+        This article explains why SharePoint Lists are the true foundation
+        of native automation in Microsoft 365, even before Power Automate.
+      </p>
+    </div>
+
+  </div>
+</main>
+
+<footer style="text-align:center;padding:2rem;color:var(--muted);font-size:.85rem;border-top:1px solid var(--border);margin-top:4rem">
+  <span class="footer-brand">
+    <span data-i18n="brand_main">Automatisez vos tâches</span>
+    <span data-i18n="brand_accent">répétitives</span>
+  </span>
+  <p style="margin:.5rem 0 0" data-i18n="footer_sub">
+    Des tutoriels concrets pour aller plus loin avec Microsoft 365
+  </p>
+  <p style="margin:.25rem 0 0">© 2026 AutomatisezVousMême.ca</p>
+</footer>
+
+<script src="../js/article.js"></script>
+</body>
+</html>
