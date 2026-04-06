@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Automatiser sans Power Automate avec les Rules SharePoint — Automatisez vos tâches répétitives</title>
+  <meta name="description" content="Avril 2026 · 6 min · Débutant · Comment utiliser les règles des listes SharePoint pour notifier et automatiser sans Power Automate.">
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="../favicon.ico">
+</head>
+
+<body>
+<nav class="nav-bar">
+  <a href="../index.html" class="nav-brand">
+    <div class="brand-icon">⚡</div>
+    <span class="brand-name">
+      <span data-i18n="brand_main">Automatisez vos tâches</span>
+      <span data-i18n="brand_accent" style="color:var(--accent)">répétitives</span>
+    </span>
+  </a>
+  <a href="../index.html#newsletter" class="nav-cta">S'abonner</a>
+</nav>
+
+<main class="article-page">
+  <div class="article-container">
+
+    <nav class="breadcrumb">
+      <a href="../index.html">Accueil</a>
+      <span>›</span>
+      <span>Articles</span>
+    </nav>
+
+    <header class="article-header">
+      <h1 class="article-title">
+        Automatiser sans Power Automate avec les Rules des listes SharePoint
+      </h1>
+      <p class="article-meta">Avril 2026 · 6 min · Débutant</p>
+    </header>
+
+    <div class="article-body lang-fr">
+
+      <p>
+        Quand on parle d’automatisation dans Microsoft 365, Power Automate arrive
+        presque toujours trop vite dans la discussion.
+      </p>
+
+      <p>
+        Pourtant, les listes SharePoint disposent déjà d’un mécanisme simple,
+        discret et redoutablement efficace : <strong>les Rules</strong>.
+      </p>
+
+      <h3>Une Rule, c’est quoi exactement ?</h3>
+
+      <p>
+        Une Rule est une règle simple attachée à une liste SharePoint :
+      </p>
+
+      <ul>
+        <li>elle observe un changement</li>
+        <li>elle vérifie une condition</li>
+        <li>elle déclenche une action</li>
+      </ul>
+
+      <div class="tip-box">
+        <strong>💡 Important :</strong><br>
+        Les Rules sont gérées directement depuis l’interface de la liste.
+        Aucun flow. Aucun connecteur. Aucun paramétrage avancé.
+      </div>
+
+      <h3>Cas concrets que tout le monde reconnaît</h3>
+
+      <ul>
+        <li>avertir un gestionnaire lorsqu’un statut passe à « En attente d’approbation »</li>
+        <li>notifier une équipe quand une nouvelle demande est créée</li>
+        <li>recevoir un courriel lorsque la date d’échéance approche</li>
+      </ul>
+
+      <h3>Pourquoi utiliser une Rule au lieu d’un flow ?</h3>
+
+      <table class="excel-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Rule</th>
+            <th>Power Automate</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Temps de configuration</td>
+            <td>2 minutes</td>
+            <td>15–30 minutes</td>
+          </tr>
+          <tr>
+            <td>Maintenance</td>
+            <td>Très faible</td>
+            <td>Moyenne à élevée</td>
+          </tr>
+          <tr>
+            <td>Lisibilité métier</td>
+            <td>✅</td>
+            <td>❌</td>
+          </tr>
+          <tr>
+            <td>Puissance</td>
+            <td>Limitée</td>
+            <td>Élevée</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="warn-box">
+        <strong>⚠️ Erreur courante :</strong><br>
+        créer un flow pour une simple notification alors qu’une Rule suffit largement.
+      </div>
+
+      <h3>Les limites à connaître</h3>
+
+      <ul>
+        <li>pas de logique complexe</li>
+        <li>pas de boucles</li>
+        <li>pas de conditions multiples</li>
+      </ul>
+
+      <p>
+        Mais ces limites sont aussi leur force :
+        les Rules sont faciles à comprendre, à expliquer et à maintenir.
+      </p>
+
+      <div class="tip-box">
+        <strong>Règle d’or :</strong><br>
+        si la logique tient en une phrase claire, utilisez une Rule.
+      </div>
+
+      <p>
+        Dans le prochain article, on va voir un autre outil souvent méconnu :
+        <strong>les Quick Steps</strong>, ou comment guider les utilisateurs
+        avec des boutons intelligents.
+      </p>
+
+    </div>
+
+  </div>
+</main>
+
+<footer class="footer">
+  <p>© 2026 AutomatisezVousMême.ca</p>
+</footer>
+
+<script src="../js/article.js"></script>
+</body>
+</html>
