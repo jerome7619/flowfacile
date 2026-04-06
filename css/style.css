@@ -1,838 +1,763 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Automatisez vos tâches répétitives — Automate office tasks yourself</title>
-<meta name="description" content="Automatisez vos processus administratifs sans programmer — tutoriels pas à pas avec Microsoft 365, Power Automate, SharePoint et Forms.">
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,700;0,9..144,900;1,9..144,700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/style.css">
-<link rel="icon" type="image/x-icon" href="favicon.ico">
-<link rel="stylesheet" href="https://sibforms.com/forms/end-form/build/sib-styles.css">
-</head>
-<body>
-
-<nav>
-  <a class="nav-brand" href="#">
-    <div class="brand-icon">⚡</div>
-    <span class="brand-name"><span data-i18n="brand_main">Automatisez vos tâches</span> <span data-i18n="brand_accent" style="color:var(--accent)">répétitives</span></span>
-  </a>
-  <ul class="nav-links">
-    <li><a href="#articles" data-i18n="nav_articles">Articles</a></li>
-    <li><a href="#proposez" data-i18n="nav_suggest">Proposez un sujet</a></li>
-    <li><a href="#vote" data-i18n="nav_vote">Voter</a></li>
-    <li><a href="#newsletter" data-i18n="nav_newsletter">Infolettre</a></li>
-  </ul>
-  <div class="lang-toggle">
-    <button class="lang-btn active" onclick="setLang('fr')">FR</button>
-    <button class="lang-btn" onclick="setLang('en')">EN</button>
-  </div>
-  <a href="#newsletter" class="nav-cta" data-i18n="nav_cta">S'abonner</a>
-</nav>
-
-<div class="hero">
-  <div class="hero-glow"></div>
-  <h1 data-i18n="hero_h1_html">Vous avez déjà accès<br>à des outils <em>puissants.</em><br>On vous montre comment automatiser vos processus administratifs.</h1>
-  <p class="hero-sub" data-i18n="hero_sub">Si votre organisation vous a fourni une licence Microsoft 365, Power Automate est probablement déjà disponible dans votre compte. Ces tutoriels pas à pas vous montrent comment l'utiliser concrètement — sans code, sans aide TI.</p>
-  <div class="hero-actions">
-    <a href="#articles" class="btn-primary" data-i18n="hero_btn1">Voir les tutoriels</a>
-    <a href="#vote" class="btn-ghost" data-i18n="hero_btn2">Voter pour le prochain sujet</a>
-  </div>
-  <p style="margin-top:1.5rem;font-size:0.78rem;color:var(--muted);max-width:480px;margin-left:auto;margin-right:auto;line-height:1.5" data-i18n="hero_note">⚠️ Power Automate est inclus dans les licences organisationnelles M365 (Business Basic, Standard, Premium, E3, E5). Il n'est <strong>pas</strong> inclus dans les abonnements personnels (M365 Personal ou Family).</p>
-</div>
-
-<div class="stats">
-  <div class="stat-item"><div class="stat-val">8+</div><div class="stat-lbl" data-i18n="stat1">Tutoriels publiés</div></div>
-  <div class="stat-item"><div class="stat-val">0</div><div class="stat-lbl" data-i18n="stat2">Ligne de code requise</div></div>
-  <div class="stat-item"><div class="stat-val">🔗</div><div class="stat-lbl" data-i18n="stat4">Sans connecteur Premium requis</div></div>
-</div>
-
-<div style="background:linear-gradient(135deg,rgba(30,86,197,0.08),rgba(8,130,168,0.08));border-left:4px solid var(--accent);padding:2rem 2.5rem;margin:0;text-align:center">
-  <blockquote style="margin:0;font-family:'Fraunces',serif;font-size:1.5rem;font-weight:700;font-style:italic;color:var(--text);line-height:1.4;max-width:700px;margin:0 auto" data-i18n="citation_main">
-    « Les autres t'apprennent Power Automate. Nous, on t'apprend à automatiser ton travail. »
-  </blockquote>
-  <p style="margin:.75rem 0 0;font-size:1rem;color:var(--muted2);font-style:italic" data-i18n="citation_sub">Pas besoin d'être programmeur — juste curieux.</p>
-</div>
-
-<div style="background:var(--card);border:1px solid var(--border);border-radius:14px;max-width:780px;margin:2rem auto;padding:1.75rem 2rem;box-shadow:0 2px 8px rgba(15,23,42,0.06)">
-  <div style="display:flex;align-items:flex-start;gap:1rem">
-    <div style="font-size:2rem;flex-shrink:0;margin-top:.1rem">🔑</div>
-    <div>
-      <p style="font-weight:700;font-size:1.05rem;color:var(--text);margin:0 0 .5rem" data-i18n="licence_title">Avant de commencer — vérifiez votre licence</p>
-      <p style="font-size:.9rem;color:var(--muted2);margin:0 0 .75rem" data-i18n="licence_body">Power Automate est inclus sans frais supplémentaires dans les licences Microsoft 365 <strong>E3, E5, F3 et Business Premium</strong>. Pour vérifier la vôtre, cliquez sur le bouton ci-dessous — vous verrez la liste de vos abonnements actifs.</p>
-      <a href="https://portal.office.com/account/?ref=MeControl#subscriptions" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:.5rem;background:var(--accent);color:#fff;padding:.55rem 1.2rem;border-radius:8px;font-size:.88rem;font-weight:600;text-decoration:none" data-i18n="licence_btn">Vérifier ma licence Microsoft 365 →</a>
-      <p style="font-size:.78rem;color:var(--muted);margin:.75rem 0 0" data-i18n="licence_note">⚠️ Les abonnements personnels (Microsoft 365 Personal ou Family) ne donnent pas accès à Power Automate.</p>
-    </div>
-  </div>
-</div>
-
-<div class="wrap">
-
-<div class="sec-header" style="margin-top:3.5rem">
-  <h2 class="sec-title">🎓 Parcours d’apprentissage</h2>
-  <p style="color:var(--muted2);max-width:760px">
-    Un chemin progressif pour automatiser intelligemment avec Microsoft 365.
-    On commence par structurer les données, on automatise ensuite — sans Power Automate quand ce n’est pas nécessaire.
-  </p>
-</div>  
-
-<!-- ══ PARCOURS D’APPRENTISSAGE ══ -->
-<div class="series-banner">
-  <div class="series-badge">Fondations</div>
-
-  <div class="series-info">
-    <h2 class="series-title">Automatiser avec Sharepoint</h2>
-    <p class="series-sub">
-      Ce parcours vous montre comment tirer parti des fonctionnalités natives de SharePoint
-      (Listes, Rules, Quick Steps, Approbations) avant de passer à des automatisations plus avancées.
-    </p>
-  </div>
-  
-
-  <div class="series-progress">
-    <div class="series-step active">
-      <div class="ss-num">1</div>
-      <div class="ss-lbl">Quitter<br>Excel</div>
-    </div>
-    <div class="series-line"></div>
-
-    <div class="series-step active">
-      <div class="ss-num">2</div>
-      <div class="ss-lbl">Listes<br>SharePoint</div>
-    </div>
-    <div class="series-line"></div>
-
-    <div class="series-step active">
-      <div class="ss-num">3</div>
-      <div class="ss-lbl">Rules<br>&nbsp;</div>
-    </div>
-    <div class="series-line"></div>
-
-    <div class="series-step active">
-      <div class="ss-num">4</div>
-      <div class="ss-lbl">Quick<br>Steps</div>
-    </div>
-    <div class="series-line"></div>
-
-    <div class="series-step active">
-      <div class="ss-num">5</div>
-      <div class="ss-lbl">Appro-<br>bations</div>
-    </div>
-    <div class="series-line"></div>
-
-    <div class="series-step active">
-      <div class="ss-num">6</div>
-      <div class="ss-lbl">Power<br>Automate</div>
-    </div>
-	<div class="series-line"></div>
-  </div>
-</div>
-
-<!-- ══ ARTICLE VEDETTE ══ -->
-  <section id="articles">
-    <div class="sec-header">
-      <h2 class="sec-title" data-i18n="sec_featured">✨ Article en vedette</h2>
-    </div>
-
- <!-- ══ PARCOURS : AUTOMATISER AVANT POWER AUTOMATE ══ -->
-<div class="series-grid" style="grid-template-columns: repeat(3, 1fr);margin-top:2rem">
-
-  <!-- 1/6 -->
-  <div class="series-card" onclick="window.location='articles/quitter-excel-pour-sharepoint-lists.html'">
-    <div class="series-card-header">
-      <div class="sc-part">Étape 1 / 6</div>
-    </div>
-    <div class="series-card-body">
-		<div class="card-title-row">
-	      <span class="card-icon">📊 → 📋</span>
-		  <h3>Pourquoi quitter Excel</h3>
-		</div>
-	  
-      <p>Excel n’est pas un système. Comprendre pourquoi les listes SharePoint sont indispensables.</p>
-      <div class="card-foot">
-        <span>5 min · Débutant</span>
-        <span class="card-arrow">→</span>
-      </div>
-    </div>
-  </div>
-  
-
-
-  <!-- 2/6 -->
-  <div class="series-card" onclick="window.location='articles/listes-sharepoint-moteur-automatisation.html'">
-    <div class="series-card-header">
-      <div class="sc-part">Étape 2 / 6</div>
-    </div>
-	<div class="series-card-body">
-		<div class="card-title-row">
-	      <span class="card-icon">📋 ⚙️</span>
-		  <h3>Les listes SharePoint</h3>
-		</div>
-      
-      <p>Le véritable moteur d’automatisation natif de Microsoft 365.</p>
-      <div class="card-foot">
-        <span>6 min · Débutant</span>
-        <span class="card-arrow">→</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- 3/6 -->
-  <div class="series-card" onclick="window.location='articles/sharepoint-rules-automatiser-sans-power-automate.html'">
-    <div class="series-card-header">
-      <div class="sc-part">Étape 3 / 6</div>
-    </div>
-	
-    <div class="series-card-body">
-		<div class="card-title-row">
-		<span class="card-icon">🔔</span>	
-      <h3>Automatiser avec les Rules</h3>
-	</div>
-	
-      <p>Notifications et déclencheurs simples, sans Power Automate.</p>
-      <div class="card-foot">
-        <span>6 min · Débutant</span>
-        <span class="card-arrow">→</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- 4/6 -->
-  <div class="series-card" onclick="window.location='articles/sharepoint-quick-steps-actions-guidees.html'">
-    <div class="series-card-header">
-      <div class="sc-part">Étape 4 / 6</div>
-    </div>
-	
-    <div class="series-card-body">
-		<div class="card-title-row">
-		<span class="card-icon">🧭</span>	
-        <h3>Quick Steps</h3>
-	   </div>
-      <p>Guider l’utilisateur avec des boutons d’action intelligents.</p>
-      <div class="card-foot">
-        <span>7 min · Débutant</span>
-        <span class="card-arrow">→</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- 5/6 -->
-  <div class="series-card" onclick="window.location='articles/sharepoint-approbations-natives.html'">
-    <div class="series-card-header">
-      <div class="sc-part">Étape 5 / 6</div>
-    </div>
-	
-    <div class="series-card-body">
-		<div class="card-title-row">
-		<span class="card-icon">✅</span>	
-	    <h3>Approbations natives</h3>
-		</div>
-      <p>Décisions simples, traçables, sans flow complexe.</p>
-      <div class="card-foot">
-        <span>7 min · Débutant</span>
-        <span class="card-arrow">→</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- 6/6 -->
-  <div class="series-card" onclick="window.location='articles/comparatif-automatisation-sharepoint-vs-power-automate.html'">
-    <div class="series-card-header">
-      <div class="sc-part">Étape 6 / 6</div>
-    </div>
-	
-    <div class="series-card-body">
-		<div class="card-title-row">
-		<span class="card-icon">⚖️</span>	
-        <h3>SharePoint ou Power Automate ?</h3>
-		</div>
-      <p>Comparer toutes les approches pour choisir la bonne solution.</p>
-      <div class="card-foot">
-        <span>8 min · Tous niveaux</span>
-        <span class="card-arrow">→</span>
-      </div>
-    </div>
-  </div>
-
-</div>
-
-
-    <div class="featured-card" onclick="window.location='articles/formulaires.html'">
-      <div class="feat-body">
-        <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:1rem">
-          <span class="tag tag-orange" data-i18n="tag_forms">Microsoft Forms</span>
-          <span style="background:rgba(22,163,74,0.12);color:#16a34a;border:1px solid rgba(22,163,74,0.25);padding:0.22rem 0.7rem;border-radius:999px;font-size:0.72rem;font-weight:700;letter-spacing:0.06em;text-transform:uppercase" data-i18n="badge_published">● Publié</span>
-        </div>
-        <h2 data-i18n="feat_title">Moderniser nos formulaires internes : remplacer Word par un processus automatisé</h2>
-        <p data-i18n="feat_desc">Fini le formulaire Word téléchargeable avec ses instructions conditionnelles! En 3 étapes simples — Microsoft Forms, Power Automate et SharePoint — vous obtenez un processus uniforme, traçable et sans erreur. Sans aucune ligne de code.</p>
-        <div class="art-meta">
-          <span data-i18n="feat_date">Mars 2025</span>
-          <span class="meta-chip">⏱ 6 min</span>
-          <span data-i18n="level_beg">Débutant</span>
-        </div>
-      </div>
-      <div class="feat-visual" style="border-right:none;border-left:1px solid var(--border)">
-        <div style="position:relative;z-index:1;width:100%">
-
-          <!-- Label -->
-          <div style="font-size:0.72rem;font-weight:700;letter-spacing:0.07em;text-transform:uppercase;color:#1d4ed8;margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem">
-            <span style="display:inline-block;width:16px;height:2px;background:#2563eb;border-radius:2px"></span>
-            Demande de formation — Avant vs Après
-          </div>
-
-          <!-- Tableau Avant / Après -->
-          <div style="display:grid;grid-template-columns:1fr 1fr;border-radius:10px;overflow:hidden;border:1.5px solid #cbd5e1;font-size:0.8rem;box-shadow:0 3px 16px rgba(15,23,42,0.10)">
-
-            <!-- En-têtes -->
-            <div style="padding:0.7rem 1rem;background:#fde8e8;color:#991b1b;font-weight:800;font-size:0.73rem;letter-spacing:0.06em;text-transform:uppercase;border-bottom:1.5px solid #fca5a5">✗ &nbsp;Avant</div>
-            <div style="padding:0.7rem 1rem;background:#dcfce7;color:#166534;font-weight:800;font-size:0.73rem;letter-spacing:0.06em;text-transform:uppercase;border-bottom:1.5px solid #86efac;border-left:1.5px solid #cbd5e1">✓ &nbsp;Après</div>
-
-            <!-- Ligne 1 -->
-            <div style="padding:0.6rem 1rem;background:#fff5f5;color:#374151;border-bottom:1px solid #e5e7eb;display:flex;align-items:flex-start;gap:0.45rem;line-height:1.4"><span style="color:#dc2626;font-weight:800;flex-shrink:0;margin-top:0.05rem">✗</span>Formulaire Word à télécharger</div>
-            <div style="padding:0.6rem 1rem;background:#f0fdf4;color:#374151;border-bottom:1px solid #e5e7eb;border-left:1.5px solid #cbd5e1;display:flex;align-items:flex-start;gap:0.45rem;line-height:1.4"><span style="color:#16a34a;font-weight:800;flex-shrink:0;margin-top:0.05rem">✓</span>Microsoft Forms en ligne</div>
-
-            <!-- Ligne 2 -->
-            <div style="padding:0.6rem 1rem;background:#fff5f5;color:#374151;border-bottom:1px solid #e5e7eb;display:flex;align-items:flex-start;gap:0.45rem;line-height:1.4"><span style="color:#dc2626;font-weight:800;flex-shrink:0;margin-top:0.05rem">✗</span>Instructions différentes payant/gratuit</div>
-            <div style="padding:0.6rem 1rem;background:#f0fdf4;color:#374151;border-bottom:1px solid #e5e7eb;border-left:1.5px solid #cbd5e1;display:flex;align-items:flex-start;gap:0.45rem;line-height:1.4"><span style="color:#16a34a;font-weight:800;flex-shrink:0;margin-top:0.05rem">✓</span>Un seul formulaire pour tous les cas</div>
-
-            <!-- Ligne 3 -->
-            <div style="padding:0.6rem 1rem;background:#fff5f5;color:#374151;border-bottom:1px solid #e5e7eb;display:flex;align-items:flex-start;gap:0.45rem;line-height:1.4"><span style="color:#dc2626;font-weight:800;flex-shrink:0;margin-top:0.05rem">✗</span>Envoi manuel au bon courriel</div>
-            <div style="padding:0.6rem 1rem;background:#f0fdf4;color:#374151;border-bottom:1px solid #e5e7eb;border-left:1.5px solid #cbd5e1;display:flex;align-items:flex-start;gap:0.45rem;line-height:1.4"><span style="color:#16a34a;font-weight:800;flex-shrink:0;margin-top:0.05rem">✓</span>Acheminement automatique par PA</div>
-
-            <!-- Ligne 4 -->
-            <div style="padding:0.6rem 1rem;background:#fff5f5;color:#374151;border-bottom:1px solid #e5e7eb;display:flex;align-items:flex-start;gap:0.45rem;line-height:1.4"><span style="color:#dc2626;font-weight:800;flex-shrink:0;margin-top:0.05rem">✗</span>Aucune traçabilité centralisée</div>
-            <div style="padding:0.6rem 1rem;background:#f0fdf4;color:#374151;border-bottom:1px solid #e5e7eb;border-left:1.5px solid #cbd5e1;display:flex;align-items:flex-start;gap:0.45rem;line-height:1.4"><span style="color:#16a34a;font-weight:800;flex-shrink:0;margin-top:0.05rem">✓</span>Registre SharePoint automatique</div>
-
-            <!-- Ligne 5 -->
-            <div style="padding:0.6rem 1rem;background:#fff5f5;color:#374151;display:flex;align-items:flex-start;gap:0.45rem;line-height:1.4"><span style="color:#dc2626;font-weight:800;flex-shrink:0;margin-top:0.05rem">✗</span>Pas d'accusé de réception</div>
-            <div style="padding:0.6rem 1rem;background:#f0fdf4;color:#374151;border-left:1.5px solid #cbd5e1;display:flex;align-items:flex-start;gap:0.45rem;line-height:1.4"><span style="color:#16a34a;font-weight:800;flex-shrink:0;margin-top:0.05rem">✓</span>Confirmation immédiate par courriel</div>
-          </div>
-
-          <!-- Badges outils -->
-          <div style="margin-top:1rem;display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap">
-            <span style="background:#eff6ff;color:#1d4ed8;padding:0.25rem 0.65rem;border-radius:6px;font-weight:700;font-size:0.7rem;border:1px solid #bfdbfe">⚡ Power Automate</span>
-            <span style="background:#f0fdf4;color:#166534;padding:0.25rem 0.65rem;border-radius:6px;font-weight:700;font-size:0.7rem;border:1px solid #bbf7d0">📋 Microsoft Forms</span>
-            <span style="background:#f8fafc;color:#1d4ed8;padding:0.25rem 0.65rem;border-radius:6px;font-weight:700;font-size:0.7rem;border:1px solid #cbd5e1">☁️ SharePoint</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  <!-- SÉRIE FORMULAIRES -->
-    <!-- ══ SÉRIE FORMULAIRES INTELLIGENTS ══ -->
-    <div class="series-banner" style="margin-top:2.5rem;background:linear-gradient(135deg,rgba(234,88,12,0.08),rgba(234,88,12,0.03));border-color:rgba(234,88,12,0.25)">
-      <div class="series-badge" style="background:rgba(234,88,12,0.12);color:#ea580c;border-color:rgba(234,88,12,0.3)">📋 Série en 5 parties</div>
-      <div class="series-info">
-        <h2 class="series-title">Formulaires intelligents — Du formulaire Word à l'approbation automatique</h2>
-        <p class="series-sub">Remplacez vos formulaires Word par un processus complet : soumission en ligne, accusé de réception automatique, approbation par le gestionnaire, relances et rapport hebdomadaire. Pas à pas, sans aucune ligne de code.</p>
-      </div>
-      <div class="series-progress">
-        <div class="series-step active"><div class="ss-num" style="background:rgba(234,88,12,0.15);color:#ea580c;border-color:rgba(234,88,12,0.4)">1</div><div class="ss-lbl">Formulaire<br>en ligne</div></div>
-        <div class="series-line"></div>
-        <div class="series-step active"><div class="ss-num" style="background:rgba(234,88,12,0.15);color:#ea580c;border-color:rgba(234,88,12,0.4)">2</div><div class="ss-lbl">Accusé de<br>réception</div></div>
-        <div class="series-line"></div>
-        <div class="series-step active"><div class="ss-num" style="background:rgba(234,88,12,0.15);color:#ea580c;border-color:rgba(234,88,12,0.4)">3</div><div class="ss-lbl">Approbation<br>gestionnaire</div></div>
-        <div class="series-line"></div>
-        <div class="series-step active"><div class="ss-num" style="background:rgba(234,88,12,0.15);color:#ea580c;border-color:rgba(234,88,12,0.4)">4</div><div class="ss-lbl">Relance<br>automatique</div></div>
-        <div class="series-line"></div>
-        <div class="series-step active"><div class="ss-num" style="background:rgba(234,88,12,0.15);color:#ea580c;border-color:rgba(234,88,12,0.4)">5</div><div class="ss-lbl">Rapport<br>hebdomadaire</div></div>
-      </div>
-    </div>
-
-    <div class="series-grid" style="grid-template-columns: repeat(3, 1fr)">
-      <div class="series-card" onclick="window.location='articles/formulaire1.html'">
-        <div class="series-card-header" style="background:linear-gradient(135deg,rgba(234,88,12,0.12),rgba(234,88,12,0.04))">
-          <div class="sc-part">Partie 1 / 5</div>
-          <div class="sc-diagram" style="display:flex;align-items:center;justify-content:center;height:90px;font-size:2.2rem;gap:.5rem">📄 → 📋 → ☁️</div>
-        </div>
-        <div class="series-card-body">
-          <h3>Remplacer votre formulaire Word par un formulaire en ligne</h3>
-          <p>Créer le formulaire Microsoft Forms, configurer la liste SharePoint et brancher le flow en 7 étapes.</p>
-          <div class="card-foot"><span>12 min · Débutant</span><span class="card-arrow">→</span></div>
-        </div>
-      </div>
-
-      <div class="series-card" onclick="window.location='articles/formulaire2.html'">
-        <div class="series-card-header" style="background:linear-gradient(135deg,rgba(234,88,12,0.12),rgba(234,88,12,0.04))">
-          <div class="sc-part">Partie 2 / 5</div>
-          <div class="sc-diagram" style="display:flex;align-items:center;justify-content:center;height:90px;font-size:2.2rem;gap:.5rem">📋 → ✅ → 📧</div>
-        </div>
-        <div class="series-card-body">
-          <h3>Confirmer automatiquement la réception de la demande</h3>
-          <p>Valider le courriel avec contains(@) et envoyer un accusé de réception personnalisé à l'employé.</p>
-          <div class="card-foot"><span>10 min · Débutant</span><span class="card-arrow">→</span></div>
-        </div>
-      </div>
-
-      <div class="series-card" onclick="window.location='articles/formulaire3a.html'">
-        <div class="series-card-header" style="background:linear-gradient(135deg,rgba(234,88,12,0.12),rgba(234,88,12,0.04))">
-          <div class="sc-part">Partie 3 / 5</div>
-          <div class="sc-diagram" style="display:flex;align-items:center;justify-content:center;height:90px;font-size:2.2rem;gap:.5rem">📝 → 👤 → 👍</div>
-        </div>
-        <div class="series-card-body">
-          <h3>Soumettre la demande à l'approbation du gestionnaire</h3>
-          <p>Identifier le gestionnaire dans SharePoint, créer la demande d'approbation et notifier l'employé du résultat.</p>
-          <div class="card-foot"><span>15 min · Intermédiaire</span><span class="card-arrow">→</span></div>
-        </div>
-      </div>
-
-      <div class="series-card" onclick="window.location='articles/formulaire3b.html'">
-        <div class="series-card-header" style="background:linear-gradient(135deg,rgba(234,88,12,0.12),rgba(234,88,12,0.04))">
-          <div class="sc-part">Partie 4 / 5</div>
-          <div class="sc-diagram" style="display:flex;align-items:center;justify-content:center;height:90px;font-size:2.2rem;gap:.5rem">⏰ → 🔁 → ⚠️</div>
-        </div>
-        <div class="series-card-body">
-          <h3>Relancer automatiquement le gestionnaire si aucune réponse</h3>
-          <p>Flow quotidien qui détecte les demandes sans réponse après 5 jours et expire automatiquement après 10 jours.</p>
-          <div class="card-foot"><span>12 min · Intermédiaire</span><span class="card-arrow">→</span></div>
-        </div>
-      </div>
-
-      <div class="series-card" onclick="window.location='articles/formulaire3c.html'">
-        <div class="series-card-header" style="background:linear-gradient(135deg,rgba(234,88,12,0.12),rgba(234,88,12,0.04))">
-          <div class="sc-part">Partie 5 / 5</div>
-          <div class="sc-diagram" style="display:flex;align-items:center;justify-content:center;height:90px;font-size:2.2rem;gap:.5rem">📊 → 📋 → 📬</div>
-        </div>
-        <div class="series-card-body">
-          <h3>Rapport hebdomadaire des demandes en attente ou non traitées</h3>
-          <p>Flow du vendredi matin qui génère un tableau HTML des demandes en attente et l'envoie automatiquement.</p>
-          <div class="card-foot"><span>10 min · Intermédiaire</span><span class="card-arrow">→</span></div>
-        </div>
-      </div>
-    </div>
-
-  <!-- TOUS LES ARTICLES -->
-  
-  
-  <div class="sec-header">
-    <h2 class="sec-title" data-i18n="sec_all">Tous les articles</h2>
-  </div>
-    <div class="grid-3">
-
-      <div class="art-card" onclick="window.location='articles/copilot.html'">
-        <div class="card-thumb thumb-5"><div class="thumb-emoji">🤖</div></div>
-        <div class="card-body">
-          <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap">
-            <span class="tag tag-green" data-i18n="tag_tip">Conseil de la semaine</span>
-            <span class="status-badge pub" data-i18n="badge_published">● Publié</span>
-          </div>
-          <h3 data-i18n="card5_title">La fonctionnalité de Copilot dans Word que beaucoup ignorent</h3>
-          <p data-i18n="card5_desc">Copilot lit votre document et insère du contenu directement — sans copier-coller, sans licence payante.</p>
-          <div class="card-foot">
-            <span>Lancement · <span data-i18n="min3">3 min</span></span>
-            <span class="card-arrow">→</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="art-card" onclick="window.location='articles/cartes.html'">
-        <div class="card-thumb thumb-1"><div class="thumb-emoji">🪪</div></div>
-        <div class="card-body">
-          <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap">
-            <span class="tag tag-blue" data-i18n="tag_pa">Power Automate</span>
-            <span class="status-badge sched" data-i18n="badge_week1">📅 Semaine 1</span>
-          </div>
-          <h3 data-i18n="card1_title">Suivi automatisé des cartes d'accès avec alertes proactives</h3>
-          <p data-i18n="card1_desc">Un flow quotidien qui surveille les dates d'expiration et envoie un rapport HTML formaté chaque matin.</p>
-          <div class="card-foot">
-            <span>Planifié · <span data-i18n="min6">6 min</span></span>
-            <span class="card-arrow">→</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="art-card" onclick="window.location='articles/deplacements.html'">
-        <div class="card-thumb thumb-2"><div class="thumb-emoji">✈️</div></div>
-        <div class="card-body">
-          <div style="display:flex;align-items:center;gap:0.5rem;flex-wrap:wrap">
-            <span class="tag tag-cyan" data-i18n="tag_sp">SharePoint</span>
-            <span class="status-badge sched" data-i18n="badge_week2">📅 Semaine 2</span>
-          </div>
-          <h3 data-i18n="card2_title">Automatiser les réservations de déplacements professionnels</h3>
-          <p data-i18n="card2_desc">De la demande SharePoint jusqu'à la notification de l'adjointe — avec duplication automatique pour les groupes.</p>
-          <div class="card-foot">
-            <span>Planifié · <span data-i18n="min7">7 min</span></span>
-            <span class="card-arrow">→</span>
-          </div>
-        </div>
-      </div>
-
-
-
-
-
-
-    </div>
-  </section>
-
-  <!-- PROPOSEZ UN SUJET -->
-    <section id="proposez">
-    <div style="max-width:680px;margin:0 auto;padding:3rem 1.5rem;text-align:center">
-      <div style="font-size:2rem;margin-bottom:.5rem">💡</div>
-      <h3 style="font-family:'Fraunces',serif;font-size:1.75rem;font-weight:900;color:var(--text);margin-bottom:.5rem" data-i18n="propose_title">Vous avez une idée d'article?</h3>
-      <p style="color:var(--muted2);font-size:1rem;margin-bottom:2rem" data-i18n="propose_sub">Un processus répétitif qui vous épuise? Une tâche que vous aimeriez automatiser? Partagez-la — ça pourrait devenir le prochain tutoriel.</p>
-      <div style="background:var(--card);border:1px solid var(--border);border-radius:14px;padding:2rem;text-align:left">
-        <div id="plumsail-form-obk8"><div class="fd-form-loading"></div></div>
-        <script type="text/javascript">
-          function initPlumsailForm() {
-            var fd = new Plumsail.Form("#plumsail-form-obk8", "9db2fdd3-ceb6-4268-8a98-1380d6833f21");
-          }
-          var plumsailScript = document.createElement('script');
-          plumsailScript.type = 'text/javascript';
-          plumsailScript.src = 'https://us-forms.plumsail.com/api/widget/9db2fdd3-ceb6-4268-8a98-1380d6833f21';
-          plumsailScript.onload = initPlumsailForm;
-          document.head.appendChild(plumsailScript);
-        </script>
-      </div>
-    </div>
-  
-
-  <!-- VOTE -->
-    <!-- ─── VOTE SECTION ─── -->
-  <section id="vote">
-    <div class="vote-section">
-      <div class="vote-header">
-        <div class="vote-title-block">
-          <h3 data-i18n="vote_title">🗳️ Quel article souhaitez-vous lire en premier?</h3>
-          <p data-i18n="vote_sub">Votre vote influence directement le prochain article publié. Résultats en temps réel.</p>
-        </div>
-        <div class="vote-total-badge">
-          <div class="vote-total-num" id="total-votes">0</div>
-          <div class="vote-total-lbl" data-i18n="votes_cast">Votes exprimés</div>
-        </div>
-      </div>
-
-      <div class="vote-grid" id="vote-grid">
-        <!-- generated by JS -->
-      </div>
-
-      <div class="vote-footer">
-        <span class="vote-disclaimer" data-i18n="vote_disclaimer">Un vote par session · Les résultats guident notre calendrier éditorial</span>
-        <span id="voted-msg" style="display:none;color:var(--cyan);font-weight:600" data-i18n="voted_thanks">✓ Merci pour votre vote!</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- NEWSLETTER -->
-  <!-- NEWSLETTER -->
-    <!-- NEWSLETTER -->
-  <section id="newsletter">
-    <div class="newsletter-block">
-      <h3 class="nl-title" data-i18n="nl_title">Recevez les nouveaux articles</h3>
-      <p class="nl-sub" data-i18n="nl_sub">Un courriel par semaine, des tutoriels pratiques, aucun spam.</p>
-      <div style="display:flex;justify-content:center;margin-top:1.5rem">
-        <a href="https://1f8dd43d.sibforms.com/serve/MUIFAIZD9316zJ47lr-z-xciSheunGSJC_tZ-6pWKdH6cM0IlUoUXxJ81okVGl_crrN6WilKr_qY3NvEhL0KLncKNx42Aceqz6isFoX3Z8_tpaIVE9d-hfliSfUL3dLvuV-C8XRIaTOmPc1We9Epz0W2exQFPJi3dXzzCdh9yvoUpTjHTOLnQ1pZLOhIi5AmsXkqokLTgPfBaGYvHA==" target="_blank" rel="noopener" class="btn-primary" style="font-size:1rem;font-weight:600;padding:.75rem 2rem;text-decoration:none;border-radius:8px;display:inline-block" data-i18n="nl_btn">S'abonner</a>
-      </div>
-    </div>
-  </section>
-</div>
-
-<footer>
-
-</div>
-
-<footer>
-  <span class="footer-brand"><span data-i18n="brand_main">Automatisez vos tâches</span> <span data-i18n="brand_accent">répétitives</span></span>
-  <p data-i18n="footer_sub">Des tutoriels concrets pour aller plus loin avec Microsoft 365</p>
-  <p style="margin-top:0.5rem">© 2026 <span data-i18n="brand_short">AutomatisezVousMême</span><span style="color:var(--accent)">.ca</span></p>
-</footer>
-
-<script>
-
-// ══════════════════════════════════
-// LANG INIT
-// ══════════════════════════════════
-let currentLang = 'fr';
-
-// ══════════════════════════════════
-// I18N
-// ══════════════════════════════════
-const i18n = {
-  fr: {
-    nav_articles: 'Articles',
-    nav_suggest: 'Proposez un sujet',
-    nav_vote: 'Voter',
-    nav_newsletter: 'Infolettre',
-    nav_cta: "S'abonner",
-    hero_h1_html: 'Vous avez déjà accès<br>à des outils <em>puissants.</em><br>On vous montre comment automatiser vos processus administratifs.',
-    hero_sub: 'Si votre organisation vous a fourni une licence Microsoft 365, Power Automate est probablement déjà disponible dans votre compte. Ces tutoriels pas à pas vous montrent comment l\'utiliser concrètement — sans code, sans aide TI.',
-    hero_note: '⚠️ Power Automate est inclus dans les licences organisationnelles M365 (Business Basic, Standard, Premium, E3, E5). Il n\'est <strong>pas</strong> inclus dans les abonnements personnels (M365 Personal ou Family).',
-    hero_btn1: 'Voir les tutoriels',
-    hero_btn2: 'Voter pour le prochain sujet',
-    stat1: 'Tutoriels publiés', stat2: 'Ligne de code requise', stat3: 'Licences organisationnelles M365', stat4: 'Sans connecteur Premium requis',
-    citation_main: '« Les autres t\'apprennent Power Automate. Nous, on t\'apprend à automatiser ton travail. »',
-    citation_sub: 'Pas besoin d\'être programmeur — juste curieux.',
-    licence_title: 'Avant de commencer — vérifiez votre licence',
-    licence_body: 'Power Automate est inclus sans frais supplémentaires dans les licences Microsoft 365 <strong>E3, E5, F3 et Business Premium</strong>. Pour vérifier la vôtre, cliquez sur le bouton ci-dessous — vous verrez la liste de vos abonnements actifs.',
-    licence_btn: 'Vérifier ma licence Microsoft 365 →',
-    licence_note: '⚠️ Les abonnements personnels (Microsoft 365 Personal ou Family) ne donnent pas accès à Power Automate.',
-    sec_featured: 'Article en vedette',
-    sec_all: 'Tous les articles',
-    see_all: 'Voir tout →',
-    tag_pa: 'Power Automate', tag_sp: 'SharePoint', tag_teams: 'Teams',
-    tag_forms: 'Microsoft Forms', tag_tip: 'Conseil de la semaine',
-    pipe1: 'Courriel reçu — mot-clé détecté', pipe2: 'Extraction catégorie + métadonnées',
-    pipe3: 'Conversion Word → PDF + archivage', pipe4: 'Notification Teams + registre Excel',
-    feat_title: 'Automatisation du traitement de courriels par mots-clés : classer, archiver, notifier',
-    feat_desc: "Comment un flow Power Automate surveille une boîte partagée, détecte des thématiques dans l'objet des courriels, puis classe automatiquement les pièces jointes dans Excel et SharePoint — zéro intervention humaine.",
-    min3:'3 min', min4:'4 min', min5:'5 min', min6:'6 min', min7:'7 min', min8:'⏱ 8 min',
-    level_adv: 'Avancé',
-    card1_title: "Suivi automatisé des cartes d'accès avec alertes proactives",
-    card1_desc: "Un flow quotidien qui surveille les dates d'expiration et envoie un rapport HTML formaté chaque matin.",
-    card2_title: 'Automatiser les réservations de déplacements professionnels',
-    card2_desc: "De la demande SharePoint jusqu'à la notification de l'adjointe — avec duplication automatique pour les groupes.",
-    card4_title: 'Moderniser nos formulaires internes : remplacer Word en 3 étapes',
-    card4_desc: 'Fini le formulaire Word téléchargeable! Comment passer à Microsoft Forms + Power Automate sans programmation.',
-    card5_title: 'La fonctionnalité de Copilot dans Word que beaucoup ignorent',
-    card5_desc: 'Copilot lit votre document et insère du contenu directement — sans copier-coller, sans licence payante.',
-    card6_title: 'Publier un message Teams à un utilisateur via Power Automate',
-    card6_desc: 'Guide pas à pas pour envoyer des messages personnalisés à des utilisateurs spécifiques dans Teams.',
-    vote_title: '🗳️ Quel article souhaitez-vous lire en premier?',
-    vote_sub: 'Votre vote influence directement le prochain article publié. Résultats en temps réel.',
-    votes_cast: 'Votes exprimés',
-    vote_btn: 'Voter',
-    voted_btn: '✓ Voté',
-    vote_disclaimer: 'Un vote par session · Les résultats guident notre calendrier éditorial',
-    voted_thanks: '✓ Merci pour votre vote!',
-    nl_title: 'Recevez les nouveaux articles',
-    nl_sub: 'Un courriel par semaine, des tutoriels pratiques, aucun spam.',
-    nl_placeholder: 'votre@courriel.com',
-    nl_btn: "S'abonner",
-    brand_main: 'Automatisez vos tâches', brand_accent: 'répétitives',
-    brand_short: 'AutomatisezVousMême',
-    footer_sub: 'Des tutoriels concrets pour aller plus loin avec Microsoft 365',
-    badge_published: '● Publié', badge_week1: '📅 Sem. 1', badge_week2: '📅 Sem. 2',
-    badge_week3: '📅 Sem. 3', badge_week4: '📅 Sem. 4', badge_meta: '🔧 Dans les coulisses',
-    feat_date: 'Lancement', level_beg: 'Débutant',
-    cal_title: '📅 Calendrier éditorial', cal_sub: 'Géré automatiquement par Power Automate',
-    card_cal_title: 'Automatiser l\'annonce LinkedIn de vos nouveaux articles',
-    card_cal_desc: 'Annoncer automatiquement chaque nouvel article sur LinkedIn via Power Automate — calendrier Excel, filtre OData, connecteur LinkedIn V2.',
-    card_cal_meta: 'Bonus · 8 min · Intermédiaire',
-    series_badge: '🔁 Série en 3 parties',
-    series_title: 'Automatiser le traitement de courriels par mots-clés',
-    series_sub: 'Du déclencheur intelligent jusqu\'aux notifications — un guide complet étape par étape avec expressions, diagrammes et captures annotées.',
-    sp1: 'Déclencheur\n& filtrage', sp2: 'Pièces jointes\n& conversion', sp3: 'Archivage\n& notifications',
-    part1_of3: 'Partie 1 / 3', part2_of3: 'Partie 2 / 3', part3_of3: 'Partie 3 / 3',
-    serie1_title: 'Déclencheur, filtrage et extraction de métadonnées',
-    serie1_desc: 'Connecter la boîte partagée, filtrer les bons courriels, extraire catégorie et date avec slice(), indexOf() et le tableau Excel de référence.',
-    serie1_meta: 'Juin 2025 · 12 min · Intermédiaire',
-    serie2_title: 'Récupérer les pièces jointes et les convertir en PDF',
-    serie2_desc: 'Boucle Apply to each sur les pièces jointes, stockage temporaire SharePoint, transfert en mode chunked pour les gros fichiers, conversion automatique Word → PDF.',
-    serie2_meta: 'Juin 2025 · 14 min · Intermédiaire',
-    serie3_title: 'Archiver, tenir le registre Excel et envoyer les notifications',
-    serie3_desc: 'Nomenclature dynamique, structure hiérarchique SharePoint, ligne Excel avec liens, carte adaptative Teams, courriel HTML et pattern Try-Catch-Finally.',
-    serie3_meta: 'Juin 2025 · 15 min · Intermédiaire',
-  },
-  en: {
-    nav_articles: 'Articles',
-    nav_suggest: 'Suggest a topic',
-    nav_vote: 'Vote',
-    nav_newsletter: 'Newsletter',
-    nav_cta: 'Subscribe',
-    hero_h1_html: 'You already have access<br>to <em>powerful tools.</em><br>Let us show you how.',
-    hero_sub: 'If your organization provided you with a Microsoft 365 license, Power Automate is likely already available in your account. These step-by-step tutorials show you how to use it concretely — no code, no IT help needed.',
-    hero_note: '⚠️ Power Automate is included in organizational M365 licenses (Business Basic, Standard, Premium, E3, E5). It is <strong>not</strong> included in personal subscriptions (M365 Personal or Family).',
-    hero_btn1: 'See the tutorials',
-    hero_btn2: 'Vote for the next topic',
-    stat1: 'Tutorials published', stat2: 'Lines of code needed', stat3: 'Organizational M365 licenses', stat4: 'No Premium connector required',
-    citation_main: '"Others teach you Power Automate. We teach you to automate your work."',
-    citation_sub: 'No programming skills needed — just curiosity.',
-    licence_title: 'Before you start — check your licence',
-    licence_body: 'Power Automate is included at no extra cost in Microsoft 365 <strong>E3, E5, F3 and Business Premium</strong> licences. Click the button below to see your active subscriptions.',
-    licence_btn: 'Check my Microsoft 365 licence →',
-    licence_note: '⚠️ Personal subscriptions (Microsoft 365 Personal or Family) do not include Power Automate.',
-    sec_featured: 'Featured article',
-    sec_all: 'All articles',
-    see_all: 'See all →',
-    tag_pa: 'Power Automate', tag_sp: 'SharePoint', tag_teams: 'Teams',
-    tag_forms: 'Microsoft Forms', tag_tip: 'Tip of the week',
-    pipe1: 'Email received — keyword detected', pipe2: 'Extract category + metadata',
-    pipe3: 'Convert Word → PDF + archive', pipe4: 'Teams notification + Excel register',
-    feat_title: 'Automating email processing by keyword: classify, archive, notify',
-    feat_desc: 'How a Power Automate flow monitors a shared mailbox, detects topics in email subject lines, then automatically files attachments into Excel and SharePoint — zero human intervention.',
-    min3:'3 min', min4:'4 min', min5:'5 min', min6:'6 min', min7:'7 min', min8:'⏱ 8 min',
-    level_adv: 'Advanced',
-    card1_title: 'Automated access card tracking with proactive alerts',
-    card1_desc: 'A daily flow that monitors expiry dates and sends a formatted HTML report every morning.',
-    card2_title: 'Automating professional travel reservations',
-    card2_desc: 'From the SharePoint request to the admin assistant notification — with auto-duplication for groups.',
-    card4_title: 'Modernizing internal forms: replace Word in 3 steps',
-    card4_desc: 'No more downloadable Word forms! How to switch to Microsoft Forms + Power Automate without coding.',
-    card5_title: 'The Copilot feature in Word most people overlook',
-    card5_desc: 'Copilot reads your open document and inserts content directly — no copy-paste, no paid license.',
-    card6_title: 'Post a Teams message to a user via Power Automate',
-    card6_desc: 'Step-by-step guide to sending personalized messages to specific Teams users using an automated flow.',
-    vote_title: '🗳️ Which article would you like to read first?',
-    vote_sub: 'Your vote directly influences the next article published. Live results.',
-    votes_cast: 'Votes cast',
-    vote_btn: 'Vote',
-    voted_btn: '✓ Voted',
-    vote_disclaimer: 'One vote per session · Results guide our editorial calendar',
-    voted_thanks: '✓ Thank you for your vote!',
-    nl_title: 'Get new articles in your inbox',
-    nl_sub: 'One email per week, practical tutorials, no spam.',
-    nl_placeholder: 'your@email.com',
-    nl_btn: 'Subscribe',
-    brand_main: 'Automate office tasks', brand_accent: 'yourself',
-    brand_short: 'AutomateTasksYourself',
-    footer_sub: 'Practical tutorials to go further with Microsoft 365',
-    badge_published: '● Published', badge_week1: '📅 Week 1', badge_week2: '📅 Week 2',
-    badge_week3: '📅 Week 3', badge_week4: '📅 Week 4', badge_meta: '🔧 Behind the scenes',
-    feat_date: 'Launch', level_beg: 'Beginner',
-    cal_title: '📅 Editorial Calendar', cal_sub: 'Managed automatically by Power Automate',
-    card_cal_title: 'Automate your LinkedIn article announcements',
-    card_cal_desc: 'Automatically announce each new article on LinkedIn via Power Automate — Excel calendar, OData filter, LinkedIn V2 connector.',
-    card_cal_meta: 'Bonus · 8 min · Intermediate',
-    series_badge: '🔁 3-Part Series',
-    series_title: 'Automating email processing by keyword',
-    series_sub: 'From smart trigger to notifications — a complete step-by-step guide with expressions, diagrams and annotated screenshots.',
-    sp1: 'Trigger\n& filtering', sp2: 'Attachments\n& conversion', sp3: 'Archive\n& notifications',
-    part1_of3: 'Part 1 / 3', part2_of3: 'Part 2 / 3', part3_of3: 'Part 3 / 3',
-    serie1_title: 'Trigger, filtering and metadata extraction',
-    serie1_desc: 'Connect the shared mailbox, filter the right emails, extract category and date with slice(), indexOf() and the Excel reference table.',
-    serie1_meta: 'June 2025 · 12 min · Intermediate',
-    serie2_title: 'Retrieve attachments and convert them to PDF',
-    serie2_desc: 'Apply to each loop on attachments, temporary SharePoint storage, chunked transfer for large files, automatic Word → PDF conversion.',
-    serie2_meta: 'June 2025 · 14 min · Intermediate',
-    serie3_title: 'Archive, maintain the Excel register and send notifications',
-    serie3_desc: 'Dynamic naming, hierarchical SharePoint structure, Excel row with links, Teams adaptive card, HTML email and Try-Catch-Finally error handling.',
-    serie3_meta: 'June 2025 · 15 min · Intermediate',
-  }
-};
-
-
-function setLang(lang) {
-  currentLang = lang;
-  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-  document.querySelector(`.lang-btn[onclick="setLang('${lang}')"]`).classList.add('active');
-  document.documentElement.lang = lang;
-
-  const t = i18n[lang];
-
-  // Update all data-i18n elements
-  document.querySelectorAll('[data-i18n]').forEach(el => {
-    const key = el.getAttribute('data-i18n');
-    if (!t[key]) return;
-    if (key === 'hero_h1_html' || key === 'hero_note') { el.innerHTML = t[key]; return; }
-    el.textContent = t[key];
-  });
-
-  // Placeholder
-  document.querySelectorAll('[data-placeholder-i18n]').forEach(el => {
-    const key = el.getAttribute('data-placeholder-i18n');
-    if (t[key]) el.placeholder = t[key];
-  });
-
-  // Re-render vote grid + calendar
-  renderVoteGrid();
-  }
-
-// ══════════════════════════════════
-// VOTE SYSTEM
-// ══════════════════════════════════
-const voteTopics = [
-  { id: 'vacances',    fr: 'Remplacer le fichier Excel des vacances',                  en: 'Replace the vacation tracking Excel file',            desc_fr: 'Approbation dans Teams, événement Outlook automatique, solde mis à jour',           desc_en: 'Teams approval, automatic Outlook calendar event, balance updated' },
-  { id: 'onboarding',  fr: 'Automatiser l\'accueil d\'un nouvel employé',              en: 'Automate new employee onboarding',                    desc_fr: 'Du formulaire RH jusqu\'aux accès Teams et courriel de bienvenue',                   desc_en: 'From HR form to Teams access and welcome email' },
-  { id: 'evals',       fr: 'Suivi des évaluations annuelles de performance',           en: 'Annual performance review tracking',                  desc_fr: 'Rappels automatiques, formulaire Forms, tableau de bord SharePoint',               desc_en: 'Automated reminders, Forms questionnaire, SharePoint dashboard' },
-  { id: 'feuille',     fr: 'Remplacer la feuille de temps Word / PDF',                 en: 'Replace the Word / PDF timesheet',                    desc_fr: 'Forms + approbation automatique + consolidation SharePoint hebdomadaire',           desc_en: 'Forms + auto-approval + weekly SharePoint consolidation' },
-  { id: 'achats',      fr: 'Automatiser les demandes d\'achat et approbations',        en: 'Automate purchase requests and approvals',            desc_fr: 'Formulaire → courriel gestionnaire → bon de commande → archivage',                 desc_en: 'Form → manager email → purchase order → archiving' },
-  { id: 'reunion',     fr: 'Automatiser la gestion des réunions récurrentes',          en: 'Automate recurring meeting management',               desc_fr: 'Ordre du jour généré automatiquement, rappels, compte-rendu archivé dans SharePoint', desc_en: 'Auto-generated agenda, reminders, minutes archived in SharePoint' },
-];
-
-// Initialize vote counts
-let votes = {};
-voteTopics.forEach(t => { votes[t.id] = Math.floor(Math.random() * 30) + 8; });
-// Vacances et onboarding en tête
-votes['vacances'] += 20; votes['onboarding'] += 12;
-
-let userVote = null; // id of topic user voted for
-
-function getTotalVotes() {
-  return Object.values(votes).reduce((a,b) => a+b, 0);
+:root {
+  --bg: #eef2f8;
+  --surface: #e4ecf5;
+  --card: #ffffff;
+  --card2: #f7f9fc;
+  --border: #cdd8e8;
+  --border2: #b0c3d9;
+  --accent: #1e56c5;
+  --accent-glow: rgba(30,86,197,0.10);
+  --cyan: #0882a8;
+  --green: #16a34a;
+  --orange: #ea580c;
+  --purple: #7c3aed;
+  --text: #0c1a30;
+  --muted: #5a6e87;
+  --muted2: #3d5166;
+  --radius: 14px;
 }
 
-function getSorted() {
-  return [...voteTopics].sort((a,b) => votes[b.id] - votes[a.id]);
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: #eef2f8;
+  background-image:
+    linear-gradient(180deg, #dce6f4 0px, #eef2f8 280px);
+  color: var(--text);
+  font-family: 'DM Sans', sans-serif;
+  font-size: 16px;
+  line-height: 1.65;
+  min-height: 100vh;
+  overflow-x: hidden;
 }
 
-
-function castVote(id) {
-  if (userVote !== null) return;
-  userVote = id;
-  votes[id] += 1;
-  renderVoteGrid();
-  document.getElementById('voted-msg').style.display = 'block';
-  // Animate the bar
-  setTimeout(() => {
-    const total = getTotalVotes();
-    const sorted = getSorted();
-    sorted.forEach(topic => {
-      const el = document.getElementById('vitem-' + topic.id);
-      if (el) {
-        const bar = el.querySelector('.vote-bar-bg');
-        const pct = Math.round((votes[topic.id] / total) * 100);
-        if (bar) bar.style.width = pct + '%';
-      }
-    });
-  }, 50);
+/* ─── GRAIN OVERLAY ─── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  opacity: 0.018;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 200px;
 }
 
-// ══════════════════════════════════
-// ARTICLES MODAL
-// ══════════════════════════════════
-function renderVoteGrid() {
-  const t = i18n[currentLang];
-  const grid = document.getElementById('vote-grid');
-  const total = getTotalVotes();
-  const sorted = getSorted();
-  document.getElementById('total-votes').textContent = total;
-
-  grid.innerHTML = sorted.map((topic, idx) => {
-    const count = votes[topic.id];
-    const pct = Math.round((count / total) * 100);
-    const rankClass = idx === 0 ? 'rank-1' : idx === 1 ? 'rank-2' : idx === 2 ? 'rank-3' : 'rank-other';
-    const isTop = idx === 0;
-    const isVoted = userVote === topic.id;
-    const hasVoted = userVote !== null;
-    const label = currentLang === 'fr' ? topic.fr : topic.en;
-    const desc = currentLang === 'fr' ? topic.desc_fr : topic.desc_en;
-    const btnLabel = isVoted ? t.voted_btn : t.vote_btn;
-
-    return `
-      <div class="vote-item ${isTop ? 'top-vote' : ''}" id="vitem-${topic.id}">
-        <div class="vote-bar-bg" style="width:${pct}%"></div>
-        <div class="vote-rank ${rankClass}">${idx + 1}</div>
-        <div class="vote-text">
-          <h4>${label}</h4>
-          <p>${desc}</p>
-        </div>
-        <div class="vote-stats">
-          <span class="vote-count">${count}</span>
-          <span class="vote-pct">${pct}%</span>
-        </div>
-        <button class="vote-btn ${isVoted ? 'voted' : ''}" 
-          onclick="castVote('${topic.id}')" 
-          ${hasVoted ? 'disabled' : ''}>${btnLabel}</button>
-      </div>
-    `;
-  }).join('');
+/* ─── NAV ─── */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  height: 62px;
+  background: rgba(238,242,248,0.94);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center;
+  padding: 0 2rem; gap: 2rem;
+  box-shadow: 0 1px 4px rgba(12,26,48,0.07);
 }
 
-// Init
-document.addEventListener('DOMContentLoaded', function() {
-  setLang('fr');
-  renderVoteGrid();
-});
-</script>
-<script>
-  window.REQUIRED_CODE_ERROR_MESSAGE = 'Please choose a country code';
-  window.LOCALE = 'fr';
-  window.EMAIL_INVALID_MESSAGE = "Adresse courriel invalide. Veuillez vérifier le format et réessayer.";
-  window.REQUIRED_ERROR_MESSAGE = "Ce champ est obligatoire.";
-  window.GENERIC_INVALID_MESSAGE = "Les informations fournies ne sont pas valides.";
-  window.translation = { common: { selectedList: '{quantity} list selected', selectedLists: '{quantity} lists selected' } };
-  var AUTOHIDE = Boolean(0);
-</script>
-<script defer src="https://sibforms.com/forms/end-form/build/main.js"></script>
-<script src="https://www.google.com/recaptcha/api.js?hl=fr"></script>
-</body>
-</html>
+.nav-brand {
+  display: flex; align-items: center; gap: 0.6rem;
+  text-decoration: none; flex-shrink: 0;
+}
+.brand-icon {
+  width: 30px; height: 30px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent), var(--cyan));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.9rem;
+}
+.brand-name {
+  font-family: 'Fraunces', serif;
+  font-weight: 900; font-size: 1.1rem;
+  color: var(--text); letter-spacing: -0.02em;
+}
+.brand-name span { color: var(--accent); }
+
+.nav-links {
+  display: flex; gap: 1.5rem; list-style: none; margin-left: auto;
+}
+.nav-links a {
+  color: var(--muted); font-size: 0.875rem; font-weight: 500;
+  text-decoration: none; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--text); }
+
+/* Language toggle */
+.lang-toggle {
+  display: flex; align-items: center;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 8px; overflow: hidden;
+  flex-shrink: 0;
+}
+.lang-btn {
+  padding: 0.35rem 0.85rem;
+  font-size: 0.78rem; font-weight: 600;
+  cursor: pointer; border: none; background: transparent;
+  color: var(--muted); transition: all 0.15s;
+  font-family: 'DM Sans', sans-serif;
+  letter-spacing: 0.04em;
+}
+.lang-btn.active {
+  background: var(--accent);
+  color: #fff;
+}
+
+.nav-cta {
+  background: var(--accent); color: #fff;
+  padding: 0.45rem 1.1rem; border-radius: 8px;
+  font-size: 0.82rem; font-weight: 600;
+  text-decoration: none; transition: all 0.2s;
+  flex-shrink: 0;
+}
+.nav-cta:hover { background: #1d4ed8; }
+
+/* ─── HERO ─── */
+.hero {
+  position: relative;
+  padding: 6rem 2rem 4rem;
+  max-width: 1000px; margin: 0 auto;
+  text-align: center;
+  overflow: hidden;
+}
+
+.hero-glow {
+  position: absolute;
+  top: 0; left: 50%; transform: translateX(-50%);
+  width: 700px; height: 500px;
+  background: radial-gradient(ellipse at 50% 0%, rgba(37,99,235,0.08) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: rgba(37,99,235,0.08);
+  border: 1px solid rgba(37,99,235,0.2);
+  color: #1d4ed8; padding: 0.3rem 0.9rem;
+  border-radius: 999px; font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 0.05em; text-transform: uppercase;
+  margin-bottom: 1.75rem;
+}
+
+.hero h1 {
+  font-family: 'Fraunces', serif;
+  font-weight: 900; font-size: clamp(2.4rem, 5.5vw, 4rem);
+  line-height: 1.1; letter-spacing: -0.03em;
+  margin-bottom: 1.25rem; color: var(--text);
+}
+.hero h1 em {
+  font-style: italic;
+  background: linear-gradient(135deg, var(--accent), var(--cyan));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+}
+
+.hero-sub {
+  color: var(--muted2); font-size: 1.05rem; font-weight: 400;
+  max-width: 520px; margin: 0 auto 2.5rem;
+}
+
+.hero-actions { display: flex; gap: 0.875rem; justify-content: center; flex-wrap: wrap; }
+.btn-primary {
+  background: var(--accent); color: #fff;
+  padding: 0.7rem 1.6rem; border-radius: 10px;
+  font-weight: 600; font-size: 0.9rem;
+  text-decoration: none; transition: all 0.2s;
+  box-shadow: 0 2px 12px rgba(37,99,235,0.25);
+}
+.btn-primary:hover { background: #1d4ed8; transform: translateY(-1px); }
+
+.btn-ghost {
+  background: var(--card); color: var(--muted2);
+  padding: 0.7rem 1.6rem; border-radius: 10px;
+  font-weight: 500; font-size: 0.9rem;
+  text-decoration: none; border: 1px solid var(--border);
+  transition: all 0.2s;
+}
+.btn-ghost:hover { color: var(--text); border-color: var(--accent); }
+
+/* ─── STATS BAR ─── */
+.stats {
+  display: flex; justify-content: center; gap: 0; flex-wrap: wrap;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  background: var(--card);
+  box-shadow: 0 1px 3px rgba(15,23,42,0.05);
+}
+.stat-item {
+  padding: 1.4rem 3rem; text-align: center;
+  border-right: 1px solid var(--border);
+}
+.stat-item:last-child { border-right: none; }
+.stat-val {
+  font-family: 'Fraunces', serif;
+  font-weight: 900; font-size: 1.7rem;
+  background: linear-gradient(135deg, var(--accent), var(--cyan));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  line-height: 1;
+}
+.stat-lbl { color: var(--muted); font-size: 0.76rem; font-weight: 500; margin-top: 0.35rem; }
+
+/* ─── LAYOUT ─── */
+.wrap { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+section { padding: 4rem 0; }
+
+.sec-header {
+  display: flex; align-items: baseline; justify-content: space-between;
+  margin-bottom: 2rem;
+}
+.sec-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 700; font-size: 1.45rem; letter-spacing: -0.02em;
+  color: var(--text);
+}
+.sec-link { color: var(--accent); font-size: 0.85rem; text-decoration: none; font-weight: 600; }
+.sec-link:hover { text-decoration: underline; }
+
+/* ─── FEATURED ─── */
+.featured-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  display: grid; grid-template-columns: 7fr 5fr;
+  overflow: hidden; cursor: pointer;
+  transition: border-color 0.25s, box-shadow 0.25s;
+  margin-bottom: 4rem;
+  box-shadow: 0 2px 8px rgba(15,23,42,0.07);
+}
+.featured-card:hover {
+  border-color: var(--accent);
+  box-shadow: 0 4px 24px rgba(37,99,235,0.1);
+}
+
+.feat-visual {
+  background: #ffffff;
+  min-height: 360px; padding: 2.5rem;
+  display: flex; flex-direction: column; justify-content: center;
+  position: relative; overflow: hidden;
+  border-right: 1px solid var(--border);
+}
+.feat-visual::after {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: none;
+  pointer-events: none;
+}
+
+.pipeline {
+  display: flex; flex-direction: column; gap: 0;
+  position: relative; z-index: 1;
+}
+.pipe-step {
+  display: flex; align-items: center; gap: 0.875rem;
+  background: rgba(255,255,255,0.7);
+  border: 1px solid rgba(37,99,235,0.18);
+  border-radius: 10px; padding: 0.8rem 1rem;
+  font-size: 0.82rem; font-weight: 500; color: var(--text);
+  transition: all 0.2s;
+}
+.featured-card:hover .pipe-step {
+  border-color: rgba(37,99,235,0.35);
+  background: rgba(255,255,255,0.9);
+}
+.pipe-connector {
+  width: 1px; height: 14px;
+  background: linear-gradient(to bottom, rgba(37,99,235,0.35), transparent);
+  margin-left: 19px; margin: 4px 0 4px 19px;
+}
+.pipe-icon {
+  width: 26px; height: 26px; border-radius: 7px;
+  background: linear-gradient(135deg, var(--accent), #0891b2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.78rem; flex-shrink: 0;
+}
+
+.feat-body {
+  padding: 2.5rem 3rem;
+  display: flex; flex-direction: column; justify-content: center;
+  background: var(--card);
+}
+
+.tag {
+  display: inline-block;
+  padding: 0.22rem 0.7rem; border-radius: 999px;
+  font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.06em; text-transform: uppercase;
+  margin-bottom: 1rem;
+}
+.tag-blue   { background: rgba(37,99,235,0.1);  color: #1d4ed8; border: 1px solid rgba(37,99,235,0.22); }
+.tag-cyan   { background: rgba(8,145,178,0.1);  color: #0891b2; border: 1px solid rgba(8,145,178,0.22); }
+.tag-green  { background: rgba(22,163,74,0.1);  color: #16a34a; border: 1px solid rgba(22,163,74,0.22); }
+.tag-orange { background: rgba(234,88,12,0.1);  color: #ea580c; border: 1px solid rgba(234,88,12,0.2); }
+.tag-purple { background: rgba(124,58,237,0.1); color: #7c3aed; border: 1px solid rgba(124,58,237,0.2); }
+
+.feat-body h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 700; font-size: 1.65rem; line-height: 1.2;
+  letter-spacing: -0.02em; margin-bottom: 1rem; color: var(--text);
+}
+.feat-body p { color: var(--muted2); font-size: 0.92rem; margin-bottom: 1.75rem; }
+.art-meta { display: flex; gap: 1.25rem; font-size: 0.78rem; color: var(--muted); align-items: center; }
+.meta-chip {
+  background: rgba(8,145,178,0.1); color: var(--cyan);
+  padding: 0.2rem 0.6rem; border-radius: 6px;
+  font-weight: 600; font-size: 0.72rem;
+}
+
+/* ─── GRID ─── */
+.grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-bottom: 4rem; }
+
+.art-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden;
+  cursor: pointer; transition: all 0.2s;
+  display: flex; flex-direction: column;
+  box-shadow: 0 1px 4px rgba(15,23,42,0.06);
+}
+.art-card:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(37,99,235,0.12); }
+
+.card-thumb {
+  height: 148px; position: relative; overflow: hidden;
+  display: flex; align-items: center; justify-content: center;
+}
+.thumb-1 { background: linear-gradient(145deg, #dbeafe, #bfdbfe); }
+.thumb-2 { background: linear-gradient(145deg, #cffafe, #a5f3fc); }
+.thumb-3 { background: linear-gradient(145deg, #ede9fe, #ddd6fe); }
+.thumb-4 { background: linear-gradient(145deg, #fef3c7, #fde68a); }
+.thumb-5 { background: linear-gradient(145deg, #dcfce7, #bbf7d0); }
+.thumb-6 { background: linear-gradient(145deg, #fee2e2, #fecaca); }
+
+.card-thumb::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(circle at 40% 40%, rgba(255,255,255,0.5), transparent 60%);
+}
+
+.thumb-emoji { font-size: 2.6rem; position: relative; z-index: 1; filter: drop-shadow(0 2px 8px rgba(15,23,42,0.15)); }
+
+.card-body { padding: 1.25rem; flex: 1; display: flex; flex-direction: column; }
+.card-body h3 {
+  font-family: 'Fraunces', serif;
+  font-size: 0.97rem; font-weight: 700; line-height: 1.35;
+  margin: 0.6rem 0 0.5rem; letter-spacing: -0.01em; color: var(--text);
+}
+.card-body p { color: var(--muted2); font-size: 0.82rem; flex: 1; line-height: 1.6; }
+.card-foot {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-top: 1rem; padding-top: 0.875rem;
+  border-top: 1px solid var(--border);
+  font-size: 0.76rem; color: var(--muted);
+}
+.card-arrow { color: var(--accent); font-size: 0.9rem; transition: transform 0.2s; }
+.art-card:hover .card-arrow { transform: translateX(3px); }
+
+/* ─── VOTE SECTION ─── */
+.vote-section {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2.5rem;
+  margin-bottom: 4rem;
+  position: relative; overflow: hidden;
+  box-shadow: 0 2px 8px rgba(15,23,42,0.06);
+}
+.vote-section::before {
+  content: '';
+  position: absolute; top: -60px; right: -60px;
+  width: 280px; height: 280px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(37,99,235,0.05), transparent 70%);
+  pointer-events: none;
+}
+
+.vote-header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  gap: 2rem; margin-bottom: 2rem; flex-wrap: wrap;
+}
+.vote-title-block h3 {
+  font-family: 'Fraunces', serif;
+  font-weight: 700; font-size: 1.4rem; letter-spacing: -0.02em;
+  margin-bottom: 0.4rem; color: var(--text);
+}
+.vote-title-block p { color: var(--muted2); font-size: 0.88rem; }
+
+.vote-total-badge {
+  display: flex; flex-direction: column; align-items: center;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 0.875rem 1.25rem; text-align: center;
+  flex-shrink: 0;
+}
+.vote-total-num {
+  font-family: 'Fraunces', serif; font-size: 1.8rem; font-weight: 900;
+  background: linear-gradient(135deg, var(--accent), var(--cyan));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  line-height: 1;
+}
+.vote-total-lbl { color: var(--muted); font-size: 0.72rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; margin-top: 0.25rem; }
+
+.vote-grid { display: flex; flex-direction: column; gap: 0.875rem; }
+
+.vote-item {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1rem 1.25rem;
+  display: flex; align-items: center; gap: 1rem;
+  transition: all 0.2s; position: relative; overflow: hidden;
+}
+.vote-item:hover { border-color: var(--border2); background: var(--card); }
+.vote-item.top-vote { border-color: rgba(37,99,235,0.35); background: rgba(37,99,235,0.04); }
+
+.vote-bar-bg {
+  position: absolute; left: 0; top: 0; bottom: 0;
+  background: linear-gradient(90deg, rgba(37,99,235,0.07), transparent);
+  border-radius: 12px; transition: width 0.6s cubic-bezier(0.34,1.56,0.64,1);
+  pointer-events: none;
+}
+
+.vote-rank {
+  width: 28px; height: 28px; border-radius: 8px;
+  font-size: 0.72rem; font-weight: 800;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; position: relative; z-index: 1;
+  font-family: 'Fraunces', serif;
+}
+.rank-1 { background: linear-gradient(135deg, #fbbf24, #f59e0b); color: #1a1000; }
+.rank-2 { background: #e2e8f0; color: var(--muted2); }
+.rank-3 { background: #e2e8f0; color: var(--muted2); }
+.rank-other { background: #f1f5f9; color: var(--muted); }
+
+.vote-text { flex: 1; min-width: 0; position: relative; z-index: 1; }
+.vote-text h4 { font-size: 0.9rem; font-weight: 600; margin-bottom: 0.15rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: var(--text); }
+.vote-text p { color: var(--muted); font-size: 0.76rem; line-height: 1.4; }
+
+.vote-stats { display: flex; flex-direction: column; align-items: flex-end; gap: 0.25rem; flex-shrink: 0; position: relative; z-index: 1; }
+.vote-count { font-family: 'Fraunces', serif; font-weight: 700; font-size: 1.1rem; color: var(--text); }
+.vote-pct { font-size: 0.72rem; color: var(--muted); }
+
+.vote-btn {
+  background: var(--card); border: 1px solid var(--border);
+  color: var(--muted2); padding: 0.4rem 0.9rem;
+  border-radius: 8px; font-size: 0.78rem; font-weight: 600;
+  cursor: pointer; transition: all 0.2s; flex-shrink: 0;
+  font-family: 'DM Sans', sans-serif; position: relative; z-index: 1;
+  white-space: nowrap;
+}
+.vote-btn:hover:not(:disabled) { background: var(--accent); border-color: var(--accent); color: #fff; }
+.vote-btn:disabled { opacity: 0.5; cursor: default; }
+.vote-btn.voted { background: rgba(37,99,235,0.1); border-color: rgba(37,99,235,0.3); color: #1d4ed8; }
+
+.vote-footer {
+  margin-top: 1.5rem; padding-top: 1.25rem;
+  border-top: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: space-between;
+  font-size: 0.8rem; color: var(--muted); flex-wrap: gap;
+}
+.vote-disclaimer { display: flex; align-items: center; gap: 0.5rem; }
+.vote-disclaimer::before { content: 'ℹ️'; font-size: 0.875rem; }
+
+/* ─── NEWSLETTER ─── */
+.newsletter-block {
+  background: linear-gradient(135deg, #dbeafe 0%, #e0f2fe 100%);
+  border: 1px solid rgba(37,99,235,0.15);
+  border-radius: var(--radius);
+  padding: 3rem; text-align: center;
+  position: relative; overflow: hidden;
+  margin-bottom: 2rem;
+}
+.newsletter-block::before {
+  content: '';
+  position: absolute; top: -80px; left: 50%; transform: translateX(-50%);
+  width: 500px; height: 300px;
+  background: radial-gradient(ellipse, rgba(37,99,235,0.08), transparent 70%);
+  pointer-events: none;
+}
+.nl-title {
+  font-family: 'Fraunces', serif; font-weight: 900;
+  font-size: 1.65rem; letter-spacing: -0.02em;
+  margin-bottom: 0.75rem; position: relative; color: var(--text);
+}
+.nl-sub { color: var(--muted2); margin-bottom: 2rem; position: relative; font-size: 0.95rem; }
+.nl-form { display: flex; gap: 0.75rem; max-width: 420px; margin: 0 auto; position: relative; }
+.nl-input {
+  flex: 1; background: rgba(255,255,255,0.9); border: 1px solid var(--border);
+  color: var(--text); padding: 0.7rem 1rem; border-radius: 10px;
+  font-family: inherit; font-size: 0.88rem; outline: none;
+  transition: border-color 0.2s;
+}
+.nl-input:focus { border-color: var(--accent); }
+.nl-input::placeholder { color: var(--muted); }
+
+/* ─── MODAL ─── */
+.modal-overlay {
+  display: none; position: fixed; inset: 0;
+  background: rgba(15,23,42,0.6); z-index: 500;
+  backdrop-filter: blur(8px);
+  overflow-y: auto; padding: 2rem 1rem;
+}
+.modal-overlay.open { display: flex; align-items: flex-start; justify-content: center; }
+.modal {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 18px; max-width: 780px; width: 100%;
+  position: relative; margin: auto;
+  animation: slideUp 0.25s ease;
+  box-shadow: 0 20px 60px rgba(15,23,42,0.18);
+}
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.modal-close {
+  position: absolute; top: 1.25rem; right: 1.25rem;
+  background: var(--surface); border: 1px solid var(--border); color: var(--muted);
+  width: 32px; height: 32px; border-radius: 8px;
+  font-size: 1rem; cursor: pointer; transition: all 0.2s;
+  display: flex; align-items: center; justify-content: center;
+  z-index: 1;
+}
+.modal-close:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+.modal-header {
+  padding: 2rem 2.5rem 1.5rem;
+  border-bottom: 1px solid var(--border);
+}
+.modal-header h2 {
+  font-family: 'Fraunces', serif;
+  font-weight: 700; font-size: 1.55rem; line-height: 1.25;
+  letter-spacing: -0.02em; margin: 0.75rem 0 0.75rem; color: var(--text);
+}
+.modal-meta { display: flex; gap: 1.5rem; font-size: 0.8rem; color: var(--muted); }
+.modal-body {
+  padding: 2rem 2.5rem;
+  font-size: 0.94rem; line-height: 1.8; color: var(--muted2);
+}
+.modal-body h3 {
+  font-family: 'Fraunces', serif; font-size: 1.05rem; font-weight: 700;
+  color: var(--cyan); margin: 1.75rem 0 0.6rem;
+}
+.modal-body p { margin-bottom: 0.875rem; }
+.modal-body ul { margin: 0.25rem 0 1rem 1.5rem; }
+.modal-body li { margin-bottom: 0.4rem; }
+.modal-body strong { color: var(--text); font-weight: 600; }
+.modal-body code {
+  background: rgba(37,99,235,0.08); color: #1d4ed8;
+  padding: 0.1rem 0.45rem; border-radius: 5px;
+  font-size: 0.84rem; font-family: 'Courier New', monospace;
+}
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--text); border-top: 1px solid rgba(255,255,255,0.08);
+  padding: 2.5rem 2rem; text-align: center;
+  color: rgba(255,255,255,0.5); font-size: 0.82rem;
+}
+.footer-brand {
+  font-family: 'Fraunces', serif; font-weight: 900; font-size: 1.15rem;
+  color: #fff; margin-bottom: 0.5rem; display: block; letter-spacing: -0.02em;
+}
+.footer-brand span { color: #60a5fa; }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  .featured-card { grid-template-columns: 1fr; }
+  .feat-visual { min-height: 220px; border-right: none; border-bottom: 1px solid var(--border); }
+  .grid-3 { grid-template-columns: 1fr 1fr; }
+  .stat-item { padding: 1.25rem 1.5rem; }
+  .series-banner { grid-template-columns: 1fr; }
+  .series-progress { display: none; }
+  .series-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 600px) {
+  .grid-3 { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .feat-body { padding: 1.75rem; }
+  .vote-header { flex-direction: column; }
+  .series-grid { grid-template-columns: 1fr; }
+}
+
+/* ─── SERIES BANNER ─── */
+.series-banner {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem 2.5rem;
+  margin-bottom: 1.5rem;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1.5rem 2rem;
+  align-items: center;
+  box-shadow: 0 1px 4px rgba(15,23,42,0.06);
+}
+.series-badge {
+  background: rgba(37,99,235,0.08);
+  border: 1px solid rgba(37,99,235,0.2);
+  color: #1d4ed8;
+  padding: 0.3rem 0.85rem;
+  border-radius: 999px;
+  font-size: 0.75rem; font-weight: 700;
+  letter-spacing: 0.05em; white-space: nowrap;
+  align-self: start; margin-top: 0.15rem;
+}
+.series-title {
+  font-family: 'Fraunces', serif;
+  font-weight: 900; font-size: 1.3rem;
+  letter-spacing: -0.02em; margin-bottom: 0.4rem; color: var(--text);
+}
+.series-sub { color: var(--muted2); font-size: 0.88rem; }
+.series-progress { display: flex; align-items: center; gap: 0; }
+.series-step { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+.ss-num {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--cyan));
+  color: #fff; border: none;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Fraunces', serif; font-weight: 700; font-size: 0.9rem;
+  box-shadow: 0 2px 8px rgba(37,99,235,0.25);
+}
+.ss-lbl { font-size: 0.68rem; color: var(--muted2); text-align: center; line-height: 1.3; white-space: nowrap; }
+.series-line {
+  width: 32px; height: 2px;
+  background: linear-gradient(90deg, rgba(37,99,235,0.3), rgba(8,145,178,0.3));
+  margin-bottom: 18px;
+}
+
+/* ─── SERIES CARDS ─── */
+.series-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.25rem; margin-bottom: 4rem; }
+.series-card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: var(--radius); overflow: hidden;
+  cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column;
+  box-shadow: 0 1px 4px rgba(15,23,42,0.06);
+}
+.series-card:hover { transform: translateY(-3px); box-shadow: 0 8px 24px rgba(37,99,235,0.1); border-color: var(--accent); }
+.series-card-header { padding: 1.25rem 1.25rem 0.5rem; }
+.sc-blue   { background: linear-gradient(160deg,#dbeafe,#eff6ff); border-bottom: 1px solid rgba(37,99,235,0.15); }
+.sc-purple { background: linear-gradient(160deg,#ede9fe,#f5f3ff); border-bottom: 1px solid rgba(124,58,237,0.15); }
+.sc-green  { background: linear-gradient(160deg,#dcfce7,#f0fdf4); border-bottom: 1px solid rgba(22,163,74,0.15); }
+.sc-part { font-size: 0.7rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0.75rem; }
+.sc-blue .sc-part   { color: #1d4ed8; }
+.sc-purple .sc-part { color: #7c3aed; }
+.sc-green .sc-part  { color: #16a34a; }
+.series-card-body { padding: 1.25rem; flex: 1; display: flex; flex-direction: column; }
+.series-card-body h3 { font-family: 'Fraunces', serif; font-size: 0.97rem; font-weight: 700; line-height: 1.35; margin-bottom: 0.6rem; letter-spacing: -0.01em; color: var(--text); }
+.series-card-body p { color: var(--muted2); font-size: 0.82rem; flex: 1; line-height: 1.6; }
+.series-card-body code { background: rgba(37,99,235,0.08); color: #1d4ed8; padding: 0.05rem 0.35rem; border-radius: 4px; font-size: 0.78rem; font-family: 'Courier New', monospace; }
+
+/* ─── MODAL ARTICLE DETAIL STYLES ─── */
+.step-block { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem 1.5rem; margin: 1.25rem 0; }
+.step-num { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(37,99,235,0.1); color: #1d4ed8; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; padding: 0.2rem 0.65rem; border-radius: 999px; margin-bottom: 0.75rem; }
+.step-title { font-family: 'Fraunces', serif; font-weight: 700; font-size: 1rem; margin-bottom: 0.6rem; color: var(--text); }
+.code-block { background: #1e293b; border: 1px solid #334155; border-radius: 8px; padding: 1rem 1.25rem; margin: 0.75rem 0; font-family: 'Courier New', monospace; font-size: 0.82rem; color: #a5f3fc; line-height: 1.8; overflow-x: auto; white-space: pre; }
+.code-block .cm { color: #64748b; }
+.code-block .kw { color: #93c5fd; }
+.code-block .fn { color: #34d399; }
+.code-block .st { color: #fbbf24; }
+.mockup { background: #f8fafc; border: 1px solid var(--border); border-radius: 10px; padding: 0.875rem; margin: 0.75rem 0; }
+.mockup-row { background: #fff; border: 1px solid var(--border); border-radius: 6px; padding: 0.45rem 0.875rem; display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.4rem; }
+.mockup-row:last-child { margin-bottom: 0; }
+.mb-label { color: var(--muted); font-size: 0.74rem; min-width: 110px; flex-shrink: 0; }
+.mb-val { color: var(--text); font-size: 0.82rem; font-family: 'Courier New', monospace; }
+.mb-tag { background: rgba(22,163,74,0.1); color: #16a34a; padding: 0.1rem 0.5rem; border-radius: 4px; font-size: 0.72rem; font-weight: 600; }
+.mb-tag.warn { background: rgba(234,88,12,0.1); color: #ea580c; }
+.mb-tag.blue { background: rgba(37,99,235,0.1); color: #1d4ed8; }
+.tip-box { background: rgba(8,145,178,0.07); border-left: 3px solid var(--cyan); border-radius: 0 8px 8px 0; padding: 0.875rem 1rem; margin: 0.875rem 0; font-size: 0.88rem; color: var(--muted2); }
+.tip-box strong { color: var(--cyan); }
+.warn-box { background: rgba(234,88,12,0.07); border-left: 3px solid var(--orange); border-radius: 0 8px 8px 0; padding: 0.875rem 1rem; margin: 0.875rem 0; font-size: 0.88rem; color: var(--muted2); }
+.warn-box strong { color: var(--orange); }
+.excel-table { width: 100%; border-collapse: collapse; font-size: 0.8rem; margin: 0.75rem 0; border-radius: 8px; overflow: hidden; border: 1px solid var(--border); }
+.excel-table th { background: rgba(37,99,235,0.08); color: #1d4ed8; padding: 0.5rem 0.875rem; text-align: left; font-weight: 600; font-size: 0.75rem; letter-spacing: 0.04em; text-transform: uppercase; }
+.excel-table td { padding: 0.5rem 0.875rem; border-bottom: 1px solid var(--border); color: var(--muted2); font-family: 'Courier New', monospace; font-size: 0.78rem; }
+.excel-table tr:last-child td { border-bottom: none; }
+.excel-table tr:nth-child(even) td { background: #f8fafc; }
+.nav-series { display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); }
+.nav-btn { background: var(--surface); border: 1px solid var(--border); color: var(--muted2); padding: 0.6rem 1.1rem; border-radius: 8px; font-size: 0.82rem; font-weight: 600; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.2s; }
+.nav-btn:hover { border-color: var(--accent); color: var(--text); }
+.status-badge { padding:0.18rem 0.6rem;border-radius:999px;font-size:0.68rem;font-weight:700;letter-spacing:0.04em; }
+.status-badge.pub   { background:rgba(22,163,74,0.12);color:#16a34a;border:1px solid rgba(22,163,74,0.25); }
+.status-badge.sched { background:rgba(37,99,235,0.1);color:#1d4ed8;border:1px solid rgba(37,99,235,0.22); }
+.status-badge.meta  { background:rgba(234,88,12,0.1);color:#ea580c;border:1px solid rgba(234,88,12,0.22); }
+
+.cal-block { background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:2rem;margin-bottom:4rem;box-shadow:0 1px 4px rgba(15,23,42,0.06); }
+.cal-flow-hint { margin-bottom:1.75rem;padding-bottom:1.5rem;border-bottom:1px solid var(--border); overflow-x:auto; }
+.cal-grid { display:flex;flex-direction:column;gap:0.625rem; }
+.cal-row { display:grid;grid-template-columns:110px 1fr auto;align-items:center;gap:1rem;
+  background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:0.75rem 1.1rem;transition:border-color .2s; }
+.cal-row.is-live { border-color:rgba(22,163,74,0.4);background:rgba(22,163,74,0.04); }
+.cal-row.is-next { border-color:rgba(37,99,235,0.35);background:rgba(37,99,235,0.04); }
+.cal-date { font-size:0.76rem;font-weight:600;color:var(--muted);font-family:'Courier New',monospace; }
+.cal-row.is-live .cal-date { color:#16a34a; }
+.cal-row.is-next .cal-date { color:#1d4ed8; }
+.cal-title-cell { font-size:0.88rem;font-weight:500;color:var(--text); }
+.cal-title-cell small { display:block;color:var(--muted);font-size:0.75rem;margin-top:0.1rem; }
+.cal-status { font-size:0.72rem;font-weight:700;padding:0.2rem 0.65rem;border-radius:6px;white-space:nowrap; }
+.cal-status.live { background:rgba(22,163,74,0.12);color:#16a34a; }
+.cal-status.next { background:rgba(37,99,235,0.12);color:#1d4ed8; }
+.cal-status.plan { background:rgba(15,23,42,0.06);color:var(--muted); }
+
+/* ─── AVANT/APRÈS TABLE ─── */
+.avant-apres {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0; border-radius: 12px; overflow: hidden;
+  border: 1px solid var(--border); margin: 1.25rem 0;
+  font-size: 0.85rem;
+}
+.aa-col { display: flex; flex-direction: column; }
+.aa-header {
+  padding: 0.75rem 1rem; font-weight: 700; font-size: 0.78rem;
+  letter-spacing: 0.05em; text-transform: uppercase;
+  display: flex; align-items: center; gap: 0.5rem;
+}
+.aa-avant .aa-header { background: #fee2e2; color: #b91c1c; border-bottom: 1px solid #fecaca; }
+.aa-apres .aa-header { background: #dcfce7; color: #15803d; border-bottom: 1px solid #bbf7d0; border-left: 1px solid var(--border); }
+.aa-row {
+  padding: 0.6rem 1rem; border-bottom: 1px solid var(--border);
+  color: var(--muted2); display: flex; align-items: flex-start; gap: 0.5rem;
+}
+.aa-apres .aa-row { border-left: 1px solid var(--border); }
+.aa-row:last-child { border-bottom: none; }
+.aa-avant .aa-row::before { content: '✗'; color: #ef4444; flex-shrink: 0; font-weight: 700; margin-top: 0.05rem; }
+.aa-apres .aa-row::before { content: '✓'; color: #22c55e; flex-shrink: 0; font-weight: 700; margin-top: 0.05rem; }
+/* ── Article pages ── */
+.article-page { max-width: 860px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+.article-container { width: 100%; }
+.breadcrumb { font-size: .82rem; color: var(--muted); margin-bottom: 1.5rem; }
+.breadcrumb a { color: var(--accent); text-decoration: none; }
+.breadcrumb a:hover { text-decoration: underline; }
+.article-header { margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
+.article-title { font-family: 'Fraunces', serif; font-size: 2rem; font-weight: 900; color: var(--text); line-height: 1.25; margin: 0 0 .75rem; }
+.article-meta { color: var(--muted2); font-size: .88rem; margin: 0; }
+.article-body { line-height: 1.75; color: var(--text); }
+.article-body p { margin: 0 0 1rem; }
+.article-body h2 { font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 900; margin: 2rem 0 1rem; }
+.article-body h3 { font-size: 1.1rem; font-weight: 700; margin: 1.75rem 0 .75rem; color: var(--text); }
+
+/* ── Screenshot placeholder ── */
+.screenshot-placeholder {
+  margin: 1.5rem 0;
+  border: 2px dashed var(--border2);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--surface);
+}
+.screenshot-placeholder img.screenshot {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px 8px 0 0;
+}
+.screenshot-placeholder img.screenshot[src$="FILENAME.png"],
+.screenshot-placeholder img.screenshot:not([src]) {
+  min-height: 180px;
+  background: var(--surface);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.screenshot-caption {
+  font-size: .78rem;
+  color: var(--muted2);
+  padding: .5rem .75rem;
+  background: var(--surface);
+  margin: 0;
+  border-top: 1px solid var(--border);
+  font-style: italic;
+}
+
+@media (max-width: 640px) {
+  .article-title { font-size: 1.5rem; }
+  .article-page { padding: 1rem 1rem 3rem; }
+}
