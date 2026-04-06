@@ -139,13 +139,16 @@
 
   <!-- 1/6 -->
   <div class="series-card" onclick="window.location='articles/quitter-excel-pour-sharepoint-lists.html'">
-    <div class="series-card-header" style="background:linear-gradient(135deg,rgba(234,88,12,0.12),rgba(234,88,12,0.04))">
+    <div class="series-card-header">
       <div class="sc-part">Étape 1 / 6</div>
-	  <div class="sc-diagram" style="display:flex;align-items:center;justify-content:center;height:90px;font-size:2.2rem;gap:.5rem">📊 → 📋</div>
     </div>
     <div class="series-card-body">
-		<h3>Pourquoi quitter Excel</h3>
-        <p>Excel n’est pas un système. Comprendre pourquoi les listes SharePoint sont indispensables.</p>
+		<div class="card-title-row">
+	      <span class="card-icon">📊 → 📋</span>
+		  <h3>Pourquoi quitter Excel</h3>
+		</div>
+	  
+      <p>Excel n’est pas un système. Comprendre pourquoi les listes SharePoint sont indispensables.</p>
       <div class="card-foot">
         <span>5 min · Débutant</span>
         <span class="card-arrow">→</span>
@@ -153,6 +156,8 @@
     </div>
   </div>
   
+
+
   <!-- 2/6 -->
   <div class="series-card" onclick="window.location='articles/listes-sharepoint-moteur-automatisation.html'">
     <div class="series-card-header">
