@@ -211,6 +211,19 @@ section { padding: 4rem 0; }
 .sec-link { color: var(--accent); font-size: 0.85rem; text-decoration: none; font-weight: 600; }
 .sec-link:hover { text-decoration: underline; }
 
+card-title-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.card-icon {
+  font-size: 1.2rem;
+  line-height: 1;
+}
+
+
+
 /* ─── FEATURED ─── */
 .featured-card {
   background: var(--card);
