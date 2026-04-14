@@ -21,6 +21,15 @@
       <span style="color:var(--accent)">répétitives</span>
     </span>
   </a>
+  <ul class="nav-links">
+    <li><a href="../index.html#articles">Articles</a></li>
+    <li><a href="../index.html#vote">Voter</a></li>
+    <li><a href="../index.html#proposez">Proposez un sujet</a></li>
+    <li><a href="../index.html#newsletter">Infolettre</a></li>
+  </ul>
+
+  <a href="../index.html#newsletter" class="nav-cta">S'abonner</a>
+  <button class="lang-toggle" id="lang-btn" onclick="toggleLang()">EN</button>
 </nav>
 
 <main class="article-page">
@@ -33,15 +42,21 @@
     </nav>
 
     <header class="article-header">
-      <h1 class="article-title">
+      <h1
+        id="article-title"
+        class="article-title"
+        data-lang-fr="Les approbations natives SharePoint : simples, rapides… souvent suffisantes"
+        data-lang-en="Native SharePoint approvals: simple, fast… often sufficient"
+      >
         Les approbations natives SharePoint : simples, rapides… souvent suffisantes
       </h1>
+      
       <p class="article-meta">
         Avril 2026 · 7 min · Débutant
       </p>
     </header>
 
-    <div class="article-body lang-fr">
+    <div id="article-body-fr" class="article-body lang-fr">
 
       <p>
         Quand un processus implique une décision humaine,
@@ -143,14 +158,126 @@
         elle est souvent la meilleure solution.
       </div>
 
+      
+<div id="article-body-en" class="article-body lang-en">
+
+  <p>
+    When a process involves a human decision,
+    the default reflex is often:
+    <strong>“Let’s build a Power Automate flow.”</strong>
+  </p>
+
+  <p>
+    Yet SharePoint already provides
+    a simple, built‑in approval mechanism
+    that is perfectly suited for many real‑world scenarios.
+  </p>
+
+  <h3>What is a native SharePoint approval?</h3>
+
+  <p>
+    A native SharePoint approval allows you to:
+  </p>
+
+  <ul>
+    <li>submit a list item for approval</li>
+    <li>assign one or more approvers</li>
+    <li>track the status: pending / approved / rejected</li>
+  </ul>
+
+  <div class="tip-box">
+    <strong>💡 Important:</strong><br>
+    All of this works without Power Automate,
+    directly from the SharePoint list interface.
+  </div>
+
+  <h3>Typical use cases</h3>
+
+  <ul>
+    <li>simple purchase requests</li>
+    <li>vacation or time‑off requests</li>
+    <li>internal document validation</li>
+    <li>one‑off exceptions or approvals</li>
+  </ul>
+
+  <h3>Why it works so well</h3>
+
+  <table class="excel-table">
+    <thead>
+      <tr>
+        <th>Criteria</th>
+        <th>Native approval</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Simplicity</td>
+        <td>✅ Very high</td>
+      </tr>
+      <tr>
+        <td>Visibility</td>
+        <td>✅ Directly in the list</td>
+      </tr>
+      <tr>
+        <td>Maintenance</td>
+        <td>✅ Almost none</td>
+      </tr>
+      <tr>
+        <td>IT dependency</td>
+        <td>✅ None</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Limitations to be aware of</h3>
+
+  <ul>
+    <li>linear logic only</li>
+    <li>limited notification customization</li>
+    <li>no complex conditional scenarios</li>
+  </ul>
+
+  <div class="warn-box">
+    <strong>⚠️ Keep in mind:</strong><br>
+    If you feel the need to work around the tool,
+    it is usually a sign that Power Automate may be more appropriate.
+  </div>
+
+  <h3>When to move to Power Automate</h3>
+
+  <p>
+    Power Automate becomes necessary when:
+  </p>
+
+  <ul>
+    <li>multiple approval levels are required</li>
+    <li>the approver depends on business data</li>
+    <li>dynamic reminders or escalation are needed</li>
+  </ul>
+
+  <div class="tip-box">
+    <strong>Key message:</strong><br>
+    Start simple.
+    If native approvals meet the requirement,
+    they are often the best solution.
+  </div>
+
+</div>
     </div>
 
   </div>
 </main>
 
-<footer class="footer">
-  <p>© 2026 AutomatisezVousMême.ca</p>
-</footer>
+<footer style="text-align:center;padding:2rem;color:var(--muted);font-size:.85rem;border-top:1px solid var(--border);margin-top:4rem">
+  <span class="footer-brand">
+    <span data-i18n="brand_main">Automatisez vos tâches</span>
+    <span data-i18n="brand_accent">répétitives</span>
+  </span>
+  <p style="margin:.5rem 0 0" data-i18n="footer_sub">
+    Des tutoriels concrets pour aller plus loin avec Microsoft 365
+  </p>
+  <p style="margin:.25rem 0 0">© 2026 AutomatisezVousMême.ca</p>
+</footer>  
 
 <script src="../js/article.js"></script>
 </body>
