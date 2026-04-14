@@ -21,6 +21,14 @@
       <span style="color:var(--accent)">répétitives</span>
     </span>
   </a>
+  <ul class="nav-links">
+    <li><a href="../index.html#articles">Articles</a></li>
+    <li><a href="../index.html#vote">Voter</a></li>
+    <li><a href="../index.html#proposez">Proposez un sujet</a></li>
+    <li><a href="../index.html#newsletter">Infolettre</a></li>
+  </ul>
+<a href="../index.html#newsletter" class="nav-cta">S'abonner</a>
+<button class="lang-toggle" id="lang-btn" onclick="toggleLang()">EN</button>  
 </nav>
 
 <main class="article-page">
@@ -33,15 +41,24 @@
     </nav>
 
     <header class="article-header">
-      <h1 class="article-title">
+      <h1
+        id="article-title"
+        class="article-title"
+        data-lang-fr="Rules, Quick Steps, Approvals ou Power Automate ?"
+        data-lang-en="Rules, Quick Steps, Approvals or Power Automate ?"
+      >
         Rules, Quick Steps, Approvals ou Power Automate ?
       </h1>
+      
+      
+
       <p class="article-meta">
         Avril 2026 · 8 min · Guide comparatif
       </p>
     </header>
 
-    <div class="article-body lang-fr">
+<!-- ARTICLE BODY FR -->
+    <div id="article-body-fr" class="article-body lang-fr">
 
       <p>
         Dans Microsoft 365, <strong>tout ne nécessite pas Power Automate</strong>.
@@ -143,12 +160,121 @@
       </p>
 
     </div>
+<div id="article-body-en" class="article-body lang-en">
+
+  <p>
+    In Microsoft 365, <strong>not everything requires Power Automate</strong>.
+    And conversely, not everything should be handled using SharePoint alone.
+  </p>
+
+  <p>
+    The real challenge is to <strong>choose the right approach</strong>
+    based on the level of complexity of the requirement.
+  </p>
+
+  <h3>Overview of the available approaches</h3>
+
+  <table class="excel-table">
+    <thead>
+      <tr>
+        <th>Tool</th>
+        <th>When to use it</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Rules</td>
+        <td>Simple notifications and obvious triggers</td>
+      </tr>
+      <tr>
+        <td>Quick Steps</td>
+        <td>User‑initiated guided actions</td>
+      </tr>
+      <tr>
+        <td>Native approvals</td>
+        <td>Simple, traceable human decisions</td>
+      </tr>
+      <tr>
+        <td>Power Automate</td>
+        <td>Complex logic, integrations, advanced scenarios</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Detailed comparison</h3>
+
+  <table class="excel-table">
+    <thead>
+      <tr>
+        <th>Criteria</th>
+        <th>Native SharePoint</th>
+        <th>Power Automate</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Implementation time</td>
+        <td>Very short</td>
+        <td>Variable</td>
+      </tr>
+      <tr>
+        <td>Business readability</td>
+        <td>✅ High</td>
+        <td>❌ Technical</td>
+      </tr>
+      <tr>
+        <td>Maintenance</td>
+        <td>Low</td>
+        <td>Medium to high</td>
+      </tr>
+      <tr>
+        <td>Scalability</td>
+        <td>Limited</td>
+        <td>Very high</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>The decision pyramid</h3>
+
+  <ul>
+    <li>👉 One simple action → <strong>Rule</strong></li>
+    <li>👉 Occasional human decision → <strong>Quick Step</strong></li>
+    <li>👉 Simple validation → <strong>Native approval</strong></li>
+    <li>👉 Conditional logic or integration → <strong>Power Automate</strong></li>
+  </ul>
+
+  <div class="tip-box">
+    <strong>Foundational principle of Automatisez‑vous‑mêmes:</strong><br>
+    Start simple.
+    Structure first.
+    Automate afterwards.
+  </div>
+
+  <p>
+    Power Automate is an accelerator —
+    not a requirement.
+  </p>
+
+  <p>
+    The best automations are often the ones
+    that never required a flow in the first place.
+  </p>
+
+</div>
 
   </div>
 </main>
 
-<footer class="footer">
-  <p>© 2026 AutomatisezVousMême.ca</p>
+<footer style="text-align:center;padding:2rem;color:var(--muted);font-size:.85rem;border-top:1px solid var(--border);margin-top:4rem">
+  <span class="footer-brand">
+    <span data-i18n="brand_main">Automatisez vos tâches</span>
+    <span data-i18n="brand_accent">répétitives</span>
+  </span>
+  <p style="margin:.5rem 0 0" data-i18n="footer_sub">
+    Des tutoriels concrets pour aller plus loin avec Microsoft 365
+  </p>
+  <p style="margin:.25rem 0 0">© 2026 AutomatisezVousMême.ca</p>
 </footer>
 
 <script src="../js/article.js"></script>
