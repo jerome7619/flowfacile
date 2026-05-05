@@ -720,6 +720,11 @@ const i18n = {
 	forms_step3_label: "Approbation\ngestionnaire",
 	forms_step4_label: "Relance\nautomatique",
 	forms_step5_label: "Rapport\nhebdomadaire",
+	forms_step1_label_html: "Formulaire<br>en ligne",
+	forms_step2_label_html: "Accusé de<br>réception",
+	forms_step3_label_html: "Approbation<br>gestionnaire",
+	forms_step4_label_html: "Relance<br>automatique",
+	forms_step5_label_html: "Rapport<br>hebdomadaire",
   },
   en: {
     nav_articles: 'Articles',
@@ -833,6 +838,12 @@ const i18n = {
 	forms_step3_label: "Manager\napproval",
 	forms_step4_label: "Automatic\nfollow‑up",
 	forms_step5_label: "Weekly\nreport",
+	forms_step1_label_html: "Online<br>form",
+	forms_step2_label_html: "Receipt<br>confirmation",
+	forms_step3_label_html: "Manager<br>approval",
+	forms_step4_label_html: "Automatic<br>follow‑up",
+	forms_step5_label_html: "Weekly<br>report",
+
   }
 };
 
@@ -849,7 +860,7 @@ function setLang(lang) {
   document.querySelectorAll('[data-i18n]').forEach(el => {
     const key = el.getAttribute('data-i18n');
     if (!t[key]) return;
-    if (key === 'hero_h1_html' || key === 'hero_note') { el.innerHTML = t[key]; return; }
+    if (key.endsWith('_html')) { el.innerHTML = t[key]; return; }
     el.textContent = t[key];
   });
 
