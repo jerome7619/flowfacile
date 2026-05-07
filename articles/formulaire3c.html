@@ -145,7 +145,191 @@
 
     <!-- ARTICLE BODY EN -->
     <div id="article-body-en" class="article-body lang-en" style="display:none">
-      <p>Every Friday morning, this flow automatically generates a summary table of all pending requests and sends it by email.</p>
+     
+
+  <p>
+    Every Friday morning, this Power Automate flow automatically generates
+    a summary table of all pending requests
+    and sends it by email — with no manual intervention.
+  </p>
+
+  <div class="tip-box">
+    <strong>⏱ Estimated setup time:</strong><br>
+    20–30 minutes — the shortest flow of the entire series.
+  </div>
+
+  <h3>Step 1 — Weekly trigger</h3>
+
+  <p>
+    Create a new flow using the <strong>Schedule (Recurrence)</strong> trigger:
+  </p>
+
+  <ul>
+    <li><strong>Frequency:</strong> Week</li>
+    <li><strong>Interval:</strong> 1</li>
+    <li><strong>Day:</strong> Friday</li>
+    <li><strong>Time:</strong> 10:00 AM (EST)</li>
+  </ul>
+
+  <p>
+    This ensures the report is generated once per week,
+    always at the same time.
+  </p>
+
+  <h3>Step 2 — Retrieve pending requests from SharePoint</h3>
+
+  <p>
+    Add the <strong>Get items</strong> (SharePoint) action
+    with the following filter and sort configuration:
+  </p>
+
+  <ul>
+    <li>Filter: <code>Status eq 'Pending approval' or Status eq 'Submitted'</code></li>
+    <li>Sort by: <code>TrainingDate</code> (ascending)</li>
+  </ul>
+
+  <p>
+    This retrieves only the relevant requests
+    and presents them in a logical order.
+  </p>
+
+  <h3>Step 3 — Select the columns for the report</h3>
+
+  <p>
+    Add the <strong>Select</strong> action to control
+    which fields appear in the final report table.
+  </p>
+
+  <p>
+    Typical columns:
+  </p>
+
+  <ul>
+    <li>Requester</li>
+    <li>Training name</li>
+    <li>Training date</li>
+    <li>Manager</li>
+    <li>Submission date (formatted)</li>
+  </ul>
+
+  <div class="tip-box">
+    <strong>💡 Why use the Select action?</strong><br>
+    It lets you control column order
+    and replace technical SharePoint field names
+    with readable, business-friendly labels.
+  </div>
+
+  <h3>Step 4 — Generate the HTML table</h3>
+
+  <p>
+    Add the <strong>Create HTML table</strong> action,
+    using the output of the <em>Select</em> action.
+  </p>
+
+  <ul>
+    <li><strong>Source:</strong> Output of Select</li>
+    <li><strong>Columns:</strong> Automatic</li>
+  </ul>
+
+  <p>
+    Power Automate will format the data
+    into a clean, readable HTML table.
+  </p>
+
+  <h3>Step 5 — Check whether the report contains data</h3>
+
+  <p>
+    An empty HTML table still contains header markup
+    (approximately 101 characters).
+    To avoid sending empty reports,
+    add a <strong>Compose</strong> action:
+  </p>
+
+  <pre><code>length(body('Create_HTML_table'))</code></pre>
+
+  <p>
+    Then add a condition:
+  </p>
+
+  <pre><code>length(body('Create_HTML_table')) &gt; 101</code></pre>
+
+  <div class="warn-box">
+    <strong>⚠️ Why 101 characters?</strong><br>
+    Even an empty table includes &lt;table&gt;, &lt;thead&gt; and headers.
+    If the length exceeds 101 characters,
+    real data is present.
+  </div>
+
+  <h3>Step 6 — Send the summary email</h3>
+
+  <p>
+    In the <em>Yes</em> branch of the condition,
+    add <strong>Send an email (V2)</strong>:
+  </p>
+
+  <ul>
+    <li><strong>To:</strong> manager@yourdomain.com</li>
+    <li><strong>Subject:</strong> 📋 Weekly report — Pending training requests</li>
+    <li><strong>Body:</strong> HTML table output</li>
+    <li><strong>Is HTML:</strong> Yes</li>
+  </ul>
+
+  <div class="tip-box">
+    <strong>💡 Important:</strong><br>
+    <strong>Is HTML = Yes</strong> is required.
+    Otherwise, the table will render as plain text.
+  </div>
+
+  <h3>🎯 Final result — The complete 5‑part process</h3>
+
+  <table class="excel-table">
+    <thead>
+      <tr>
+        <th>Part</th>
+        <th>What happens</th>
+        <th>Who is involved</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>1</td>
+        <td>Employee submits an online form</td>
+        <td>Employee</td>
+      </tr>
+      <tr>
+        <td>2</td>
+        <td>Automatic receipt confirmation</td>
+        <td>Flow → Employee</td>
+      </tr>
+      <tr>
+        <td>3</td>
+        <td>Manager approval request</td>
+        <td>Flow → Manager → Flow → Employee</td>
+      </tr>
+      <tr>
+        <td>4</td>
+        <td>Reminder after 5 days / Expiration after 10 days</td>
+        <td>Flow → Manager or Employee</td>
+      </tr>
+      <tr>
+        <td>5</td>
+        <td>Weekly report of unprocessed requests</td>
+        <td>Flow → Manager</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="tip-box">
+    <strong>Key takeaway:</strong><br>
+    Five flows, zero manual work —
+    your request process is now complete,
+    traceable and professional from start to finish.
+  </div>
+
+</div>
+      
+      
+      
       <div class="step-block">
         <div class="step-num">Steps 1–6</div>
         <div class="step-title">Friday trigger → Get items → Select columns → Create HTML table → Check length > 101 → Send email</div>
