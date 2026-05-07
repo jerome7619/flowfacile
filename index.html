@@ -293,8 +293,8 @@
           <div class="sc-diagram" style="display:flex;align-items:center;justify-content:center;height:90px;font-size:2.2rem;gap:.5rem">📄 → 📋 → ☁️</div>
         </div>
         <div class="series-card-body">
-          <h3>Remplacer votre formulaire Word par un formulaire en ligne</h3>
-          <p>Créer le formulaire Microsoft Forms, configurer la liste SharePoint et brancher le flow en 7 étapes.</p>
+          <h3 data-i18n="forms_card1_title">Remplacer votre formulaire Word par un formulaire en ligne</h3>
+          <p data-i18n="forms_card1_desc">Créer le formulaire Microsoft Forms, configurer la liste SharePoint et brancher le flow en 7 étapes.</p>
           <div class="card-foot"><span>12 min · Débutant</span><span class="card-arrow">→</span></div>
         </div>
       </div>
@@ -305,8 +305,8 @@
           <div class="sc-diagram" style="display:flex;align-items:center;justify-content:center;height:90px;font-size:2.2rem;gap:.5rem">📋 → ✅ → 📧</div>
         </div>
         <div class="series-card-body">
-          <h3>Confirmer automatiquement la réception de la demande</h3>
-          <p>Valider le courriel avec contains(@) et envoyer un accusé de réception personnalisé à l'employé.</p>
+          <h3 data-i18n="forms_card2_title">Confirmer automatiquement la réception de la demande</h3>
+          <p data-i18n="forms_card2_desc">Valider le courriel avec contains(@) et envoyer un accusé de réception personnalisé à l'employé.</p>
           <div class="card-foot"><span>10 min · Débutant</span><span class="card-arrow">→</span></div>
         </div>
       </div>
@@ -317,8 +317,8 @@
           <div class="sc-diagram" style="display:flex;align-items:center;justify-content:center;height:90px;font-size:2.2rem;gap:.5rem">📝 → 👤 → 👍</div>
         </div>
         <div class="series-card-body">
-          <h3>Soumettre la demande à l'approbation du gestionnaire</h3>
-          <p>Identifier le gestionnaire dans SharePoint, créer la demande d'approbation et notifier l'employé du résultat.</p>
+          <h3 data-i18n="forms_card3_title">Soumettre la demande à l'approbation du gestionnaire</h3>
+          <p data-i18n="forms_card3_desc">Identifier le gestionnaire dans SharePoint, créer la demande d'approbation et notifier l'employé du résultat.</p>
           <div class="card-foot"><span>15 min · Intermédiaire</span><span class="card-arrow">→</span></div>
         </div>
       </div>
@@ -329,8 +329,8 @@
           <div class="sc-diagram" style="display:flex;align-items:center;justify-content:center;height:90px;font-size:2.2rem;gap:.5rem">⏰ → 🔁 → ⚠️</div>
         </div>
         <div class="series-card-body">
-          <h3>Relancer automatiquement le gestionnaire si aucune réponse</h3>
-          <p>Flow quotidien qui détecte les demandes sans réponse après 5 jours et expire automatiquement après 10 jours.</p>
+          <h3 data-i18n="forms_card4_title">Relancer automatiquement le gestionnaire si aucune réponse</h3>
+          <p data-i18n="forms_card4_desc">Flow quotidien qui détecte les demandes sans réponse après 5 jours et expire automatiquement après 10 jours.</p>
           <div class="card-foot"><span>12 min · Intermédiaire</span><span class="card-arrow">→</span></div>
         </div>
       </div>
@@ -341,8 +341,8 @@
           <div class="sc-diagram" style="display:flex;align-items:center;justify-content:center;height:90px;font-size:2.2rem;gap:.5rem">📊 → 📋 → 📬</div>
         </div>
         <div class="series-card-body">
-          <h3>Rapport hebdomadaire des demandes en attente ou non traitées</h3>
-          <p>Flow du vendredi matin qui génère un tableau HTML des demandes en attente et l'envoie automatiquement.</p>
+          <h3 data-i18n="forms_card5_title">Rapport hebdomadaire des demandes en attente ou non traitées</h3>
+          <p data-i18n="forms_card5_desc">Flow du vendredi matin qui génère un tableau HTML des demandes en attente et l'envoie automatiquement.</p>
           <div class="card-foot"><span>10 min · Intermédiaire</span><span class="card-arrow">→</span></div>
         </div>
       </div>
@@ -603,6 +603,21 @@ const i18n = {
 	propose_title: "Vous avez une idée d'article ?",
 	propose_sub: "Un processus répétitif qui vous épuise ? Une tâche que vous aimeriez automatiser ? Partagez‑la — ça pourrait devenir le prochain tutoriel.",
 	propose_form_note: "Le formulaire est actuellement disponible en français.",
+	forms_card1_title: "Formulaire en ligne et liste SharePoint",
+	forms_card1_desc: "Remplacer un formulaire Word par une saisie structurée et traçable.",
+
+	forms_card2_title: "Accusé de réception automatique",
+	forms_card2_desc: "Confirmer immédiatement la prise en charge d’une demande.",
+
+	forms_card3_title: "Approbation du gestionnaire",
+	forms_card3_desc: "Soumettre automatiquement une demande à validation.",
+
+	forms_card4_title: "Relances et délais automatiques",
+	forms_card4_desc: "Gérer les demandes sans réponse dans le temps.",
+
+	forms_card5_title: "Rapports et suivi global",
+	forms_card5_desc: "Produire automatiquement une vue d’ensemble hebdomadaire.",
+
   },
   en: {
     nav_articles: 'Articles',
@@ -724,7 +739,20 @@ const i18n = {
 	propose_title: "Do you have an article idea?",
 	propose_sub: "A repetitive process that drains your time? A task you wish you could automate? Share it — it could become the next tutorial.",
 	propose_form_note: "The form is currently available in French.",
-	
+	forms_card1_title: "Online form and SharePoint list",
+	forms_card1_desc: "Replace a Word form with structured and traceable data entry.",
+
+	forms_card2_title: "Automatic receipt confirmation",
+	forms_card2_desc: "Immediately acknowledge that a request has been received.",
+
+	forms_card3_title: "Manager approval",
+	forms_card3_desc: "Automatically submit a request for approval.",
+
+	forms_card4_title: "Automated reminders and deadlines",
+	forms_card4_desc: "Handle unanswered requests over time.",
+
+	forms_card5_title: "Reports and global tracking",
+	forms_card5_desc: "Automatically produce a weekly overview.",
   }
 };
 
